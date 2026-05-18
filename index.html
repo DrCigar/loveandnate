@@ -16,41 +16,15 @@
             --neon-pink: #ff00aa;
         }
         
-        * {
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-        
-        .tail-container * {
-            font-family: 'Inter', system_ui, sans-serif;
-        }
-        
-        .heading-font {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        * { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
 
-        .hero-bg {
-            background: radial-gradient(circle at center, #111111 0%, #000000 70%);
-        }
-        
-        .neon-text {
-            text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple);
-        }
-        
-        .vinyl {
-            animation: spin 20s linear infinite;
-        }
-        
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .section-header {
-            position: relative;
-        }
-        
+        .hero-bg { background: radial-gradient(circle at center, #111111 0%, #000000 70%); }
+        .neon-text { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple); }
+        .vinyl { animation: spin 20s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
         .section-header::after {
             content: '';
             position: absolute;
@@ -61,30 +35,15 @@
             background: linear-gradient(to right, var(--neon-green), var(--neon-purple));
         }
         
-        .album-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .album-card:hover {
-            transform: scale(1.05) rotate(2deg);
-            box-shadow: 0 0 30px -5px rgb(0 255 157);
-        }
-        
-        .countdown-box {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(0, 255, 157, 0.3);
-        }
-        
-        .intensity-bar {
-            height: 6px;
-            background: linear-gradient(to right, #00ff9d, #c300ff);
-        }
+        .album-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .album-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px -5px rgb(0 255 157); }
+
+        .intensity-bar { height: 6px; background: linear-gradient(to right, #00ff9d, #c300ff); }
     </style>
 </head>
-<body class="tail-container bg-black text-white overflow-x-hidden">
+<body class="bg-black text-white overflow-x-hidden">
 
-    <!-- TOP RECORD BANNER -->
+    <!-- TOP BANNER -->
     <div class="bg-gradient-to-r from-[#ff00aa] to-[#c300ff] py-3 text-center text-white font-medium">
         CURRENT GUINNESS WORLD RECORD: <strong>20 ALBUMS</strong> — WE'RE GOING FOR 33
     </div>
@@ -157,29 +116,6 @@
         </div>
     </header>
 
-    <!-- THE ATTEMPT SECTION -->
-    <section id="attempt" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/10">
-        <div class="grid md:grid-cols-12 gap-16 items-center">
-            <div class="md:col-span-7">
-                <h2 class="section-header heading-font text-5xl font-semibold mb-8">THE MOST AMBITIOUS<br>INDIE RELEASE EVER</h2>
-                <div class="prose prose-invert text-lg max-w-none">
-                    <p class="text-white/80">LOVEANDNATE is attempting to shatter the Guinness World Record for the most studio albums released digitally by an indie artist in a 24-hour period.</p>
-                    <p class="text-white/80">33 full-length concept albums. 33 unique worlds. All written, produced, mixed, and released by one person — live — in a single day.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LIVE COUNTDOWN -->
-    <section id="live" class="bg-black py-24 border-t border-b border-white/10 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="heading-font text-6xl font-semibold neon-text">TIME UNTIL HISTORY</h2>
-            </div>
-            <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto text-center"></div>
-        </div>
-    </section>
-
     <!-- THE 33 ALBUMS -->
     <section id="albums" class="max-w-7xl mx-auto px-6 py-24">
         <div class="flex justify-between items-baseline mb-12">
@@ -189,7 +125,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" id="album-grid"></div>
     </section>
 
-    <!-- JOURNEY -->
+    <!-- JOURNEY with your reel -->
     <section id="journey" class="bg-gradient-to-b from-black to-[#111] py-24 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-16">
