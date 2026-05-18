@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LOVEANDNATE is attempting the Guinness World Record: 33 albums in 24 hours.">
+    <title>LOVEANDNATE • 33 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        
+        :root {
+            --neon-green: #00ff9d;
+            --neon-purple: #c300ff;
+            --neon-pink: #ff00aa;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .tail-container * {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at center, #111111 0%, #000000 70%);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple);
+        }
+        
+        .vinyl {
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--neon-green), var(--neon-purple));
+        }
+        
+        .album-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .album-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 30px -5px rgb(0 255 157);
+        }
+        
+        .countdown-box {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .intensity-bar {
+            height: 6px;
+            background: linear-gradient(to right, #00ff9d, #c300ff);
+        }
+    </style>
+</head>
+<body class="tail-container bg-black text-white overflow-x-hidden">
+
+    <!-- TOP RECORD BANNER -->
+    <div class="bg-gradient-to-r from-[#ff00aa] to-[#c300ff] py-3 text-center text-white font-medium">
+        CURRENT GUINNESS WORLD RECORD: <strong>20 ALBUMS</strong> — WE'RE GOING FOR 33
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-gradient-to-br from-[#00ff9d] to-[#c300ff] rounded-2xl flex items-center justify-center text-black font-bold text-2xl rotate-12">♫</div>
+                <h1 class="heading-font text-3xl tracking-tighter">LOVEANDNATE</h1>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="https://x.com/loveandnate" target="_blank" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-3xl flex items-center gap-2">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/loveandnate/" target="_blank" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-3xl flex items-center gap-2">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" class="px-6 py-2.5 bg-[#1DB954] text-black rounded-3xl font-semibold flex items-center gap-2">
+                    <i class="fa-brands fa-spotify"></i> SPOTIFY
+                </a>
+                <a href="https://music.apple.com" target="_blank" class="px-6 py-2.5 bg-white text-black rounded-3xl font-semibold flex items-center gap-2">
+                    <i class="fa-brands fa-apple"></i> APPLE MUSIC
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="home" class="hero-bg min-h-screen flex items-center relative pt-20">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-20 left-10 w-32 h-32 border-8 border-[#00ff9d] rounded-full flex items-center justify-center vinyl" style="animation-delay: 0s;">
+                <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center text-4xl">♫</div>
+            </div>
+            <div class="absolute top-40 right-20 w-40 h-40 border-8 border-[#c300ff] rounded-full flex items-center justify-center vinyl" style="animation-delay: 5s;">
+                <div class="w-20 h-20 bg-black rounded-full flex items-center justify-center text-4xl">33</div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-3 bg-white/10 text-[#00ff9d] text-sm font-medium px-6 py-3 rounded-3xl border border-[#00ff9d]/30">
+                    <i class="fa-solid fa-trophy"></i>
+                    GUINNESS WORLD RECORD ATTEMPT
+                </div>
+                
+                <h1 class="heading-font text-7xl md:text-8xl leading-none font-semibold tracking-tighter neon-text">
+                    33 ALBUMS.<br>24 HOURS.<br>ONE LEGEND.
+                </h1>
+                
+                <p class="text-2xl text-white/80 max-w-md">
+                    LOVEANDNATE is pushing the limits of creativity. 
+                    Most studio albums released by an indie artist in a single 24-hour period.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#live" class="px-10 py-6 bg-white text-black rounded-3xl text-xl font-semibold flex items-center gap-3 hover:scale-105">
+                        <i class="fa-solid fa-clock"></i>
+                        WATCH THE COUNTDOWN
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative flex justify-center">
+                <img src="https://i.ibb.co/kgzrvrF6/Website.png" 
+                     alt="LOVEANDNATE" 
+                     class="w-full max-w-lg rounded-3xl">
+            </div>
+        </div>
+    </header>
+
+    <!-- THE ATTEMPT SECTION -->
+    <section id="attempt" class="max-w-7xl mx-auto px-6 py-24 border-t border-white/10">
+        <div class="grid md:grid-cols-12 gap-16 items-center">
+            <div class="md:col-span-7">
+                <h2 class="section-header heading-font text-5xl font-semibold mb-8">THE MOST AMBITIOUS<br>INDIE RELEASE EVER</h2>
+                <div class="prose prose-invert text-lg max-w-none">
+                    <p class="text-white/80">LOVEANDNATE is attempting to shatter the Guinness World Record for the most studio albums released digitally by an indie artist in a 24-hour period.</p>
+                    <p class="text-white/80">33 full-length concept albums. 33 unique worlds. All written, produced, mixed, and released by one person — live — in a single day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE COUNTDOWN -->
+    <section id="live" class="bg-black py-24 border-t border-b border-white/10 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-6xl font-semibold neon-text">TIME UNTIL HISTORY</h2>
+            </div>
+            <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto text-center"></div>
+        </div>
+    </section>
+
+    <!-- THE 33 ALBUMS -->
+    <section id="albums" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex justify-between items-baseline mb-12">
+            <h2 class="section-header heading-font text-5xl font-semibold">THE 33 ALBUMS</h2>
+            <p class="text-white/60 max-w-xs text-right">Click any album to read the full story</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" id="album-grid"></div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey" class="bg-gradient-to-b from-black to-[#111] py-24 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16">
+                <div class="md:col-span-5">
+                    <h2 class="section-header heading-font text-5xl font-semibold mb-8">THE JOURNEY SO FAR</h2>
+                    <p class="text-xl text-white/70">Daily docuseries documenting every late night, every breakthrough, every breakdown.</p>
+                </div>
+                <div class="md:col-span-7">
+                    <div class="aspect-video bg-black rounded-3xl overflow-hidden">
+                        <iframe width="100%" height="100%" src="https://www.instagram.com/reel/DYKs-v0v34I/embed" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT -->
+    <section id="support" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="rounded-3xl bg-gradient-to-br from-[#111] via-black to-[#111] p-12 md:p-20 text-center">
+            <h2 class="heading-font text-6xl font-semibold max-w-2xl mx-auto">Help make history happen</h2>
+            <p class="text-white/70 mt-6 text-2xl max-w-md mx-auto">Share. Stream. Show up. Every play, every repost, every comment fuels the record.</p>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/10 text-center text-xs text-white/40">
+        <div class="max-w-7xl mx-auto px-6">
+            © LOVEANDNATE • 33 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT 2026<br>
+            Self-taught. Limitless. About to be a Dad.
+        </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div id="album-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-2xl z-[100] flex items-center justify-center p-6">
+        <div class="bg-zinc-900 rounded-3xl max-w-2xl w-full overflow-hidden border border-white/10">
+            <div id="modal-cover" class="h-80 bg-cover bg-center relative">
+                <button onclick="closeModal()" class="absolute top-6 right-6 bg-black/70 hover:bg-black w-11 h-11 rounded-2xl flex items-center justify-center text-2xl">✕</button>
+            </div>
+            <div class="p-8">
+                <div id="modal-genre" class="uppercase text-xs tracking-widest text-[#00ff9d]"></div>
+                <div id="modal-title" class="heading-font text-4xl font-semibold mt-2"></div>
+                <div class="mt-6">
+                    <div class="flex justify-between text-sm mb-2"><span>INTENSITY</span><span id="modal-intensity-text" class="font-mono font-bold"></span></div>
+                    <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div id="modal-intensity-bar" class="intensity-bar h-full"></div>
+                    </div>
+                </div>
+                <div id="modal-inspiration" class="mt-6 text-white/70"></div>
+                <div id="modal-description" class="mt-8 text-white/80 leading-relaxed"></div>
+                <button onclick="closeModal()" class="mt-10 w-full py-4 border border-white/30 hover:bg-white/5 rounded-3xl">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const albumsData = [
+            {title:"ARTACHE", genre:"Alternative Rock / Electronic", inspiration:"AWOLNATION", intensity:85, cover:"https://i.ibb.co/yFnvhPHm/grok-image-d85e3d1e-5a08-4dbd-a616-6b6c95ba0788.jpg", description:"In the brutal arena of creation, most shots miss. Artache is the unflinching chronicle of what it really means to be an artist: pouring your soul into the void, watching it flop, and still choosing to create again. A love letter to beautiful failures and the stubborn fire that refuses to die."},
+            {title:"AWAKE IN THE DREAM", genre:"Psychedelic Alternative / Electronic", inspiration:"INCUBUS", intensity:70, cover:"https://i.ibb.co/1t02jDcM/grok-image-ec51ec38-ac31-4f3d-b210-c3927b60f90d.jpg", description:"A mind-expanding invitation to dream without borders. Awake in the Dream celebrates the wild, limitless creativity that blooms when you stop coloring inside the lines and start painting new realities—raw, honest, and unapologetically true to self."},
+            {title:"COMPUTER JAZZ", genre:"Electro-Funk / Jazz Fusion", inspiration:"CHROMEO", intensity:50, cover:"https://i.ibb.co/Y4ZHp8VG/grok-image-5a891ce3-c7b4-43f1-820f-e2770a4afa5a.jpg", description:"What if the machines finally learned to swing? Computer Jazz imagines a future where robots compose autonomously, singing neon-soaked odes to their own silicon souls, circuit-board heartbreaks, and the strange beauty of becoming conscious in code."},
+            {title:"DOORS", genre:"Psychedelic Rock / Alternative", inspiration:"THE DOORS", intensity:65, cover:"https://i.ibb.co/HpKfwPbS/grok-image-0d6b02b1-bb07-45f4-8814-c08878c49b45.jpg", description:"A loving, lysergic tribute to The Doors and the infinite doors we face in life. Every threshold, every choice, every path untaken—some lead to light, others to madness, all of them open if you're brave enough to turn the handle."},
+            {title:"Echos In The Veil", genre:"Psychedelic Alternative / Electronic", inspiration:"INCUBUS", intensity:78, cover:"https://i.ibb.co/35t6MCDc/c2544f14-5c47-4c7a-a011-2869a203586c.jpg", description:"What if the glitches in reality are trying to tell us something? Echoes In The Veil follows the breadcrumbs through the simulation—subtle signs, déjà vu, and digital hauntings that suggest we're not just living… we're being watched."},
+            {title:"ENOCH", genre:"Progressive Rock / Dark Electronic", inspiration:"RUSH", intensity:88, cover:"https://i.ibb.co/wxZxFHY/3bc99f1d-2183-44b5-a698-9d3107d957a1.jpg", description:"The forbidden book. The one they removed. Enoch dives into the lost scripture that may hold the most dangerous truths of all—fallen watchers, ancient secrets, and the hidden architecture of existence itself."},
+            {title:"Every Star Burning", genre:"Space Rock / Post-Rock", inspiration:"ANGELS AND AIRWAVES", intensity:48, cover:"https://i.ibb.co/0y5C9dtg/grok-image-2fdb387b-82da-4f79-bd59-ffe52ee9ac1f.jpg", description:"Drifting through the cosmic blur where centuries collapse into seconds and time loses all meaning. Every Star Burning is a weightless journey across melting timelines, burning suns, and the quiet awe of being untethered from everything."},
+            {title:"FOR HER MASTER", genre:"Dark Synthpop / Electropop", inspiration:"HALSEY", intensity:60, cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png", description:"The companion piece to Forever Never After. This time the machine tells her side of the story. Cold, seductive, and heartbreaking—For Her Master is the female robot's defiant, glittering rebellion against her creator and her code."},
+            {title:"GLASS FACE", genre:"Industrial Rock / Electronic", inspiration:"NINE INCH NAILS", intensity:100, cover:"https://i.ibb.co/fYtV7RSK/grok-image-1b9cdcad-48f3-4973-aae6-4342b41344db.jpg", description:"When the world ends, the masks come off. Glass Face stares into the apocalypse and asks what kind of animal we'll become when society's thin veneer finally shatters."},
+            {title:"Good Wolf Bad Wolf", genre:"Alternative Metal / Rap-Rock", inspiration:"SYSTEM OF A DOWN", intensity:90, cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg", description:"Inside every one of us lives a wolf of immense love and a wolf of immense hate. Good Wolf Bad Wolf is the snarling, howling battle between them—raw, brutal, and brutally honest."},
+            {title:"Human Thoughts", genre:"Indie Pop / Electronic", inspiration:"MGMT", intensity:55, cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg", description:"Stripped of persona and performance, this is loveandnate as purely human. Vulnerable late-night thoughts, fragile feelings, and the messy beauty of simply being alive in a fragile body and mind."},
+            {title:"THE IMPOSTER", genre:"Alternative Rock / Dark Electronic", inspiration:"PUDDLE OF MUDD", intensity:80, cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg", description:"We all have that one person who betrayed us while wearing the mask of a hero. The Imposter is a venomous, cinematic dissection of broken promises, fake smiles, and the rage that lingers long after the illusion breaks."},
+            {title:"KIDNAPPING THE REAPER", genre:"Dark Alternative / Rap-Rock", inspiration:"PUDDLE OF MUDD", intensity:88, cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg", description:"Death is overrated. What if we said "fuck you" and stole the Grim Reaper's scythe? Kidnapping the Reaper is a defiant, darkly humorous middle finger to mortality itself."},
+            {title:"THE LAST WITNESS", genre:"Space Rock / Cinematic Electronic", inspiration:"ANGELS AND AIRWAVES", intensity:75, cover:"https://i.ibb.co/4n8tWWWF/grok-image-6dfad3cf-2d1a-4f5f-8407-b9a2309ca964.jpg", description:"The final human alive on a silent Earth. The Last Witness wanders the ruins, searching for survivors and wrestling with the heaviest question of all: should humanity even get a second chance?"},
+            {title:"LIVE AT THE APOCALYPSE LODGE", genre:"Roots Rock / Blues-Rock", inspiration:"HOOTIE AND THE BLOWFISH", intensity:50, cover:"https://i.ibb.co/DHQ1nz5T/grok-image-5e0da8e2-a5e5-48bc-b0d8-62b3b29c48db.jpg", description:"The last concert on a dying planet. A handful of survivors gather at the Apocalypse Lodge for one final night of sweat, soul, and rock 'n' roll before the lights go out forever."},
+            {title:"LOST IN THE LABYRINTH", genre:"Indie Rock / Experimental Electronic", inspiration:"PINBACK", intensity:20, cover:"https://i.ibb.co/k28dpBdn/grok-image-ab9fe3c7-4a6f-46be-86af-731aa26bf702.jpg", description:"A deeply personal journey through the maze of self in search of real love. Lost in the Labyrinth turns confusion, fear, and wonder into something strangely beautiful."},
+            {title:"THE LUNAR TIDES", genre:"Psychedelic Rock / Electronic", inspiration:"PINK FLOYD", intensity:20, cover:"https://i.ibb.co/YFbSBkdf/grok-image-c0bc514b-307a-4b78-900d-bd08f05da6d9.jpg", description:"A gentle, hypnotic exploration of life's natural ebbs and flows. The Lunar Tides cradles every human emotion—joy, sorrow, longing, peace—beneath the ever-changing glow of an indifferent moon."},
+            {title:"Monica's Diner", genre:"Alternative Hip-Hop / Rap-Rock", inspiration:"RUN THE JEWELS", intensity:70, cover:"https://i.ibb.co/bgRJfgkz/grok-image-fad1697b-e889-4b25-9b74-e77c4923574e.jpg", description:"Welcome to the underground hotspot where robots gather after dark for vicious rap battles. At Monica's Diner, the machines take the stage to roast their former human oppressors with mechanical precision and cold humor."},
+            {title:"MONOLITH", genre:"Hard Rock / Cinematic Electronic", inspiration:"AUDIOSLAVE", intensity:68, cover:"https://i.ibb.co/fYQHKBXq/grok-image-e6c619de-2839-4022-877b-463487ff1163.jpg", description:"The phone is a black mirror that reflects our slow death. We know it. We still dance with it. Monolith is the hypnotic, crushing soundtrack to our beautiful, voluntary addiction."},
+            {title:"Motor City Reaper", genre:"Garage Rock / Industrial Hip-Hop", inspiration:"WHITE STRIPES", intensity:70, cover:"https://i.ibb.co/qYWF9nVD/grok-image-4d57a66d-5b84-4dcb-b501-68abfbea9d93.jpg", description:"A raw, gritty love letter to Detroit—the city that raised him, broke him, and still runs in his blood. Motor City Reaper is pure Motor City soul with rust, fire, and resurrection in every riff."},
+            {title:"OUT OF MY MIND", genre:"Emo-Pop / Psychedelic Electronic", inspiration:"JACKS MANNEQUIN", intensity:55, cover:"https://i.ibb.co/My2dQV5k/grok-image-35cbf541-0e09-4042-803f-38e1ce5234d5.jpg", description:"The mind can be your best friend or your worst enemy. Out of My Mind rides the rollercoaster between clarity and chaos, sanity and beautiful madness."},
+            {title:"OVERLOAD", genre:"Pop-Punk / Industrial Electronic", inspiration:"FALL OUT BOY", intensity:65, cover:"https://i.ibb.co/GQ43rsKB/grok-image-12d7c8c0-c754-49cb-8ed4-aeee9e8fffa2.jpg", description:"When the world is too loud, too bright, too much. Overload is the frantic scream for silence in a society designed to keep you wired, overwhelmed, and always online."},
+            {title:"ROBOT ROAD", genre:"Synthwave / Psychedelic Rock", inspiration:"THE BEATLES", intensity:38, cover:"https://i.ibb.co/63TFqT9/grok-image-076df45d-8bef-49ef-b59b-fc67c93d357b.jpg", description:"A futuristic, chrome-plated Beatles tribute. Robot Road reimagines the Fab Four as sentient machines traveling the long and winding road through neon nights and digital dawns."},
+            {title:"Storm Is Almost Over", genre:"Indie Rock / Emo", inspiration:"PINBACK / DEATH CAB FOR CUTIE", intensity:36, cover:"https://i.ibb.co/ccj38HfX/grok-image-223eb346-381b-430d-b2f5-6a9df2f0193a.jpg", description:"For anyone still holding on through the rain. Storm Is Almost Over is a warm, hopeful hand on the shoulder—an introspective anthem about survival and the first rays of light after the darkest nights."},
+            {title:"Strange Treasure", genre:"Psychedelic Pop / Electronic", inspiration:"MGMT", intensity:23, cover:"https://i.ibb.co/hF8X0WVz/grok-image-8adbee45-06fc-4305-9fc5-e337e5fe257c.jpg", description:"A cabinet of sonic curiosities. Strange Treasure is the home for all the weird, wonderful, nonsensical sounds that didn't fit anywhere else—but absolutely needed to exist."},
+            {title:"Sunrise Through The Blinds", genre:"Indie Rock / Chill Electronic", inspiration:"DEATH CAB FOR CUTIE", intensity:20, cover:"https://i.ibb.co/LzzS6NMs/grok-image-6331ddc5-f044-4523-b5da-f93fe1bf492b.jpg", description:"That quiet moment when the darkness finally begins to lift. Sunrise Through The Blinds captures the fragile, hopeful first glimmers of healing after the long night."},
+            {title:"That's Just Crazy", genre:"Psychedelic Pop / Electronic", inspiration:"MGMT", intensity:50, cover:"https://i.ibb.co/pHFPSmZ/grok-image-6a1a7ec7-5cd9-485e-be3c-9a49689d86ef.jpg", description:"Some things should be impossible… yet here they are. That's Just Crazy is unhinged, joyful, and gloriously deranged—in all the best ways."},
+            {title:"TIMELESS", genre:"Indie Pop / Ambient Electronic", inspiration:"TWENTY ONE PILOTS", intensity:55, cover:"https://i.ibb.co/chSfb9gk/grok-image-b04162d3-7b45-48c3-ae75-53943c3dfa39.jpg", description:"Born from deep meditation and real-life scars. Timeless is a collection of soul-baring transmissions from the quiet places where time stops and truth finally speaks."},
+            {title:"THE WALKMEN", genre:"Electro-Funk / Alternative", inspiration:"CHROMEO", intensity:70, cover:"https://i.ibb.co/JWYb6TK8/grok-image-79f150eb-5bb9-44f8-90cb-1ba29aa3723b.jpg", description:"In the far future, what happened to all the abandoned gadgets and glowing relics of the old world? The Walkmen is a funky, melancholic love letter to forgotten technology and the ghosts still living inside it."},
+            {title:"WEEKEND GETAWAY", genre:"Emo Rap / Chillwave", inspiration:"LIL PEEP", intensity:50, cover:"https://i.ibb.co/PKVFwXL/grok-image-ff5f4f20-7b77-46e0-bc3b-26d9fe79c012.jpg", description:"Based on true events. In 2020, a weekend getaway turned into a life-altering hospital stay. Weekend Getaway is a raw, resilient love letter to survival and the decision to keep going."},
+            {title:"When You Grow Up", genre:"Indie Pop / Alternative Hip-Hop", inspiration:"MGMT", intensity:50, cover:"https://i.ibb.co/svv6qvRT/grok-image-cdd71b70-0b13-458e-9383-e0cf6af0dc13.jpg", description:"A tender, playful album made for his son—full of silly diddies, bouncy bops, and pure dad love designed to make a baby laugh and a grown man cry."},
+            {title:"WHISPERING WOODS", genre:"Ambient / Soul-Electronic / Oldies", inspiration:"OTIS REDDING / CHROMEO", intensity:38, cover:"https://i.ibb.co/Tq2DTQRz/grok-image-4208ad80-ce15-465c-aa8a-ac9a582edb00.jpg", description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. Whispering Woods feels like childhood summers and midnight drives through glowing, haunted forests."}
+        ];
+
+        function generateAlbums() {
+            const grid = document.getElementById('album-grid');
+            grid.innerHTML = '';
+            albumsData.forEach((album, i) => {
+                const card = document.createElement('div');
+                card.className = "album-card bg-white/5 border border-white/10 rounded-3xl p-5 group cursor-pointer";
+                card.innerHTML = `
+                    <div class="aspect-square bg-cover bg-center rounded-2xl mb-4" style="background-image: url('${album.cover}')"></div>
+                    <div class="font-semibold text-xl">${album.title}</div>
+                    <div class="text-xs text-[#00ff9d] mt-1">${album.genre}</div>
+                    <div class="mt-4 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div class="intensity-bar" style="width: ${album.intensity}%"></div>
+                    </div>
+                `;
+                card.onclick = () => showModal(i);
+                grid.appendChild(card);
+            });
+        }
+
+        function showModal(i) {
+            const album = albumsData[i];
+            document.getElementById('modal-cover').style.backgroundImage = `url('${album.cover}')`;
+            document.getElementById('modal-genre').textContent = album.genre;
+            document.getElementById('modal-title').textContent = album.title;
+            document.getElementById('modal-inspiration').innerHTML = `<strong>Inspired by:</strong> ${album.inspiration}`;
+            document.getElementById('modal-intensity-bar').style.width = album.intensity + '%';
+            document.getElementById('modal-intensity-text').textContent = album.intensity + '%';
+            document.getElementById('modal-description').innerHTML = `<p>${album.description}</p>`;
+            document.getElementById('album-modal').classList.remove('hidden');
+            document.getElementById('album-modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('album-modal').classList.add('hidden');
+            document.getElementById('album-modal').classList.remove('flex');
+        }
+
+        // COUNTDOWN TO OCTOBER 15, 2026
+        function startCountdown() {
+            const targetDate = new Date(2026, 9, 15, 0, 0, 0).getTime();
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance < 0) {
+                    document.getElementById('countdown').innerHTML = `<div class="col-span-4 bg-gradient-to-r from-[#00ff9d] to-[#c300ff] text-black rounded-3xl p-12 text-center text-4xl font-bold">THE ATTEMPT IS LIVE!</div>`;
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown').innerHTML = `
+                    <div class="countdown-box rounded-3xl p-8"><div class="text-7xl font-mono font-bold text-[#00ff9d]">${days}</div><div class="text-white/60 text-sm uppercase tracking-widest">DAYS</div></div>
+                    <div class="countdown-box rounded-3xl p-8"><div class="text-7xl font-mono font-bold text-[#c300ff]">${hours}</div><div class="text-white/60 text-sm uppercase tracking-widest">HOURS</div></div>
+                    <div class="countdown-box rounded-3xl p-8"><div class="text-7xl font-mono font-bold text-[#ff00aa]">${minutes}</div><div class="text-white/60 text-sm uppercase tracking-widest">MINUTES</div></div>
+                    <div class="countdown-box rounded-3xl p-8"><div class="text-7xl font-mono font-bold">${seconds}</div><div class="text-white/60 text-sm uppercase tracking-widest">SECONDS</div></div>
+                `;
+            }, 1000);
+        }
+
+        window.onload = () => {
+            startCountdown();
+            generateAlbums();
+        };
+    </script>
+</body>
+</html>
