@@ -98,7 +98,7 @@
         </div>
     </header>
 
-    <!-- ALBUMS -->
+    <!-- ALBUMS SECTION -->
     <section id="albums" class="max-w-7xl mx-auto px-6 py-24">
         <div class="flex justify-between items-baseline mb-12">
             <h2 class="section-header heading-font text-5xl font-semibold">THE 33 ALBUMS</h2>
@@ -183,7 +183,7 @@
             {title:"Good Wolf Bad Wolf", genre:"Alternative Metal / Rap-Rock", inspiration:"SYSTEM OF A DOWN", intensity:90, cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg", description:"Inside every one of us lives a wolf of immense love and a wolf of immense hate. Good Wolf Bad Wolf is the snarling, howling battle between them—raw, brutal, and brutally honest."},
             {title:"Human Thoughts", genre:"Indie Pop / Electronic", inspiration:"MGMT", intensity:55, cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg", description:"Stripped of persona and performance, this is loveandnate as purely human. Vulnerable late-night thoughts, fragile feelings, and the messy beauty of simply being alive in a fragile body and mind."},
             {title:"THE IMPOSTER", genre:"Alternative Rock / Dark Electronic", inspiration:"PUDDLE OF MUDD", intensity:80, cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg", description:"We all have that one person who betrayed us while wearing the mask of a hero. The Imposter is a venomous, cinematic dissection of broken promises, fake smiles, and the rage that lingers long after the illusion breaks."},
-            {title:"KIDNAPPING THE REAPER", genre:"Dark Alternative / Rap-Rock", inspiration:"PUDDLE OF MUDD", intensity:88, cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg", description:"Death is overrated. What if we said “no” and stole the Grim Reaper’s scythe? Kidnapping the Reaper is a defiant, darkly humorous middle finger to mortality itself."},
+            {title:"KIDNAPPING THE REAPER", genre:"Dark Alternative / Rap-Rock", inspiration:"PUDDLE OF MUDD", intensity:88, cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg", description:"Death is overrated. What if we said no and stole the Grim Reaper’s scythe? Kidnapping the Reaper is a defiant, darkly humorous middle finger to mortality itself."},
             {title:"THE LAST WITNESS", genre:"Space Rock / Cinematic Electronic", inspiration:"ANGELS AND AIRWAVES", intensity:75, cover:"https://i.ibb.co/4n8tWWWF/grok-image-6dfad3cf-2d1a-4f5f-8407-b9a2309ca964.jpg", description:"The final human alive on a silent Earth. The Last Witness wanders the ruins, searching for survivors and wrestling with the heaviest question of all: should humanity even get a second chance?"},
             {title:"LIVE AT THE APOCALYPSE LODGE", genre:"Roots Rock / Blues-Rock", inspiration:"HOOTIE AND THE BLOWFISH", intensity:50, cover:"https://i.ibb.co/DHQ1nz5T/grok-image-5e0da8e2-a5e5-48bc-b0d8-62b3b29c48db.jpg", description:"The last concert on a dying planet. A handful of survivors gather at the Apocalypse Lodge for one final night of sweat, soul, and rock ‘n’ roll before the lights go out forever."},
             {title:"LOST IN THE LABYRINTH", genre:"Indie Rock / Experimental Electronic", inspiration:"PINBACK", intensity:20, cover:"https://i.ibb.co/k28dpBdn/grok-image-ab9fe3c7-4a6f-46be-86af-731aa26bf702.jpg", description:"A deeply personal journey through the maze of self in search of real love. Lost in the Labyrinth turns confusion, fear, and wonder into something strangely beautiful."},
@@ -243,7 +243,7 @@
             document.getElementById('album-modal').classList.remove('flex');
         }
 
-        // COUNTDOWN
+        // COUNTDOWN TO OCTOBER 15, 2026
         function startCountdown() {
             const targetDate = new Date(2026, 9, 15, 0, 0, 0).getTime();
             const countdownEl = document.getElementById('countdown');
@@ -272,7 +272,7 @@
         }
 
         window.onload = function() {
-            console.log("✅ Website loaded successfully");
+            console.log("✅ Website fully loaded");
             startCountdown();
             generateAlbums();
         };
