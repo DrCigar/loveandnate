@@ -7,45 +7,38 @@
     <title>LOVEANDNATE • 33 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-    
-    :root {
-        --neon-green: #00ff9d;
-        --neon-purple: #c300ff;
-        font-size: 20px;   /* ← This is the main change (was ~16px) */
-    }
-    
-    * { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-    body { font-family: 'Inter', system_ui, sans-serif; }
-    .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        :root {
+            --neon-green: #00ff9d;
+            --neon-purple: #c300ff;
+            font-size: 19px;
+        }
 
-    .hero-bg { background: radial-gradient(circle at center, #111111 0%, #000000 70%); }
-    .neon-text { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple); }
-    .vinyl { animation: spin 20s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        * { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
 
-    .section-header::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(to right, var(--neon-green), var(--neon-purple));
-    }
-    
-    .album-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .album-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px -5px rgb(0 255 157); }
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 2.1rem;
+            letter-spacing: -3px;
+            text-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple);
+        }
 
-    .intensity-bar { height: 6px; background: linear-gradient(to right, #00ff9d, #c300ff); }
+        .neon-text { 
+            text-shadow: 0 0 15px var(--neon-green), 
+                        0 0 30px var(--neon-green), 
+                        0 0 50px var(--neon-purple); 
+        }
 
-    /* Extra padding for bigger feel */
-    h1 { font-size: 4.5rem !important; line-height: 1.05; }
-    h2 { font-size: 3.2rem !important; }
+        .album-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .album-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px -5px rgb(0 255 157); }
 
-}
-</style>
+        .intensity-bar { height: 6px; background: linear-gradient(to right, #00ff9d, #c300ff); }
+    </style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
 
@@ -54,62 +47,58 @@
         CURRENT GUINNESS WORLD RECORD: <strong>20 ALBUMS</strong> — WE'RE GOING FOR 33
     </div>
 
-   <!-- NAVBAR -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <!-- YOUR CUSTOM ICON -->
-            <img src="https://i.ibb.co/4nWWPzpb/234135.png" 
-                 alt="Loveandnate" 
-                 class="w-11 h-11 object-contain">
-            
-            <h1 class="nav-logo tracking-[-4px]">LOVEANDNATE</h1>
-        </div>
-        
-        <div class="flex items-center gap-4">
-            <a href="https://x.com/loveandnate" target="_blank" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-3xl flex items-center gap-2">
-                <i class="fa-brands fa-x-twitter text-xl"></i>
-            </a>
-            <a href="https://www.instagram.com/loveandnate/" target="_blank" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-3xl flex items-center gap-2">
-                <i class="fa-brands fa-instagram text-xl"></i>
-            </a>
-            <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" class="px-6 py-2.5 bg-[#1DB954] text-black rounded-3xl font-semibold flex items-center gap-2">
-                <i class="fa-brands fa-spotify"></i> SPOTIFY
-            </a>
-            <a href="https://music.apple.com" target="_blank" class="px-6 py-2.5 bg-white text-black rounded-3xl font-semibold flex items-center gap-2">
-                <i class="fa-brands fa-apple"></i> APPLE
-            </a>
-        </div>
-    </div>
-</nav>
-
-<header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
-    <!-- Improved Starfield -->
-    <canvas id="starfield" class="absolute inset-0 z-0"></canvas>
-
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-        <div class="space-y-8">
-            <div class="inline-flex items-center gap-3 bg-white/10 text-[#00ff9d] text-sm font-medium px-6 py-3 rounded-3xl border border-[#00ff9d]/30">
-                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD ATTEMPT
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co/4nWWPzpb/234135.png" alt="Loveandnate" class="w-11 h-11 object-contain">
+                <h1 class="nav-logo tracking-[-4px]">LOVEANDNATE</h1>
             </div>
             
-            <h1 class="heading-font text-7xl md:text-8xl leading-none font-semibold tracking-tighter neon-text">
-                33 ALBUMS.<br>24 HOURS.<br>ONE LEGEND.
-            </h1>
-            
-            <p class="text-2xl text-white/80 max-w-md">
-                LOVEANDNATE is pushing the limits of creativity. 
-                Most studio albums released by an indie artist in a single 24-hour period.
-            </p>
+            <div class="flex items-center gap-4">
+                <a href="https://x.com/loveandnate" target="_blank" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-3xl flex items-center gap-2">
+                    <i class="fa-brands fa-x-twitter text-xl"></i>
+                </a>
+                <a href="https://www.instagram.com/loveandnate/" target="_blank" class="px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-3xl flex items-center gap-2">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                </a>
+                <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" class="px-6 py-2.5 bg-[#1DB954] text-black rounded-3xl font-semibold flex items-center gap-2">
+                    <i class="fa-brands fa-spotify"></i> SPOTIFY
+                </a>
+                <a href="https://music.apple.com" target="_blank" class="px-6 py-2.5 bg-white text-black rounded-3xl font-semibold flex items-center gap-2">
+                    <i class="fa-brands fa-apple"></i> APPLE MUSIC
+                </a>
+            </div>
         </div>
-        
-        <div class="relative flex justify-center">
-            <img src="https://i.ibb.co/kgzrvrF6/Website.png" alt="LOVEANDNATE" class="w-full max-w-lg rounded-3xl">
-        </div>
-    </div>
-</header>
+    </nav>
 
-       <!-- LIVE COUNTDOWN -->
+    <!-- HERO with Zooming Starfield -->
+    <header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
+        <canvas id="starfield" class="absolute inset-0 z-0"></canvas>
+        
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-3 bg-white/10 text-[#00ff9d] text-sm font-medium px-6 py-3 rounded-3xl border border-[#00ff9d]/30">
+                    <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD ATTEMPT
+                </div>
+                
+                <h1 class="heading-font text-7xl md:text-8xl leading-none font-semibold tracking-tighter neon-text">
+                    33 ALBUMS.<br>24 HOURS.<br>ONE LEGEND.
+                </h1>
+                
+                <p class="text-2xl text-white/80 max-w-md">
+                    LOVEANDNATE is pushing the limits of creativity.<br>
+                    Most studio albums released by an indie artist in a single 24-hour period.
+                </p>
+            </div>
+            
+            <div class="relative flex justify-center">
+                <img src="https://i.ibb.co/kgzrvrF6/Website.png" alt="LOVEANDNATE" class="w-full max-w-lg rounded-3xl">
+            </div>
+        </div>
+    </header>
+
+    <!-- LIVE COUNTDOWN -->
     <section id="live" class="bg-black py-24 border-t border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="heading-font text-6xl font-semibold neon-text mb-8">TIME UNTIL HISTORY</h2>
@@ -125,8 +114,6 @@
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" id="album-grid"></div>
     </section>
-
- 
 
     <!-- JOURNEY -->
     <section id="journey" class="bg-gradient-to-b from-black to-[#111] py-24 border-t border-white/10">
@@ -185,22 +172,22 @@
     <script>
         const albumsData = [
             {title:"ARTACHE", genre:"Alternative Rock / Electronic", inspiration:"AWOLNATION", intensity:85, cover:"https://i.ibb.co/yFnvhPHm/grok-image-d85e3d1e-5a08-4dbd-a616-6b6c95ba0788.jpg", description:"In the brutal arena of creation, most shots miss. Artache is the unflinching chronicle of what it really means to be an artist: pouring your soul into the void, watching it flop, and still choosing to create again."},
-            {title:"AWAKE IN THE DREAM", genre:"Psychedelic Alternative / Electronic", inspiration:"INCUBUS", intensity:70, cover:"https://i.ibb.co/1t02jDcM/grok-image-ec51ec38-ac31-4f3d-b210-c3927b60f90d.jpg", description:"A mind-expanding invitation to dream without borders. Awake in the Dream celebrates the wild, limitless creativity that blooms when you stop coloring inside the lines and start painting new realities."},
-            {title:"COMPUTER JAZZ", genre:"Electro-Funk / Jazz Fusion", inspiration:"CHROMEO", intensity:50, cover:"https://i.ibb.co/Y4ZHp8VG/grok-image-5a891ce3-c7b4-43f1-820f-e2770a4afa5a.jpg", description:"What if the machines finally learned to swing? Computer Jazz imagines a future where robots compose autonomously."},
-            {title:"DOORS", genre:"Psychedelic Rock / Alternative", inspiration:"THE DOORS", intensity:65, cover:"https://i.ibb.co/HpKfwPbS/grok-image-0d6b02b1-bb07-45f4-8814-c08878c49b45.jpg", description:"A loving tribute to The Doors and the infinite doors we face in life."},
+            {title:"AWAKE IN THE DREAM", genre:"Psychedelic Alternative / Electronic", inspiration:"INCUBUS", intensity:70, cover:"https://i.ibb.co/1t02jDcM/grok-image-ec51ec38-ac31-4f3d-b210-c3927b60f90d.jpg", description:"A mind-expanding invitation to dream without borders."},
+            {title:"COMPUTER JAZZ", genre:"Electro-Funk / Jazz Fusion", inspiration:"CHROMEO", intensity:50, cover:"https://i.ibb.co/Y4ZHp8VG/grok-image-5a891ce3-c7b4-43f1-820f-e2770a4afa5a.jpg", description:"What if the machines finally learned to swing?"},
+            {title:"DOORS", genre:"Psychedelic Rock / Alternative", inspiration:"THE DOORS", intensity:65, cover:"https://i.ibb.co/HpKfwPbS/grok-image-0d6b02b1-bb07-45f4-8814-c08878c49b45.jpg", description:"A loving tribute to The Doors."},
             {title:"Echos In The Veil", genre:"Psychedelic Alternative / Electronic", inspiration:"INCUBUS", intensity:78, cover:"https://i.ibb.co/35t6MCDc/c2544f14-5c47-4c7a-a011-2869a203586c.jpg", description:"What if the glitches in reality are trying to tell us something?"},
-            {title:"ENOCH", genre:"Progressive Rock / Dark Electronic", inspiration:"RUSH", intensity:88, cover:"https://i.ibb.co/wxZxFHY/3bc99f1d-2183-44b5-a698-9d3107d957a1.jpg", description:"The forbidden book. Enoch dives into the lost scripture that may hold the most dangerous truths of all."},
-            {title:"Every Star Burning", genre:"Space Rock / Post-Rock", inspiration:"ANGELS AND AIRWAVES", intensity:48, cover:"https://i.ibb.co/0y5C9dtg/grok-image-2fdb387b-82da-4f79-bd59-ffe52ee9ac1f.jpg", description:"Drifting through the cosmic blur where centuries collapse into seconds."},
-            {title:"FOR HER MASTER", genre:"Dark Synthpop / Electropop", inspiration:"HALSEY", intensity:60, cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png", description:"The companion piece. This time the machine tells her side of the story."},
+            {title:"ENOCH", genre:"Progressive Rock / Dark Electronic", inspiration:"RUSH", intensity:88, cover:"https://i.ibb.co/wxZxFHY/3bc99f1d-2183-44b5-a698-9d3107d957a1.jpg", description:"The forbidden book."},
+            {title:"Every Star Burning", genre:"Space Rock / Post-Rock", inspiration:"ANGELS AND AIRWAVES", intensity:48, cover:"https://i.ibb.co/0y5C9dtg/grok-image-2fdb387b-82da-4f79-bd59-ffe52ee9ac1f.jpg", description:"Drifting through the cosmic blur."},
+            {title:"FOR HER MASTER", genre:"Dark Synthpop / Electropop", inspiration:"HALSEY", intensity:60, cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png", description:"The machine tells her side of the story."},
             {title:"GLASS FACE", genre:"Industrial Rock / Electronic", inspiration:"NINE INCH NAILS", intensity:100, cover:"https://i.ibb.co/fYtV7RSK/grok-image-1b9cdcad-48f3-4973-aae6-4342b41344db.jpg", description:"When the world ends, the masks come off."},
-            {title:"Good Wolf Bad Wolf", genre:"Alternative Metal / Rap-Rock", inspiration:"SYSTEM OF A DOWN", intensity:90, cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg", description:"Inside every one of us lives a wolf of immense love and a wolf of immense hate."},
-            {title:"Human Thoughts", genre:"Indie Pop / Electronic", inspiration:"MGMT", intensity:55, cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg", description:"Stripped of persona. Purely human thoughts."},
-            {title:"THE IMPOSTER", genre:"Alternative Rock / Dark Electronic", inspiration:"PUDDLE OF MUDD", intensity:80, cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg", description:"We all have that one person who betrayed us while wearing the mask of a hero."},
-            {title:"KIDNAPPING THE REAPER", genre:"Dark Alternative / Rap-Rock", inspiration:"PUDDLE OF MUDD", intensity:88, cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg", description:"Death is overrated. What if we said no and stole the Grim Reaper’s scythe?"},
+            {title:"Good Wolf Bad Wolf", genre:"Alternative Metal / Rap-Rock", inspiration:"SYSTEM OF A DOWN", intensity:90, cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg", description:"Inside every one of us lives a wolf of immense love and hate."},
+            {title:"Human Thoughts", genre:"Indie Pop / Electronic", inspiration:"MGMT", intensity:55, cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg", description:"Purely human thoughts."},
+            {title:"THE IMPOSTER", genre:"Alternative Rock / Dark Electronic", inspiration:"PUDDLE OF MUDD", intensity:80, cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg", description:"We all have that one person who betrayed us."},
+            {title:"KIDNAPPING THE REAPER", genre:"Dark Alternative / Rap-Rock", inspiration:"PUDDLE OF MUDD", intensity:88, cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg", description:"What if we said no and stole the Grim Reaper’s scythe?"},
             {title:"THE LAST WITNESS", genre:"Space Rock / Cinematic Electronic", inspiration:"ANGELS AND AIRWAVES", intensity:75, cover:"https://i.ibb.co/4n8tWWWF/grok-image-6dfad3cf-2d1a-4f5f-8407-b9a2309ca964.jpg", description:"The final human alive on a silent Earth."},
             {title:"LIVE AT THE APOCALYPSE LODGE", genre:"Roots Rock / Blues-Rock", inspiration:"HOOTIE AND THE BLOWFISH", intensity:50, cover:"https://i.ibb.co/DHQ1nz5T/grok-image-5e0da8e2-a5e5-48bc-b0d8-62b3b29c48db.jpg", description:"The last concert on a dying planet."},
             {title:"LOST IN THE LABYRINTH", genre:"Indie Rock / Experimental Electronic", inspiration:"PINBACK", intensity:20, cover:"https://i.ibb.co/k28dpBdn/grok-image-ab9fe3c7-4a6f-46be-86af-731aa26bf702.jpg", description:"A deeply personal journey through the maze of self."},
-            {title:"THE LUNAR TIDES", genre:"Psychedelic Rock / Electronic", inspiration:"PINK FLOYD", intensity:20, cover:"https://i.ibb.co/YFbSBkdf/grok-image-c0bc514b-307a-4b78-900d-bd08f05da6d9.jpg", description:"A gentle, hypnotic exploration of life’s natural ebbs and flows."},
+            {title:"THE LUNAR TIDES", genre:"Psychedelic Rock / Electronic", inspiration:"PINK FLOYD", intensity:20, cover:"https://i.ibb.co/YFbSBkdf/grok-image-c0bc514b-307a-4b78-900d-bd08f05da6d9.jpg", description:"A gentle exploration of life’s natural ebbs and flows."},
             {title:"Monica's Diner", genre:"Alternative Hip-Hop / Rap-Rock", inspiration:"RUN THE JEWELS", intensity:70, cover:"https://i.ibb.co/bgRJfgkz/grok-image-fad1697b-e889-4b25-9b74-e77c4923574e.jpg", description:"Welcome to the underground hotspot where robots gather after dark."},
             {title:"MONOLITH", genre:"Hard Rock / Cinematic Electronic", inspiration:"AUDIOSLAVE", intensity:68, cover:"https://i.ibb.co/fYQHKBXq/grok-image-e6c619de-2839-4022-877b-463487ff1163.jpg", description:"The phone is a black mirror that reflects our slow death."},
             {title:"Motor City Reaper", genre:"Garage Rock / Industrial Hip-Hop", inspiration:"WHITE STRIPES", intensity:70, cover:"https://i.ibb.co/qYWF9nVD/grok-image-4d57a66d-5b84-4dcb-b501-68abfbea9d93.jpg", description:"A raw love letter to Detroit."},
@@ -284,84 +271,71 @@
         }
 
         window.onload = function() {
-            console.log("✅ Website loaded successfully");
+            console.log("✅ Website loaded with zooming starfield");
             startCountdown();
             generateAlbums();
         };
     </script>
-<script>
-// Hyperspace / Zooming Through Stars Effect
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-let stars = [];
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+    <!-- ZOOMING STARFIELD -->
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
 
-class Star {
-    constructor() {
-        this.reset();
-    }
-    reset() {
-        this.x = canvas.width / 2;
-        this.y = canvas.height / 2;
-        this.z = Math.random() * 1000 + 200;   // depth
-        this.prevZ = this.z;
-    }
-    update() {
-        this.z -= 8;   // speed of flying forward
-        if (this.z <= 0) this.reset();
-    }
-    draw() {
-        const scale = 800 / this.z;
-        const x = (this.x - canvas.width/2) * scale + canvas.width/2;
-        const y = (this.y - canvas.height/2) * scale + canvas.height/2;
-        
-        const prevScale = 800 / this.prevZ;
-        const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
-        const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
 
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = scale * 1.5;
-        ctx.globalAlpha = Math.min(1, scale * 2);
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(x, y);
-        ctx.stroke();
+        class Star {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height / 2;
+                this.z = Math.random() * 1000 + 200;
+                this.prevZ = this.z;
+            }
+            update() {
+                this.z -= 9;
+                if (this.z <= 0) this.reset();
+            }
+            draw() {
+                const scale = 800 / this.z;
+                const x = (this.x - canvas.width/2) * scale + canvas.width/2;
+                const y = (this.y - canvas.height/2) * scale + canvas.height/2;
+                
+                const prevScale = 800 / this.prevZ;
+                const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
+                const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
 
-        this.prevZ = this.z;
-    }
-}
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = scale * 1.8;
+                ctx.globalAlpha = Math.min(1, scale * 2.5);
+                ctx.beginPath();
+                ctx.moveTo(prevX, prevY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                this.prevZ = this.z;
+            }
+        }
 
-function initStars(count = 800) {
-    stars = [];
-    for (let i = 0; i < count; i++) {
-        stars.push(new Star());
-    }
-}
+        function initStars(count = 900) {
+            stars = [];
+            for (let i = 0; i < count; i++) stars.push(new Star());
+        }
 
-function animate() {
-    ctx.fillStyle = 'rgba(5, 5, 15, 0.35)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function animate() {
+            ctx.fillStyle = 'rgba(5, 5, 20, 0.25)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => { star.update(); star.draw(); });
+            requestAnimationFrame(animate);
+        }
 
-    stars.forEach(star => {
-        star.update();
-        star.draw();
-    });
-
-    requestAnimationFrame(animate);
-}
-
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    initStars();
-});
-
-resizeCanvas();
-initStars(800);
-animate();
-</script>
+        window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+        resizeCanvas();
+        initStars(900);
+        animate();
+    </script>
 </body>
 </html>
