@@ -72,9 +72,16 @@
         </div>
     </nav>
 
-  <header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
-    <!-- Starfield Canvas -->
-    <canvas id="starfield" class="absolute inset-0 z-0 w-full h-full"></canvas>
+<!-- HERO with your chosen background image -->
+<header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden">
+    
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+         style="background-image: url('https://images.steamusercontent.com/ugc/951857668148675039/DEE6B85887DB25E1C531CC813CE37D2231936DD8/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true');">
+    </div>
+
+    <!-- Optional dark overlay for better text readability -->
+    <div class="absolute inset-0 bg-black/40 z-0"></div>
 
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
         <div class="space-y-8">
