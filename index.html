@@ -83,10 +83,8 @@
     </div>
 </nav>
 
- <!-- HERO with Fixed Starfield -->
-<header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-black">
-    
-    <!-- Starfield Canvas -->
+<header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
+    <!-- Improved Starfield -->
     <canvas id="starfield" class="absolute inset-0 z-0"></canvas>
 
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
@@ -293,15 +291,14 @@
     </script>
 
 <script>
-// Realistic Full Hero Starfield
+// Improved Starfield - closer to starfield.js.org
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
-
 let stars = [];
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
-    canvas.height = Math.max(window.innerHeight, 800); // Ensure it covers hero
+    canvas.height = window.innerHeight;
 }
 
 class Star {
@@ -311,36 +308,39 @@ class Star {
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.8 + 0.6;
-        this.speed = Math.random() * 0.6 + 0.2;
+        this.size = Math.random() * 2.2 + 0.4;
+        this.speed = Math.random() * 1.8 + 0.4;   // varied speed = depth
+        this.opacity = Math.random() * 0.8 + 0.5;
     }
     update() {
         this.y += this.speed;
         if (this.y > canvas.height) this.reset();
     }
     draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
         ctx.fillStyle = '#ffffff';
-        ctx.globalAlpha = this.size * 0.8;
         ctx.fillRect(this.x, this.y, this.size, this.size);
+        ctx.restore();
     }
 }
 
-function initStars() {
+function initStars(count = 1200) {
     stars = [];
-    for (let i = 0; i < 800; i++) {
+    for (let i = 0; i < count; i++) {
         stars.push(new Star());
     }
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(10, 5, 25, 0.25)'; // subtle trail
+    ctx.fillStyle = 'rgba(5, 5, 15, 0.25)';   // subtle trail
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
+
     stars.forEach(star => {
         star.update();
         star.draw();
     });
-    
+
     requestAnimationFrame(animate);
 }
 
@@ -350,7 +350,7 @@ window.addEventListener('resize', () => {
 });
 
 resizeCanvas();
-initStars();
+initStars(1200);
 animate();
 </script>
 </body>
