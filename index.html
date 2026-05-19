@@ -276,8 +276,8 @@
         };
     </script>
 
- <script>
-// Strong Zooming Starfield
+<script>
+// Calm Realistic Starfield (gentle twinkling stars)
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
 let stars = [];
@@ -288,47 +288,38 @@ function resizeCanvas() {
 }
 
 class Star {
-    constructor() { this.reset(); }
+    constructor() {
+        this.reset();
+    }
     reset() {
-        this.x = canvas.width / 2 + (Math.random() - 0.5) * 400;
-        this.y = canvas.height / 2 + (Math.random() - 0.5) * 400;
-        this.z = Math.random() * 800 + 300;
-        this.prevZ = this.z;
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.2 + 0.5;
+        this.speed = Math.random() * 0.4 + 0.1; // slow movement
+        this.twinkle = Math.random() * 0.5 + 0.5;
+        this.twinkleSpeed = Math.random() * 0.03 + 0.01;
     }
     update() {
-        this.z -= 12; // faster speed
-        if (this.z <= 0) this.reset();
+        this.y += this.speed;
+        if (this.y > canvas.height) this.reset();
+        this.twinkle = Math.sin(Date.now() * this.twinkleSpeed) * 0.5 + 0.5;
     }
     draw() {
-        const scale = 900 / this.z;
-        const x = (this.x - canvas.width/2) * scale + canvas.width/2;
-        const y = (this.y - canvas.height/2) * scale + canvas.height/2;
-        
-        const prevScale = 900 / this.prevZ;
-        const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
-        const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
-
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = scale * 2;
-        ctx.globalAlpha = Math.min(1, scale * 3);
-        ctx.beginPath();
-        ctx.moveTo(prevX, prevY);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-
-        this.prevZ = this.z;
+        ctx.globalAlpha = this.twinkle;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(this.x, this.y, this.size, this.size);
     }
 }
 
-function initStars() {
+function initStars(count = 1000) {
     stars = [];
-    for (let i = 0; i < 1200; i++) {
+    for (let i = 0; i < count; i++) {
         stars.push(new Star());
     }
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(5, 5, 20, 0.3)';
+    ctx.fillStyle = 'rgba(5, 5, 20, 0.15)'; // gentle fade
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     stars.forEach(star => {
@@ -345,7 +336,7 @@ window.addEventListener('resize', () => {
 });
 
 resizeCanvas();
-initStars();
+initStars(1000);
 animate();
 </script>
 </body>
