@@ -8,67 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
    <style>
-
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
-    
-    :root {
-        --neon-green: #00ff9d;
-        --neon-purple: #c300ff;
-        font-size: 19px;
-    }
-
-    body {
-        position: relative;
-        overflow-x: hidden;
-        background: #000000;
-    }
-
-    /* STRONG SCI-FI STARFIELD */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-        background: 
-            radial-gradient(white 1px, transparent 1px),
-            radial-gradient(white 1px, transparent 1px),
-            linear-gradient(#0a0a0a, #000000);
-        background-position: 0 0, 50px 50px;
-        background-size: 100px 100px, 100px 100px;
-        animation: starfield 120s linear infinite;
-        opacity: 0.75;
-    }
-
-    @keyframes starfield {
-        from { background-position: 0 0, 50px 50px; }
-        to   { background-position: 1000px 1000px, 1050px 1050px; }
-    }
-
-    /* Extra glow layer */
-    body::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: radial-gradient(circle at center, rgba(0, 255, 157, 0.06) 0%, transparent 70%);
-        pointer-events: none;
-    }
-
-    /* Rest of your styles... */
-    .hero-bg {
-        background: transparent !important;   /* Important: remove solid background */
-    }
-    
-    /* ... your other styles (nav-logo, neon-text, etc.) */
-</style>
-}
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
     
     :root {
