@@ -72,32 +72,31 @@
         </div>
     </nav>
 
-    <!-- HERO with Zooming Starfield -->
-    <header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
-        <canvas id="starfield" class="absolute inset-0 z-0"></canvas>
-        
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div class="space-y-8">
-                <div class="inline-flex items-center gap-3 bg-white/10 text-[#00ff9d] text-sm font-medium px-6 py-3 rounded-3xl border border-[#00ff9d]/30">
-                    <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD ATTEMPT
-                </div>
-                
-                <h1 class="heading-font text-7xl md:text-8xl leading-none font-semibold tracking-tighter neon-text">
-                    33 ALBUMS.<br>24 HOURS.<br>ONE LEGEND.
-                </h1>
-                
-                <p class="text-2xl text-white/80 max-w-md">
-                    LOVEANDNATE is pushing the limits of creativity.<br>
-                    Most studio albums released by an indie artist in a single 24-hour period.
-                </p>
+  <header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
+    <!-- Starfield Canvas -->
+    <canvas id="starfield" class="absolute inset-0 z-0 w-full h-full"></canvas>
+
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="space-y-8">
+            <div class="inline-flex items-center gap-3 bg-white/10 text-[#00ff9d] text-sm font-medium px-6 py-3 rounded-3xl border border-[#00ff9d]/30">
+                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD ATTEMPT
             </div>
             
-            <div class="relative flex justify-center">
-                <img src="https://i.ibb.co/kgzrvrF6/Website.png" alt="LOVEANDNATE" class="w-full max-w-lg rounded-3xl">
-            </div>
+            <h1 class="heading-font text-7xl md:text-8xl leading-none font-semibold tracking-tighter neon-text">
+                33 ALBUMS.<br>24 HOURS.<br>ONE LEGEND.
+            </h1>
+            
+            <p class="text-2xl text-white/80 max-w-md">
+                LOVEANDNATE is pushing the limits of creativity.<br>
+                Most studio albums released by an indie artist in a single 24-hour period.
+            </p>
         </div>
-    </header>
-
+        
+        <div class="relative flex justify-center">
+            <img src="https://i.ibb.co/kgzrvrF6/Website.png" alt="LOVEANDNATE" class="w-full max-w-lg rounded-3xl">
+        </div>
+    </div>
+</header>
     <!-- LIVE COUNTDOWN -->
     <section id="live" class="bg-black py-24 border-t border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 text-center">
@@ -277,65 +276,77 @@
         };
     </script>
 
-    <!-- ZOOMING STARFIELD -->
-    <script>
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
+ <script>
+// Strong Zooming Starfield
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
-        class Star {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = canvas.width / 2;
-                this.y = canvas.height / 2;
-                this.z = Math.random() * 1000 + 200;
-                this.prevZ = this.z;
-            }
-            update() {
-                this.z -= 9;
-                if (this.z <= 0) this.reset();
-            }
-            draw() {
-                const scale = 800 / this.z;
-                const x = (this.x - canvas.width/2) * scale + canvas.width/2;
-                const y = (this.y - canvas.height/2) * scale + canvas.height/2;
-                
-                const prevScale = 800 / this.prevZ;
-                const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
-                const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
+class Star {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = canvas.width / 2 + (Math.random() - 0.5) * 400;
+        this.y = canvas.height / 2 + (Math.random() - 0.5) * 400;
+        this.z = Math.random() * 800 + 300;
+        this.prevZ = this.z;
+    }
+    update() {
+        this.z -= 12; // faster speed
+        if (this.z <= 0) this.reset();
+    }
+    draw() {
+        const scale = 900 / this.z;
+        const x = (this.x - canvas.width/2) * scale + canvas.width/2;
+        const y = (this.y - canvas.height/2) * scale + canvas.height/2;
+        
+        const prevScale = 900 / this.prevZ;
+        const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
+        const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
 
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = scale * 1.8;
-                ctx.globalAlpha = Math.min(1, scale * 2.5);
-                ctx.beginPath();
-                ctx.moveTo(prevX, prevY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
-                this.prevZ = this.z;
-            }
-        }
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = scale * 2;
+        ctx.globalAlpha = Math.min(1, scale * 3);
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
 
-        function initStars(count = 900) {
-            stars = [];
-            for (let i = 0; i < count; i++) stars.push(new Star());
-        }
+        this.prevZ = this.z;
+    }
+}
 
-        function animate() {
-            ctx.fillStyle = 'rgba(5, 5, 20, 0.25)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            stars.forEach(star => { star.update(); star.draw(); });
-            requestAnimationFrame(animate);
-        }
+function initStars() {
+    stars = [];
+    for (let i = 0; i < 1200; i++) {
+        stars.push(new Star());
+    }
+}
 
-        window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
-        resizeCanvas();
-        initStars(900);
-        animate();
-    </script>
+function animate() {
+    ctx.fillStyle = 'rgba(5, 5, 20, 0.3)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    stars.forEach(star => {
+        star.update();
+        star.draw();
+    });
+    
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => {
+    resizeCanvas();
+    initStars();
+});
+
+resizeCanvas();
+initStars();
+animate();
+</script>
 </body>
 </html>
