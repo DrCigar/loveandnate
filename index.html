@@ -7,38 +7,43 @@
     <title>LOVEANDNATE • 33 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        
-        :root {
-            --neon-green: #00ff9d;
-            --neon-purple: #c300ff;
-        }
-        
-        * { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+    
+    :root {
+        --neon-green: #00ff9d;
+        --neon-purple: #c300ff;
+        font-size: 20px;   /* ← This is the main change (was ~16px) */
+    }
+    
+    * { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    body { font-family: 'Inter', system_ui, sans-serif; }
+    .heading-font { font-family: 'Space Grotesk', sans-serif; }
 
-        .hero-bg { background: radial-gradient(circle at center, #111111 0%, #000000 70%); }
-        .neon-text { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple); }
-        .vinyl { animation: spin 20s linear infinite; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .hero-bg { background: radial-gradient(circle at center, #111111 0%, #000000 70%); }
+    .neon-text { text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-purple); }
+    .vinyl { animation: spin 20s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, var(--neon-green), var(--neon-purple));
-        }
-        
-        .album-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .album-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px -5px rgb(0 255 157); }
+    .section-header::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, var(--neon-green), var(--neon-purple));
+    }
+    
+    .album-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .album-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px -5px rgb(0 255 157); }
 
-        .intensity-bar { height: 6px; background: linear-gradient(to right, #00ff9d, #c300ff); }
-    </style>
+    .intensity-bar { height: 6px; background: linear-gradient(to right, #00ff9d, #c300ff); }
+
+    /* Extra padding for bigger feel */
+    h1 { font-size: 4.5rem !important; line-height: 1.05; }
+    h2 { font-size: 3.2rem !important; }
+</style>
 </head>
 <body class="bg-black text-white overflow-x-hidden">
 
@@ -96,6 +101,14 @@
         </div>
     </header>
 
+       <!-- LIVE COUNTDOWN -->
+    <section id="live" class="bg-black py-24 border-t border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-6xl font-semibold neon-text mb-8">TIME UNTIL HISTORY</h2>
+            <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"></div>
+        </div>
+    </section>
+
     <!-- ALBUMS -->
     <section id="albums" class="max-w-7xl mx-auto px-6 py-24">
         <div class="flex justify-between items-baseline mb-12">
@@ -105,13 +118,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" id="album-grid"></div>
     </section>
 
-    <!-- LIVE COUNTDOWN -->
-    <section id="live" class="bg-black py-24 border-t border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="heading-font text-6xl font-semibold neon-text mb-8">TIME UNTIL HISTORY</h2>
-            <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"></div>
-        </div>
-    </section>
+ 
 
     <!-- JOURNEY -->
     <section id="journey" class="bg-gradient-to-b from-black to-[#111] py-24 border-t border-white/10">
