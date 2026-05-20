@@ -306,25 +306,39 @@
      description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. It feels like childhood summers and midnight drives through glowing, haunted forests."}
 ];
 
-        function generateAlbums() {
-            const grid = document.getElementById('album-grid');
-            if (!grid) return;
-            grid.innerHTML = '';
-            albumsData.forEach((album, i) => {
-                const card = document.createElement('div');
-                card.className = "album-card bg-white/5 border border-white/10 rounded-3xl p-5 group cursor-pointer";
-                card.innerHTML = `
-                    <div class="aspect-square bg-cover bg-center rounded-2xl mb-4" style="background-image: url('${album.cover}')"></div>
-                    <div class="font-semibold text-xl">${album.title}</div>
-                    <div class="text-xs text-[#00ff9d] mt-1">${album.genre}</div>
-                    <div class="mt-4 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                        <div class="intensity-bar" style="width: ${album.intensity}%"></div>
-                    </div>
-                `;
-                card.onclick = () => showModal(i);
-                grid.appendChild(card);
-            });
+    function generateAlbums() {
+    const grid = document.getElementById('album-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    albumsData.forEach((album, i) => {
+        let statusHTML = '';
+
+        if (album.status === "COMPLETE") {
+            statusHTML = `<span class="inline-block px-4 py-1 text-xs font-bold bg-green-500/20 text-green-400 rounded-full border border-green-500/30">COMPLETE</span>`;
+        } else if (album.status === "RECORDING") {
+            statusHTML = `<span class="inline-block px-4 py-1 text-xs font-bold bg-red-500/20 text-red-400 rounded-full border border-red-500/30 animate-pulse">RECORDING LIVE</span>`;
+        } else if (album.status === "MIXING") {
+            statusHTML = `<span class="inline-block px-4 py-1 text-xs font-bold bg-yellow-500/20 text-yellow-400 rounded-full border border-yellow-500/30">MIXING</span>`;
+        } else if (album.status === "WRITING") {
+            statusHTML = `<span class="inline-block px-4 py-1 text-xs font-bold bg-blue-500/20 text-blue-400 rounded-full border border-blue-500/30">WRITING</span>`;
         }
+
+        const card = document.createElement('div');
+        card.className = "album-card bg-white/5 border border-white/10 rounded-3xl p-5 group cursor-pointer";
+        card.innerHTML = `
+            <div class="aspect-square bg-cover bg-center rounded-2xl mb-4" style="background-image: url('${album.cover}')"></div>
+            <div class="font-semibold text-xl">${album.title}</div>
+            <div class="text-xs text-[#00ff9d] mt-1">${album.genre}</div>
+            
+            <div class="mt-4">
+                ${statusHTML}
+            </div>
+        `;
+        card.onclick = () => showModal(i);
+        grid.appendChild(card);
+    });
+}
 
         function showModal(i) {
             const album = albumsData[i];
