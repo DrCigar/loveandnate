@@ -112,16 +112,6 @@
         </div>
     </section>
 
-    <!-- SIMPLE TEASER SECTION -->
-<section class="bg-black py-20 border-t border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="heading-font text-5xl font-semibold mb-4 neon-text">Want to hear a little now?</h2>
-        <p class="text-white/60 mb-10">Click any album to play a 30-second teaser</p>
-
-        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6" id="teaser-grid"></div>
-    </div>
-</section>
-
     <!-- ALBUMS -->
     <section id="albums" class="max-w-7xl mx-auto px-6 py-24">
         <div class="flex justify-between items-baseline mb-12">
@@ -462,35 +452,6 @@ window.addEventListener('resize', () => {
     initStars();
 });
 
-resizeCanvas();
-initStars(1000);
-animate();
-
-    function playTeaser(i) {
-    const album = albumsData[i];
-    if (!album.sampleUrl) {
-        alert("Sample coming soon for " + album.title);
-        return;
-    }
-    
-    const audio = new Audio(album.sampleUrl);
-    audio.play();
-}
-
-function generateTeaserGrid() {
-    const grid = document.getElementById('teaser-grid');
-    grid.innerHTML = '';
-
-    albumsData.forEach((album, i) => {
-        const div = document.createElement('div');
-        div.className = "cursor-pointer group text-center";
-        div.innerHTML = `
-            <div class="aspect-square bg-cover bg-center rounded-2xl mb-3 border border-white/10 group-hover:border-[#00ff9d] transition-all"></div>
-            <div class="text-sm font-medium">${album.title}</div>
-        `;
-        div.onclick = () => playTeaser(i);
-        grid.appendChild(div);
-    });
 }
 </script>
     
