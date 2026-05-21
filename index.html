@@ -468,50 +468,7 @@ window.addEventListener('resize', () => {
     initStars();
 });
 
-}
-    let currentAudio = null;
 
-function playSnippet() {
-    const album = albumsData[currentAlbumIndex];   // We'll set this when opening modal
-    
-    if (!album.sampleUrl) {
-        alert("Snippet coming soon!");
-        return;
-    }
-
-    if (currentAudio) currentAudio.pause();
-
-    currentAudio = new Audio(album.sampleUrl);
-    
-    currentAudio.play();
-
-    // Stop after 20 seconds
-    setTimeout(() => {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-    }, 20000);
-}
-
-// We'll need this global variable
-let currentAlbumIndex = 0;
-
-function showModal(i) {
-    currentAlbumIndex = i;
-    const album = albumsData[i];
-    
-    document.getElementById('modal-cover').style.backgroundImage = `url('${album.cover}')`;
-    document.getElementById('modal-genre').textContent = album.genre;
-    document.getElementById('modal-title').textContent = album.title;
-    document.getElementById('modal-inspiration').innerHTML = `<strong>Inspired by:</strong> ${album.inspiration}`;
-    document.getElementById('modal-intensity-bar').style.width = album.intensity + '%';
-    document.getElementById('modal-intensity-text').textContent = album.intensity + '%';
-    document.getElementById('modal-description').innerHTML = `<p>${album.description}</p>`;
-    
-    document.getElementById('album-modal').classList.remove('hidden');
-    document.getElementById('album-modal').classList.add('flex');
-}
 </script>
 
     
