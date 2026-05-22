@@ -421,11 +421,11 @@
     </script>
 
 <script>
-// Clean Zooming Star Tunnel - Final Version
+// FINAL ATTEMPT - Simple Zooming Starfield
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('starfield');
     if (!canvas) {
-        console.error("Canvas not found - check if id='starfield' exists");
+        console.error("Starfield canvas not found!");
         return;
     }
 
@@ -442,25 +442,24 @@ document.addEventListener('DOMContentLoaded', () => {
         reset() {
             this.x = canvas.width / 2;
             this.y = canvas.height / 2;
-            this.z = Math.random() * 800 + 300;
+            this.z = Math.random() * 900 + 250;
             this.prevZ = this.z;
         }
         update() {
-            this.z -= 12;
+            this.z -= 13;
             if (this.z <= 0) this.reset();
         }
         draw() {
-            const scale = 900 / this.z;
+            const scale = 950 / this.z;
             const x = (this.x - canvas.width/2) * scale + canvas.width/2;
             const y = (this.y - canvas.height/2) * scale + canvas.height/2;
             
-            const prevScale = 900 / this.prevZ;
-            const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
-            const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
+            const prevX = (this.x - canvas.width/2) * (950 / this.prevZ) + canvas.width/2;
+            const prevY = (this.y - canvas.height/2) * (950 / this.prevZ) + canvas.height/2;
 
             ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = scale * 2;
-            ctx.globalAlpha = Math.min(1, scale * 2.5);
+            ctx.lineWidth = scale * 2.5;
+            ctx.globalAlpha = Math.min(1, scale * 3);
             ctx.beginPath();
             ctx.moveTo(prevX, prevY);
             ctx.lineTo(x, y);
@@ -470,9 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function initStars(count = 800) {
+    function initStars() {
         stars = [];
-        for (let i = 0; i < count; i++) stars.push(new Star());
+        for (let i = 0; i < 900; i++) stars.push(new Star());
     }
 
     function animate() {
@@ -484,11 +483,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
     resizeCanvas();
-    initStars(800);
+    initStars();
     animate();
 });
 </script>
-    
-    
 </body>
 </html>
