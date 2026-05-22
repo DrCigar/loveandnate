@@ -421,14 +421,10 @@
     </script>
 
 <script>
-// BRIGHT TEST Starfield - Should be very obvious
+// ZOOMING TUNNEL / HYPERSPACE - Clean Version
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('starfield');
-    if (!canvas) {
-        console.error("Canvas not found");
-        return;
-    }
-    console.log("✅ Starfield script started");
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -441,30 +437,45 @@ document.addEventListener('DOMContentLoaded', () => {
     class Star {
         constructor() { this.reset(); }
         reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3 + 1;
-            this.speed = Math.random() * 2 + 1;
+            this.x = canvas.width / 2;
+            this.y = canvas.height / 2;
+            this.z = Math.random() * 900 + 300;
+            this.prevZ = this.z;
         }
         update() {
-            this.y += this.speed;
-            if (this.y > canvas.height) this.y = 0;
+            this.z -= 14;                    // ← Speed of zoom
+            if (this.z <= 0) this.reset();
         }
         draw() {
-            ctx.fillStyle = '#ffffff';
-            ctx.globalAlpha = 1;
-            ctx.fillRect(this.x, this.y, this.size, this.size);
+            const scale = 950 / this.z;
+            const x = (this.x - canvas.width/2) * scale + canvas.width/2;
+            const y = (this.y - canvas.height/2) * scale + canvas.height/2;
+            
+            const prevScale = 950 / this.prevZ;
+            const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
+            const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
+
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = scale * 2.8;
+            ctx.globalAlpha = Math.min(1, scale * 3.5);
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+
+            this.prevZ = this.z;
         }
     }
 
-    function init() {
+    function initStars(count = 850) {
         stars = [];
-        for (let i = 0; i < 2000; i++) stars.push(new Star());
+        for (let i = 0; i < count; i++) stars.push(new Star());
     }
 
     function animate() {
-        ctx.fillStyle = 'rgba(5, 5, 25, 0.15)';
+        ctx.fillStyle = 'rgba(5, 5, 20, 0.22)';   // trail strength
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
         stars.forEach(star => {
             star.update();
             star.draw();
@@ -472,9 +483,9 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
     resizeCanvas();
-    init();
+    initStars();
     animate();
 });
 </script>
