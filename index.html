@@ -432,24 +432,29 @@ function resizeCanvas() {
 }
 
 class Star {
-    constructor() { this.reset(); }
+    constructor() {
+        this.reset();
+    }
     reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.2 + 0.5;
-        this.speed = Math.random() * 0.4 + 0.1;
-        this.twinkle = Math.random() * 0.5 + 0.5;
-        this.twinkleSpeed = Math.random() * 0.03 + 0.01;
+        this.size = Math.random() * 2.0 + 0.4;
+        this.speed = Math.random() * 0.15 + 0.05;     // Much slower movement
+        this.twinkle = Math.random() * 0.6 + 0.6;
+        this.twinkleSpeed = Math.random() * 0.08 + 0.02; // Faster twinkling
     }
     update() {
-        this.y += this.speed;
+        this.y += this.speed;   // Very slow drift
         if (this.y > canvas.height) this.reset();
-        this.twinkle = Math.sin(Date.now() * this.twinkleSpeed) * 0.5 + 0.5;
+        
+        // Nice natural twinkling
+        this.twinkle = Math.sin(Date.now() * this.twinkleSpeed) * 0.4 + 0.7;
     }
     draw() {
         ctx.globalAlpha = this.twinkle;
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(this.x, this.y, this.size, this.size);
+    }
     }
 }
 
