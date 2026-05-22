@@ -421,7 +421,7 @@
     </script>
 
 <script>
-// Clean & Calm Starfield
+// Zooming Star Tunnel / Hyperspace Effect
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
 let stars = [];
@@ -436,26 +436,37 @@ class Star {
         this.reset();
     }
     reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.0 + 0.4;
-        this.speed = Math.random() * 0.15 + 0.05;     // slow gentle drift
-        this.twinkle = Math.random() * 0.6 + 0.6;
-        this.twinkleSpeed = Math.random() * 0.08 + 0.02;
+        this.x = canvas.width / 2;
+        this.y = canvas.height / 2;
+        this.z = Math.random() * 800 + 300;   // depth
+        this.prevZ = this.z;
     }
     update() {
-        this.y += this.speed;
-        if (this.y > canvas.height) this.reset();
-        this.twinkle = Math.sin(Date.now() * this.twinkleSpeed) * 0.4 + 0.7;
+        this.z -= 14;   // speed - higher = more intense tunnel
+        if (this.z <= 0) this.reset();
     }
     draw() {
-        ctx.globalAlpha = this.twinkle;
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(this.x, this.y, this.size, this.size);
+        const scale = 900 / this.z;
+        const x = (this.x - canvas.width/2) * scale + canvas.width/2;
+        const y = (this.y - canvas.height/2) * scale + canvas.height/2;
+        
+        const prevScale = 900 / this.prevZ;
+        const prevX = (this.x - canvas.width/2) * prevScale + canvas.width/2;
+        const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
+
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = scale * 2.2;
+        ctx.globalAlpha = Math.min(1, scale * 3);
+        ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        this.prevZ = this.z;
     }
 }
 
-function initStars(count = 1800) {
+function initStars(count = 800) {
     stars = [];
     for (let i = 0; i < count; i++) {
         stars.push(new Star());
@@ -463,7 +474,7 @@ function initStars(count = 1800) {
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(5, 5, 20, 0.12)';
+    ctx.fillStyle = 'rgba(5, 5, 20, 0.28)';   // trail effect
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     stars.forEach(star => {
@@ -480,7 +491,7 @@ window.addEventListener('resize', () => {
 });
 
 resizeCanvas();
-initStars(1800);
+initStars(800);
 animate();
 </script>
 </body>
