@@ -71,14 +71,19 @@
 </nav>
 
 <!-- HERO with Starfield -->
-<header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-[#05050f]">
-    
-    <!-- Starfield Canvas -->
-    <canvas id="starfield" class="absolute inset-0 z-0"></canvas>
+<!-- HERO with Your GIF -->
+<header id="home" class="min-h-screen flex items-center relative pt-20 overflow-hidden bg-black">
+
+    <!-- Your Slow Stars GIF -->
+    <img src="https://makeagif.com/i/XRIl_1" 
+         class="absolute inset-0 w-full h-full object-cover z-0 opacity-75" 
+         alt="starfield">
+
+    <!-- Dark overlay for readability -->
+    <div class="absolute inset-0 bg-black/55 z-0"></div>
 
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
         
-        <!-- Left Content -->
         <div class="space-y-8">
             <div class="inline-flex items-center gap-3 bg-white/10 text-[#00ff9d] text-sm font-medium px-6 py-3 rounded-3xl border border-[#00ff9d]/30">
                 <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD ATTEMPT
@@ -94,7 +99,6 @@
             </p>
         </div>
        
-        <!-- Right Image -->
         <div class="relative flex justify-center">
             <img src="https://i.ibb.co/kgzrvrF6/Website.png" alt="LOVEANDNATE" class="w-full max-w-lg rounded-3xl">
         </div>
