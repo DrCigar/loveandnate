@@ -421,13 +421,14 @@
     </script>
 
 <script>
-// FINAL ATTEMPT - Simple Zooming Starfield
+// BRIGHT TEST Starfield - Should be very obvious
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('starfield');
     if (!canvas) {
-        console.error("Starfield canvas not found!");
+        console.error("Canvas not found");
         return;
     }
+    console.log("✅ Starfield script started");
 
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -440,50 +441,40 @@ document.addEventListener('DOMContentLoaded', () => {
     class Star {
         constructor() { this.reset(); }
         reset() {
-            this.x = canvas.width / 2;
-            this.y = canvas.height / 2;
-            this.z = Math.random() * 900 + 250;
-            this.prevZ = this.z;
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speed = Math.random() * 2 + 1;
         }
         update() {
-            this.z -= 13;
-            if (this.z <= 0) this.reset();
+            this.y += this.speed;
+            if (this.y > canvas.height) this.y = 0;
         }
         draw() {
-            const scale = 950 / this.z;
-            const x = (this.x - canvas.width/2) * scale + canvas.width/2;
-            const y = (this.y - canvas.height/2) * scale + canvas.height/2;
-            
-            const prevX = (this.x - canvas.width/2) * (950 / this.prevZ) + canvas.width/2;
-            const prevY = (this.y - canvas.height/2) * (950 / this.prevZ) + canvas.height/2;
-
-            ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = scale * 2.5;
-            ctx.globalAlpha = Math.min(1, scale * 3);
-            ctx.beginPath();
-            ctx.moveTo(prevX, prevY);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-
-            this.prevZ = this.z;
+            ctx.fillStyle = '#ffffff';
+            ctx.globalAlpha = 1;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
         }
     }
 
-    function initStars() {
+    function init() {
         stars = [];
-        for (let i = 0; i < 900; i++) stars.push(new Star());
+        for (let i = 0; i < 2000; i++) stars.push(new Star());
     }
 
     function animate() {
-        ctx.fillStyle = 'rgba(5, 5, 20, 0.25)';
+        ctx.fillStyle = 'rgba(5, 5, 25, 0.15)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        stars.forEach(star => { star.update(); star.draw(); });
+        stars.forEach(star => {
+            star.update();
+            star.draw();
+        });
         requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+    window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-    initStars();
+    init();
     animate();
 });
 </script>
