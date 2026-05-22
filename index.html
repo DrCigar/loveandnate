@@ -418,10 +418,9 @@
     generateAlbums();
     generateTeaserGrid();     // ← Add this line
 };
-    </script>
-
+        
 <script>
-// Zooming Star Tunnel / Hyperspace Effect
+// Clean Zooming Star Tunnel
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
 let stars = [];
@@ -432,17 +431,15 @@ function resizeCanvas() {
 }
 
 class Star {
-    constructor() {
-        this.reset();
-    }
+    constructor() { this.reset(); }
     reset() {
         this.x = canvas.width / 2;
         this.y = canvas.height / 2;
-        this.z = Math.random() * 800 + 300;   // depth
+        this.z = Math.random() * 800 + 300;
         this.prevZ = this.z;
     }
     update() {
-        this.z -= 14;   // speed - higher = more intense tunnel
+        this.z -= 12;
         if (this.z <= 0) this.reset();
     }
     draw() {
@@ -455,8 +452,8 @@ class Star {
         const prevY = (this.y - canvas.height/2) * prevScale + canvas.height/2;
 
         ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = scale * 2.2;
-        ctx.globalAlpha = Math.min(1, scale * 3);
+        ctx.lineWidth = scale * 2;
+        ctx.globalAlpha = Math.min(1, scale * 2.5);
         ctx.beginPath();
         ctx.moveTo(prevX, prevY);
         ctx.lineTo(x, y);
@@ -466,33 +463,23 @@ class Star {
     }
 }
 
-function initStars(count = 800) {
+function initStars(count = 700) {
     stars = [];
-    for (let i = 0; i < count; i++) {
-        stars.push(new Star());
-    }
+    for (let i = 0; i < count; i++) stars.push(new Star());
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(5, 5, 20, 0.28)';   // trail effect
+    ctx.fillStyle = 'rgba(5, 5, 20, 0.25)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    stars.forEach(star => {
-        star.update();
-        star.draw();
-    });
-    
+    stars.forEach(star => { star.update(); star.draw(); });
     requestAnimationFrame(animate);
 }
 
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    initStars();
-});
-
+window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
 resizeCanvas();
-initStars(800);
+initStars(700);
 animate();
 </script>
+
 </body>
 </html>
