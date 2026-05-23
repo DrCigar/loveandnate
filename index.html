@@ -124,10 +124,8 @@
         .ticker-inner {
             display: flex;
             width: max-content;
-            animation: ticker-scroll 32s linear infinite;
             will-change: transform;
         }
-        .ticker-inner:hover { animation-play-state: paused; }
         .ticker-seg {
             display: flex; gap: 2.5rem; padding-right: 2.5rem;
             flex-shrink: 0;
@@ -138,10 +136,6 @@
         }
         .ticker-seg .hi  { color: rgba(255,255,255,.9); }
         .ticker-seg .rec { color: var(--purple); }
-        @keyframes ticker-scroll {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
-        }
 
         /* ─── Album tracker ──────────────────────────────────────────────── */
         .tracker-dots { display: grid; grid-template-columns: repeat(32, 1fr); gap: 3px; }
@@ -887,6 +881,29 @@ function buildTicker() {
     document.getElementById('ticker-b').innerHTML = seg;
 }
 
+// ══════════════════════════════════════════ TICKER ANIMATION ===
+function animateTicker() {
+    const inner = document.getElementById('ticker-inner');
+    if (!inner) return;
+    let x = 0;
+    let paused = false;
+    const speed = 0.4; // px per frame (~24px/sec at 60fps)
+
+    inner.parentElement.addEventListener('mouseenter', () => paused = true);
+    inner.parentElement.addEventListener('mouseleave', () => paused = false);
+
+    function tick() {
+        if (!paused) {
+            x -= speed;
+            const half = inner.scrollWidth / 2;
+            if (half > 0 && Math.abs(x) >= half) x = 0;
+            inner.style.transform = `translateX(${x}px)`;
+        }
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
 // ══════════════════════════════════════════ MISSION STATS PANEL ===
 function buildStats() {
     document.getElementById('stat-done').textContent = nComplete;
@@ -1056,6 +1073,7 @@ window.onload = function () {
     syncNavHeight();
     initStarfield();
     buildTicker();
+    animateTicker();
     buildStats();
     buildTracker();
     generateAlbums();
