@@ -115,8 +115,7 @@
             position: sticky;
             top: var(--nav-h, 64px);
             z-index: 45;
-            background: rgba(0,0,0,.75);
-            backdrop-filter: blur(12px);
+            background: #000;
             border-bottom: 1px solid rgba(0,255,157,.12);
             overflow: hidden;
             padding: .35rem 0;
@@ -126,10 +125,12 @@
             display: flex;
             width: max-content;
             animation: ticker-scroll 32s linear infinite;
+            will-change: transform;
         }
         .ticker-inner:hover { animation-play-state: paused; }
         .ticker-seg {
             display: flex; gap: 2.5rem; padding-right: 2.5rem;
+            flex-shrink: 0;
             font-family: 'JetBrains Mono', monospace;
             font-size: .6rem;
             color: rgba(255,255,255,.45);
