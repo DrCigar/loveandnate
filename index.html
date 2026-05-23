@@ -112,11 +112,16 @@
 
         /* ─── Status ticker ──────────────────────────────────────────────── */
         .ticker-wrap {
-            background: rgba(0,255,157,.04);
+            position: sticky;
+            top: 57px;
+            z-index: 45;
+            background: rgba(0,0,0,.75);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0,255,157,.12);
             overflow: hidden;
             padding: .35rem 0;
         }
+        @media (min-width: 640px) { .ticker-wrap { top: 65px; } }
         .ticker-inner {
             display: flex;
             width: max-content;
@@ -312,8 +317,8 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ HERO === -->
-<header id="home" class="min-h-screen flex items-center relative bg-black">
-    <div class="absolute inset-0 bg-black/40 z-0"></div>
+<header id="home" class="min-h-screen flex items-center relative">
+    <div class="absolute inset-0 bg-black/60 z-0"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 pt-20 pb-28 md:py-16">
 
