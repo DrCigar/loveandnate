@@ -113,7 +113,7 @@
         /* ─── Status ticker ──────────────────────────────────────────────── */
         .ticker-wrap {
             position: sticky;
-            top: 57px;
+            top: 62px;
             z-index: 45;
             background: rgba(0,0,0,.75);
             backdrop-filter: blur(12px);
@@ -121,7 +121,7 @@
             overflow: hidden;
             padding: .35rem 0;
         }
-        @media (min-width: 640px) { .ticker-wrap { top: 65px; } }
+        @media (min-width: 640px) { .ticker-wrap { top: 78px; } }
         .ticker-inner {
             display: flex;
             width: max-content;
@@ -305,7 +305,7 @@
 </div>
 
 <!-- Nav height spacer (fixed nav doesn't push content) -->
-<div class="h-[57px] sm:h-[65px]"></div>
+<div class="h-[62px] sm:h-[78px]"></div>
 
 <!-- ════════════════════════════════════════════════════ STATUS TICKER === -->
 <div class="ticker-wrap">
@@ -320,7 +320,7 @@
 <header id="home" class="min-h-screen flex items-center relative">
     <div class="absolute inset-0 bg-black/60 z-0"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 pt-20 pb-28 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 pt-10 pb-14 md:py-8">
 
         <div class="space-y-6">
             <div class="inline-flex items-center gap-2 bg-white/10 text-[var(--green)] text-xs sm:text-sm
