@@ -113,7 +113,7 @@
         /* ─── Status ticker ──────────────────────────────────────────────── */
         .ticker-wrap {
             position: sticky;
-            top: 62px;
+            top: var(--nav-h, 64px);
             z-index: 45;
             background: rgba(0,0,0,.75);
             backdrop-filter: blur(12px);
@@ -121,7 +121,7 @@
             overflow: hidden;
             padding: .35rem 0;
         }
-        @media (min-width: 640px) { .ticker-wrap { top: 78px; } }
+        /* top is set dynamically via --nav-h CSS variable */
         .ticker-inner {
             display: flex;
             width: max-content;
@@ -305,7 +305,7 @@
 </div>
 
 <!-- Nav height spacer (fixed nav doesn't push content) -->
-<div class="h-[62px] sm:h-[78px]"></div>
+<div id="nav-spacer"></div>
 
 <!-- ════════════════════════════════════════════════════ STATUS TICKER === -->
 <div class="ticker-wrap">
@@ -898,8 +898,20 @@ function initScrollAnimations() {
     document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
 }
 
+// ══════════════════════ NAV HEIGHT → spacer + ticker offset ===
+function syncNavHeight() {
+    const nav    = document.querySelector('nav');
+    const spacer = document.getElementById('nav-spacer');
+    if (!nav) return;
+    const h = nav.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--nav-h', h + 'px');
+    if (spacer) spacer.style.height = h + 'px';
+}
+window.addEventListener('resize', syncNavHeight);
+
 // ══════════════════════════════════════════════════ BOOT ===
 window.onload = function () {
+    syncNavHeight();
     initStarfield();
     buildTicker();
     buildStats();
