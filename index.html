@@ -860,6 +860,12 @@ function buildTicker() {
     const recording = albumsData.find(a => a.status === 'RECORDING');
     const daysOut   = Math.max(0, Math.floor((new Date(2026,9,15) - Date.now()) / 86400000));
 
+    // Total creative hours: 1 hr/day since May 1 2021, capped at Oct 15 2026
+    const PROJECT_START = new Date(2021, 4, 1); // May 1 2021
+    const PROJECT_END   = new Date(2026, 9, 15); // Oct 15 2026
+    const countTo = Math.min(Date.now(), PROJECT_END.getTime());
+    const totalHrs = Math.floor((countTo - PROJECT_START.getTime()) / 86400000);
+
     const seg = [
         `LATEST COMPLETE &nbsp;·&nbsp; <span class="hi">${lastDone ? lastDone.title : '—'}</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
@@ -872,6 +878,8 @@ function buildTicker() {
         `PROGRESS &nbsp;·&nbsp; <span class="hi">${pct}%</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
         `ALBUMS DONE &nbsp;·&nbsp; <span class="hi">${nComplete} / ${TOTAL}</span>`,
+        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
+        `TOTAL CREATIVE HRS &nbsp;·&nbsp; <span class="hi">${totalHrs.toLocaleString()} HRS</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
     ].join('');
 
