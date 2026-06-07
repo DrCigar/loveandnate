@@ -149,6 +149,7 @@
         .tracker-dot.recording { background: var(--purple); animation: pulse-dot 1.4s ease-in-out infinite; }
         .tracker-dot.mixing    { background: #ffaa00; }
         .tracker-dot.writing   { background: var(--pink); opacity: .55; }
+        .tracker-dot.scrapped  { background: #ff2222; opacity: .5; }
         @keyframes pulse-dot {
             0%,100% { opacity:1; box-shadow: 0 0 6px rgba(195,0,255,.5); }
             50%      { opacity:.6; box-shadow: 0 0 14px rgba(195,0,255,.9); }
@@ -782,7 +783,7 @@ const albumsData = [
     {title:"When You Grow Up",genre:"Indie Pop / Alternative Hip-Hop",inspiration:"MGMT",status:"RECORDING",intensity:50,
      cover:"https://i.ibb.co/svv6qvRT/grok-image-cdd71b70-0b13-458e-9383-e0cf6af0dc13.jpg",
      description:"A tender, playful album made for his son — full of silly diddies, bouncy bops, and pure dad love."},
-    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING / CHROMEO",status:"MIXING",intensity:38,
+    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING / CHROMEO",status:"SCRAPPED",intensity:38,
      cover:"https://i.ibb.co/Tq2DTQRz/grok-image-4208ad80-ce15-465c-aa8a-ac9a582edb00.jpg",
      description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. It feels like childhood summers and midnight drives through glowing, haunted forests."}
 ];
@@ -948,15 +949,26 @@ function generateAlbums() {
             RECORDING: 'bg-red-500/20 text-red-400 border-red-500/30 animate-pulse',
             MIXING:    'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
             WRITING:   'border-[#ff00aa] text-[#ff00aa]',
+            SCRAPPED:  'bg-red-900/40 text-red-400 border-red-700/60',
         };
         const cls = statusStyles[album.status] || 'bg-white/10 text-white/50 border-white/20';
+
+        const scrappedOverlay = album.status === 'SCRAPPED' ? `
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:1rem;background:rgba(0,0,0,0.45);pointer-events:none;">
+                <svg viewBox="0 0 100 100" style="width:75%;height:75%;filter:drop-shadow(0 0 12px rgba(255,0,0,0.9))">
+                    <line x1="10" y1="10" x2="90" y2="90" stroke="#ff1111" stroke-width="12" stroke-linecap="round"/>
+                    <line x1="90" y1="10" x2="10" y2="90" stroke="#ff1111" stroke-width="12" stroke-linecap="round"/>
+                </svg>
+            </div>` : '';
 
         const card = document.createElement('div');
         card.className      = 'album-card bg-white/5 border border-white/10 rounded-3xl p-3 sm:p-4 cursor-pointer';
         card.dataset.status = album.status;
         card.innerHTML = `
             <div class="aspect-square rounded-2xl mb-3 bg-cover bg-center"
-                 style="background-image:url('${album.cover}')"></div>
+                 style="position:relative;background-image:url('${album.cover}')">
+                ${scrappedOverlay}
+            </div>
             <div class="font-semibold text-sm leading-tight mb-1">${album.title}</div>
             <div class="mono text-[10px] line-clamp-2 mb-2" style="color:var(--green)">${album.genre}</div>
             <span class="inline-block px-2.5 py-0.5 text-xs font-bold rounded-full border ${cls}">${album.status}</span>
