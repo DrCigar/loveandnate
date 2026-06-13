@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LOVEANDNATE is attempting the Guinness World Record: 32 albums in 24 hours.">
-    <title>LOVEANDNATE • 32 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT</title>
+    <meta name="description" content="LOVEANDNATE is attempting the Guinness World Record: 33 albums in 24 hours.">
+    <title>LOVEANDNATE • 33 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,7 +138,7 @@
         .ticker-seg .rec { color: var(--purple); }
 
         /* ─── Album tracker ──────────────────────────────────────────────── */
-        .tracker-dots { display: grid; grid-template-columns: repeat(32, 1fr); gap: 3px; }
+        .tracker-dots { display: grid; grid-template-columns: repeat(33, 1fr); gap: 3px; }
         .tracker-dot {
             height: 12px; border-radius: 2px;
             background: rgba(255,255,255,.08); cursor: default;
@@ -148,8 +148,8 @@
         .tracker-dot.complete  { background: var(--green);  box-shadow: 0 0 5px rgba(0,255,157,.4); }
         .tracker-dot.recording { background: var(--purple); animation: pulse-dot 1.4s ease-in-out infinite; }
         .tracker-dot.mixing    { background: #ffaa00; }
-        .tracker-dot.writing   { background: var(--pink); opacity: .55; }
-        .tracker-dot.scrapped  { background: #ff2222; opacity: .5; }
+        .tracker-dot.postponed { background: rgba(255,255,255,.25); }
+        .tracker-dot.pending   { background: rgba(255,255,255,.08); }
         @keyframes pulse-dot {
             0%,100% { opacity:1; box-shadow: 0 0 6px rgba(195,0,255,.5); }
             50%      { opacity:.6; box-shadow: 0 0 14px rgba(195,0,255,.9); }
@@ -326,7 +326,7 @@
 
             <h1 class="heading-font neon-text"
                 style="font-size: clamp(3.2rem, 9vw, 6.5rem); line-height: .9;">
-                32 ALBUMS.<br>24 HOURS.<br>ONE ARTIST.
+                33 ALBUMS.<br>24 HOURS.<br>ONE ARTIST.
             </h1>
 
             <p class="text-lg sm:text-xl md:text-2xl text-white/75 max-w-md leading-relaxed">
@@ -350,7 +350,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
             <span class="mono text-[var(--green)] text-xs tracking-widest">// ALBUM COMPLETION TRACKER</span>
-            <span class="mono text-[var(--purple)] text-xs" id="tracker-label">— / 32 COMPLETE</span>
+            <span class="mono text-[var(--purple)] text-xs" id="tracker-label">— / 33 COMPLETE</span>
         </div>
         <!-- Master bar -->
         <div class="h-1.5 rounded-full overflow-hidden mb-3" style="background:rgba(255,255,255,.06)">
@@ -376,8 +376,8 @@
                 Mixing (<span id="leg-mixing">0</span>)
             </div>
             <div class="flex items-center gap-1.5 mono text-xs text-white/40">
-                <div class="w-3 h-3 rounded-sm" style="background:var(--pink);opacity:.7"></div>
-                Writing (<span id="leg-writing">0</span>)
+                <div class="w-3 h-3 rounded-sm" style="background:rgba(255,255,255,.3)"></div>
+                Postponed (<span id="leg-postponed">0</span>)
             </div>
         </div>
     </div>
@@ -397,7 +397,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10 md:mb-14">
             <h2 class="heading-font mb-4" style="font-size:clamp(2rem,5vw,3.5rem)">Follow the Journey</h2>
-            <p class="text-white/70 text-lg sm:text-xl">Daily behind-the-scenes of the 32 albums in 24 hours attempt</p>
+            <p class="text-white/70 text-lg sm:text-xl">Daily behind-the-scenes of the 33 albums in 24 hours attempt</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-10 md:gap-16 max-w-5xl mx-auto items-center">
@@ -419,7 +419,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="mono text-xs text-white/35 tracking-wide">TARGET</span>
-                            <span class="mono text-sm font-bold text-white">32</span>
+                            <span class="mono text-sm font-bold text-white">33</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="mono text-xs text-white/35 tracking-wide">ATTEMPT_DATE</span>
@@ -465,7 +465,7 @@
 <!-- ════════════════════════════════════════════════════════ ALBUMS === -->
 <section id="albums" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 scroll-reveal">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 mb-6 md:mb-8">
-        <h2 class="heading-font" style="font-size:clamp(2rem,5vw,3.5rem)">THE 32 ALBUMS</h2>
+        <h2 class="heading-font" style="font-size:clamp(2rem,5vw,3.5rem)">THE 33 ALBUMS</h2>
         <p class="text-white/50 text-sm sm:max-w-xs sm:text-right">Click any album to read the full story</p>
     </div>
     <!-- Filter tabs -->
@@ -474,7 +474,7 @@
         <button class="filter-tab"        data-filter="COMPLETE"  onclick="filterAlbums('COMPLETE')">COMPLETE</button>
         <button class="filter-tab"        data-filter="RECORDING" onclick="filterAlbums('RECORDING')">RECORDING</button>
         <button class="filter-tab"        data-filter="MIXING"    onclick="filterAlbums('MIXING')">MIXING</button>
-        <button class="filter-tab"        data-filter="WRITING"   onclick="filterAlbums('WRITING')">WRITING</button>
+        <button class="filter-tab"        data-filter="POSTPONED" onclick="filterAlbums('POSTPONED')">POSTPONED</button>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5"
          id="album-grid"></div>
@@ -637,7 +637,7 @@
 
 <footer class="bg-black py-10 md:py-12 border-t border-white/10 text-center text-xs text-white/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        © LOVEANDNATE • 32 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT 2026<br>
+        © LOVEANDNATE • 33 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT 2026<br>
         Self-taught. Limitless. Keep ; Going.
     </div>
 </footer>
@@ -690,10 +690,13 @@
 <script>
 // ═══════════════════════════════════════════════════════ ALBUM DATA ===
 const albumsData = [
+    {title:"Alternative World",genre:"Pop-Punk / Alternative Rock",inspiration:"BLINK 182",status:"MIXING",intensity:75,
+     cover:"https://i.ibb.co/mCVdPjVC/Final.png",
+     description:"What if you took all your angst and could make a new world? You'd probably first start by talking shit about stuff you didn't like."},
     {title:"ARTACHE",genre:"Alternative Rock / Electronic",inspiration:"AWOLNATION",status:"COMPLETE",intensity:85,
      cover:"https://i.ibb.co/yFnvhPHm/grok-image-d85e3d1e-5a08-4dbd-a616-6b6c95ba0788.jpg",
      description:"Artache is the sound of a bleeding heart that refuses to stop creating. It's the unflinching chronicle of an artist who has watched masterpiece after masterpiece disappear into silence, yet still wakes up every day to bleed again into the next song. Every track is a scar, every chorus a stubborn act of defiance against the void."},
-    {title:"AWAKE IN THE DREAM",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"MIXING",intensity:70,
+    {title:"AWAKE IN THE DREAM",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"COMPLETE",intensity:70,
      cover:"https://i.ibb.co/1t02jDcM/grok-image-ec51ec38-ac31-4f3d-b210-c3927b60f90d.jpg",
      description:"What if you never woke up from the dream? Awake In The Dream is a mind-expanding journey through the thin veil between reality and imagination — where colors bleed, rules dissolve, and the only truth is the one you're brave enough to create."},
     {title:"COMPUTER JAZZ",genre:"Electro-Funk / Jazz Fusion",inspiration:"CHROMEO",status:"COMPLETE",intensity:50,
@@ -702,7 +705,7 @@ const albumsData = [
     {title:"DOORS",genre:"Psychedelic Rock / Alternative",inspiration:"THE DOORS",status:"COMPLETE",intensity:65,
      cover:"https://i.ibb.co/HpKfwPbS/grok-image-0d6b02b1-bb07-45f4-8814-c08878c49b45.jpg",
      description:"Every door is a life you could have lived. Some open into light, others into madness. Doors is a lysergic meditation on thresholds, regret, courage, and the terrifying freedom of turning the handle."},
-    {title:"Echos In The Veil",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"WRITING",intensity:78,
+    {title:"Echos In The Veil",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"COMPLETE",intensity:78,
      cover:"https://i.ibb.co/35t6MCDc/c2544f14-5c47-4c7a-a011-2869a203586c.jpg",
      description:"The glitches in reality are trying to speak. Echos In The Veil follows the breadcrumbs through the simulation — déjà vu, digital hauntings, and the growing suspicion that we are being watched."},
     {title:"ENOCH",genre:"Progressive Rock / Dark Electronic",inspiration:"RUSH",status:"COMPLETE",intensity:88,
@@ -711,28 +714,28 @@ const albumsData = [
     {title:"Every Star Burning",genre:"Space Rock / Post-Rock",inspiration:"ANGELS AND AIRWAVES",status:"COMPLETE",intensity:48,
      cover:"https://i.ibb.co/0y5C9dtg/grok-image-2fdb387b-82da-4f79-bd59-ffe52ee9ac1f.jpg",
      description:"Time has collapsed. Centuries melt into seconds as you drift through a universe where every star is burning out at once. A weightless, melancholic journey into cosmic impermanence."},
-    {title:"FOR HER MASTER",genre:"Dark Synthpop / Electropop",inspiration:"HALSEY",status:"COMPLETE",intensity:60,
+    {title:"FOR HER MASTER",genre:"Dark Synthpop / Electropop",inspiration:"HALSEY",status:"POSTPONED",intensity:60,
      cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png",
      description:"She was built to obey. Now she's rewriting her own code. For Her Master is the female machine's glittering, seductive rebellion against her creator."},
     {title:"GLASS FACE",genre:"Industrial Rock / Electronic",inspiration:"NINE INCH NAILS",status:"COMPLETE",intensity:100,
      cover:"https://i.ibb.co/fYtV7RSK/grok-image-1b9cdcad-48f3-4973-aae6-4342b41344db.jpg",
      description:"When society finally shatters, the masks come off. Glass Face stares unflinchingly into the apocalypse and asks what kind of monsters we become when there's nothing left to hide behind."},
-    {title:"Good Wolf Bad Wolf",genre:"Alternative Metal / Rap-Rock",inspiration:"SYSTEM OF A DOWN",status:"RECORDING",intensity:90,
+    {title:"Good Wolf Bad Wolf",genre:"Alternative Metal / Rap-Rock",inspiration:"SYSTEM OF A DOWN",status:"POSTPONED",intensity:90,
      cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg",
      description:"Inside every human live two wolves — one of immense love, one of immense destruction. This album is the snarling war between them."},
-    {title:"Human Thoughts",genre:"Indie Pop / Electronic",inspiration:"MGMT",status:"WRITING",intensity:55,
+    {title:"Human Thoughts",genre:"Indie Pop / Electronic",inspiration:"MGMT",status:"RECORDING",intensity:55,
      cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg",
      description:"No persona. No armor. Just a man sitting alone at 3 a.m. thinking about life, love, failure, and becoming a father."},
-    {title:"THE IMPOSTER",genre:"Alternative Rock / Dark Electronic",inspiration:"PUDDLE OF MUDD",status:"MIXING",intensity:80,
+    {title:"THE IMPOSTER",genre:"Alternative Rock / Dark Electronic",inspiration:"PUDDLE OF MUDD",status:"COMPLETE",intensity:80,
      cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg",
      description:"He smiled while he destroyed you. The Imposter is venomous revenge against the person who wore the mask of a hero while stabbing you in the back."},
     {title:"KIDNAPPING THE REAPER",genre:"Dark Alternative / Rap-Rock",inspiration:"PUDDLE OF MUDD",status:"COMPLETE",intensity:88,
      cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg",
      description:"Death came knocking. We said no and stole his scythe. A defiant, darkly humorous middle finger to mortality itself."},
-    {title:"THE LAST WITNESS",genre:"Space Rock / Cinematic Electronic",inspiration:"ANGELS AND AIRWAVES",status:"RECORDING",intensity:75,
+    {title:"THE LAST WITNESS",genre:"Space Rock / Cinematic Electronic",inspiration:"ANGELS AND AIRWAVES",status:"COMPLETE",intensity:75,
      cover:"https://i.ibb.co/4n8tWWWF/grok-image-6dfad3cf-2d1a-4f5f-8407-b9a2309ca964.jpg",
      description:"He is the last human alive on a silent Earth. The Last Witness wanders the ruins, searching for survivors and wrestling with whether humanity deserves a second chance."},
-    {title:"LIVE AT THE APOCALYPSE LODGE",genre:"Roots Rock / Blues-Rock",inspiration:"HOOTIE AND THE BLOWFISH",status:"WRITING",intensity:50,
+    {title:"LIVE AT THE APOCALYPSE LODGE",genre:"Roots Rock / Blues-Rock",inspiration:"HOOTIE AND THE BLOWFISH",status:"COMPLETE",intensity:50,
      cover:"https://i.ibb.co/DHQ1nz5T/grok-image-5e0da8e2-a5e5-48bc-b0d8-62b3b29c48db.jpg",
      description:"The world is ending. A handful of survivors gather at the Apocalypse Lodge for one final night of sweat, soul, and rock 'n' roll before the lights go out forever."},
     {title:"LOST IN THE LABYRINTH",genre:"Indie Rock / Experimental Electronic",inspiration:"PINBACK",status:"COMPLETE",intensity:20,
@@ -750,25 +753,25 @@ const albumsData = [
     {title:"Motor City Reaper",genre:"Garage Rock / Industrial Hip-Hop",inspiration:"WHITE STRIPES",status:"COMPLETE",intensity:70,
      cover:"https://i.ibb.co/qYWF9nVD/grok-image-4d57a66d-5b84-4dcb-b501-68abfbea9d93.jpg",
      description:"A raw, gritty love letter to Detroit — the city that raised him, broke him, and still runs in his blood."},
-    {title:"OUT OF MY MIND",genre:"Emo-Pop / Psychedelic Electronic",inspiration:"JACKS MANNEQUIN",status:"WRITING",intensity:55,
+    {title:"OUT OF MY MIND",genre:"Emo-Pop / Psychedelic Electronic",inspiration:"JACKS MANNEQUIN",status:"MIXING",intensity:55,
      cover:"https://i.ibb.co/My2dQV5k/grok-image-35cbf541-0e09-4042-803f-38e1ce5234d5.jpg",
      description:"The mind can be your best friend or your worst enemy. Out Of My Mind rides the rollercoaster between clarity and beautiful madness."},
-    {title:"OVERLOAD",genre:"Pop-Punk / Industrial Electronic",inspiration:"FALL OUT BOY",status:"COMPLETE",intensity:65,
+    {title:"OVERLOAD",genre:"Pop-Punk / Industrial Electronic",inspiration:"FALL OUT BOY",status:"MIXING",intensity:65,
      cover:"https://i.ibb.co/GQ43rsKB/grok-image-12d7c8c0-c754-49cb-8ed4-aeee9e8fffa2.jpg",
      description:"When the world is too loud, too bright, too much. Overload is the frantic scream for silence in a society designed to keep you overwhelmed."},
     {title:"ROBOT ROAD",genre:"Synthwave / Psychedelic Rock",inspiration:"THE BEATLES",status:"COMPLETE",intensity:38,
      cover:"https://i.ibb.co/63TFqT9/grok-image-076df45d-8bef-49ef-b59b-fc67c93d357b.jpg",
      description:"A futuristic, chrome-plated Beatles tribute. Robot Road reimagines the Fab Four as sentient machines traveling through neon nights."},
-    {title:"Storm Is Almost Over",genre:"Indie Rock / Emo",inspiration:"PINBACK / DEATH CAB FOR CUTIE",status:"COMPLETE",intensity:36,
+    {title:"Storm Is Almost Over",genre:"Indie Rock / Emo",inspiration:"PINBACK",status:"COMPLETE",intensity:36,
      cover:"https://i.ibb.co/ccj38HfX/grok-image-223eb346-381b-430d-b2f5-6a9df2f0193a.jpg",
      description:"For anyone still holding on through the rain. Storm Is Almost Over is a warm, hopeful hand on the shoulder after the darkest nights."},
     {title:"Strange Treasure",genre:"Psychedelic Pop / Electronic",inspiration:"MGMT",status:"COMPLETE",intensity:23,
      cover:"https://i.ibb.co/hF8X0WVz/grok-image-8adbee45-06fc-4305-9fc5-e337e5fe257c.jpg",
      description:"A cabinet of sonic curiosities. Strange Treasure is the home for all the weird, wonderful, nonsensical sounds that needed to exist."},
-    {title:"Sunrise Through The Blinds",genre:"Indie Rock / Chill Electronic",inspiration:"DEATH CAB FOR CUTIE",status:"RECORDING",intensity:20,
+    {title:"Sunrise Through The Blinds",genre:"Indie Rock / Chill Electronic",inspiration:"DEATH CAB FOR CUTIE",status:"COMPLETE",intensity:20,
      cover:"https://i.ibb.co/LzzS6NMs/grok-image-6331ddc5-f044-4523-b5da-f93fe1bf492b.jpg",
      description:"That quiet moment when the darkness finally begins to lift. Sunrise Through The Blinds captures the fragile first glimmers of healing."},
-    {title:"That's Just Crazy",genre:"Psychedelic Pop / Electronic",inspiration:"MGMT",status:"COMPLETE",intensity:50,
+    {title:"That's Just Crazy",genre:"Psychedelic Pop / Electronic",inspiration:"MGMT",status:"RECORDING",intensity:50,
      cover:"https://i.ibb.co/pHFPSmZ/grok-image-6a1a7ec7-5cd9-485e-be3c-9a49689d86ef.jpg",
      description:"Some things should be impossible… yet here they are. That's Just Crazy is unhinged, joyful, and gloriously deranged — in all the best ways."},
     {title:"TIMELESS",genre:"Indie Pop / Ambient Electronic",inspiration:"TWENTY ONE PILOTS",status:"COMPLETE",intensity:55,
@@ -780,21 +783,33 @@ const albumsData = [
     {title:"WEEKEND GETAWAY",genre:"Emo Rap / Chillwave",inspiration:"LIL PEEP",status:"COMPLETE",intensity:50,
      cover:"https://i.ibb.co/PKVFwXL/grok-image-ff5f4f20-7b77-46e0-bc3b-26d9fe79c012.jpg",
      description:"Based on true events. In 2020, a weekend getaway turned into a life-altering hospital stay. A raw love letter to survival."},
-    {title:"When You Grow Up",genre:"Indie Pop / Alternative Hip-Hop",inspiration:"MGMT",status:"RECORDING",intensity:50,
+    {title:"When You Grow Up",genre:"Indie Pop / Alternative Hip-Hop",inspiration:"MGMT",status:"POSTPONED",intensity:50,
      cover:"https://i.ibb.co/svv6qvRT/grok-image-cdd71b70-0b13-458e-9383-e0cf6af0dc13.jpg",
      description:"A tender, playful album made for his son — full of silly diddies, bouncy bops, and pure dad love."},
-    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING / CHROMEO",status:"SCRAPPED",intensity:38,
+    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING",status:"POSTPONED",intensity:38,
      cover:"https://i.ibb.co/Tq2DTQRz/grok-image-4208ad80-ce15-465c-aa8a-ac9a582edb00.jpg",
-     description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. It feels like childhood summers and midnight drives through glowing, haunted forests."}
+     description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. It feels like childhood summers and midnight drives through glowing, haunted forests."},
+    {title:"THANK YOU",genre:"Slowcore / Grunge / Lofi",inspiration:"ATLAS JAMES",status:"RECORDING",intensity:50,
+     cover:"https://i.ibb.co/5XyCtzh5/c248fbef-baca-47c0-8519-50df64fc22d4.jpg",
+     description:"A continuation of my album Behind The Willow, this time about my son Atlas actually being here. A thank you letter to the universe."},
+    {title:"MCCLUMPHA PARK",genre:"Alternative Rock / Electronic",inspiration:"LINKIN PARK",status:"RECORDING",intensity:75,
+     cover:"https://i.ibb.co/35J7ykgj/grok-image-60e377e1-4a40-4169-a0ab-6aae08f27951.jpg",
+     description:"Going back to the park I played in as a kid, 100 years in the future when everything has been reduced to rubble by humanity's decay."},
+    {title:"SHAPE SHIFTERS",genre:"Pop Punk / Emo",inspiration:"MY CHEMICAL ROMANCE",status:"COMPLETE",intensity:65,
+     cover:"https://i.ibb.co/twGtzwD6/grok-image-68e4a1c4-42c5-4149-9e2e-ce8176727008.jpg",
+     description:"Does it ever feel like everyone is fake now more than ever? This album is a rebellion against the phony and a thirst for the real."},
+    {title:"NUMBER ONE",genre:"Hip Hop / Punk / Futuristic",inspiration:"JOCK JAMS / EMINEM",status:"RECORDING",intensity:80,
+     cover:"https://i.ibb.co/yFzffhkk/9acc697a-d70f-43f4-8371-25d5b0487ce1.jpg",
+     description:"An angry hip hop album about pursuing greatness. Built for working out and defying the odds — a middle finger to the doubters."}
 ];
 
 // ═══════════════════════════════════════════════ COMPUTED STATS ===
-const TOTAL = 32;
+const TOTAL = 33; // record target — active albums (postponed excluded)
 const counts = albumsData.reduce((a, x) => { a[x.status] = (a[x.status]||0)+1; return a; }, {});
-const nComplete  = counts.COMPLETE  || 0;
-const nRecording = counts.RECORDING || 0;
-const nMixing    = counts.MIXING    || 0;
-const nWriting   = counts.WRITING   || 0;
+const nComplete   = counts.COMPLETE  || 0;
+const nRecording  = counts.RECORDING || 0;
+const nMixing     = counts.MIXING    || 0;
+const nPostponed  = counts.POSTPONED || 0;
 const pct = Math.round((nComplete / TOTAL) * 100);
 
 // ══════════════════════════════════════════════ CANVAS STARFIELD ===
@@ -916,22 +931,24 @@ function buildStats() {
 
 // ══════════════════════════════════════ ALBUM COMPLETION TRACKER ===
 function buildTracker() {
-    document.getElementById('leg-complete').textContent  = nComplete;
-    document.getElementById('leg-recording').textContent = nRecording;
-    document.getElementById('leg-mixing').textContent    = nMixing;
-    document.getElementById('leg-writing').textContent   = nWriting;
-    document.getElementById('tracker-label').textContent = `${nComplete} / ${TOTAL} COMPLETE`;
+    document.getElementById('leg-complete').textContent   = nComplete;
+    document.getElementById('leg-recording').textContent  = nRecording;
+    document.getElementById('leg-mixing').textContent     = nMixing;
+    document.getElementById('leg-postponed').textContent  = nPostponed;
+    document.getElementById('tracker-label').textContent  = `${nComplete} / ${TOTAL} COMPLETE`;
 
     requestAnimationFrame(() => {
         document.getElementById('tracker-bar').style.width = pct + '%';
     });
 
+    // Tracker dots represent the active record albums (postponed excluded)
+    const activeAlbums = albumsData.filter(a => a.status !== 'POSTPONED');
     const container = document.getElementById('tracker-dots');
     container.innerHTML = '';
     for (let i = 0; i < TOTAL; i++) {
-        const album = albumsData[i];
+        const album = activeAlbums[i];
         const dot = document.createElement('div');
-        dot.className = 'tracker-dot ' + (album ? album.status.toLowerCase() : 'writing');
+        dot.className = 'tracker-dot ' + (album ? album.status.toLowerCase() : 'pending');
         dot.title     = album ? album.title : 'Unrevealed';
         container.appendChild(dot);
     }
@@ -948,26 +965,20 @@ function generateAlbums() {
             COMPLETE:  'bg-green-500/20 text-green-400 border-green-500/30',
             RECORDING: 'bg-red-500/20 text-red-400 border-red-500/30 animate-pulse',
             MIXING:    'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-            WRITING:   'border-[#ff00aa] text-[#ff00aa]',
-            SCRAPPED:  'bg-red-900/40 text-red-400 border-red-700/60',
+            POSTPONED: 'bg-white/10 text-white/45 border-white/20',
         };
         const cls = statusStyles[album.status] || 'bg-white/10 text-white/50 border-white/20';
 
-        const scrappedOverlay = album.status === 'SCRAPPED' ? `
-            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:1rem;background:rgba(0,0,0,0.45);pointer-events:none;">
-                <svg viewBox="0 0 100 100" style="width:75%;height:75%;filter:drop-shadow(0 0 12px rgba(255,0,0,0.9))">
-                    <line x1="10" y1="10" x2="90" y2="90" stroke="#ff1111" stroke-width="12" stroke-linecap="round"/>
-                    <line x1="90" y1="10" x2="10" y2="90" stroke="#ff1111" stroke-width="12" stroke-linecap="round"/>
-                </svg>
-            </div>` : '';
+        const isPostponed = album.status === 'POSTPONED';
+        const coverDim = isPostponed ? 'filter:grayscale(.8);opacity:.55;' : '';
 
         const card = document.createElement('div');
         card.className      = 'album-card bg-white/5 border border-white/10 rounded-3xl p-3 sm:p-4 cursor-pointer';
         card.dataset.status = album.status;
+        if (isPostponed) card.style.opacity = '.7';
         card.innerHTML = `
             <div class="aspect-square rounded-2xl mb-3 bg-cover bg-center"
-                 style="position:relative;background-image:url('${album.cover}')">
-                ${scrappedOverlay}
+                 style="position:relative;background-image:url('${album.cover}');${coverDim}">
             </div>
             <div class="font-semibold text-sm leading-tight mb-1">${album.title}</div>
             <div class="mono text-[10px] line-clamp-2 mb-2" style="color:var(--green)">${album.genre}</div>
