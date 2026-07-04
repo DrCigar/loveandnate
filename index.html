@@ -129,8 +129,14 @@
             position: sticky;
             top: var(--nav-h, 64px);
             z-index: 45;
-            background: #000;
-            border-bottom: 1px solid rgba(0,255,157,.12);
+            /* Brushed-steel strip: tonal gradient + fine machined striations + bevel */
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 14%, rgba(0,0,0,0) 80%, rgba(0,0,0,.55) 100%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, rgba(0,0,0,.06) 1px 2.5px),
+                linear-gradient(180deg, #26292e 0%, #14161a 52%, #0d0f12 100%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.7);
+            border-top: 1px solid rgba(255,255,255,.06);
+            border-bottom: 1px solid rgba(0,0,0,.65);
             overflow: hidden;
             padding: .35rem 0;
         }
@@ -291,17 +297,18 @@
 <canvas id="starCanvas"></canvas>
 
 <!-- ═══════════════════════════════════════════════════════════════ NAV === -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between relative">
 
-        <div class="flex items-center gap-2 sm:gap-3">
-            <img src="https://i.ibb.co/4nWWPzpb/234135.png" alt="Loveandnate"
-                 class="w-9 h-9 sm:w-11 sm:h-11 object-contain">
-            <div class="flex flex-col leading-none">
-                <h1 class="nav-logo">LOVEANDNATE</h1>
-                <span class="nav-tagline">ART IS LIFE</span>
-            </div>
-        </div>
+        <!-- Wordmark (left) -->
+        <h1 class="m-0 leading-none">
+            <img src="https://i.ibb.co/bRB8tPn5/grok-image-8d285fba-5e47-4b74-88a7-a87635ef3da2.jpg"
+                 alt="LOVEANDNATE" class="h-9 sm:h-12 w-auto object-contain">
+        </h1>
+
+        <!-- Emblem (centered) — LN monogram, sized as the focal logo -->
+        <img src="https://i.ibb.co/WWg3PQ22/grok-image-1467b1d4-b739-421b-b24e-2816df7f5890.jpg" alt=""
+             class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 object-contain pointer-events-none">
 
         <!-- Desktop -->
         <div class="hidden md:flex items-center gap-3">
