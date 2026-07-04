@@ -151,22 +151,77 @@
         .ticker-seg .hi  { color: rgba(255,255,255,.9); }
         .ticker-seg .rec { color: var(--purple); }
 
-        /* ─── Album tracker ──────────────────────────────────────────────── */
-        .tracker-dots { display: grid; grid-template-columns: repeat(32, 1fr); gap: 3px; }
-        .tracker-dot {
-            height: 12px; border-radius: 2px;
-            background: rgba(255,255,255,.08); cursor: default;
-            transition: transform .15s;
+        /* ─── Energy core (alien fuel cell) tracker ──────────────────────── */
+        .fuel-cell {
+            position: relative;
+            border-radius: 16px;
+            padding: 13px 15px;
+            background:
+                radial-gradient(130% 120% at 50% 0%, rgba(0,255,157,.10), transparent 60%),
+                rgba(255,255,255,.02);
+            border: 1px solid rgba(0,255,157,.28);
+            overflow: hidden;
+            animation: cell-breathe 3.4s ease-in-out infinite;
         }
-        .tracker-dot:hover { transform: scaleY(1.5); }
-        .tracker-dot.complete  { background: var(--green);  box-shadow: 0 0 5px rgba(0,255,157,.4); }
-        .tracker-dot.recording { background: var(--purple); animation: pulse-dot 1.4s ease-in-out infinite; }
-        .tracker-dot.mixing    { background: #ffaa00; }
-        .tracker-dot.postponed { background: rgba(255,255,255,.25); }
-        .tracker-dot.pending   { background: rgba(255,255,255,.08); }
+        @keyframes cell-breathe {
+            0%,100% { box-shadow: inset 0 0 30px rgba(0,255,157,.07), 0 0 22px rgba(0,255,157,.12); }
+            50%     { box-shadow: inset 0 0 44px rgba(0,255,157,.14), 0 0 46px rgba(0,255,157,.30), 0 0 90px rgba(195,0,255,.16); }
+        }
+        /* glass sheen across the top */
+        .fuel-cell::before {
+            content:''; position:absolute; inset:0; pointer-events:none; z-index:2; border-radius:16px;
+            background: linear-gradient(180deg, rgba(255,255,255,.12), transparent 24%);
+        }
+        /* plasma energy sweep flowing across the chamber */
+        .fuel-sweep {
+            position:absolute; inset:0; pointer-events:none; z-index:3; border-radius:16px;
+            background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,.20) 47%,
+                        rgba(0,255,157,.28) 52%, rgba(195,0,255,.14) 57%, transparent 72%);
+            background-size: 250% 100%;
+            mix-blend-mode: screen;
+            animation: sweep-flow 3.1s linear infinite;
+        }
+        @keyframes sweep-flow { 0%{background-position:150% 0} 100%{background-position:-150% 0} }
+
+        .tracker-dots {
+            position:relative; z-index:1;
+            display:grid; grid-template-columns:repeat(32, 1fr); gap:4px; height:48px;
+        }
+        .tracker-dot {
+            align-self:stretch; border-radius:4px; position:relative; overflow:hidden;
+            background: rgba(255,255,255,.05);
+            box-shadow: inset 0 0 6px rgba(0,0,0,.55);
+            cursor:default; transition: transform .2s;
+        }
+        .tracker-dot:hover { transform: translateY(-3px) scaleX(1.18); z-index:4; }
+        /* charged cell — bright energy column with rising shimmer */
+        .tracker-dot.complete {
+            background: linear-gradient(180deg, #8affd6 0%, var(--green) 45%, #00b56e 100%);
+            box-shadow: 0 0 11px rgba(0,255,157,.85), inset 0 0 8px rgba(255,255,255,.5);
+            animation: cell-flicker 2.6s ease-in-out infinite;
+        }
+        .tracker-dot.complete::after {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,.6), transparent);
+            background-size:100% 55%; background-repeat:no-repeat;
+            animation: energy-rise 1.9s linear infinite;
+        }
+        @keyframes energy-rise { 0%{background-position:0 130%} 100%{background-position:0 -60%} }
+        @keyframes cell-flicker { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.28)} }
+        .tracker-dot.recording {
+            background: linear-gradient(180deg, #e79bff, var(--purple) 55%, #7a00a3);
+            animation: pulse-dot 1.3s ease-in-out infinite;
+        }
+        .tracker-dot.mixing {
+            background: linear-gradient(180deg, #ffd685, #ffaa00 55%, #b36b00);
+            box-shadow: 0 0 10px rgba(255,170,0,.8), inset 0 0 8px rgba(255,255,255,.4);
+            animation: cell-flicker 1.7s ease-in-out infinite;
+        }
+        .tracker-dot.postponed { background: rgba(255,255,255,.10); }
+        .tracker-dot.pending   { background: rgba(255,255,255,.035); box-shadow: inset 0 0 7px rgba(0,0,0,.6); }
         @keyframes pulse-dot {
-            0%,100% { opacity:1; box-shadow: 0 0 6px rgba(195,0,255,.5); }
-            50%      { opacity:.6; box-shadow: 0 0 14px rgba(195,0,255,.9); }
+            0%,100% { box-shadow: 0 0 9px rgba(195,0,255,.6),  inset 0 0 8px rgba(255,255,255,.35); }
+            50%     { box-shadow: 0 0 22px rgba(195,0,255,1),  inset 0 0 11px rgba(255,255,255,.55); }
         }
 
         /* ─── Filter tabs ────────────────────────────────────────────────── */
@@ -372,19 +427,22 @@
 <section class="border-t border-b border-[var(--green)]/12 py-5 sm:py-6 scroll-reveal"
          style="background:rgba(0,255,157,.025)">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
-            <span class="mono text-[var(--green)] text-xs tracking-widest">// ALBUM COMPLETION TRACKER</span>
-            <span class="mono text-[var(--purple)] text-xs" id="tracker-label">— / 32 COMPLETE</span>
+        <div class="flex items-end justify-between gap-3 mb-3">
+            <div>
+                <div class="mono text-[var(--green)] text-xs tracking-widest">// ENERGY CORE · RECORD CHARGE</div>
+                <div class="mono text-white/40 text-[11px] mt-1" id="tracker-label">— / 32 CELLS CHARGED</div>
+            </div>
+            <div class="heading-font leading-none flex items-baseline"
+                 style="font-size:clamp(2.2rem,8vw,3.8rem);color:var(--green);
+                        text-shadow:0 0 18px rgba(0,255,157,.6),0 0 42px rgba(0,255,157,.3)">
+                <span id="charge-pct">0</span><span style="font-size:.45em;opacity:.7;margin-left:.05em">%</span>
+            </div>
         </div>
-        <!-- Master bar -->
-        <div class="h-1.5 rounded-full overflow-hidden mb-3" style="background:rgba(255,255,255,.06)">
-            <div id="tracker-bar" class="h-full rounded-full" style="width:0%;
-                 background:linear-gradient(90deg,var(--green),var(--purple));
-                 box-shadow:0 0 10px rgba(0,255,157,.35);
-                 transition:width 1.2s ease .5s;"></div>
+        <!-- Alien fuel cell: 32 energy cells -->
+        <div class="fuel-cell">
+            <div class="tracker-dots" id="tracker-dots"></div>
+            <div class="fuel-sweep"></div>
         </div>
-        <!-- 32 individual album dots -->
-        <div class="tracker-dots" id="tracker-dots"></div>
         <!-- Legend -->
         <div class="flex flex-wrap gap-3 sm:gap-5 mt-3">
             <div class="flex items-center gap-1.5 mono text-xs text-white/40">
@@ -728,7 +786,7 @@ const albumsData = [
     {title:"AWAKE IN THE DREAM",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"COMPLETE",intensity:70,
      cover:"https://i.ibb.co/1t02jDcM/grok-image-ec51ec38-ac31-4f3d-b210-c3927b60f90d.jpg",
      description:"What if you never woke up from the dream? Awake In The Dream is a mind-expanding journey through the thin veil between reality and imagination — where colors bleed, rules dissolve, and the only truth is the one you're brave enough to create."},
-    {title:"COMPUTER JAZZ",genre:"Electro-Funk / Jazz Fusion",inspiration:"CHROMEO",status:"COMPLETE",intensity:50,
+    {title:"COMPUTER JAZZ",genre:"Electro-Funk / Jazz Fusion",inspiration:"CHROMEO",status:"MIXING",intensity:50,
      cover:"https://i.ibb.co/Y4ZHp8VG/grok-image-5a891ce3-c7b4-43f1-820f-e2770a4afa5a.jpg",
      description:"In a neon-drenched future, the machines have learned how to feel. Computer Jazz is their love letters, their heartbreak anthems, and their late-night improvisations — the sound of silicon souls discovering swing."},
     {title:"DOORS",genre:"Psychedelic Rock / Alternative",inspiration:"THE DOORS",status:"COMPLETE",intensity:65,
@@ -788,7 +846,7 @@ const albumsData = [
     {title:"OVERLOAD",genre:"Pop-Punk / Industrial Electronic",inspiration:"FALL OUT BOY",status:"MIXING",intensity:65,
      cover:"https://i.ibb.co/GQ43rsKB/grok-image-12d7c8c0-c754-49cb-8ed4-aeee9e8fffa2.jpg",
      description:"When the world is too loud, too bright, too much. Overload is the frantic scream for silence in a society designed to keep you overwhelmed."},
-    {title:"ROBOT ROAD",genre:"Synthwave / Psychedelic Rock",inspiration:"THE BEATLES",status:"COMPLETE",intensity:38,
+    {title:"ROBOT ROAD",genre:"Synthwave / Psychedelic Rock",inspiration:"THE BEATLES",status:"MIXING",intensity:38,
      cover:"https://i.ibb.co/63TFqT9/grok-image-076df45d-8bef-49ef-b59b-fc67c93d357b.jpg",
      description:"A futuristic, chrome-plated Beatles tribute. Robot Road reimagines the Fab Four as sentient machines traveling through neon nights."},
     {title:"Storm Is Almost Over",genre:"Indie Rock / Emo",inspiration:"PINBACK",status:"COMPLETE",intensity:36,
@@ -824,7 +882,7 @@ const albumsData = [
     {title:"MCCLUMPHA PARK",genre:"Alternative Rock / Electronic",inspiration:"LINKIN PARK",status:"RECORDING",intensity:75,
      cover:"https://i.ibb.co/5XyCtzh5/c248fbef-baca-47c0-8519-50df64fc22d4.jpg",
      description:"Going back to the park I played in as a kid, 100 years in the future when everything has been reduced to rubble by humanity's decay."},
-    {title:"SHAPE SHIFTERS",genre:"Pop Punk / Emo",inspiration:"MY CHEMICAL ROMANCE",status:"COMPLETE",intensity:65,
+    {title:"SHAPE SHIFTERS",genre:"Pop Punk / Emo",inspiration:"MY CHEMICAL ROMANCE",status:"MIXING",intensity:65,
      cover:"https://i.ibb.co/twGtzwD6/grok-image-68e4a1c4-42c5-4149-9e2e-ce8176727008.jpg",
      description:"Does it ever feel like everyone is fake now more than ever? This album is a rebellion against the phony and a thirst for the real."},
     {title:"NUMBER ONE",genre:"Hip Hop / Punk / Futuristic",inspiration:"JOCK JAMS / EMINEM",status:"POSTPONED",intensity:80,
@@ -964,11 +1022,17 @@ function buildTracker() {
     document.getElementById('leg-recording').textContent  = nRecording;
     document.getElementById('leg-mixing').textContent     = nMixing;
     document.getElementById('leg-postponed').textContent  = nPostponed;
-    document.getElementById('tracker-label').textContent  = `${nComplete} / ${TOTAL} COMPLETE`;
+    document.getElementById('tracker-label').textContent  = `${nComplete} / ${TOTAL} CELLS CHARGED`;
 
-    requestAnimationFrame(() => {
-        document.getElementById('tracker-bar').style.width = pct + '%';
-    });
+    // Energy charge — count up to pct for a "powering on" feel
+    const chargeEl = document.getElementById('charge-pct');
+    let cur = 0;
+    (function step() {
+        cur += Math.max(1, Math.ceil((pct - cur) / 8));
+        if (cur >= pct) cur = pct;
+        chargeEl.textContent = cur;
+        if (cur < pct) requestAnimationFrame(step);
+    })();
 
     // Tracker dots represent the active record albums (postponed excluded)
     const activeAlbums = albumsData.filter(a => a.status !== 'POSTPONED');
