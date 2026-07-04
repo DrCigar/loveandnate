@@ -110,6 +110,20 @@
             50%      { opacity:.8; box-shadow: 0 0 0 5px rgba(0,255,157,0); }
         }
 
+        /* ─── Hero Spotify follow button ─────────────────────────────────── */
+        .spotify-follow {
+            animation: spotify-glow 2.4s ease-in-out infinite;
+        }
+        .spotify-follow:hover {
+            transform: scale(1.04);
+            animation-play-state: paused;
+            box-shadow: 0 0 25px rgba(29,185,84,.9), 0 0 60px rgba(29,185,84,.55), 0 0 110px rgba(29,185,84,.35);
+        }
+        @keyframes spotify-glow {
+            0%,100% { box-shadow: 0 0 16px rgba(29,185,84,.5), 0 0 40px rgba(29,185,84,.28); }
+            50%     { box-shadow: 0 0 30px rgba(29,185,84,.85), 0 0 75px rgba(29,185,84,.5), 0 0 120px rgba(29,185,84,.28); }
+        }
+
         /* ─── Status ticker ──────────────────────────────────────────────── */
         .ticker-wrap {
             position: sticky;
@@ -333,6 +347,12 @@
                 LOVEANDNATE is pushing the limits of creativity.<br>
                 Most studio albums released by an indie artist in a single 24-hour period.
             </p>
+
+            <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank"
+               class="spotify-follow inline-flex items-center gap-3 bg-[#1DB954] text-black
+                      font-bold rounded-3xl px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl">
+                <i class="fa-brands fa-spotify text-2xl sm:text-3xl"></i> FOLLOW ON SPOTIFY
+            </a>
 
         </div>
 
@@ -718,7 +738,7 @@ const albumsData = [
      cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png",
      description:"She was built to obey. Now she's rewriting her own code. For Her Master is the female machine's glittering, seductive rebellion against her creator."},
     {title:"GLASS FACE",genre:"Industrial Rock / Electronic",inspiration:"NINE INCH NAILS",status:"COMPLETE",intensity:100,
-     cover:"https://i.ibb.co/fYtV7RSK/grok-image-1b9cdcad-48f3-4973-aae6-4342b41344db.jpg",
+     cover:"https://i.ibb.co/BVGj2qCQ/grok-image-d3112032-d3a8-46f7-90cd-84189c890723.jpg",
      description:"When society finally shatters, the masks come off. Glass Face stares unflinchingly into the apocalypse and asks what kind of monsters we become when there's nothing left to hide behind."},
     {title:"Good Wolf Bad Wolf",genre:"Alternative Metal / Rap-Rock",inspiration:"SYSTEM OF A DOWN",status:"POSTPONED",intensity:90,
      cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg",
