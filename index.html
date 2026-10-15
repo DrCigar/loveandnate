@@ -1251,11 +1251,15 @@ function startCountdown() {
     function tick() {
         const dist = target - Date.now();
         if (dist < 0) {
-            el.innerHTML = `
-                <div class="col-span-2 md:col-span-4 rounded-3xl p-10 text-center heading-font"
-                     style="background:linear-gradient(90deg,var(--green),var(--purple));
-                            color:#000;font-size:clamp(1.5rem,4vw,2.5rem)">
-                    THE ATTEMPT IS LIVE!
+            el.innerHTML =
+                box(0, 'DAYS',    'var(--green)')  +
+                box(0, 'HOURS',   'var(--purple)') +
+                box(0, 'MINUTES', 'var(--pink)')   +
+                box(0, 'SECONDS', '#ffffff')       + `
+                <div class="col-span-2 md:col-span-4 rounded-3xl p-6 sm:p-8 text-center"
+                     style="background:rgba(20,14,0,.85);border:1px solid rgba(255,200,40,.45)">
+                    <div class="record-kicker"><i class="fa-solid fa-trophy"></i>&nbsp; Guinness World Record &nbsp;<i class="fa-solid fa-trophy"></i></div>
+                    <div class="record-title" style="font-size:clamp(1.8rem,5vw,3.2rem)">THIS WORLD RECORD WAS SET ON 10.15.2026</div>
                 </div>`;
             return;
         }
