@@ -276,7 +276,7 @@
 
         .tracker-dots {
             position:relative; z-index:1;
-            display:grid; grid-template-columns:repeat(32, 1fr); gap:4px; height:48px;
+            display:grid; grid-template-columns:repeat(var(--cells, 32), 1fr); gap:4px; height:48px;
         }
         .tracker-dot {
             align-self:stretch; border-radius:4px; position:relative; overflow:hidden;
@@ -539,7 +539,7 @@
         <div class="flex items-end justify-between gap-3 mb-3">
             <div>
                 <div class="mono text-[var(--green)] text-xs tracking-widest">// ENERGY CORE · RECORD CHARGE</div>
-                <div class="mono text-white/40 text-[11px] mt-1" id="tracker-label">— / 32 CELLS CHARGED</div>
+                <div class="mono text-white/40 text-[11px] mt-1" id="tracker-label">— / 21 CELLS CHARGED</div>
             </div>
             <div class="heading-font leading-none flex items-baseline"
                  style="font-size:clamp(2.2rem,8vw,3.8rem);color:var(--green);
@@ -547,7 +547,7 @@
                 <span id="charge-pct">0</span><span style="font-size:.45em;opacity:.7;margin-left:.05em">%</span>
             </div>
         </div>
-        <!-- Alien fuel cell: 32 energy cells -->
+        <!-- Alien fuel cell: one energy cell per active album -->
         <div class="fuel-cell">
             <div class="tracker-dots" id="tracker-dots"></div>
             <div class="fuel-sweep"></div>
@@ -904,13 +904,13 @@ const albumsData = [
     {title:"Echos In The Veil",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"COMPLETE",intensity:78,
      cover:"https://i.ibb.co/35t6MCDc/c2544f14-5c47-4c7a-a011-2869a203586c.jpg",
      description:"The glitches in reality are trying to speak. Echos In The Veil follows the breadcrumbs through the simulation — déjà vu, digital hauntings, and the growing suspicion that we are being watched."},
-    {title:"ENOCH",genre:"Progressive Rock / Dark Electronic",inspiration:"RUSH",status:"COMPLETE",intensity:88,
+    {title:"ENOCH",genre:"Progressive Rock / Dark Electronic",inspiration:"RUSH",status:"POSTPONED",intensity:88,
      cover:"https://i.ibb.co/wxZxFHY/3bc99f1d-2183-44b5-a698-9d3107d957a1.jpg",
      description:"They removed the book because it told the truth. Enoch descends into the forbidden knowledge of the Watchers — fallen beings who taught humanity secrets we were never meant to know."},
     {title:"Every Star Burning",genre:"Space Rock / Post-Rock",inspiration:"ANGELS AND AIRWAVES",status:"COMPLETE",intensity:48,
      cover:"https://i.ibb.co/0y5C9dtg/grok-image-2fdb387b-82da-4f79-bd59-ffe52ee9ac1f.jpg",
      description:"Time has collapsed. Centuries melt into seconds as you drift through a universe where every star is burning out at once. A weightless, melancholic journey into cosmic impermanence."},
-    {title:"FOR HER MASTER",genre:"Dark Synthpop / Electropop",inspiration:"HALSEY",status:"COMPLETE",intensity:60,
+    {title:"FOR HER MASTER",genre:"Dark Synthpop / Electropop",inspiration:"HALSEY",status:"POSTPONED",intensity:60,
      cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png",
      description:"She was built to obey. Now she's rewriting her own code. For Her Master is the female machine's glittering, seductive rebellion against her creator."},
     {title:"GLASS FACE",genre:"Industrial Rock / Electronic",inspiration:"NINE INCH NAILS",status:"COMPLETE",intensity:100,
@@ -922,7 +922,7 @@ const albumsData = [
     {title:"Human Thoughts",genre:"Indie Pop / Electronic",inspiration:"MGMT",status:"COMPLETE",intensity:55,
      cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg",
      description:"No persona. No armor. Just a man sitting alone at 3 a.m. thinking about life, love, failure, and becoming a father."},
-    {title:"THE IMPOSTER",genre:"Alternative Rock / Dark Electronic",inspiration:"PUDDLE OF MUDD",status:"COMPLETE",intensity:80,
+    {title:"THE IMPOSTER",genre:"Alternative Rock / Dark Electronic",inspiration:"PUDDLE OF MUDD",status:"POSTPONED",intensity:80,
      cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg",
      description:"He smiled while he destroyed you. The Imposter is venomous revenge against the person who wore the mask of a hero while stabbing you in the back."},
     {title:"KIDNAPPING THE REAPER",genre:"Dark Alternative / Rap-Rock",inspiration:"PUDDLE OF MUDD",status:"COMPLETE",intensity:88,
@@ -979,10 +979,10 @@ const albumsData = [
     {title:"WEEKEND GETAWAY",genre:"Emo Rap / Chillwave",inspiration:"LIL PEEP",status:"POSTPONED",intensity:50,
      cover:"https://i.ibb.co/PKVFwXL/grok-image-ff5f4f20-7b77-46e0-bc3b-26d9fe79c012.jpg",
      description:"Based on true events. In 2020, a weekend getaway turned into a life-altering hospital stay. A raw love letter to survival."},
-    {title:"When You Grow Up",genre:"Indie Pop / Alternative Hip-Hop",inspiration:"MGMT",status:"COMPLETE",intensity:50,
+    {title:"When You Grow Up",genre:"Indie Pop / Alternative Hip-Hop",inspiration:"MGMT",status:"POSTPONED",intensity:50,
      cover:"https://i.ibb.co/svv6qvRT/grok-image-cdd71b70-0b13-458e-9383-e0cf6af0dc13.jpg",
      description:"A tender, playful album made for his son — full of silly diddies, bouncy bops, and pure dad love."},
-    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING",status:"COMPLETE",intensity:38,
+    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING",status:"POSTPONED",intensity:38,
      cover:"https://i.ibb.co/Tq2DTQRz/grok-image-4208ad80-ce15-465c-aa8a-ac9a582edb00.jpg",
      description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. It feels like childhood summers and midnight drives through glowing, haunted forests."},
     {title:"THANK YOU",genre:"Slowcore / Grunge / Lofi",inspiration:"ATLAS JAMES",status:"COMPLETE",intensity:50,
@@ -994,13 +994,13 @@ const albumsData = [
     {title:"SHAPE SHIFTERS",genre:"Pop Punk / Emo",inspiration:"MY CHEMICAL ROMANCE",status:"POSTPONED",intensity:65,
      cover:"https://i.ibb.co/twGtzwD6/grok-image-68e4a1c4-42c5-4149-9e2e-ce8176727008.jpg",
      description:"Does it ever feel like everyone is fake now more than ever? This album is a rebellion against the phony and a thirst for the real."},
-    {title:"NUMBER ONE",genre:"Hip Hop / Punk / Futuristic",inspiration:"JOCK JAMS / EMINEM",status:"COMPLETE",intensity:80,
+    {title:"NUMBER ONE",genre:"Hip Hop / Punk / Futuristic",inspiration:"JOCK JAMS / EMINEM",status:"POSTPONED",intensity:80,
      cover:"https://i.ibb.co/yFzffhkk/9acc697a-d70f-43f4-8371-25d5b0487ce1.jpg",
      description:"An angry hip hop album about pursuing greatness. Built for working out and defying the odds — a middle finger to the doubters."}
 ];
 
 // ═══════════════════════════════════════════════ COMPUTED STATS ===
-const TOTAL = 32; // record target — active albums (postponed excluded)
+const TOTAL = albumsData.filter(a => a.status !== 'POSTPONED').length; // active albums (postponed excluded)
 const counts = albumsData.reduce((a, x) => { a[x.status] = (a[x.status]||0)+1; return a; }, {});
 const nComplete   = counts.COMPLETE  || 0;
 const nRecording  = counts.RECORDING || 0;
@@ -1146,6 +1146,7 @@ function buildTracker() {
     // Tracker dots represent the active record albums (postponed excluded)
     const activeAlbums = albumsData.filter(a => a.status !== 'POSTPONED');
     const container = document.getElementById('tracker-dots');
+    container.style.setProperty('--cells', TOTAL);
     container.innerHTML = '';
     for (let i = 0; i < TOTAL; i++) {
         const album = activeAlbums[i];
