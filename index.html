@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LOVEANDNATE is attempting the Guinness World Record: 32 albums in 24 hours.">
-    <title>LOVEANDNATE • 32 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT</title>
+    <meta name="description" content="LOVEANDNATE set the Guinness World Record: 21 albums released in 24 hours, beating the record of 20.">
+    <title>LOVEANDNATE • 21 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,6 +97,59 @@
             0%, 49%  { color: #ff2323; text-shadow: 0 0 12px rgba(255,0,0,.9), 0 0 34px rgba(255,0,0,.7), 0 0 70px rgba(255,0,0,.5); opacity: 1; }
             50%,100% { color: #7a0000; text-shadow: none; opacity: .55; }
         }
+
+        /* ─── World Record achieved banner (gold) ─────────────────────────── */
+        .record-banner {
+            background:
+                radial-gradient(ellipse at center, rgba(255,200,40,.16) 0%, rgba(0,0,0,0) 70%),
+                rgba(20,14,0,.85);
+            border-top: 1px solid rgba(255,200,40,.45);
+            border-bottom: 1px solid rgba(255,200,40,.45);
+            padding: 1.4rem 1rem 1.6rem;
+            text-align: center;
+        }
+        .record-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2.2vw, .95rem);
+            letter-spacing: .3em;
+            color: #ffd54a;
+            text-transform: uppercase;
+        }
+        .record-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: .04em;
+            font-size: clamp(2.4rem, 8vw, 5rem);
+            line-height: .95;
+            margin-top: .35rem;
+            background: linear-gradient(180deg, #fff6c8 0%, #ffd54a 45%, #c98a00 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            filter: drop-shadow(0 0 18px rgba(255,200,40,.55));
+            animation: record-shine 2.4s ease-in-out infinite;
+        }
+        .record-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.75rem, 2.4vw, 1.05rem);
+            letter-spacing: .12em;
+            color: rgba(255,255,255,.85);
+            margin-top: .5rem;
+            text-transform: uppercase;
+        }
+        .record-sub b { color: #ffd54a; }
+        @keyframes record-shine {
+            0%,100% { filter: drop-shadow(0 0 14px rgba(255,200,40,.45)); }
+            50%     { filter: drop-shadow(0 0 30px rgba(255,200,40,.85)); }
+        }
+        .stream-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: .75rem;
+            font-weight: 700; border-radius: 1.5rem;
+            padding: 1rem 2rem; font-size: clamp(1rem, 3vw, 1.25rem);
+            min-width: 15rem;
+        }
+        .stream-btn:hover { transform: scale(1.04); }
+        .stream-btn i { font-size: 1.8em; }
+        .stream-btn small { font-size: .62em; letter-spacing: .2em; opacity: .85; }
+        .stream-spotify { background: #1DB954; color: #000; box-shadow: 0 0 24px rgba(29,185,84,.6); }
+        .stream-apple   { background: linear-gradient(135deg, #fa2d48, #fc5c7d); color: #fff; box-shadow: 0 0 24px rgba(250,45,72,.6); }
 
         /* ─── Album cards ────────────────────────────────────────────────── */
         .album-card {
@@ -420,10 +473,21 @@
     </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════ MISSION JEOPARDY === -->
-<div class="jeopardy-banner" role="alert">
-    <div class="jeopardy-title">⚠ MISSION IN JEOPARDY ⚠</div>
-    <div class="jeopardy-sub">21 of 32 albums scheduled for release — balance has been blocked by humans</div>
+<!-- ═══════════════════════════════════════════ WORLD RECORD ACHIEVED === -->
+<div class="record-banner">
+    <div class="record-kicker"><i class="fa-solid fa-trophy"></i>&nbsp; Guinness World Records &nbsp;<i class="fa-solid fa-trophy"></i></div>
+    <div class="record-title">WORLD RECORD ACHIEVED</div>
+    <div class="record-sub"><b>21 albums</b> released in 24 hours — beating the record of <b>20</b></div>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+        <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener"
+           class="stream-btn stream-spotify">
+            <i class="fa-brands fa-spotify"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>SPOTIFY</span>
+        </a>
+        <a href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener"
+           class="stream-btn stream-apple">
+            <i class="fa-brands fa-apple"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>APPLE MUSIC</span>
+        </a>
+    </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ HERO === -->
@@ -435,12 +499,12 @@
         <div class="space-y-6">
             <div class="inline-flex items-center gap-2 bg-white/10 text-[var(--green)] text-xs sm:text-sm
                         font-medium px-4 sm:px-5 py-2 rounded-3xl border border-[var(--green)]/30">
-                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD ATTEMPT
+                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD HOLDER
             </div>
 
             <h1 class="heading-font neon-text"
                 style="font-size: clamp(3.2rem, 9vw, 6.5rem); line-height: .9;">
-                20 ALBUMS.<br>24 HOURS.<br>ONE ARTIST.
+                21 ALBUMS.<br>24 HOURS.<br>ONE ARTIST.
             </h1>
 
             <div class="mono uppercase" style="font-size:clamp(.8rem,2.2vw,1.05rem);letter-spacing:.28em;
@@ -542,7 +606,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="mono text-xs text-white/35 tracking-wide">STATUS</span>
-                            <span class="mono text-xs font-bold text-[var(--purple)]">● RECORDING</span>
+                            <span class="mono text-xs font-bold" style="color:#ffd54a">● RECORD SET</span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="mono text-xs text-white/35 tracking-wide">RECORD_TO_BEAT</span>
