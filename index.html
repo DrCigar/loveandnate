@@ -1081,11 +1081,12 @@ function buildTicker() {
     const recording = albumsData.find(a => a.status === 'RECORDING');
     const daysOut   = Math.max(0, Math.floor((new Date(2026,9,15) - Date.now()) / 86400000));
 
-    // Total creative hours: 1 hr/day since May 1 2021, capped at Oct 15 2026
+    // Total creative hours: 1 hr/day since May 1 2021, capped at Oct 15 2026, plus 1,000 bonus hrs
     const PROJECT_START = new Date(2021, 4, 1); // May 1 2021
     const PROJECT_END   = new Date(2026, 9, 15); // Oct 15 2026
     const countTo = Math.min(Date.now(), PROJECT_END.getTime());
-    const totalHrs = Math.floor((countTo - PROJECT_START.getTime()) / 86400000);
+    const BONUS_HRS = 1000;
+    const totalHrs = Math.floor((countTo - PROJECT_START.getTime()) / 86400000) + BONUS_HRS;
 
     const seg = [
         `LATEST COMPLETE &nbsp;·&nbsp; <span class="hi">${lastDone ? lastDone.title : '—'}</span>`,
