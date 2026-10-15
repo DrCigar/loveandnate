@@ -135,6 +135,20 @@
             text-transform: uppercase;
         }
         .record-sub b { color: #ffd54a; }
+        .record-blocked {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2.2vw, .9rem);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #ff6b6b;
+            border: 1px solid rgba(255,60,60,.4);
+            background: rgba(40,0,0,.55);
+            border-radius: 999px;
+            padding: .4rem 1rem;
+            margin-top: .8rem;
+        }
+        .record-blocked b { color: #fff; }
         @keyframes record-shine {
             0%,100% { filter: drop-shadow(0 0 14px rgba(255,200,40,.45)); }
             50%     { filter: drop-shadow(0 0 30px rgba(255,200,40,.85)); }
@@ -478,6 +492,7 @@
     <div class="record-kicker"><i class="fa-solid fa-trophy"></i>&nbsp; Guinness World Records &nbsp;<i class="fa-solid fa-trophy"></i></div>
     <div class="record-title">WORLD RECORD ACHIEVED</div>
     <div class="record-sub"><b>21 albums</b> released in 24 hours — beating the record of <b>20</b></div>
+    <div class="record-blocked"><i class="fa-solid fa-lock"></i>&nbsp; 11 albums blocked by the system will release in <b>2028</b></div>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
         <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener"
            class="stream-btn stream-spotify">
