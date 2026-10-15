@@ -225,6 +225,11 @@
         }
         .ticker-seg .hi  { color: rgba(255,255,255,.9); }
         .ticker-seg .rec { color: var(--purple); }
+        .ticker-seg .wr  { color: #ffd54a; font-weight: 700; animation: wr-pulse 1.6s ease-in-out infinite; }
+        @keyframes wr-pulse {
+            0%,100% { opacity: .55; text-shadow: none; }
+            50%     { opacity: 1;   text-shadow: 0 0 8px rgba(255,213,74,.9), 0 0 18px rgba(255,200,40,.6); }
+        }
 
         /* ─── Energy core (alien fuel cell) tracker ──────────────────────── */
         .fuel-cell {
@@ -1038,7 +1043,7 @@ function buildTicker() {
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
         `TOTAL CREATIVE HRS &nbsp;·&nbsp; <span class="hi">${totalHrs.toLocaleString()} HRS</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
-        `WORLD RECORD SET &nbsp;·&nbsp; <span class="hi">10.15.2026</span>`,
+        `<span class="wr">🏆 WORLD RECORD SET &nbsp;·&nbsp; 10.15.2026</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
     ].join('');
 
