@@ -98,15 +98,18 @@
             50%,100% { color: #7a0000; text-shadow: none; opacity: .55; }
         }
 
-        /* ─── World Record achieved banner (gold) ─────────────────────────── */
-        .record-banner {
-            background:
-                radial-gradient(ellipse at center, rgba(255,200,40,.16) 0%, rgba(0,0,0,0) 70%),
-                rgba(20,14,0,.85);
-            border-top: 1px solid rgba(255,200,40,.45);
-            border-bottom: 1px solid rgba(255,200,40,.45);
-            padding: 1.4rem 1rem 1.6rem;
-            text-align: center;
+        /* ─── World Record gold styling (hero badge, countdown panel, albums note) ─ */
+        .record-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2vw, .85rem);
+            letter-spacing: .14em;
+            color: #ffd54a;
+            background: rgba(40,28,0,.6);
+            border: 1px solid rgba(255,200,40,.45);
+            border-radius: 999px;
+            padding: .45rem 1.1rem;
+            box-shadow: 0 0 18px rgba(255,200,40,.18);
         }
         .record-kicker {
             font-family: 'JetBrains Mono', monospace;
@@ -126,15 +129,6 @@
             filter: drop-shadow(0 0 18px rgba(255,200,40,.55));
             animation: record-shine 2.4s ease-in-out infinite;
         }
-        .record-sub {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(.75rem, 2.4vw, 1.05rem);
-            letter-spacing: .12em;
-            color: rgba(255,255,255,.85);
-            margin-top: .5rem;
-            text-transform: uppercase;
-        }
-        .record-sub b { color: #ffd54a; }
         .record-blocked {
             display: inline-block;
             font-family: 'JetBrains Mono', monospace;
@@ -146,7 +140,7 @@
             background: rgba(40,0,0,.55);
             border-radius: 999px;
             padding: .4rem 1rem;
-            margin-top: .8rem;
+            margin-bottom: 1.5rem;
         }
         .record-blocked b { color: #fff; }
         @keyframes record-shine {
@@ -198,30 +192,6 @@
             flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
         }
         .mobile-menu.open { display: flex; }
-
-        /* ─── Mission live dot ───────────────────────────────────────────── */
-        .live-dot {
-            width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0;
-            animation: pulse-live 1.6s ease-in-out infinite;
-        }
-        @keyframes pulse-live {
-            0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(0,255,157,.5); }
-            50%      { opacity:.8; box-shadow: 0 0 0 5px rgba(0,255,157,0); }
-        }
-
-        /* ─── Hero Spotify follow button ─────────────────────────────────── */
-        .spotify-follow {
-            animation: spotify-glow 2.4s ease-in-out infinite;
-        }
-        .spotify-follow:hover {
-            transform: scale(1.04);
-            animation-play-state: paused;
-            box-shadow: 0 0 25px rgba(29,185,84,.9), 0 0 60px rgba(29,185,84,.55), 0 0 110px rgba(29,185,84,.35);
-        }
-        @keyframes spotify-glow {
-            0%,100% { box-shadow: 0 0 16px rgba(29,185,84,.5), 0 0 40px rgba(29,185,84,.28); }
-            50%     { box-shadow: 0 0 30px rgba(29,185,84,.85), 0 0 75px rgba(29,185,84,.5), 0 0 120px rgba(29,185,84,.28); }
-        }
 
         /* ─── Status ticker ──────────────────────────────────────────────── */
         .ticker-wrap {
@@ -411,10 +381,6 @@
 
         <!-- Desktop -->
         <div class="hidden md:flex items-center gap-3">
-            <div class="flex items-center gap-2 px-3 py-2 bg-white/5 border border-[var(--green)]/25 rounded-3xl">
-                <div class="live-dot"></div>
-                <span class="mono text-[var(--green)] text-xs tracking-widest">MISSION LIVE</span>
-            </div>
             <a href="https://x.com/loveandnate" target="_blank"
                class="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-2xl flex items-center justify-center"
                style="box-shadow: 0 0 0 1px rgba(255,255,255,.5), 0 0 12px rgba(255,255,255,.25), 0 0 28px rgba(255,255,255,.1)">
@@ -461,10 +427,6 @@
 <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true">
     <button onclick="toggleMenu()" aria-label="Close menu"
             class="absolute top-5 right-5 w-11 h-11 bg-white/10 rounded-2xl flex items-center justify-center text-xl">✕</button>
-    <div class="flex items-center gap-2 mb-2">
-        <div class="live-dot"></div>
-        <span class="mono text-[var(--green)] text-sm tracking-widest">MISSION LIVE</span>
-    </div>
     <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" onclick="toggleMenu()"
        class="px-8 py-4 bg-[#1DB954] text-black rounded-3xl font-bold text-xl flex items-center gap-3">
         <i class="fa-brands fa-spotify"></i> SPOTIFY
@@ -487,24 +449,6 @@
     </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ WORLD RECORD ACHIEVED === -->
-<div class="record-banner">
-    <div class="record-kicker"><i class="fa-solid fa-trophy"></i>&nbsp; Guinness World Records &nbsp;<i class="fa-solid fa-trophy"></i></div>
-    <div class="record-title">WORLD RECORD ACHIEVED</div>
-    <div class="record-sub"><b>21 albums</b> released in 24 hours — beating the record of <b>20</b></div>
-    <div class="record-blocked"><i class="fa-solid fa-lock"></i>&nbsp; 11 albums blocked by the system will release in <b>2028</b></div>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-        <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener"
-           class="stream-btn stream-spotify">
-            <i class="fa-brands fa-spotify"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>SPOTIFY</span>
-        </a>
-        <a href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener"
-           class="stream-btn stream-apple">
-            <i class="fa-brands fa-apple"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>APPLE MUSIC</span>
-        </a>
-    </div>
-</div>
-
 <!-- ═══════════════════════════════════════════════════════════════ HERO === -->
 <header id="home" class="min-h-screen flex items-center relative">
     <div class="absolute inset-0 bg-black/15 z-0"></div>
@@ -512,9 +456,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 pt-10 pb-14 md:py-8">
 
         <div class="space-y-6">
-            <div class="inline-flex items-center gap-2 bg-white/10 text-[var(--green)] text-xs sm:text-sm
-                        font-medium px-4 sm:px-5 py-2 rounded-3xl border border-[var(--green)]/30">
-                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD HOLDER
+            <div class="record-badge">
+                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD <span class="opacity-60">·</span> 10.15.2026
             </div>
 
             <h1 class="heading-font neon-text"
@@ -528,14 +471,19 @@
             </div>
 
             <p class="text-lg sm:text-xl md:text-2xl text-white/75 max-w-md leading-relaxed">
-                The most studio albums ever released by an indie artist in a single day.
+                Beating the previous record of <span style="color:#ffd54a">20</span>.
             </p>
 
-            <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank"
-               class="spotify-follow inline-flex items-center gap-3 bg-[#1DB954] text-black
-                      font-bold rounded-3xl px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl">
-                <i class="fa-brands fa-spotify text-2xl sm:text-3xl"></i> FOLLOW ON SPOTIFY
-            </a>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener"
+                   class="stream-btn stream-spotify">
+                    <i class="fa-brands fa-spotify"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>SPOTIFY</span>
+                </a>
+                <a href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener"
+                   class="stream-btn stream-apple">
+                    <i class="fa-brands fa-apple"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>APPLE MUSIC</span>
+                </a>
+            </div>
 
         </div>
 
@@ -678,6 +626,7 @@
         <h2 class="heading-font" style="font-size:clamp(2rem,5vw,3.5rem)">THE 32 ALBUMS</h2>
         <p class="text-white/50 text-sm sm:max-w-xs sm:text-right">Click any album to read the full story</p>
     </div>
+    <div class="record-blocked"><i class="fa-solid fa-lock"></i>&nbsp; 11 albums blocked by the system will release in <b>2028</b></div>
     <!-- Filter tabs -->
     <div class="flex flex-wrap gap-2 mb-8" id="filter-tabs" role="group" aria-label="Filter albums by status">
         <button class="filter-tab active" data-filter="all"       onclick="filterAlbums('all')">ALL</button>
@@ -1077,10 +1026,6 @@ document.addEventListener('keydown', e => {
 
 // ══════════════════════════════════════════════ STATUS TICKER ===
 function buildTicker() {
-    const lastDone  = [...albumsData].reverse().find(a => a.status === 'COMPLETE');
-    const recording = albumsData.find(a => a.status === 'RECORDING');
-    const daysOut   = Math.max(0, Math.floor((new Date(2026,9,15) - Date.now()) / 86400000));
-
     // Total creative hours: 1 hr/day since May 1 2021, capped at Oct 15 2026, plus 1,000 bonus hrs
     const PROJECT_START = new Date(2021, 4, 1); // May 1 2021
     const PROJECT_END   = new Date(2026, 9, 15); // Oct 15 2026
@@ -1089,19 +1034,11 @@ function buildTicker() {
     const totalHrs = Math.floor((countTo - PROJECT_START.getTime()) / 86400000) + BONUS_HRS;
 
     const seg = [
-        `LATEST COMPLETE &nbsp;·&nbsp; <span class="hi">${lastDone ? lastDone.title : '—'}</span>`,
-        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
-        recording
-            ? `${recording.title} &nbsp;·&nbsp; <span class="rec">● RECORDING LIVE</span>`
-            : `STATUS &nbsp;·&nbsp; <span class="hi">ALL RECORDING COMPLETE</span>`,
-        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
-        `OCT_15_2026 &nbsp;·&nbsp; <span class="hi">T-${daysOut} DAYS</span>`,
-        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
-        `PROGRESS &nbsp;·&nbsp; <span class="hi">${pct}%</span>`,
-        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
-        `ALBUMS DONE &nbsp;·&nbsp; <span class="hi">${nComplete} / ${TOTAL}</span>`,
+        `ALBUMS RELEASED &nbsp;·&nbsp; <span class="hi">${nComplete}</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
         `TOTAL CREATIVE HRS &nbsp;·&nbsp; <span class="hi">${totalHrs.toLocaleString()} HRS</span>`,
+        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
+        `WORLD RECORD SET &nbsp;·&nbsp; <span class="hi">10.15.2026</span>`,
         `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
     ].join('');
 
