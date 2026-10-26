@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>WELL WELL WELL — Coming October 2027</title>
+<meta name="description" content="A family, thinned by grief, debt, and addiction returns to an inherited house in the woods. The rooms remember more than they should. The property breathes.">
+<meta name="theme-color" content="#07080a">
+<link rel="canonical" href="https://loveandnate.io/wellwellwell">
+<meta property="og:type" content="video.movie">
+<meta property="og:title" content="WELL WELL WELL">
+<meta property="og:description" content="Psychological horror. Coming October 2027. The property breathes.">
+<meta property="og:url" content="https://loveandnate.io/wellwellwell">
+<meta property="og:site_name" content="LOVEANDNATE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WELL WELL WELL">
+<meta name="twitter:description" content="Psychological horror. Coming October 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Oswald:wght@200;300&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080a;--fg:#c9c6bd;--dim:#6d6b66;--faint:#2a2b2c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{color:var(--fg);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:5;opacity:.07;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:4;background:radial-gradient(ellipse at 50% 45%,transparent 30%,rgba(0,0,0,.85) 100%);animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+a{color:inherit}
+.back{position:fixed;top:1.4rem;left:1.6rem;z-index:10;font:200 .7rem/1 'Oswald',sans-serif;letter-spacing:.35em;text-decoration:none;color:var(--dim);transition:color .6s}
+.back:hover{color:var(--fg)}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 4rem}
+.scene{position:absolute;inset:auto 0 0 0;width:100%;height:62vh;z-index:0;opacity:.9}
+.status{font:200 .75rem/1 'Oswald',sans-serif;letter-spacing:.6em;text-transform:uppercase;color:var(--dim);margin-bottom:2.2rem;position:relative;z-index:2}
+h1{position:relative;z-index:2;font-family:'Oswald',sans-serif;font-weight:200;font-size:clamp(2.6rem,11vw,9.5rem);line-height:.9;letter-spacing:.08em;color:#d8d4ca}
+h1 span{display:block;opacity:0;filter:blur(14px);animation:resolve 4.5s cubic-bezier(.2,.6,.2,1) forwards}
+h1 span:nth-child(1){animation-delay:.6s}
+h1 span:nth-child(2){animation-delay:2.2s;color:#a8a49b}
+h1 span:nth-child(3){animation-delay:3.8s;color:#77746d}
+@keyframes resolve{to{opacity:1;filter:blur(0)}}
+.release{position:relative;z-index:2;margin-top:2.6rem;font-style:italic;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--dim);opacity:0;animation:fade 3s 6s forwards}
+@keyframes fade{to{opacity:1}}
+.cue{position:absolute;bottom:2rem;left:50%;width:1px;height:48px;background:linear-gradient(var(--dim),transparent);z-index:2;opacity:0;animation:fade 3s 7.5s forwards}
+section{position:relative;z-index:2;max-width:40rem;margin:0 auto;padding:18vh 1.75rem}
+.label{font:200 .7rem/1 'Oswald',sans-serif;letter-spacing:.5em;text-transform:uppercase;color:var(--dim);margin-bottom:2rem}
+.synopsis{font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.65;color:var(--fg)}
+.synopsis em{color:#e6e1d6}
+.rule{width:1px;height:14vh;margin:0 auto;background:linear-gradient(transparent,var(--faint),transparent)}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;text-align:left}
+.meta p{font-size:1.35rem}
+footer{position:relative;z-index:2;text-align:center;padding:10vh 1.5rem 4rem}
+.tags{font:200 .68rem/2 'Oswald',sans-serif;letter-spacing:.25em;color:#45443f;word-spacing:.6em}
+.sig{margin-top:2rem;font:200 .65rem/1 'Oswald',sans-serif;letter-spacing:.5em;color:#3a3936}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 2.4s ease,transform 2.4s ease}
+.reveal.in{opacity:1;transform:none}
+.flick{animation:flick 11s infinite}
+@keyframes flick{0%,92%,100%{opacity:.55}93%{opacity:.15}94%{opacity:.6}96%{opacity:.25}}
+@media (max-width:560px){.meta{grid-template-columns:1fr;gap:1.8rem}.status{letter-spacing:.45em}.scene{height:48vh}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}h1 span,.release,.cue{opacity:1;filter:none}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<a class="back" href="/">← LOVEANDNATE</a>
+
+<header class="hero">
+  <svg class="scene" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="fog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07080a" stop-opacity="0"/><stop offset=".7" stop-color="#0d0f10"/><stop offset="1" stop-color="#07080a"/></linearGradient>
+      <radialGradient id="glow"><stop offset="0" stop-color="#b9a67a" stop-opacity=".55"/><stop offset="1" stop-color="#b9a67a" stop-opacity="0"/></radialGradient>
+    </defs>
+    <g fill="#0f1112">
+      <path d="M0 560V300l30-90 25 90 20-150 30 160 25-120 20 110 35-170 30 180 20-90 25 100 30-140 25 130 20-60 25 70 30-160 25 160V560z"/>
+      <path d="M940 560V310l30-120 25 110 30-180 25 190 30-110 20 100 35-160 25 150 30-90 20 80 35-140 25 140 30-100 25 90 30-160 25 170 30-90V560z"/>
+    </g>
+    <g fill="#0a0b0c">
+      <path d="M560 560V420l120-80 120 80v140z"/><rect x="740" y="350" width="12" height="40"/>
+      <rect class="flick" x="672" y="440" width="16" height="22" fill="#6e6447"/>
+      <g transform="translate(880 470)"><ellipse cx="0" cy="0" rx="34" ry="7" fill="#141617"/><rect x="-34" y="0" width="68" height="30" fill="#0c0d0e"/><path d="M-30 0v-46M30 0v-46M-40-46h80" stroke="#141617" stroke-width="3" fill="none"/></g>
+      <rect x="0" y="520" width="1440" height="40"/>
+    </g>
+    <circle cx="680" cy="451" r="40" fill="url(#glow)" class="flick"/>
+    <rect width="1440" height="560" fill="url(#fog)"/>
+  </svg>
+  <p class="status">Movie era is near.</p>
+  <h1 aria-label="WELL WELL WELL"><span>WELL</span><span>WELL</span><span>WELL</span></h1>
+  <p class="release">Coming October 2027</p>
+  <div class="cue" aria-hidden="true"></div>
+</header>
+
+<main>
+  <section class="reveal">
+    <p class="label">Synopsis</p>
+    <p class="synopsis">A family, thinned by grief, debt, and addiction returns to an inherited house in the woods. <em>The rooms remember more than they should. The property breathes.</em> What begins as a last refuge becomes a study in appetite: how a household is rearranged when human needs conflict, and none of them will yield.</p>
+  </section>
+  <div class="rule" aria-hidden="true"></div>
+  <section class="reveal">
+    <div class="meta">
+      <div><p class="label">Genre</p><p>Psychological horror</p></div>
+      <div><p class="label">Release</p><p>Coming October 2027</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="reveal">
+  <p class="tags">#WELLWELLWELL #PsychologicalHorror #IndieHorror #FamilyHorror</p>
+  <p class="sig">A LOVEANDNATE FILM</p>
+</footer>
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
