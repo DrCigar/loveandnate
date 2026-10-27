@@ -123,17 +123,17 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 @media (prefers-reduced-motion:reduce){.track,#static,.lw .tear{display:none!important}.lw .ch{opacity:.45}.label::after{display:none}}
 
 /* ===== BLOOD DRIP ===== */
-.blood{position:fixed;top:0;left:0;right:0;height:clamp(90px,22vw,210px);z-index:11;pointer-events:none;overflow:visible;mix-blend-mode:multiply;opacity:.92}
+.blood{position:fixed;top:0;left:0;right:0;height:clamp(100px,24vw,240px);z-index:11;pointer-events:none;overflow:visible;opacity:.95}
 .blood svg{width:100%;height:100%;display:block;overflow:visible}
-.blood .pool,.blood .drip{fill:#5a0606}
-.blood .hi{fill:#8a1818;opacity:.35}
-.blood .drop{fill:#4a0000;opacity:0}
+.blood .pool,.blood .drip{fill:#6e0c0c}
+.blood .hi{fill:#a02020;opacity:.45}
+.blood .drop{fill:#5c0808;opacity:0}
 .blood .grow{transform-box:fill-box;transform-origin:top center;animation:dripGrow var(--dur,7s) ease-in-out var(--delay,0s) infinite}
 .blood .fall{animation:dropFall var(--fdur,4.5s) ease-in var(--fdelay,1.5s) infinite}
 @keyframes dripGrow{0%,100%{transform:scaleY(1)}45%{transform:scaleY(1.18)}70%{transform:scaleY(1.05)}}
 @keyframes dropFall{0%,12%{opacity:0;transform:translateY(0) scale(.6)}14%{opacity:.85;transform:translateY(0) scale(1)}55%{opacity:.55;transform:translateY(min(48vh,420px)) scale(.7)}70%,100%{opacity:0;transform:translateY(min(62vh,520px)) scale(.35)}}
 .g .blood{filter:url(#bloodRgb);transform:translateX(var(--jx,0))}
-@media (max-width:560px){.blood{height:clamp(70px,28vw,140px)}}
+@media (max-width:560px){.blood{height:clamp(80px,30vw,160px)}}
 @media (prefers-reduced-motion:reduce){.blood .grow,.blood .fall{animation:none!important}.blood .drop{opacity:0!important}}
 </style>
 </head>
@@ -158,7 +158,7 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
       <feBlend in="m" in2="C" mode="screen"/>
     </filter>
     <linearGradient id="wet" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7a0a0a"/><stop offset=".55" stop-color="#4a0000"/><stop offset="1" stop-color="#2a0000"/>
+      <stop offset="0" stop-color="#8a1212"/><stop offset=".45" stop-color="#5c0808"/><stop offset="1" stop-color="#3a0404"/>
     </linearGradient>
   </defs>
   <g filter="url(#goo)" fill="url(#wet)">
