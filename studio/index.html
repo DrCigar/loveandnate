@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LOVEANDNATE — Studio</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="LOVEANDNATE creative studio — music, books, apps, and film.">
+<link rel="canonical" href="https://loveandnate.io/studio">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://loveandnate.io/studio">
+<meta property="og:title" content="LOVEANDNATE — Studio">
+<meta property="og:description" content="Music. Books. Apps. Movies. One practice.">
+<meta property="og:image" content="https://loveandnate.io/og-record.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LOVEANDNATE — Studio">
+<meta name="twitter:description" content="Music. Books. Apps. Movies. One practice.">
+<meta name="twitter:image" content="https://loveandnate.io/og-record.jpg?v=2">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050506;--ink:#eceae4;--mute:#8a8780;
+  --accent:#c9ced6; /* chrome / logo metal */
+  --copper:#b56a3a; /* rose boutonniere */
+  --panel:#0d0d10;--line:#1a1a1e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.75rem;background:linear-gradient(to bottom,rgba(5,5,6,.92),transparent);pointer-events:none}
+.nav-left{position:relative;z-index:2;max-width:min(40vw,280px)}
+.nav-emblem{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:42px;width:auto;display:block;opacity:1;z-index:1;pointer-events:none}
+nav .links{position:relative;z-index:2;display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.mono-mark{display:none!important}
+nav *{pointer-events:auto}
+.wordmark{height:28px;width:auto;max-width:min(42vw,220px);display:block;object-fit:contain;object-position:left center}
+.cred{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:.4rem;opacity:.75}
+nav .links{display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:6.5rem 2rem 3.5rem;overflow:hidden}
+.stars{position:absolute;inset:0;z-index:0;pointer-events:none}
+.stars canvas{width:100%;height:100%;display:block;opacity:.7}
+.nebula{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 50% 40% at 75% 35%,rgba(120,90,60,.12),transparent 60%),
+    radial-gradient(ellipse 40% 50% at 20% 70%,rgba(60,80,110,.1),transparent 55%),
+    linear-gradient(to top,var(--bg) 8%,transparent 45%)}
+.hero-copy{position:relative;z-index:2;padding-bottom:2rem;max-width:34rem}
+.eyebrow{color:var(--copper);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.3rem}
+h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(2.8rem,7vw,5.6rem);line-height:.95;letter-spacing:-.02em}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-copy p{margin-top:1.4rem;color:var(--mute);font-size:1.05rem;max-width:28rem}
+.hero-figure{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:center;min-height:70vh}
+.hero-figure .drift{width:min(100%,520px);animation:drift 14s ease-in-out infinite;filter:drop-shadow(0 30px 60px rgba(0,0,0,.65))}
+.hero-figure img{width:100%;height:auto;display:block}
+@keyframes drift{
+  0%,100%{transform:translate3d(0,0,0) rotate(-1deg)}
+  50%{transform:translate3d(0,-18px,0) rotate(1.2deg)}
+}
+.panels{display:grid;grid-template-columns:repeat(4,1fr);min-height:72vh;position:relative;z-index:2;border-top:1px solid var(--line)}
+.panel{position:relative;padding:2.2rem 1.6rem;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;min-height:26rem;background:var(--panel);overflow:hidden;transition:background .4s}
+.panel:first-child{border-left:0}
+.panel:hover{background:#121216}
+.panel .num{position:absolute;top:1.6rem;left:1.6rem;font-size:.68rem;letter-spacing:.2em;color:var(--mute)}
+.panel h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,2.8vw,2.5rem);line-height:1;margin-bottom:.9rem}
+.panel p{font-size:.9rem;color:var(--mute);margin-bottom:1.4rem;max-width:22ch}
+.panel .cta{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.panel .cta:hover{color:#fff}
+.panel.film{background:#0a0a0c}
+.panel.film .logo{width:min(100%,220px);margin:0 0 1.2rem;mix-blend-mode:screen;opacity:.9}
+.water{position:absolute;inset:auto -20% -30% -20%;height:55%;background:radial-gradient(ellipse at 50% 0%,rgba(70,110,140,.16),transparent 70%);pointer-events:none}
+.ph{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);border:1px solid #5a3a22;padding:.12rem .4rem;margin-left:.35rem}
+.about{padding:5rem 2rem;max-width:900px}
+.about h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:1rem}
+.about p{color:var(--mute);font-size:1.1rem;max-width:40rem;line-height:1.7}
+footer{border-top:1px solid var(--line);padding:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+footer a:hover{color:var(--accent)}
+
+.hero-media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
+.hero-media video,.hero-media img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-media .scrim{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(5,5,6,.88) 0%,rgba(5,5,6,.55) 42%,rgba(5,5,6,.25) 70%,rgba(5,5,6,.45) 100%),
+  linear-gradient(to top,rgba(5,5,6,.95) 0%,rgba(5,5,6,.35) 40%,rgba(5,5,6,.5) 100%);
+  pointer-events:none}
+.hero .stars{opacity:.45}
+.panel.music{padding:0;min-height:28rem;justify-content:flex-end}
+.panel.music .media{position:absolute;inset:0;z-index:0;overflow:hidden}
+.panel.music .media video,.panel.music .media img.poster{width:100%;height:100%;object-fit:cover;object-position:center}
+.panel.music .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,.92) 0%,rgba(5,5,6,.45) 45%,rgba(5,5,6,.35) 100%);pointer-events:none}
+.panel.music .inner{position:relative;z-index:1;padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:28rem}
+.panel.music .cred-line{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem;opacity:.9}
+.about{display:grid;grid-template-columns:160px 1fr;gap:2.5rem;align-items:center;max-width:980px}
+.about .mascot{width:140px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.6))}
+.about .mascot img{width:100%;height:auto;display:block}
+@media(max-width:720px){
+  .about{grid-template-columns:1fr;gap:1.5rem;text-align:center}
+  .about .mascot{margin:0 auto;width:110px}
+  .hero-media .scrim{background:linear-gradient(to top,rgba(5,5,6,.95) 0%,rgba(5,5,6,.55) 50%,rgba(5,5,6,.6) 100%)}
+  .hero-copy{text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-media video,.panel.music .media video{display:none!important}
+  .hero-media img.poster,.panel.music .media img.poster{display:block!important}
+}
+@media (prefers-reduced-motion:reduce){.hero-figure .drift{animation:none}}
+@media(max-width:960px){
+  .hero{padding:5.5rem 1.25rem 2.5rem;align-items:flex-end}
+  .hero-copy{padding-bottom:1.5rem;margin:0 auto;max-width:34rem}
+  .panels{grid-template-columns:1fr 1fr}
+  .panel:nth-child(3){border-left:0}
+  .panel.music .inner{min-height:22rem}
+}
+@media(max-width:560px){
+  .panels{grid-template-columns:1fr}
+  .panel{border-left:0;border-top:1px solid var(--line);min-height:18rem}
+  nav .links{display:none}
+  .wordmark{height:20px;max-width:38vw}
+  .nav-emblem{height:36px}
+  .cred{display:none}
+  .nav-left{max-width:45vw}
+  nav,footer,.about{padding-left:1.25rem;padding-right:1.25rem}
+  .hero-figure{min-height:42vh}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <a href="/studio"><img class="wordmark" src="/studio/assets/lan-wordmark.webp" alt="LOVEANDNATE" width="320" height="58"></a>
+    <div class="cred">WORLD RECORD HOLDER</div>
+  </div>
+  <img class="nav-emblem" src="/studio/assets/lan-monogram.webp" alt="" width="128" height="122">
+  <div class="links"><span>Music</span><span>Books</span><span>Apps</span><span>Movies</span></div>
+</nav>
+
+<header class="hero">
+  <div class="hero-media" data-lazy-video>
+    <img class="poster" src="/studio/assets/hero-loop-poster.webp" alt="" width="1280" height="720">
+    <video muted loop playsinline preload="metadata" poster="/studio/assets/hero-loop-poster.webp" aria-hidden="true">
+      <source data-src="/studio/assets/hero-loop.webm" type="video/webm">
+      <source data-src="/studio/assets/hero-loop.mp4" type="video/mp4">
+    </video>
+    <div class="scrim"></div>
+  </div>
+  <div class="stars" aria-hidden="true"><canvas id="stars"></canvas></div>
+  <div class="nebula" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <p class="eyebrow">Creative studio</p>
+    <h1>Four disciplines.<br><em>One practice.</em></h1>
+    <p>Sound, story, software, and film — built by a self-taught artist working under LOVEANDNATE.</p>
+  </div>
+</header>
+
+<section class="panels" aria-label="Pillars">
+  <article class="panel music">
+    <div class="media" data-lazy-video>
+      <img class="poster" src="/studio/assets/record-loop-poster.webp" alt="" width="1280" height="720">
+      <video muted loop playsinline preload="metadata" poster="/studio/assets/record-loop-poster.webp" aria-hidden="true">
+        <source data-src="/studio/assets/record-loop.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="inner">
+      <span class="num">01 / MUSIC</span>
+      <p class="cred-line">WORLD RECORD HOLDER — 21 albums released in 24 hours</p>
+      <h2>21 albums</h2>
+      <p>ARTACHE · MONOLITH · TIMELESS · OUT OF MY MIND · MCCLUMPHA PARK — and more, streaming now.</p>
+      <a class="cta" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr">Listen on Spotify →</a>
+    </div>
+  </article>
+  <article class="panel">
+    <span class="num">02 / BOOKS</span>
+    <h2>Marvin Stench</h2>
+    <p>Anti-bullying children’s book. Resilience, kindness, self-love. By Zepp.</p>
+    <a class="cta" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094">On Amazon →</a>
+  </article>
+  <article class="panel">
+    <span class="num">03 / APPS</span>
+    <div class="water" aria-hidden="true"></div>
+    <h2>Innerpool</h2>
+    <p>Where your quiet comes alive. Calm, water-themed wellness.</p>
+    <p style="font-size:.75rem;color:var(--mute)"><span class="ph">Placeholder</span> Store badges & screens</p>
+    <a class="cta" href="#innerpool">Coming soon →</a>
+  </article>
+  <article class="panel film">
+    <span class="num">04 / MOVIES</span>
+    <img class="logo" src="/studio/assets/www-logo.webp" alt="WELL WELL WELL">
+    <h2>WELL WELL WELL</h2>
+    <p>Psychological horror. Coming October 2027.</p>
+    <a class="cta" href="/wellwellwell">Watch the page →</a>
+  </article>
+</section>
+
+<section class="about">
+  <div class="mascot"><img src="/studio/assets/space-character.webp" alt="LOVEANDNATE space character" width="400" height="397" loading="lazy"></div>
+  <div>
+    <h3>About</h3>
+    <p>“Music was my first love… and I was destined to do this.” From Detroit-born children’s author Zepp to the LOVEANDNATE catalogue and a film in the works — the work keeps expanding. Self-taught. Limitless. Keep ; Going.</p>
+  </div>
+</section>
+
+<footer>
+  <div>© LOVEANDNATE</div>
+  <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
+    <a href="https://www.instagram.com/loveandnate/">Instagram</a>
+    <a href="https://x.com/loveandnate">X</a>
+    <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr">Spotify</a>
+    <a href="https://music.apple.com/us/artist/loveandnate/1625477213">Apple Music</a>
+    <a href="https://www.instagram.com/booksbyzepp/">@booksbyzepp</a>
+  </div>
+</footer>
+<script>
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w,h,stars,t=0;
+  function resize(){
+    const r=c.parentElement.getBoundingClientRect();
+    w=c.width=Math.floor(r.width*devicePixelRatio);
+    h=c.height=Math.floor(r.height*devicePixelRatio);
+    const n=Math.min(180, Math.floor((r.width*r.height)/9000));
+    stars=Array.from({length:n},()=>({
+      x:Math.random()*w,y:Math.random()*h,
+      r:(Math.random()*1.2+.3)*devicePixelRatio,
+      a:Math.random()*.7+.15, s:Math.random()*0.015+.004
+    }));
+  }
+  function draw(){
+    x.clearRect(0,0,w,h);
+    for(const s of stars){
+      const tw=RM? s.a : s.a*(.65+.35*Math.sin(t*s.s*60+s.x));
+      x.beginPath(); x.fillStyle=`rgba(220,225,235,${tw})`;
+      x.arc(s.x,s.y,s.r,0,Math.PI*2); x.fill();
+      if(!RM){ s.y+=s.s*devicePixelRatio; if(s.y>h){s.y=0;s.x=Math.random()*w;} }
+    }
+    t+=1; if(!RM) requestAnimationFrame(draw); else { /* static once */ }
+  }
+  resize(); draw();
+  addEventListener('resize',()=>{resize(); if(RM) draw();});
+})();
+</script>
+</body>
+</html>
+<script>
+(function(){
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function arm(root){
+    const v=root.querySelector('video'); if(!v) return;
+    const sources=[...v.querySelectorAll('source[data-src]')];
+    function load(){
+      if(v.dataset.ready) return;
+      sources.forEach(s=>{s.src=s.dataset.src});
+      v.load(); v.dataset.ready='1';
+      const play=()=>v.play().catch(()=>{});
+      if(v.readyState>=2) play(); else v.addEventListener('loadeddata',play,{once:true});
+    }
+    if(RM){ v.remove(); return; }
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver(ents=>{
+        ents.forEach(e=>{ if(e.isIntersecting){ load(); io.disconnect(); }});
+      },{rootMargin:'200px'});
+      io.observe(root);
+    } else load();
+  }
+  document.querySelectorAll('[data-lazy-video]').forEach(arm);
+})();
+</script>
+
