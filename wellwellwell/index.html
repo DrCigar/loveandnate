@@ -122,25 +122,58 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 @media (max-width:560px){.osd.tl,.osd.tc{left:1rem}.back{right:1rem}.osd.br{left:1rem}.crt{outline-width:0;border-radius:0;box-shadow:inset 0 0 70px 20px rgba(0,0,0,.85)}}
 @media (prefers-reduced-motion:reduce){.track,#static,.lw .tear{display:none!important}.lw .ch{opacity:.45}.label::after{display:none}}
 
-/* ===== BLOOD DRIP ===== */
-.blood{position:fixed;top:0;left:0;right:0;height:clamp(180px,48vh,480px);z-index:11;pointer-events:none;overflow:hidden}
-.blood canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.blood #bloodBase{opacity:.98;filter:url(#bloodGoo)}
-.blood #bloodHi{opacity:1;mix-blend-mode:screen;filter:blur(.15px)}
+/* ===== BLOOD (photoreal) ===== */
+.blood{position:fixed;top:0;left:0;right:0;height:clamp(160px,42vh,420px);z-index:11;pointer-events:none;overflow:hidden}
+.blood .sheet{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:.96;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%)}
+.blood .sheet.pour{clip-path:inset(0 0 100% 0);animation:bloodPour 3.6s cubic-bezier(.4,.05,.2,1) .15s forwards}
+@keyframes bloodPour{0%{clip-path:inset(0 0 100% 0)}55%{clip-path:inset(0 0 18% 0)}100%{clip-path:inset(0 0 0 0)}}
+.blood .shimmer{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,180,160,.07) 48%,transparent 56%);
+  background-size:220% 100%;animation:bloodShim 7.5s ease-in-out 4s infinite}
+@keyframes bloodShim{0%,100%{opacity:0;background-position:120% 0}40%{opacity:1;background-position:0% 0}70%{opacity:.4}}
+.blood .creep{position:absolute;top:0;width:clamp(36px,5vw,70px);height:70%;transform-origin:top center;opacity:0;
+  object-fit:contain;object-position:top center;filter:brightness(1.02)}
+.blood .creep.on{opacity:.9;animation:creepDown var(--cd,11s) ease-in-out var(--cdelay,4.2s) infinite}
+@keyframes creepDown{0%,100%{transform:scaleY(.92)}50%{transform:scaleY(1.12)}}
+.blood .fall{position:absolute;width:clamp(18px,2.2vw,32px);height:auto;opacity:0;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
+.blood .fall.go{animation:dropFall var(--fd,2.8s) cubic-bezier(.35,.05,.7,.2) var(--fdelay,0s) 1 forwards}
+@keyframes dropFall{0%{opacity:0;transform:translateY(0) scale(.85)}8%{opacity:.95;transform:translateY(0) scale(1)}70%{opacity:.75;transform:translateY(min(48vh,380px)) scale(.9)}100%{opacity:0;transform:translateY(min(62vh,520px)) scale(.55)}}
+.blood .smear{position:absolute;width:2px;height:0;background:linear-gradient(rgba(90,10,10,.55),transparent);opacity:0;pointer-events:none}
+.blood .smear.go{animation:smear 1.4s ease-out forwards}
+@keyframes smear{0%{opacity:.7;height:0}40%{opacity:.45;height:28px}100%{opacity:0;height:42px}}
 .g .blood{filter:url(#bloodRgb);transform:translateX(var(--jx,0))}
-@media (max-width:560px){.blood{height:clamp(120px,32vh,280px)}}
-@media (prefers-reduced-motion:reduce){.blood #bloodHi{opacity:.5}}
+@media (max-width:560px){
+  .blood{height:clamp(130px,36vh,300px)}
+  .blood picture{display:none}
+  .blood .sheet.mob{display:block}
+}
+@media (min-width:561px){.blood .sheet.mob{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .blood .sheet{clip-path:none!important;animation:none!important;opacity:.95}
+  .blood .shimmer,.blood .creep,.blood .fall,.blood .smear{display:none!important}
+}
+
+/* ===== POSTER ===== */
+.poster-sec{position:relative;z-index:2;max-width:42rem;margin:0 auto;padding:10vh 1.75rem 4vh}
+.poster-frame{position:relative;margin:0 auto;cursor:zoom-in;background:#050505;border:1px solid #1a1a1a;
+  box-shadow:0 24px 60px rgba(0,0,0,.75), inset 0 0 40px rgba(0,0,0,.5);padding:0;display:block;width:100%;color:inherit;font:inherit;
+  opacity:0;transform:none!important}
+.in .poster-frame{opacity:1;transition:opacity 2.2s ease}
+.poster-frame.ev{transform:none!important}
+.poster-frame img{width:100%;height:auto;display:block;filter:saturate(.75) contrast(1.08) brightness(.95)}
+.poster-frame::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);mix-blend-mode:multiply;opacity:.7}
+.g .poster-frame img{filter:saturate(.9) contrast(1.1) brightness(.95);transform:translateX(var(--jx,1px))}
+.poster-frame .cap{display:block;margin-top:.9rem;padding:0 .2rem 1rem;font:200 .95rem/1 'VT323',monospace;letter-spacing:.18em;color:#55534e;text-transform:uppercase;text-align:left}
+.poster-frame:hover img,.poster-frame:focus-visible img{filter:saturate(.85) contrast(1.08) brightness(1)}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <filter id="onlyR"><feColorMatrix values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
 <filter id="onlyC"><feColorMatrix values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
-<filter id="bloodGoo" x="-10%" y="-25%" width="120%" height="160%">
-  <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
-  <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="g"/>
-  <feComposite in="SourceGraphic" in2="g" operator="atop"/>
-</filter>
 <filter id="bloodRgb" x="-8%" y="-8%" width="116%" height="116%">
   <feOffset in="SourceGraphic" dx="2" dy="0" result="r"/>
   <feOffset in="SourceGraphic" dx="-2" dy="0" result="c"/>
@@ -153,8 +186,15 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 <div class="grain" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div><div class="track" aria-hidden="true"></div><canvas id="static" width="160" height="90" aria-hidden="true"></canvas><div class="crt" aria-hidden="true"></div>
 
 <div class="blood" aria-hidden="true">
-<canvas id="bloodBase"></canvas>
-<canvas id="bloodHi"></canvas>
+<picture>
+  <source type="image/avif" srcset="/wellwellwell/blood.avif">
+  <img class="sheet desk pour" src="/wellwellwell/blood.webp" alt="" width="1800" height="1012" decoding="async" fetchpriority="high">
+</picture>
+<img class="sheet mob pour" src="/wellwellwell/blood-mobile.webp" alt="" width="900" height="1567" decoding="async">
+<div class="shimmer"></div>
+<img class="creep" data-src="/wellwellwell/blood-runner-1.webp" style="left:14%;--cd:12s;--cdelay:4.5s" alt="">
+<img class="creep" data-src="/wellwellwell/blood-runner-2.webp" style="left:48%;--cd:14s;--cdelay:6s" alt="">
+<img class="creep" data-src="/wellwellwell/blood-runner-3.webp" style="left:72%;--cd:11s;--cdelay:5.2s" alt="">
 </div>
 <div class="osd tl" aria-hidden="true">▶ PLAY</div><div class="osd tc" aria-hidden="true" id="tc">SP 00:00:00</div><div class="osd br" aria-hidden="true">OCT 2027</div>
 <div class="vignette" aria-hidden="true"></div>
@@ -191,8 +231,15 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
     <p class="label">CH 01 ▸ SYNOPSIS</p>
     <p class="synopsis">A family, thinned by grief, debt, and addiction returns to an inherited house in the woods. <em>The rooms remember more than they should. The property breathes.</em> What begins as a last refuge becomes a study in appetite: how a household is rearranged when human needs conflict, and none of them will yield.</p>
   </section>
+  <section class="poster-sec reveal" aria-labelledby="poster">
+    <p class="label" id="poster">CH 02 ▸ POSTER</p>
+    <button class="poster-frame ev" data-full="/wellwellwell/poster.webp" aria-label="Enlarge: official WELL WELL WELL poster">
+      <img src="/wellwellwell/poster.webp" alt="Official WELL WELL WELL poster: a dim concrete corridor lined with masked cultists in top hats, a young man carrying a gagged woman on his back, a kneeling boy holding a bleeding heart over a pool of blood, and a painting of a well on an easel. Title WELL WELL WELL at top." width="1152" height="1728" loading="lazy">
+      <span class="cap">Key art · October 2027</span>
+    </button>
+  </section>
   <section class="case reveal" aria-labelledby="ev">
-    <p class="label" id="ev">CH 02 ▸ RECOVERED FROM THE HOUSE</p>
+    <p class="label" id="ev">CH 03 ▸ RECOVERED FROM THE HOUSE</p>
     <div class="files">
       <button class="ev n" data-full="/wellwellwell/note.webp" aria-label="Enlarge: scrawled note"><img src="/wellwellwell/note.webp" alt="Torn, aged paper covered in scrawled notes: Time travel is a lie. The past owns you. Clocks don't move, we do. A well at the center. Hell waits below. There is no escape." width="1500" height="844" loading="lazy"><span class="cap">Exhibit A · found near the well</span></button>
       <button class="ev r" data-full="/wellwellwell/report.webp" aria-label="Enlarge: psychiatric evaluation report"><img src="/wellwellwell/report.webp" alt="Psychiatric Evaluation Report stamped DANGER LEVEL: EXTREME. Patient exhibits severe PTSD, believes his family's involvement in the occult cursed his life, stating: The shadows followed me here." width="1500" height="1861" loading="lazy"><span class="cap">Exhibit B · patient file</span></button>
@@ -201,8 +248,8 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
   <div class="rule" aria-hidden="true"></div>
   <section class="reveal jit">
     <div class="meta">
-      <div><p class="label">CH 03 ▸ GENRE</p><p>Psychological horror</p></div>
-      <div><p class="label">CH 04 ▸ RELEASE</p><p>Coming October 2027</p></div>
+      <div><p class="label">CH 04 ▸ GENRE</p><p>Psychological horror</p></div>
+      <div><p class="label">CH 05 ▸ RELEASE</p><p>Coming October 2027</p></div>
     </div>
   </section>
 </main>
@@ -236,284 +283,53 @@ sb.onclick=()=>{if(au.paused){noise(350,.12);au.play();sb.textContent='SOUND ON'
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ===== BLOOD SIM ===== */
+/* ===== BLOOD (photoreal) ===== */
 (function(){
-  const base=document.getElementById('bloodBase'), hi=document.getElementById('bloodHi');
-  if(!base||!hi) return;
-  const bctx=base.getContext('2d');
-  const hctx=hi.getContext('2d');
+  const root=document.querySelector('.blood');
+  if(!root) return;
   const reduced=RM;
-  let W=0,H=0,dpr=1,raf=0,last=0;
-  let drips=[], drops=[], streaks=[];
-
-  const rand=(a,b)=>a+Math.random()*(b-a);
-  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const lerp=(a,b,t)=>a+(b-a)*t;
-
-  function resize(){
-    const wrap=base.parentElement.getBoundingClientRect();
-    dpr=Math.min(devicePixelRatio||1, 2);
-    W=Math.max(1,wrap.width); H=Math.max(1,wrap.height);
-    for(const c of [base,hi]){
-      c.width=(W*dpr)|0; c.height=(H*dpr)|0;
-      c.style.width=W+'px'; c.style.height=H+'px';
-    }
-    bctx.setTransform(dpr,0,0,dpr,0,0);
-    hctx.setTransform(dpr,0,0,dpr,0,0);
-    if(!drips.length) seed(); else for(const d of drips) d.x=d.xf*W;
-  }
-
-  function seed(){
-    drips=[];
-    const count=W<500?11:16;
-    const plan=W<500
-      ?['long','long','med','med','short','short','thin','thin','bead','bead','med']
-      :['long','long','long','med','med','med','med','short','short','short','thin','thin','thin','bead','bead','med'];
-    for(let i=0;i<count;i++){
-      let xf,tries=0;
-      do{xf=rand(0.025,0.975);tries++}while(tries<50&&drips.some(d=>Math.abs(d.xf-xf)<0.038));
-      const kind=plan[i]||'med';
-      const m=W<500?1.2:1;
-      let maxFrac,bodyR,tipR;
-      if(kind==='long'){ maxFrac=rand(.55,.88); bodyR=rand(9,14)*m; tipR=rand(13,19)*m; }
-      else if(kind==='med'){ maxFrac=rand(.28,.5); bodyR=rand(7,11)*m; tipR=rand(10,15)*m; }
-      else if(kind==='thin'){ maxFrac=rand(.35,.68); bodyR=rand(4,6.5)*m; tipR=rand(7.5,11)*m; }
-      else if(kind==='bead'){ maxFrac=rand(.07,.14); bodyR=rand(6,10)*m; tipR=rand(9,14)*m; }
-      else { maxFrac=rand(.12,.24); bodyR=rand(6,9)*m; tipR=rand(9,13)*m; }
-      drips.push({
-        xf,x:xf*W,kind,maxFrac,bodyR,tipR,
-        len: reduced ? H*maxFrac*rand(.75,.95) : H*maxFrac*rand(.28,.7),
-        tip: reduced ? tipR*rand(.8,1) : tipR*rand(.45,.8),
-        phase: reduced?'hold':(Math.random()<.5?'grow':(Math.random()<.35?'swell':'hold')),
-        t:rand(0,2.5), hold:rand(.35,3), growSpeed:rand(34,80),
-        retract:0, wobble:rand(0,Math.PI*2), wobbleSp:rand(.7,1.7),
-        lean:rand(-.32,.32), wet:rand(.5,1), poolNudge:rand(-4,12)
-      });
-    }
-    for(const d of drips){
-      if(d.phase==='swell'){ d.len=H*d.maxFrac; d.tip=d.tipR*rand(1.05,1.4); }
-    }
-    drops=[]; streaks=[];
-  }
-
-  function blob(ctx,x,y,r){
-    // shaded blood sphere: dark rim, deep mid, slightly lifted core
-    const g=ctx.createRadialGradient(x-r*0.28,y-r*0.32,r*0.05,x,y,r);
-    g.addColorStop(0,'#7a1818');
-    g.addColorStop(0.35,'#5a0808');
-    g.addColorStop(0.7,'#3a0000');
-    g.addColorStop(1,'rgba(18,0,0,0)');
-    ctx.fillStyle=g;
-    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
-  }
-
-  function paint(){
-    bctx.clearRect(0,0,W,H);
-    hctx.clearRect(0,0,W,H);
-
-    // --- top pool: overlapping shaded blobs for lumpy edge ---
-    const n=Math.max(22,(W/34)|0);
-    for(let i=0;i<n;i++){
-      const xf=i/(n-1);
-      const x=xf*W;
-      const breathe=Math.sin(xf*17+last*0.65)*5 + Math.sin(xf*6.5+last*0.3)*6;
-      const r=(20+Math.sin(xf*10)*9+Math.abs(breathe)*0.5)*(W<500?0.78:1);
-      const y=r*0.32+3+Math.max(0,breathe*0.35);
-      blob(bctx,x,y,r*1.2);
-      if(i%2===0) blob(bctx,x+4,y+r*0.4,r*0.7);
-    }
-    for(let x=0;x<W;x+=12) blob(bctx,x,4,14);
-
-    // --- smooth tapered runners + bulb tips (goo merges tip to body) ---
-    for(const d of drips){
-      const lean=d.lean*d.len*0.07;
-      const y0=8+d.poolNudge;
-      const tipX=d.x+lean, tipY=y0+d.len;
-      const topW=d.bodyR*1.35;
-      const midW=d.bodyR*0.95;
-      const bulb=d.tip;
-      const w1=Math.sin(d.wobble)*d.bodyR*0.2;
-      const w2=Math.sin(d.wobble+1.2)*d.bodyR*0.3;
-
-      // continuous body path
-      bctx.beginPath();
-      bctx.moveTo(d.x-topW, y0);
-      bctx.bezierCurveTo(
-        d.x-topW+w1, y0+d.len*0.2,
-        d.x-midW+w2, y0+d.len*0.55,
-        tipX-bulb*0.45, tipY-bulb*0.9
-      );
-      bctx.bezierCurveTo(
-        tipX-bulb*1.2, tipY-bulb*0.15,
-        tipX-bulb*1.05, tipY+bulb*0.95,
-        tipX, tipY+bulb*1.05
-      );
-      bctx.bezierCurveTo(
-        tipX+bulb*1.05, tipY+bulb*0.95,
-        tipX+bulb*1.2, tipY-bulb*0.15,
-        tipX+bulb*0.45, tipY-bulb*0.9
-      );
-      bctx.bezierCurveTo(
-        d.x+midW+w2*0.3, y0+d.len*0.55,
-        d.x+topW+w1*0.2, y0+d.len*0.2,
-        d.x+topW, y0
-      );
-      bctx.closePath();
-      const g=bctx.createLinearGradient(d.x-topW, y0, d.x+topW, tipY+bulb);
-      g.addColorStop(0,'#6b1010');
-      g.addColorStop(0.25,'#5a0808');
-      g.addColorStop(0.55,'#3f0303');
-      g.addColorStop(0.85,'#2a0000');
-      g.addColorStop(1,'#1a0000');
-      bctx.fillStyle=g;
-      bctx.fill();
-
-      // join blobs at top so goo welds runner into pool
-      blob(bctx, d.x, y0, topW*1.1);
-      // tip volume blob for gooey bulb
-      blob(bctx, tipX, tipY, bulb*1.15);
-      // a couple mid-runner blobs for slight thickness variation / goo organic feel
-      blob(bctx, d.x+lean*0.4+w1, y0+d.len*0.35, midW*0.85);
-      blob(bctx, tipX-lean*0.1+w2*0.5, y0+d.len*0.7, Math.max(midW, bulb*0.55));
-    }
-
-    for(const p of drops){
-      for(const t of p.trail) blob(bctx,t.x,t.y,t.r*0.9);
-      blob(bctx,p.x,p.y,p.r*1.2);
-    }
-    for(const s of streaks){
-      const a=clamp(s.life,0,1);
-      if(a<.05) continue;
-      bctx.globalAlpha=a;
-      if(s.splat){
-        blob(bctx,s.x,s.y,s.w*3);
-        blob(bctx,s.x-s.w*2.2,s.y+3,s.w);
-        blob(bctx,s.x+s.w*2.4,s.y+4,s.w*0.85);
-      } else {
-        for(let i=0;i<4;i++) blob(bctx,s.x,s.y+i*s.len/4,s.w*(1-i*0.12));
-      }
-      bctx.globalAlpha=1;
-    }
-
-    // --- specular highlights (no goo) ---
-    for(const d of drips){
-      if(d.len<12) continue;
-      const lean=d.lean*d.len*0.07;
-      const tipX=d.x+lean, tipY=8+d.poolNudge+d.len;
-      hctx.strokeStyle=`rgba(255,175,155,${0.4+d.wet*0.4})`;
-      hctx.lineWidth=Math.max(1.6,d.bodyR*0.38);
-      hctx.lineCap='round';
-      hctx.beginPath();
-      hctx.moveTo(d.x-d.bodyR*0.38, 11+d.poolNudge);
-      hctx.bezierCurveTo(
-        d.x-d.bodyR*0.3+Math.sin(d.wobble)*2, tipY*0.38,
-        tipX-d.tip*0.4, tipY*0.72,
-        tipX-d.tip*0.42, tipY-d.tip*0.65
-      );
-      hctx.stroke();
-      const g=hctx.createRadialGradient(tipX-d.tip*0.4,tipY-d.tip*0.48,0,tipX,tipY,d.tip*1.25);
-      g.addColorStop(0,`rgba(255,220,205,${0.7+d.wet*0.25})`);
-      g.addColorStop(0.3,'rgba(220,95,75,0.45)');
-      g.addColorStop(1,'rgba(40,0,0,0)');
-      hctx.fillStyle=g;
-      hctx.beginPath(); hctx.arc(tipX,tipY,d.tip*1.15,0,Math.PI*2); hctx.fill();
-      hctx.fillStyle=`rgba(255,236,228,${0.55+d.wet*0.3})`;
-      hctx.beginPath();
-      hctx.ellipse(tipX-d.tip*0.4, tipY-d.tip*0.45, d.tip*0.22, d.tip*0.13, -0.5, 0, Math.PI*2);
-      hctx.fill();
-    }
-    for(const p of drops){
-      const g=hctx.createRadialGradient(p.x-p.r*0.35,p.y-p.r*0.4,0,p.x,p.y,p.r);
-      g.addColorStop(0,'rgba(255,215,195,0.75)');
-      g.addColorStop(0.4,'rgba(180,50,40,0.25)');
-      g.addColorStop(1,'rgba(0,0,0,0)');
-      hctx.fillStyle=g;
-      hctx.beginPath(); hctx.arc(p.x,p.y,p.r,0,Math.PI*2); hctx.fill();
-    }
-    hctx.strokeStyle='rgba(215,105,95,0.32)';
-    hctx.lineWidth=2;
-    hctx.beginPath();
-    for(let i=0;i<=40;i++){
-      const x=(i/40)*W;
-      const y=9+Math.sin(x*0.04+last)*3.2+Math.sin(x*0.1)*2.2;
-      if(i===0) hctx.moveTo(x,y); else hctx.lineTo(x,y);
-    }
-    hctx.stroke();
-  }
-
-  function update(dt){
-    if(reduced) return;
-    for(const d of drips){
-      d.wobble+=d.wobbleSp*dt;
-      d.t+=dt;
-      const maxLen=H*d.maxFrac;
-      if(d.phase==='hold'){
-        d.tip=lerp(d.tip,d.tipR*0.5,dt*1.2);
-        if(d.t>=d.hold){d.phase='grow';d.t=0}
-      } else if(d.phase==='grow'){
-        d.len+=d.growSpeed*dt*(0.45+0.55*clamp(d.len/Math.max(20,maxLen),0,1));
-        d.tip=Math.min(d.tipR*0.85,d.tip+dt*2);
-        if(d.len>=maxLen){d.len=maxLen;d.phase='swell';d.t=0}
-      } else if(d.phase==='swell'){
-        d.tip=Math.min(d.tipR*1.55,d.tip+dt*3.4);
-        d.len+=dt*8;
-        if(d.tip>=d.tipR*1.28 || d.t>1.0){
-          const lean=d.lean*d.len*0.07;
-          drops.push({
-            x:d.x+lean, y:8+d.poolNudge+d.len,
-            r:d.tip*0.55, vy:rand(40,95), vx:rand(-14,14)+d.lean*25,
-            trail:[], age:0
-          });
-          d.tip*=0.42; d.retract=d.len*rand(0.15,0.32);
-          d.phase='retract'; d.t=0;
-        }
-      } else if(d.phase==='retract'){
-        const step=Math.min(d.retract,95*dt);
-        d.len=Math.max(10,d.len-step); d.retract-=step;
-        d.tip=Math.max(d.tipR*0.35,d.tip-dt*3.5);
-        if(d.retract<=0){
-          d.phase='hold'; d.t=0; d.hold=rand(0.7,4.5);
-          if(Math.random()<.28) d.maxFrac=clamp(d.maxFrac*rand(0.94,1.1),0.07,0.9);
-        }
-      }
-    }
-    for(let i=drops.length-1;i>=0;i--){
-      const p=drops[i];
-      p.age+=dt; p.vy+=1150*dt; p.vx*=(1-0.7*dt);
-      p.x+=p.vx*dt; p.y+=p.vy*dt;
-      p.trail.push({x:p.x,y:p.y,r:p.r*0.85}); if(p.trail.length>5)p.trail.shift();
-      if(p.y>H+40){
-        if(Math.random()<.55) streaks.push({x:p.x,y:H-rand(2,16),len:rand(14,42),w:rand(1.4,2.8),life:1,splat:false});
-        drops.splice(i,1);
-      } else if(p.y>H*0.82 && p.vy>480 && Math.random()<.03){
-        streaks.push({x:p.x,y:p.y,len:rand(8,18),w:p.r,life:1,splat:true});
-      }
-    }
-    for(let i=streaks.length-1;i>=0;i--){
-      streaks[i].life-=dt*(streaks[i].splat?2.2:0.7);
-      if(streaks[i].life<=0) streaks.splice(i,1);
-    }
-  }
-
-  function frame(ts){
-    if(document.hidden){raf=0;return}
-    const t=ts*0.001;
-    const dt=Math.min(0.045, last?t-last:0.016);
-    last=t;
-    update(dt);
-    paint();
-    raf=requestAnimationFrame(frame);
-  }
-  function start(){ if(raf||document.hidden) return; last=0; raf=requestAnimationFrame(frame); }
-
-  resize();
-  paint();
-  if(!reduced) start();
-  addEventListener('resize',()=>{resize();paint()},{passive:true});
-  document.addEventListener('visibilitychange',()=>{
-    if(document.hidden){ if(raf) cancelAnimationFrame(raf); raf=0; }
-    else if(!reduced) start();
+  // lazy-assign creep sources so they don't compete with hero sheet
+  root.querySelectorAll('.creep').forEach(el=>{
+    const s=el.getAttribute('data-src');
+    if(s) el.src=s;
+    if(!reduced) setTimeout(()=>el.classList.add('on'), 4200+Math.random()*800);
   });
+  if(reduced){
+    root.querySelectorAll('.sheet').forEach(el=>el.classList.remove('pour'));
+    return;
+  }
+  // falling drops from photoreal tip crops
+  const drops=['/wellwellwell/blood-drop-1.webp','/wellwellwell/blood-drop-3.webp'];
+  const slots=[18,34,52,68,82];
+  function spawnDrop(){
+    if(document.hidden) return;
+    const img=document.createElement('img');
+    img.className='fall';
+    img.alt='';
+    img.src=drops[Math.random()*drops.length|0];
+    const left=slots[Math.random()*slots.length|0] + (Math.random()*4-2);
+    img.style.left=left+'%';
+    img.style.top=(38+Math.random()*18)+'%';
+    img.style.setProperty('--fd',(2.2+Math.random()*1.4)+'s');
+    root.appendChild(img);
+    void img.offsetWidth;
+    img.classList.add('go');
+    // faint smear near start
+    if(Math.random()<.55){
+      const sm=document.createElement('span');
+      sm.className='smear';
+      sm.style.left='calc('+left+'% + 10px)';
+      sm.style.top=img.style.top;
+      root.appendChild(sm);
+      void sm.offsetWidth; sm.classList.add('go');
+      setTimeout(()=>sm.remove(),1600);
+    }
+    setTimeout(()=>img.remove(),4200);
+  }
+  function loopDrops(){
+    setTimeout(()=>{spawnDrop(); loopDrops()}, 2800+Math.random()*5200);
+  }
+  setTimeout(loopDrops, 5200);
 })();
 </script>
 </body>
