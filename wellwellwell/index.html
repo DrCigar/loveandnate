@@ -123,80 +123,38 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 @media (prefers-reduced-motion:reduce){.track,#static,.lw .tear{display:none!important}.lw .ch{opacity:.45}.label::after{display:none}}
 
 /* ===== BLOOD DRIP ===== */
-.blood{position:fixed;top:0;left:0;right:0;height:clamp(100px,24vw,240px);z-index:11;pointer-events:none;overflow:visible;opacity:.95}
-.blood svg{width:100%;height:100%;display:block;overflow:visible}
-.blood .pool,.blood .drip{fill:#6e0c0c}
-.blood .hi{fill:#a02020;opacity:.45}
-.blood .drop{fill:#5c0808;opacity:0}
-.blood .grow{transform-box:fill-box;transform-origin:top center;animation:dripGrow var(--dur,7s) ease-in-out var(--delay,0s) infinite}
-.blood .fall{animation:dropFall var(--fdur,4.5s) ease-in var(--fdelay,1.5s) infinite}
-@keyframes dripGrow{0%,100%{transform:scaleY(1)}45%{transform:scaleY(1.18)}70%{transform:scaleY(1.05)}}
-@keyframes dropFall{0%,12%{opacity:0;transform:translateY(0) scale(.6)}14%{opacity:.85;transform:translateY(0) scale(1)}55%{opacity:.55;transform:translateY(min(48vh,420px)) scale(.7)}70%,100%{opacity:0;transform:translateY(min(62vh,520px)) scale(.35)}}
+.blood{position:fixed;top:0;left:0;right:0;height:clamp(180px,48vh,480px);z-index:11;pointer-events:none;overflow:hidden}
+.blood canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.blood #bloodBase{opacity:.98;filter:url(#bloodGoo)}
+.blood #bloodHi{opacity:1;mix-blend-mode:screen;filter:blur(.15px)}
 .g .blood{filter:url(#bloodRgb);transform:translateX(var(--jx,0))}
-@media (max-width:560px){.blood{height:clamp(80px,30vw,160px)}}
-@media (prefers-reduced-motion:reduce){.blood .grow,.blood .fall{animation:none!important}.blood .drop{opacity:0!important}}
+@media (max-width:560px){.blood{height:clamp(120px,32vh,280px)}}
+@media (prefers-reduced-motion:reduce){.blood #bloodHi{opacity:.5}}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="onlyR"><feColorMatrix values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter><filter id="onlyC"><feColorMatrix values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<filter id="onlyR"><feColorMatrix values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
+<filter id="onlyC"><feColorMatrix values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
+<filter id="bloodGoo" x="-10%" y="-25%" width="120%" height="160%">
+  <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
+  <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="g"/>
+  <feComposite in="SourceGraphic" in2="g" operator="atop"/>
+</filter>
+<filter id="bloodRgb" x="-8%" y="-8%" width="116%" height="116%">
+  <feOffset in="SourceGraphic" dx="2" dy="0" result="r"/>
+  <feOffset in="SourceGraphic" dx="-2" dy="0" result="c"/>
+  <feColorMatrix in="r" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="R"/>
+  <feColorMatrix in="c" values="0 0 0 0 0  0 .55 0 0 0  0 0 .75 0 0  0 0 0 1 0" result="C"/>
+  <feBlend in="SourceGraphic" in2="R" mode="screen" result="m"/>
+  <feBlend in="m" in2="C" mode="screen"/>
+</filter>
+</svg>
 <div class="grain" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div><div class="track" aria-hidden="true"></div><canvas id="static" width="160" height="90" aria-hidden="true"></canvas><div class="crt" aria-hidden="true"></div>
 
 <div class="blood" aria-hidden="true">
-<svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="goo" x="-10%" y="-20%" width="120%" height="160%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
-      <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" result="g"/>
-      <feComposite in="SourceGraphic" in2="g" operator="atop"/>
-    </filter>
-    <filter id="bloodRgb" x="-5%" y="-5%" width="110%" height="110%">
-      <feOffset in="SourceGraphic" dx="2" dy="0" result="r"/>
-      <feOffset in="SourceGraphic" dx="-2" dy="0" result="c"/>
-      <feColorMatrix in="r" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="R"/>
-      <feColorMatrix in="c" values="0 0 0 0 0  0 .6 0 0 0  0 0 .8 0 0  0 0 0 1 0" result="C"/>
-      <feBlend in="SourceGraphic" in2="R" mode="screen" result="m"/>
-      <feBlend in="m" in2="C" mode="screen"/>
-    </filter>
-    <linearGradient id="wet" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#8a1212"/><stop offset=".45" stop-color="#5c0808"/><stop offset="1" stop-color="#3a0404"/>
-    </linearGradient>
-  </defs>
-  <g filter="url(#goo)" fill="url(#wet)">
-    <!-- pooled top edge, irregular -->
-    <path class="pool" d="M0 0h1440v22
-      C1380 34 1340 18 1288 38 C1230 62 1190 28 1140 48 C1080 72 1040 30 980 52 C920 74 870 34 820 50
-      C760 68 720 36 670 54 C610 76 560 32 500 48 C440 66 400 30 350 46 C290 66 250 34 200 50 C140 68 90 30 50 42 C20 48 8 30 0 28Z"/>
-    <!-- drips of varying length/width; keep left of OSD sparse/short -->
-    <ellipse class="drip grow" style="--dur:8.5s;--delay:0s" cx="72" cy="48" rx="5" ry="18"/>
-    <ellipse class="drip grow" style="--dur:6.2s;--delay:1.2s" cx="168" cy="62" rx="7" ry="34"/>
-    <ellipse class="drip grow" style="--dur:9s;--delay:.4s" cx="255" cy="78" rx="9" ry="52"/>
-    <ellipse class="drip grow" style="--dur:7.4s;--delay:2.1s" cx="340" cy="58" rx="6" ry="28"/>
-    <ellipse class="drip grow" style="--dur:5.8s;--delay:.8s" cx="445" cy="95" rx="11" ry="70"/>
-    <ellipse class="drip grow" style="--dur:8.1s;--delay:1.6s" cx="540" cy="68" rx="7" ry="38"/>
-    <ellipse class="drip grow" style="--dur:6.6s;--delay:2.8s" cx="640" cy="110" rx="10" ry="86"/>
-    <ellipse class="drip grow" style="--dur:9.4s;--delay:.2s" cx="735" cy="72" rx="8" ry="44"/>
-    <ellipse class="drip grow" style="--dur:7.1s;--delay:1.9s" cx="850" cy="88" rx="9" ry="58"/>
-    <ellipse class="drip grow" style="--dur:5.5s;--delay:3.1s" cx="960" cy="120" rx="12" ry="98"/>
-    <ellipse class="drip grow" style="--dur:8.8s;--delay:.6s" cx="1065" cy="64" rx="7" ry="32"/>
-    <ellipse class="drip grow" style="--dur:6.9s;--delay:2.4s" cx="1160" cy="100" rx="10" ry="76"/>
-    <ellipse class="drip grow" style="--dur:7.7s;--delay:1.1s" cx="1265" cy="70" rx="8" ry="40"/>
-    <ellipse class="drip grow" style="--dur:9.2s;--delay:3.4s" cx="1360" cy="82" rx="9" ry="50"/>
-    <!-- wet highlights on a few drips -->
-    <ellipse class="hi" cx="255" cy="55" rx="2.5" ry="16"/>
-    <ellipse class="hi" cx="445" cy="68" rx="3" ry="22"/>
-    <ellipse class="hi" cx="640" cy="78" rx="2.8" ry="28"/>
-    <ellipse class="hi" cx="960" cy="85" rx="3.2" ry="30"/>
-    <ellipse class="hi" cx="1160" cy="72" rx="2.6" ry="24"/>
-  </g>
-  <!-- falling droplets (outside goo so they stay discrete) -->
-  <ellipse class="drop fall" style="--fdur:5.2s;--fdelay:2.4s" cx="255" cy="128" rx="4" ry="6"/>
-  <ellipse class="drop fall" style="--fdur:4.6s;--fdelay:5.8s" cx="445" cy="162" rx="5" ry="7"/>
-  <ellipse class="drop fall" style="--fdur:5.8s;--fdelay:1.1s" cx="640" cy="192" rx="4.5" ry="6.5"/>
-  <ellipse class="drop fall" style="--fdur:4.3s;--fdelay:7.2s" cx="850" cy="142" rx="3.5" ry="5.5"/>
-  <ellipse class="drop fall" style="--fdur:5.5s;--fdelay:3.6s" cx="960" cy="210" rx="5" ry="7.5"/>
-  <ellipse class="drop fall" style="--fdur:4.9s;--fdelay:6.4s" cx="1160" cy="172" rx="4" ry="6"/>
-  <ellipse class="drop fall" style="--fdur:5.1s;--fdelay:8.8s" cx="1360" cy="128" rx="3.8" ry="5.8"/>
-</svg>
+<canvas id="bloodBase"></canvas>
+<canvas id="bloodHi"></canvas>
 </div>
 <div class="osd tl" aria-hidden="true">▶ PLAY</div><div class="osd tc" aria-hidden="true" id="tc">SP 00:00:00</div><div class="osd br" aria-hidden="true">OCT 2027</div>
 <div class="vignette" aria-hidden="true"></div>
@@ -277,6 +235,286 @@ const sb=document.querySelector('.sound'),au=document.getElementById('amb');au.v
 sb.onclick=()=>{if(au.paused){noise(350,.12);au.play();sb.textContent='SOUND ON';sb.setAttribute('aria-pressed','true')}else{au.pause();sb.textContent='SOUND OFF';sb.setAttribute('aria-pressed','false')}};
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== BLOOD SIM ===== */
+(function(){
+  const base=document.getElementById('bloodBase'), hi=document.getElementById('bloodHi');
+  if(!base||!hi) return;
+  const bctx=base.getContext('2d');
+  const hctx=hi.getContext('2d');
+  const reduced=RM;
+  let W=0,H=0,dpr=1,raf=0,last=0;
+  let drips=[], drops=[], streaks=[];
+
+  const rand=(a,b)=>a+Math.random()*(b-a);
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const lerp=(a,b,t)=>a+(b-a)*t;
+
+  function resize(){
+    const wrap=base.parentElement.getBoundingClientRect();
+    dpr=Math.min(devicePixelRatio||1, 2);
+    W=Math.max(1,wrap.width); H=Math.max(1,wrap.height);
+    for(const c of [base,hi]){
+      c.width=(W*dpr)|0; c.height=(H*dpr)|0;
+      c.style.width=W+'px'; c.style.height=H+'px';
+    }
+    bctx.setTransform(dpr,0,0,dpr,0,0);
+    hctx.setTransform(dpr,0,0,dpr,0,0);
+    if(!drips.length) seed(); else for(const d of drips) d.x=d.xf*W;
+  }
+
+  function seed(){
+    drips=[];
+    const count=W<500?11:16;
+    const plan=W<500
+      ?['long','long','med','med','short','short','thin','thin','bead','bead','med']
+      :['long','long','long','med','med','med','med','short','short','short','thin','thin','thin','bead','bead','med'];
+    for(let i=0;i<count;i++){
+      let xf,tries=0;
+      do{xf=rand(0.025,0.975);tries++}while(tries<50&&drips.some(d=>Math.abs(d.xf-xf)<0.038));
+      const kind=plan[i]||'med';
+      const m=W<500?1.2:1;
+      let maxFrac,bodyR,tipR;
+      if(kind==='long'){ maxFrac=rand(.55,.88); bodyR=rand(9,14)*m; tipR=rand(13,19)*m; }
+      else if(kind==='med'){ maxFrac=rand(.28,.5); bodyR=rand(7,11)*m; tipR=rand(10,15)*m; }
+      else if(kind==='thin'){ maxFrac=rand(.35,.68); bodyR=rand(4,6.5)*m; tipR=rand(7.5,11)*m; }
+      else if(kind==='bead'){ maxFrac=rand(.07,.14); bodyR=rand(6,10)*m; tipR=rand(9,14)*m; }
+      else { maxFrac=rand(.12,.24); bodyR=rand(6,9)*m; tipR=rand(9,13)*m; }
+      drips.push({
+        xf,x:xf*W,kind,maxFrac,bodyR,tipR,
+        len: reduced ? H*maxFrac*rand(.75,.95) : H*maxFrac*rand(.28,.7),
+        tip: reduced ? tipR*rand(.8,1) : tipR*rand(.45,.8),
+        phase: reduced?'hold':(Math.random()<.5?'grow':(Math.random()<.35?'swell':'hold')),
+        t:rand(0,2.5), hold:rand(.35,3), growSpeed:rand(34,80),
+        retract:0, wobble:rand(0,Math.PI*2), wobbleSp:rand(.7,1.7),
+        lean:rand(-.32,.32), wet:rand(.5,1), poolNudge:rand(-4,12)
+      });
+    }
+    for(const d of drips){
+      if(d.phase==='swell'){ d.len=H*d.maxFrac; d.tip=d.tipR*rand(1.05,1.4); }
+    }
+    drops=[]; streaks=[];
+  }
+
+  function blob(ctx,x,y,r){
+    // shaded blood sphere: dark rim, deep mid, slightly lifted core
+    const g=ctx.createRadialGradient(x-r*0.28,y-r*0.32,r*0.05,x,y,r);
+    g.addColorStop(0,'#7a1818');
+    g.addColorStop(0.35,'#5a0808');
+    g.addColorStop(0.7,'#3a0000');
+    g.addColorStop(1,'rgba(18,0,0,0)');
+    ctx.fillStyle=g;
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+  }
+
+  function paint(){
+    bctx.clearRect(0,0,W,H);
+    hctx.clearRect(0,0,W,H);
+
+    // --- top pool: overlapping shaded blobs for lumpy edge ---
+    const n=Math.max(22,(W/34)|0);
+    for(let i=0;i<n;i++){
+      const xf=i/(n-1);
+      const x=xf*W;
+      const breathe=Math.sin(xf*17+last*0.65)*5 + Math.sin(xf*6.5+last*0.3)*6;
+      const r=(20+Math.sin(xf*10)*9+Math.abs(breathe)*0.5)*(W<500?0.78:1);
+      const y=r*0.32+3+Math.max(0,breathe*0.35);
+      blob(bctx,x,y,r*1.2);
+      if(i%2===0) blob(bctx,x+4,y+r*0.4,r*0.7);
+    }
+    for(let x=0;x<W;x+=12) blob(bctx,x,4,14);
+
+    // --- smooth tapered runners + bulb tips (goo merges tip to body) ---
+    for(const d of drips){
+      const lean=d.lean*d.len*0.07;
+      const y0=8+d.poolNudge;
+      const tipX=d.x+lean, tipY=y0+d.len;
+      const topW=d.bodyR*1.35;
+      const midW=d.bodyR*0.95;
+      const bulb=d.tip;
+      const w1=Math.sin(d.wobble)*d.bodyR*0.2;
+      const w2=Math.sin(d.wobble+1.2)*d.bodyR*0.3;
+
+      // continuous body path
+      bctx.beginPath();
+      bctx.moveTo(d.x-topW, y0);
+      bctx.bezierCurveTo(
+        d.x-topW+w1, y0+d.len*0.2,
+        d.x-midW+w2, y0+d.len*0.55,
+        tipX-bulb*0.45, tipY-bulb*0.9
+      );
+      bctx.bezierCurveTo(
+        tipX-bulb*1.2, tipY-bulb*0.15,
+        tipX-bulb*1.05, tipY+bulb*0.95,
+        tipX, tipY+bulb*1.05
+      );
+      bctx.bezierCurveTo(
+        tipX+bulb*1.05, tipY+bulb*0.95,
+        tipX+bulb*1.2, tipY-bulb*0.15,
+        tipX+bulb*0.45, tipY-bulb*0.9
+      );
+      bctx.bezierCurveTo(
+        d.x+midW+w2*0.3, y0+d.len*0.55,
+        d.x+topW+w1*0.2, y0+d.len*0.2,
+        d.x+topW, y0
+      );
+      bctx.closePath();
+      const g=bctx.createLinearGradient(d.x-topW, y0, d.x+topW, tipY+bulb);
+      g.addColorStop(0,'#6b1010');
+      g.addColorStop(0.25,'#5a0808');
+      g.addColorStop(0.55,'#3f0303');
+      g.addColorStop(0.85,'#2a0000');
+      g.addColorStop(1,'#1a0000');
+      bctx.fillStyle=g;
+      bctx.fill();
+
+      // join blobs at top so goo welds runner into pool
+      blob(bctx, d.x, y0, topW*1.1);
+      // tip volume blob for gooey bulb
+      blob(bctx, tipX, tipY, bulb*1.15);
+      // a couple mid-runner blobs for slight thickness variation / goo organic feel
+      blob(bctx, d.x+lean*0.4+w1, y0+d.len*0.35, midW*0.85);
+      blob(bctx, tipX-lean*0.1+w2*0.5, y0+d.len*0.7, Math.max(midW, bulb*0.55));
+    }
+
+    for(const p of drops){
+      for(const t of p.trail) blob(bctx,t.x,t.y,t.r*0.9);
+      blob(bctx,p.x,p.y,p.r*1.2);
+    }
+    for(const s of streaks){
+      const a=clamp(s.life,0,1);
+      if(a<.05) continue;
+      bctx.globalAlpha=a;
+      if(s.splat){
+        blob(bctx,s.x,s.y,s.w*3);
+        blob(bctx,s.x-s.w*2.2,s.y+3,s.w);
+        blob(bctx,s.x+s.w*2.4,s.y+4,s.w*0.85);
+      } else {
+        for(let i=0;i<4;i++) blob(bctx,s.x,s.y+i*s.len/4,s.w*(1-i*0.12));
+      }
+      bctx.globalAlpha=1;
+    }
+
+    // --- specular highlights (no goo) ---
+    for(const d of drips){
+      if(d.len<12) continue;
+      const lean=d.lean*d.len*0.07;
+      const tipX=d.x+lean, tipY=8+d.poolNudge+d.len;
+      hctx.strokeStyle=`rgba(255,175,155,${0.4+d.wet*0.4})`;
+      hctx.lineWidth=Math.max(1.6,d.bodyR*0.38);
+      hctx.lineCap='round';
+      hctx.beginPath();
+      hctx.moveTo(d.x-d.bodyR*0.38, 11+d.poolNudge);
+      hctx.bezierCurveTo(
+        d.x-d.bodyR*0.3+Math.sin(d.wobble)*2, tipY*0.38,
+        tipX-d.tip*0.4, tipY*0.72,
+        tipX-d.tip*0.42, tipY-d.tip*0.65
+      );
+      hctx.stroke();
+      const g=hctx.createRadialGradient(tipX-d.tip*0.4,tipY-d.tip*0.48,0,tipX,tipY,d.tip*1.25);
+      g.addColorStop(0,`rgba(255,220,205,${0.7+d.wet*0.25})`);
+      g.addColorStop(0.3,'rgba(220,95,75,0.45)');
+      g.addColorStop(1,'rgba(40,0,0,0)');
+      hctx.fillStyle=g;
+      hctx.beginPath(); hctx.arc(tipX,tipY,d.tip*1.15,0,Math.PI*2); hctx.fill();
+      hctx.fillStyle=`rgba(255,236,228,${0.55+d.wet*0.3})`;
+      hctx.beginPath();
+      hctx.ellipse(tipX-d.tip*0.4, tipY-d.tip*0.45, d.tip*0.22, d.tip*0.13, -0.5, 0, Math.PI*2);
+      hctx.fill();
+    }
+    for(const p of drops){
+      const g=hctx.createRadialGradient(p.x-p.r*0.35,p.y-p.r*0.4,0,p.x,p.y,p.r);
+      g.addColorStop(0,'rgba(255,215,195,0.75)');
+      g.addColorStop(0.4,'rgba(180,50,40,0.25)');
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      hctx.fillStyle=g;
+      hctx.beginPath(); hctx.arc(p.x,p.y,p.r,0,Math.PI*2); hctx.fill();
+    }
+    hctx.strokeStyle='rgba(215,105,95,0.32)';
+    hctx.lineWidth=2;
+    hctx.beginPath();
+    for(let i=0;i<=40;i++){
+      const x=(i/40)*W;
+      const y=9+Math.sin(x*0.04+last)*3.2+Math.sin(x*0.1)*2.2;
+      if(i===0) hctx.moveTo(x,y); else hctx.lineTo(x,y);
+    }
+    hctx.stroke();
+  }
+
+  function update(dt){
+    if(reduced) return;
+    for(const d of drips){
+      d.wobble+=d.wobbleSp*dt;
+      d.t+=dt;
+      const maxLen=H*d.maxFrac;
+      if(d.phase==='hold'){
+        d.tip=lerp(d.tip,d.tipR*0.5,dt*1.2);
+        if(d.t>=d.hold){d.phase='grow';d.t=0}
+      } else if(d.phase==='grow'){
+        d.len+=d.growSpeed*dt*(0.45+0.55*clamp(d.len/Math.max(20,maxLen),0,1));
+        d.tip=Math.min(d.tipR*0.85,d.tip+dt*2);
+        if(d.len>=maxLen){d.len=maxLen;d.phase='swell';d.t=0}
+      } else if(d.phase==='swell'){
+        d.tip=Math.min(d.tipR*1.55,d.tip+dt*3.4);
+        d.len+=dt*8;
+        if(d.tip>=d.tipR*1.28 || d.t>1.0){
+          const lean=d.lean*d.len*0.07;
+          drops.push({
+            x:d.x+lean, y:8+d.poolNudge+d.len,
+            r:d.tip*0.55, vy:rand(40,95), vx:rand(-14,14)+d.lean*25,
+            trail:[], age:0
+          });
+          d.tip*=0.42; d.retract=d.len*rand(0.15,0.32);
+          d.phase='retract'; d.t=0;
+        }
+      } else if(d.phase==='retract'){
+        const step=Math.min(d.retract,95*dt);
+        d.len=Math.max(10,d.len-step); d.retract-=step;
+        d.tip=Math.max(d.tipR*0.35,d.tip-dt*3.5);
+        if(d.retract<=0){
+          d.phase='hold'; d.t=0; d.hold=rand(0.7,4.5);
+          if(Math.random()<.28) d.maxFrac=clamp(d.maxFrac*rand(0.94,1.1),0.07,0.9);
+        }
+      }
+    }
+    for(let i=drops.length-1;i>=0;i--){
+      const p=drops[i];
+      p.age+=dt; p.vy+=1150*dt; p.vx*=(1-0.7*dt);
+      p.x+=p.vx*dt; p.y+=p.vy*dt;
+      p.trail.push({x:p.x,y:p.y,r:p.r*0.85}); if(p.trail.length>5)p.trail.shift();
+      if(p.y>H+40){
+        if(Math.random()<.55) streaks.push({x:p.x,y:H-rand(2,16),len:rand(14,42),w:rand(1.4,2.8),life:1,splat:false});
+        drops.splice(i,1);
+      } else if(p.y>H*0.82 && p.vy>480 && Math.random()<.03){
+        streaks.push({x:p.x,y:p.y,len:rand(8,18),w:p.r,life:1,splat:true});
+      }
+    }
+    for(let i=streaks.length-1;i>=0;i--){
+      streaks[i].life-=dt*(streaks[i].splat?2.2:0.7);
+      if(streaks[i].life<=0) streaks.splice(i,1);
+    }
+  }
+
+  function frame(ts){
+    if(document.hidden){raf=0;return}
+    const t=ts*0.001;
+    const dt=Math.min(0.045, last?t-last:0.016);
+    last=t;
+    update(dt);
+    paint();
+    raf=requestAnimationFrame(frame);
+  }
+  function start(){ if(raf||document.hidden) return; last=0; raf=requestAnimationFrame(frame); }
+
+  resize();
+  paint();
+  if(!reduced) start();
+  addEventListener('resize',()=>{resize();paint()},{passive:true});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){ if(raf) cancelAnimationFrame(raf); raf=0; }
+    else if(!reduced) start();
+  });
+})();
 </script>
 </body>
 </html>
