@@ -30,14 +30,15 @@
 body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:1.15rem 1.75rem;min-height:4.75rem;background:linear-gradient(to bottom,rgba(5,5,6,.92),transparent);pointer-events:none}
-.nav-left{position:relative;z-index:2;max-width:min(46vw,380px)}
-.nav-emblem{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:76px;width:auto;display:block;opacity:1;z-index:1;pointer-events:none}
-nav .links{position:relative;z-index:2;display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.nav-left{position:relative;z-index:2}
+.nav-lockup{display:flex;align-items:center;gap:.7rem;max-width:min(72vw,520px)}
+.nav-emblem{position:static;transform:none;height:68px;width:auto;display:block;flex:0 0 auto;opacity:1}
+.nav-lockup-text{display:flex;flex-direction:column;justify-content:center;min-width:0;gap:.12rem}
 .mono-mark{display:none!important}
 nav *{pointer-events:auto}
-.wordmark{height:50px;width:auto;max-width:min(46vw,380px);display:block;object-fit:contain;object-position:left center}
-.cred{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:.4rem;opacity:.75}
-nav .links{display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.wordmark{height:46px;width:auto;max-width:min(48vw,340px);display:block;object-fit:contain;object-position:left center}
+.cred{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:0;opacity:.75;line-height:1.2}
+nav .links{position:relative;z-index:2;display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:7.5rem 2rem 3.5rem;overflow:hidden}
 .stars{position:absolute;inset:0;z-index:0;pointer-events:none}
 .stars canvas{width:100%;height:100%;display:block;opacity:.7}
@@ -92,9 +93,10 @@ footer a:hover{color:var(--accent)}
 .panel.music .cred-line{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem;opacity:.9}
 .panel.apps{padding:0;min-height:28rem;justify-content:flex-end}
 .panel.apps .media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
-.panel.apps .media img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
-.panel.apps .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,.94) 0%,rgba(5,5,6,.55) 42%,rgba(5,5,6,.28) 100%);pointer-events:none}
+.panel.apps .media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.panel.apps .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#050506 0%,#050506 42%,rgba(5,5,6,.85) 55%,rgba(5,5,6,.25) 70%,transparent 100%);pointer-events:none}
 .panel.apps .inner{position:relative;z-index:1;padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:28rem}
+.panel.apps .num{position:static;top:auto;left:auto;margin-bottom:.55rem}
 
 .about{display:grid;grid-template-columns:160px 1fr;gap:2.5rem;align-items:center;max-width:980px}
 .about .mascot{width:140px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.6))}
@@ -122,12 +124,11 @@ footer a:hover{color:var(--accent)}
   .panels{grid-template-columns:1fr}
   .panel{border-left:0;border-top:1px solid var(--line);min-height:18rem}
   nav .links{display:none}
-  .wordmark{height:34px;max-width:min(34vw,132px)}
-  .nav-emblem{height:56px}
+  .nav-lockup{gap:.5rem;max-width:calc(100vw - 2.5rem)}
+  .wordmark{height:30px;max-width:min(52vw,200px)}
+  .nav-emblem{height:48px}
   nav{min-height:3.75rem;padding:0.85rem 1.25rem}
-  .nav-left{max-width:min(38vw,150px)}
   .cred{display:none}
-  .nav-left{max-width:45vw}
   nav,footer,.about{padding-left:1.25rem;padding-right:1.25rem}
   .hero-figure{min-height:42vh}
 }
@@ -136,10 +137,14 @@ footer a:hover{color:var(--accent)}
 <body>
 <nav>
   <div class="nav-left">
-    <a href="/studio"><img class="wordmark" src="/studio/assets/lan-wordmark.webp" alt="LOVEANDNATE" width="320" height="58"></a>
-    <div class="cred">WORLD RECORD HOLDER</div>
+    <a class="nav-lockup" href="/studio">
+      <img class="nav-emblem" src="/studio/assets/lan-monogram.webp" alt="" width="128" height="122">
+      <span class="nav-lockup-text">
+        <img class="wordmark" src="/studio/assets/lan-wordmark.webp" alt="LOVEANDNATE" width="320" height="58">
+        <span class="cred">WORLD RECORD HOLDER</span>
+      </span>
+    </a>
   </div>
-  <img class="nav-emblem" src="/studio/assets/lan-monogram.webp" alt="" width="128" height="122">
   <div class="links"><span>Music</span><span>Books</span><span>Apps</span><span>Movies</span></div>
 </nav>
 
@@ -185,7 +190,7 @@ footer a:hover{color:var(--accent)}
   </article>
   <article class="panel apps">
     <div class="media">
-      <img src="/studio/assets/innerpool.webp" alt="Innerpool app" width="1080" height="1844" loading="lazy">
+      <img src="/studio/assets/innerpool.webp" alt="Innerpool app" width="1080" height="1725" loading="lazy">
     </div>
     <div class="inner">
       <span class="num">03 / APPS</span>
