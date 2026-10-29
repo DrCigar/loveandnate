@@ -29,15 +29,17 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:1.15rem 1.75rem;min-height:4.75rem;background:linear-gradient(to bottom,rgba(5,5,6,.92),transparent);pointer-events:none}
+nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:1.15rem 1.75rem;min-height:4.75rem;background:#000;pointer-events:none}
 .nav-left{position:relative;z-index:2}
 .nav-lockup{display:flex;align-items:center;gap:.7rem;max-width:min(72vw,520px)}
 .nav-emblem{position:static;transform:none;height:68px;width:auto;display:block;flex:0 0 auto;opacity:1}
-.nav-lockup-text{display:flex;flex-direction:column;justify-content:center;min-width:0;gap:.12rem}
+.nav-lockup-text{display:flex;flex-direction:column;justify-content:center;align-items:stretch;min-width:0;width:max-content;max-width:100%;gap:.08rem}
 .mono-mark{display:none!important}
 nav *{pointer-events:auto}
 .wordmark{height:46px;width:auto;max-width:min(48vw,340px);display:block;object-fit:contain;object-position:left center}
-.cred{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:0;opacity:.75;line-height:1.2}
+.cred{display:flex;justify-content:space-between;align-items:baseline;width:100%;box-sizing:border-box;font-size:1.05rem;letter-spacing:0;text-transform:uppercase;color:var(--accent);margin-top:.2rem;opacity:.85;line-height:1;font-weight:500}
+.cred > span{flex:0 0 auto}
+.cred > .cred-gap{flex:0 0 .55em;width:.55em}
 nav .links{position:relative;z-index:2;display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:7.5rem 2rem 3.5rem;overflow:hidden}
 .stars{position:absolute;inset:0;z-index:0;pointer-events:none}
@@ -124,11 +126,12 @@ footer a:hover{color:var(--accent)}
   .panels{grid-template-columns:1fr}
   .panel{border-left:0;border-top:1px solid var(--line);min-height:18rem}
   nav .links{display:none}
-  .nav-lockup{gap:.5rem;max-width:calc(100vw - 2.5rem)}
+  .nav-lockup{gap:.5rem;max-width:calc(100vw - 2.5rem);align-items:center}
   .wordmark{height:30px;max-width:min(52vw,200px)}
   .nav-emblem{height:48px}
-  nav{min-height:3.75rem;padding:0.85rem 1.25rem}
-  .cred{display:none}
+  nav{min-height:3.75rem;padding:0.85rem 1.25rem;background:#000}
+  .cred{font-size:.72rem;margin-top:.1rem}
+  .cred > .cred-gap{flex:0 0 .4em;width:.4em}
   nav,footer,.about{padding-left:1.25rem;padding-right:1.25rem}
   .hero-figure{min-height:42vh}
 }
@@ -141,7 +144,7 @@ footer a:hover{color:var(--accent)}
       <img class="nav-emblem" src="/studio/assets/lan-monogram.webp" alt="" width="128" height="122">
       <span class="nav-lockup-text">
         <img class="wordmark" src="/studio/assets/lan-wordmark.webp" alt="LOVEANDNATE" width="320" height="58">
-        <span class="cred">ART IS LIFE</span>
+        <span class="cred" aria-label="Art is life"><span>A</span><span>R</span><span>T</span><span class="cred-gap" aria-hidden="true"></span><span>I</span><span>S</span><span class="cred-gap" aria-hidden="true"></span><span>L</span><span>I</span><span>F</span><span>E</span></span>
       </span>
     </a>
   </div>
@@ -176,7 +179,7 @@ footer a:hover{color:var(--accent)}
     </div>
     <div class="inner">
       <span class="num">01 / MUSIC</span>
-      <p class="cred-line">ART IS LIFE — 21 albums released in 24 hours</p>
+      <p class="cred-line">21 albums released in 24 hours</p>
       <h2>21 albums</h2>
       <p>ARTACHE · MONOLITH · TIMELESS · OUT OF MY MIND · MCCLUMPHA PARK — and more, streaming now.</p>
       <a class="cta" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr">Listen on Spotify →</a>
