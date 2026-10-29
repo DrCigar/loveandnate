@@ -122,51 +122,6 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 @media (max-width:560px){.osd.tl,.osd.tc{left:1rem}.back{right:1rem}.osd.br{left:1rem}.crt{outline-width:0;border-radius:0;box-shadow:inset 0 0 70px 20px rgba(0,0,0,.85)}}
 @media (prefers-reduced-motion:reduce){.track,#static,.lw .tear{display:none!important}.lw .ch{opacity:.45}.label::after{display:none}}
 
-/* ===== BLOOD (photoreal) ===== */
-.blood{position:fixed;top:0;left:0;right:0;height:clamp(160px,42vh,420px);z-index:11;pointer-events:none;overflow:hidden}
-.blood .sheet{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:.96;
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%);
-  mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%)}
-.blood .sheet.pour{clip-path:inset(0 0 100% 0);animation:bloodPour 3.6s cubic-bezier(.4,.05,.2,1) .15s forwards}
-@keyframes bloodPour{0%{clip-path:inset(0 0 100% 0)}55%{clip-path:inset(0 0 18% 0)}100%{clip-path:inset(0 0 0 0)}}
-.blood .shimmer{position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:linear-gradient(105deg,transparent 40%,rgba(255,180,160,.07) 48%,transparent 56%);
-  background-size:220% 100%;animation:bloodShim 7.5s ease-in-out 4s infinite}
-@keyframes bloodShim{0%,100%{opacity:0;background-position:120% 0}40%{opacity:1;background-position:0% 0}70%{opacity:.4}}
-.blood .creep{position:absolute;top:0;width:clamp(36px,5vw,70px);height:70%;transform-origin:top center;opacity:0;
-  object-fit:contain;object-position:top center;filter:brightness(1.02)}
-.blood .creep.on{opacity:.9;animation:creepDown var(--cd,11s) ease-in-out var(--cdelay,4.2s) infinite}
-@keyframes creepDown{0%,100%{transform:scaleY(.92)}50%{transform:scaleY(1.12)}}
-.blood .fall{position:absolute;width:clamp(18px,2.2vw,32px);height:auto;opacity:0;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
-.blood .fall.go{animation:dropFall var(--fd,2.8s) cubic-bezier(.35,.05,.7,.2) var(--fdelay,0s) 1 forwards}
-@keyframes dropFall{0%{opacity:0;transform:translateY(0) scale(.85)}8%{opacity:.95;transform:translateY(0) scale(1)}70%{opacity:.75;transform:translateY(min(48vh,380px)) scale(.9)}100%{opacity:0;transform:translateY(min(62vh,520px)) scale(.55)}}
-.blood .smear{position:absolute;width:2px;height:0;background:linear-gradient(rgba(90,10,10,.55),transparent);opacity:0;pointer-events:none}
-.blood .smear.go{animation:smear 1.4s ease-out forwards}
-@keyframes smear{0%{opacity:.7;height:0}40%{opacity:.45;height:28px}100%{opacity:0;height:42px}}
-.g .blood{filter:url(#bloodRgb);transform:translateX(var(--jx,0))}
-@media (max-width:560px){
-  .blood{height:clamp(130px,36vh,300px)}
-  .blood picture{display:none}
-  .blood .sheet.mob{display:block}
-}
-@media (min-width:561px){.blood .sheet.mob{display:none}}
-@media (prefers-reduced-motion:reduce){
-  .blood .sheet{clip-path:none!important;animation:none!important;opacity:.95}
-  .blood .shimmer,.blood .creep,.blood .fall,.blood .smear{display:none!important}
-}
-
-
-/* clear blood behind tagline + back link (above blood, below text) */
-.blood-clear{position:fixed;inset:0;z-index:12;pointer-events:none;
-  background:
-    radial-gradient(ellipse 420px 90px at 50% 224px,#07080a 0%,#07080a 52%,rgba(7,8,10,.95) 70%,transparent 90%),
-    radial-gradient(ellipse 280px 78px at calc(100% - 48px) 26px,#07080a 0%,#07080a 58%,rgba(7,8,10,.96) 75%,transparent 92%)}
-@media (max-width:560px){
-  .blood-clear{background:
-    radial-gradient(ellipse 95% 120px at 50% 305px,#07080a 0%,#07080a 50%,rgba(7,8,10,.92) 68%,transparent 88%),
-    radial-gradient(ellipse 210px 86px at calc(100% - 2px) 24px,#07080a 0%,#07080a 58%,rgba(7,8,10,.96) 76%,transparent 92%)}
-}
-
 /* ===== POSTER ===== */
 .poster-sec{position:relative;z-index:2;max-width:42rem;margin:0 auto;padding:10vh 1.75rem 4vh}
 .poster-frame{position:relative;margin:0 auto;cursor:zoom-in;background:#050505;border:1px solid #1a1a1a;
@@ -186,29 +141,9 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <filter id="onlyR"><feColorMatrix values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
 <filter id="onlyC"><feColorMatrix values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
-<filter id="bloodRgb" x="-8%" y="-8%" width="116%" height="116%">
-  <feOffset in="SourceGraphic" dx="2" dy="0" result="r"/>
-  <feOffset in="SourceGraphic" dx="-2" dy="0" result="c"/>
-  <feColorMatrix in="r" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="R"/>
-  <feColorMatrix in="c" values="0 0 0 0 0  0 .55 0 0 0  0 0 .75 0 0  0 0 0 1 0" result="C"/>
-  <feBlend in="SourceGraphic" in2="R" mode="screen" result="m"/>
-  <feBlend in="m" in2="C" mode="screen"/>
-</filter>
 </svg>
 <div class="grain" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div><div class="track" aria-hidden="true"></div><canvas id="static" width="160" height="90" aria-hidden="true"></canvas><div class="crt" aria-hidden="true"></div>
 
-<div class="blood" aria-hidden="true">
-<picture>
-  <source type="image/avif" srcset="/wellwellwell/blood.avif">
-  <img class="sheet desk pour" src="/wellwellwell/blood.webp" alt="" width="1800" height="1012" decoding="async" fetchpriority="high">
-</picture>
-<img class="sheet mob pour" src="/wellwellwell/blood-mobile.webp" alt="" width="900" height="1567" decoding="async">
-<div class="shimmer"></div>
-<img class="creep" data-src="/wellwellwell/blood-runner-1.webp" style="left:14%;--cd:12s;--cdelay:4.5s" alt="">
-<img class="creep" data-src="/wellwellwell/blood-runner-2.webp" style="left:48%;--cd:14s;--cdelay:6s" alt="">
-<img class="creep" data-src="/wellwellwell/blood-runner-3.webp" style="left:62%;--cd:11s;--cdelay:5.2s" alt="">
-</div>
-<div class="blood-clear" aria-hidden="true"></div>
 <div class="osd tl" aria-hidden="true">▶ PLAY</div><div class="osd tc" aria-hidden="true" id="tc">SP 00:00:00</div><div class="osd br" aria-hidden="true">OCT 2027</div>
 <div class="vignette" aria-hidden="true"></div>
 <a class="back" href="/">← LOVEANDNATE</a>
@@ -295,55 +230,6 @@ const sb=document.querySelector('.sound'),au=document.getElementById('amb');au.v
 sb.onclick=()=>{if(au.paused){noise(350,.12);au.play();sb.textContent='SOUND ON';sb.setAttribute('aria-pressed','true')}else{au.pause();sb.textContent='SOUND OFF';sb.setAttribute('aria-pressed','false')}};
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* ===== BLOOD (photoreal) ===== */
-(function(){
-  const root=document.querySelector('.blood');
-  if(!root) return;
-  const reduced=RM;
-  // lazy-assign creep sources so they don't compete with hero sheet
-  root.querySelectorAll('.creep').forEach(el=>{
-    const s=el.getAttribute('data-src');
-    if(s) el.src=s;
-    if(!reduced) setTimeout(()=>el.classList.add('on'), 4200+Math.random()*800);
-  });
-  if(reduced){
-    root.querySelectorAll('.sheet').forEach(el=>el.classList.remove('pour'));
-    return;
-  }
-  // falling drops from photoreal tip crops
-  const drops=['/wellwellwell/blood-drop-1.webp','/wellwellwell/blood-drop-3.webp'];
-  const slots=[18,34,52,68,82];
-  function spawnDrop(){
-    if(document.hidden) return;
-    const img=document.createElement('img');
-    img.className='fall';
-    img.alt='';
-    img.src=drops[Math.random()*drops.length|0];
-    const left=slots[Math.random()*slots.length|0] + (Math.random()*4-2);
-    img.style.left=left+'%';
-    img.style.top=(38+Math.random()*18)+'%';
-    img.style.setProperty('--fd',(2.2+Math.random()*1.4)+'s');
-    root.appendChild(img);
-    void img.offsetWidth;
-    img.classList.add('go');
-    // faint smear near start
-    if(Math.random()<.55){
-      const sm=document.createElement('span');
-      sm.className='smear';
-      sm.style.left='calc('+left+'% + 10px)';
-      sm.style.top=img.style.top;
-      root.appendChild(sm);
-      void sm.offsetWidth; sm.classList.add('go');
-      setTimeout(()=>sm.remove(),1600);
-    }
-    setTimeout(()=>img.remove(),4200);
-  }
-  function loopDrops(){
-    setTimeout(()=>{spawnDrop(); loopDrops()}, 2800+Math.random()*5200);
-  }
-  setTimeout(loopDrops, 5200);
-})();
 </script>
 </body>
 </html>
