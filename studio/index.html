@@ -97,10 +97,11 @@ footer a:hover{color:var(--accent)}
   pointer-events:none}
 .hero .stars{opacity:.45}
 .panel.music{padding:0;min-height:28rem;justify-content:flex-end}
-.panel.music .media{position:absolute;inset:0;z-index:0;overflow:hidden}
-.panel.music .media video,.panel.music .media img.poster{width:100%;height:100%;object-fit:cover;object-position:center}
-.panel.music .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,.92) 0%,rgba(5,5,6,.45) 45%,rgba(5,5,6,.35) 100%);pointer-events:none}
+.panel.music .media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
+.panel.music .media img{width:100%;height:100%;object-fit:cover;object-position:center 28%;display:block}
+.panel.music .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#050506 0%,#050506 40%,rgba(5,5,6,.9) 52%,rgba(5,5,6,.35) 68%,rgba(5,5,6,.1) 80%,transparent 100%);pointer-events:none}
 .panel.music .inner{position:relative;z-index:1;padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:28rem}
+.panel.music .num{position:static;top:auto;left:auto;margin-bottom:.55rem}
 .panel.music .cred-line{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.85rem;opacity:.9}
 .panel.apps{padding:0;min-height:28rem;justify-content:flex-end}
 .panel.apps .media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
@@ -125,8 +126,8 @@ footer a:hover{color:var(--accent)}
   .hero-copy{text-align:center}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero-media video,.panel.music .media video{display:none!important}
-  .hero-media img.poster,.panel.music .media img.poster{display:block!important}
+  .hero-media video{display:none!important}
+  .hero-media img.poster{display:block!important}
   .hero-figure .drift{animation:none}
   .panel.film .media > img{transition:none;transform:scale(1.06)}
   .panel.film:hover .media > img{transform:scale(1.06)}
@@ -256,11 +257,8 @@ body{padding-bottom:8.5rem}
 
 <section class="panels" aria-label="Pillars">
   <article class="panel music">
-    <div class="media" data-lazy-video>
-      <img class="poster" src="/studio/assets/record-loop-poster.webp" alt="" width="1280" height="720">
-      <video muted loop playsinline preload="metadata" poster="/studio/assets/record-loop-poster.webp" aria-hidden="true">
-        <source data-src="/studio/assets/record-loop.mp4" type="video/mp4">
-      </video>
+    <div class="media">
+      <img src="/studio/assets/music.webp" alt="LOVEANDNATE music" width="988" height="1285" loading="lazy">
     </div>
     <div class="inner">
       <span class="num">01 / MUSIC</span>
