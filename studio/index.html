@@ -154,22 +154,53 @@ footer a:hover{color:var(--accent)}
 .nav-streams a{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;color:var(--mute);opacity:.85;transition:color .2s,opacity .2s}
 .nav-streams a:hover{color:#fff;opacity:1}
 .nav-streams svg{width:18px;height:18px;display:block;fill:currentColor}
-body{padding-bottom:6.5rem}
-.lan-player{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#000;border-top:1px solid #1a1a1e;padding:.55rem .9rem .65rem;box-shadow:0 -12px 40px rgba(0,0,0,.55)}
-.lan-player-inner{max-width:1100px;margin:0 auto}
-.lan-player iframe{width:100%;height:80px;border:0;border-radius:8px;display:block;background:#000}
+body{padding-bottom:8.5rem}
+.lan-player{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#000;border-top:1px solid #1a1a1e;padding:.75rem 1.1rem .85rem;box-shadow:0 -12px 40px rgba(0,0,0,.55)}
+.lan-player-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1.1fr) minmax(0,1fr);gap:1rem 1.25rem;align-items:center}
+.lan-player-controls{display:flex;align-items:center;gap:.55rem}
+.lan-player-btn{appearance:none;border:1px solid #2a2a30;background:#0d0d10;color:var(--ink);width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.lan-player-btn:hover{background:#16161c;border-color:#3a3a42;color:#fff}
+.lan-player-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lan-player-btn.sm{width:34px;height:34px}
+.lan-player-btn svg{width:15px;height:15px;fill:currentColor}
+.lan-player-btn .icon-pause{display:none}
+.lan-player.is-playing .lan-player-btn .icon-play{display:none}
+.lan-player.is-playing .lan-player-btn .icon-pause{display:block}
+.lan-player-now{min-width:0;display:flex;flex-direction:column;gap:.4rem}
+.lan-player-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.lan-player-title{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lan-player-row{display:flex;align-items:center;gap:.55rem}
+.lan-player-time{font-size:.6rem;letter-spacing:.06em;color:var(--mute);font-variant-numeric:tabular-nums;min-width:2.3rem}
+.lan-player-scrub{appearance:none;-webkit-appearance:none;flex:1;height:3px;border-radius:2px;background:#1a1a1e;outline:none;cursor:pointer}
+.lan-player-scrub::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--accent);border:0;cursor:pointer}
+.lan-player-scrub::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--accent);border:0;cursor:pointer}
+.lan-player-side{display:flex;align-items:center;gap:1rem;min-width:0}
+.lan-player-tracks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.15rem;min-width:0;flex:1}
+.lan-player-tracks button{appearance:none;border:0;background:transparent;color:var(--mute);font:inherit;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-align:left;padding:.2rem 0;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;transition:color .2s}
+.lan-player-tracks button:hover{color:#fff}
+.lan-player-tracks button.is-active{color:var(--ink)}
+.lan-player-viz{width:72px;height:32px;flex:0 0 auto}
+.lan-player-viz canvas{width:100%;height:100%;display:block}
 @media(max-width:960px){
-  body{padding-bottom:7rem}
-  .lan-player{padding:.5rem .7rem .6rem}
-  .lan-player iframe{height:80px}
+  body{padding-bottom:10rem}
+  .lan-player{padding:.65rem .85rem .75rem}
+  .lan-player-inner{grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;gap:.65rem .9rem}
+  .lan-player-side{grid-column:1 / -1}
 }
 @media(max-width:560px){
   .nav-right{gap:.5rem}
   .nav-streams a{width:26px;height:26px}
   .nav-streams svg{width:16px;height:16px}
-  body{padding-bottom:7.25rem}
-  .lan-player{padding:.45rem .55rem .55rem}
-  .lan-player iframe{height:80px;border-radius:6px}
+  body{padding-bottom:11rem}
+  .lan-player{padding:.55rem .7rem .65rem}
+  .lan-player-title{font-size:.72rem;letter-spacing:.1em}
+  .lan-player-tracks button{font-size:.62rem}
+  .lan-player-btn{width:38px;height:38px}
+  .lan-player-btn.sm{width:32px;height:32px}
+  .lan-player-viz{width:56px;height:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .lan-player.is-playing .lan-player-viz{opacity:.5}
 }
 
 </style>
@@ -274,15 +305,37 @@ body{padding-bottom:6.5rem}
 
 <div class="lan-player" id="lan-player" role="region" aria-label="Now playing">
   <div class="lan-player-inner">
-    <iframe
-      title="L1FEL1NE AW0KEN — loveandnate"
-      src="https://open.spotify.com/embed/track/0IUlQMNIpHoS4Hpa3NwB0f?utm_source=generator&theme=0"
-      width="100%"
-      height="80"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-      allowfullscreen></iframe>
+    <div class="lan-player-controls">
+      <button type="button" class="lan-player-btn sm" id="lan-prev" aria-label="Previous track">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button type="button" class="lan-player-btn" id="lan-play" aria-label="Play">
+        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+      </button>
+      <button type="button" class="lan-player-btn sm" id="lan-next" aria-label="Next track">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+      </button>
+    </div>
+    <div class="lan-player-now">
+      <div class="lan-player-label">Now playing</div>
+      <div class="lan-player-title" id="lan-title">MACHINES OVER PEOPLE</div>
+      <div class="lan-player-row">
+        <span class="lan-player-time" id="lan-cur">0:00</span>
+        <input class="lan-player-scrub" id="lan-scrub" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">
+        <span class="lan-player-time" id="lan-dur">0:00</span>
+      </div>
+    </div>
+    <div class="lan-player-side">
+      <ul class="lan-player-tracks" id="lan-tracks" aria-label="Track list">
+        <li><button type="button" data-i="0" class="is-active">MACHINES OVER PEOPLE</button></li>
+        <li><button type="button" data-i="1">LAST COFFEE</button></li>
+        <li><button type="button" data-i="2">CHILDHOOD 90'S</button></li>
+      </ul>
+      <div class="lan-player-viz" aria-hidden="true"><canvas id="lan-viz" width="144" height="64"></canvas></div>
+    </div>
   </div>
+  <audio id="lan-audio" preload="metadata"></audio>
 </div>
 
 <footer>
@@ -323,6 +376,127 @@ body{padding-bottom:6.5rem}
   }
   resize(); draw();
   addEventListener('resize',()=>{resize(); if(RM) draw();});
+})();
+</script>
+
+
+<script>
+(function(){
+  const TRACKS=[
+    {title:"MACHINES OVER PEOPLE", src:"/studio/audio/machines-over-people.mp3"},
+    {title:"LAST COFFEE", src:"/studio/audio/last-coffee.mp3"},
+    {title:"CHILDHOOD 90'S", src:"/studio/audio/childhood-90s.mp3"}
+  ];
+  const player=document.getElementById('lan-player');
+  const audio=document.getElementById('lan-audio');
+  const btnPlay=document.getElementById('lan-play');
+  const btnPrev=document.getElementById('lan-prev');
+  const btnNext=document.getElementById('lan-next');
+  const scrub=document.getElementById('lan-scrub');
+  const curEl=document.getElementById('lan-cur');
+  const durEl=document.getElementById('lan-dur');
+  const titleEl=document.getElementById('lan-title');
+  const trackBtns=[...document.querySelectorAll('#lan-tracks button')];
+  const vizCanvas=document.getElementById('lan-viz');
+  const vx=vizCanvas.getContext('2d');
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i=0, seeking=false, ctx=null, analyser=null, data=null, hooked=false;
+
+  function fmt(s){
+    s=Math.max(0,Math.floor(s||0));
+    const m=Math.floor(s/60), r=s%60;
+    return m+':'+(r<10?'0':'')+r;
+  }
+  function setPlaying(on){
+    player.classList.toggle('is-playing', !!on);
+    btnPlay.setAttribute('aria-label', on?'Pause':'Play');
+  }
+  function load(idx, autoplay){
+    i=(idx+TRACKS.length)%TRACKS.length;
+    const t=TRACKS[i];
+    titleEl.textContent=t.title;
+    trackBtns.forEach((b,n)=>b.classList.toggle('is-active', n===i));
+    audio.src=t.src;
+    audio.load();
+    if(autoplay) audio.play().then(()=>setPlaying(true)).catch(()=>setPlaying(false));
+  }
+  function ensureAudioGraph(){
+    if(hooked || RM) return;
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC) return;
+    ctx=new AC();
+    analyser=ctx.createAnalyser();
+    analyser.fftSize=64;
+    data=new Uint8Array(analyser.frequencyBinCount);
+    const src=ctx.createMediaElementSource(audio);
+    src.connect(analyser);
+    analyser.connect(ctx.destination);
+    hooked=true;
+  }
+
+  btnPlay.addEventListener('click', async ()=>{
+    ensureAudioGraph();
+    if(ctx && ctx.state==='suspended') await ctx.resume();
+    if(audio.paused){
+      try{ await audio.play(); setPlaying(true);}catch(e){ setPlaying(false); }
+    } else {
+      audio.pause(); setPlaying(false);
+    }
+  });
+  btnPrev.addEventListener('click', ()=>load(i-1, !audio.paused || player.classList.contains('is-playing')));
+  btnNext.addEventListener('click', ()=>load(i+1, !audio.paused || player.classList.contains('is-playing')));
+  trackBtns.forEach(b=>b.addEventListener('click', ()=>{
+    const n=Number(b.dataset.i);
+    const wasPlaying=!audio.paused || player.classList.contains('is-playing');
+    load(n, wasPlaying);
+    if(!wasPlaying){ /* selected only */ }
+  }));
+
+  scrub.addEventListener('pointerdown', ()=>{ seeking=true; });
+  scrub.addEventListener('pointerup', ()=>{
+    if(audio.duration) audio.currentTime=(Number(scrub.value)/1000)*audio.duration;
+    seeking=false;
+  });
+  scrub.addEventListener('input', ()=>{
+    if(audio.duration) curEl.textContent=fmt((Number(scrub.value)/1000)*audio.duration);
+  });
+
+  audio.addEventListener('loadedmetadata', ()=>{ durEl.textContent=fmt(audio.duration); });
+  audio.addEventListener('timeupdate', ()=>{
+    if(seeking || !audio.duration) return;
+    scrub.value=String(Math.round((audio.currentTime/audio.duration)*1000));
+    curEl.textContent=fmt(audio.currentTime);
+    durEl.textContent=fmt(audio.duration);
+  });
+  audio.addEventListener('play', ()=>setPlaying(true));
+  audio.addEventListener('pause', ()=>setPlaying(false));
+  audio.addEventListener('ended', ()=>load(i+1, true));
+
+  function drawViz(){
+    const dpr=devicePixelRatio||1;
+    const w=vizCanvas.clientWidth||72, h=vizCanvas.clientHeight||32;
+    if(vizCanvas.width!==Math.floor(w*dpr) || vizCanvas.height!==Math.floor(h*dpr)){
+      vizCanvas.width=Math.floor(w*dpr); vizCanvas.height=Math.floor(h*dpr);
+    }
+    vx.setTransform(dpr,0,0,dpr,0,0);
+    vx.clearRect(0,0,w,h);
+    const bars=14, gap=2, bw=(w-(bars-1)*gap)/bars;
+    let vals;
+    if(analyser && !audio.paused && !RM){
+      analyser.getByteFrequencyData(data);
+      vals=Array.from({length:bars},(_,n)=>data[n+2]/255);
+    } else {
+      vals=Array.from({length:bars},(_,n)=>0.12+0.04*(n%3));
+    }
+    for(let n=0;n<bars;n++){
+      const bh=Math.max(2, vals[n]*h);
+      vx.fillStyle='rgba(201,206,214,'+(audio.paused?0.28:0.8)+')';
+      vx.fillRect(n*(bw+gap), h-bh, bw, bh);
+    }
+    requestAnimationFrame(drawViz);
+  }
+  requestAnimationFrame(drawViz);
+  load(0, false);
 })();
 </script>
 
