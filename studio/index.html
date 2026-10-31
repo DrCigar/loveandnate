@@ -65,19 +65,22 @@ h1 em{font-style:italic;color:var(--accent)}
 .panel{position:relative;padding:2.2rem 1.6rem;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;min-height:26rem;background:var(--panel);overflow:hidden;transition:background .4s}
 .panel:first-child{border-left:0}
 .panel:hover{background:#121216}
-.panel .num{position:absolute;top:1.6rem;left:1.6rem;font-size:.68rem;letter-spacing:.2em;color:var(--mute)}
+.panel .num-legacy-unused{display:none}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.panel h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,2.8vw,2.5rem);line-height:1;margin-bottom:.9rem}
+.num{position:static;top:auto;left:auto;display:block;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mute);margin:0 0 .35rem;opacity:.85}
+.panel h2.discipline,.discipline{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-weight:800;font-size:clamp(2.35rem,3.6vw,3.15rem);letter-spacing:.14em;text-transform:uppercase;line-height:.95;margin:0 0 .7rem;color:#fff}
+.panel-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.15;margin:0 0 .55rem;color:rgba(255,255,255,.92)}
+.panel h2:not(.discipline){font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,2.8vw,2.5rem);line-height:1;margin-bottom:.9rem}
 .panel p{font-size:.9rem;color:var(--mute);margin-bottom:1.4rem;max-width:22ch}
 .panel .cta{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 .panel .cta:hover{color:#fff}
 .panel.film{padding:0;min-height:28rem;justify-content:flex-end;background:#050506;overflow:hidden}
 .panel.film .media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
-.panel.film .media > img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1.08);transform-origin:center 18%;transition:transform 3.2s cubic-bezier(.15,.7,.2,1);will-change:transform}
+.panel.film .media > img{width:100%;height:100%;object-fit:cover;object-position:center 32%;display:block;transform:scale(1.06);transform-origin:center 40%;transition:transform 3.2s cubic-bezier(.15,.7,.2,1);will-change:transform}
 .panel.film:hover .media > img{transform:scale(1.16)}
 .panel.film .media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(255,255,255,.018) 3px,rgba(255,255,255,.018) 4px);mix-blend-mode:soft-light;opacity:.45;animation:vhs-flicker 5.2s steps(2,end) infinite}
 .panel.film .vhs-track{position:absolute;left:-5%;right:-5%;height:3px;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.07) 20%,rgba(180,220,255,.14) 50%,rgba(255,255,255,.07) 80%,transparent 100%);box-shadow:0 0 12px rgba(255,255,255,.08);animation:vhs-track 8.5s linear infinite;opacity:.55}
-.panel.film .media::after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(to top,#050506 0%,#050506 18%,rgba(5,5,6,.88) 28%,rgba(5,5,6,.4) 40%,rgba(5,5,6,.12) 50%,transparent 62%);pointer-events:none}
+.panel.film .media::after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(to top,#050506 0%,#050506 38%,rgba(5,5,6,.9) 50%,rgba(5,5,6,.35) 66%,rgba(5,5,6,.1) 78%,transparent 100%);pointer-events:none}
 .panel.film .inner{position:relative;z-index:4;padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:28rem}
 .panel.film .num{position:static;top:auto;left:auto;margin-bottom:.55rem}
 .panel.film .inner > p{margin-bottom:.85rem;max-width:28ch}
@@ -133,8 +136,8 @@ footer a:hover{color:var(--accent)}
   .hero-media video{display:none!important}
   .hero-media img.poster{display:block!important}
   .hero-figure .drift{animation:none}
-  .panel.film .media > img{transition:none;transform:scale(1.08)}
-  .panel.film:hover .media > img{transform:scale(1.08)}
+  .panel.film .media > img{transition:none;transform:scale(1.06)}
+  .panel.film:hover .media > img{transform:scale(1.06)}
   .panel.film .media::before,.panel.film .vhs-track{animation:none!important;opacity:.25}
 }
 @media(max-width:960px){
@@ -146,6 +149,7 @@ footer a:hover{color:var(--accent)}
   .panel.apps .inner{min-height:22rem}
   .panel.books .inner{min-height:22rem}
   .panel.film .inner{min-height:22rem}
+  .discipline{font-size:clamp(2.1rem,11vw,2.6rem);letter-spacing:.12em}
 }
 @media(max-width:560px){
   .panels{grid-template-columns:1fr}
@@ -265,9 +269,10 @@ body{padding-bottom:8.5rem}
       <img src="/studio/assets/music.webp" alt="LOVEANDNATE music" width="988" height="1285" loading="lazy">
     </div>
     <div class="inner">
-      <span class="num">01 / MUSIC</span>
+      <span class="num">01</span>
+      <h2 class="discipline">Music</h2>
       <p class="cred-line">21 albums released in 24 hours</p>
-      <h2>21 albums</h2>
+      <p class="panel-title">21 albums</p>
       <p>ARTACHE · MONOLITH · TIMELESS · OUT OF MY MIND · MCCLUMPHA PARK — and more, streaming now.</p>
       <a class="cta" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr">Listen on Spotify →</a>
     </div>
@@ -277,8 +282,9 @@ body{padding-bottom:8.5rem}
       <img src="/studio/assets/books.webp" alt="Marvin Stench by Zepp" width="796" height="1348" loading="lazy">
     </div>
     <div class="inner">
-      <span class="num">02 / BOOKS</span>
-      <h2>Marvin Stench</h2>
+      <span class="num">02</span>
+      <h2 class="discipline">Books</h2>
+      <p class="panel-title">Marvin Stench</p>
       <p>Anti-bullying children’s book. Resilience, kindness, self-love. By Zepp.</p>
       <a class="cta" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094">On Amazon →</a>
     </div>
@@ -288,22 +294,22 @@ body{padding-bottom:8.5rem}
       <img src="/studio/assets/innerpool.webp" alt="Innerpool app" width="1080" height="1725" loading="lazy">
     </div>
     <div class="inner">
-      <span class="num">03 / APPS</span>
-      <h2>Innerpool</h2>
+      <span class="num">03</span>
+      <h2 class="discipline">Apps</h2>
+      <p class="panel-title">Innerpool</p>
       <p>Where your quiet comes alive. Calm, water-themed wellness.</p>
       <a class="cta" href="#innerpool">Coming soon →</a>
     </div>
   </article>
   <article class="panel film">
     <div class="media">
-      <img src="/studio/assets/www-poster.webp" alt="WELL WELL WELL poster" width="1080" height="1620" loading="lazy">
+      <img src="/studio/assets/movies.webp" alt="Movies" width="1080" height="1956" loading="lazy">
       <div class="vhs-track" aria-hidden="true"></div>
     </div>
     <div class="inner">
-      <span class="num">04 / MOVIES</span>
-      <h2 class="visually-hidden">WELL WELL WELL</h2>
-      <p>Psychological horror. Coming October 2027.</p>
-      <a class="cta" href="/wellwellwell">Watch the page →</a>
+      <span class="num">04</span>
+      <h2 class="discipline">Movies</h2>
+      <a class="cta" href="/wellwellwell">Enter →</a>
     </div>
   </article>
 </section>
