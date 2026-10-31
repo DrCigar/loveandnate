@@ -135,6 +135,20 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 .g .poster-frame img{filter:saturate(.9) contrast(1.1) brightness(.95);transform:translateX(var(--jx,1px))}
 .poster-frame .cap{display:block;margin-top:.9rem;padding:0 .2rem 1rem;font:200 .95rem/1 'VT323',monospace;letter-spacing:.18em;color:#55534e;text-transform:uppercase;text-align:left}
 .poster-frame:hover img,.poster-frame:focus-visible img{filter:saturate(.85) contrast(1.08) brightness(1)}
+
+/* ===== BG VIDEO ===== */
+.bg-media{position:fixed;inset:0;z-index:0;overflow:hidden;background:#050506;pointer-events:none}
+.bg-media video,.bg-media img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+.bg-media img.poster{z-index:0}
+.bg-media video{z-index:1}
+.bg-dim{position:fixed;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(180deg,rgba(7,8,10,.72) 0%,rgba(7,8,10,.55) 35%,rgba(7,8,10,.62) 70%,rgba(7,8,10,.88) 100%),
+  radial-gradient(ellipse at 50% 40%,rgba(0,0,0,.15) 0%,rgba(0,0,0,.55) 75%);
+}
+@media (prefers-reduced-motion:reduce){
+  .bg-media video{display:none!important}
+  .bg-media img.poster{display:block!important}
+}
 </style>
 </head>
 <body>
@@ -142,6 +156,13 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 <filter id="onlyR"><feColorMatrix values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
 <filter id="onlyC"><feColorMatrix values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
 </svg>
+<div class="bg-media" aria-hidden="true">
+  <img class="poster" src="/wellwellwell/bg-poster.webp" alt="" width="1280" height="720">
+  <video muted loop playsinline autoplay preload="metadata" poster="/wellwellwell/bg-poster.webp">
+    <source src="/wellwellwell/bg.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="bg-dim" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div><div class="scan" aria-hidden="true"></div><div class="track" aria-hidden="true"></div><canvas id="static" width="160" height="90" aria-hidden="true"></canvas><div class="crt" aria-hidden="true"></div>
 
 <div class="osd tl" aria-hidden="true">▶ PLAY</div><div class="osd tc" aria-hidden="true" id="tc">SP 00:00:00</div><div class="osd br" aria-hidden="true">OCT 2027</div>
@@ -211,6 +232,7 @@ body{font-family:'VT323',ui-monospace,monospace;font-weight:400}
 <audio id="amb" src="/wellwellwell/ambience.m4a" loop preload="none"></audio>
 <script>
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,B=document.body,tc=document.getElementById('tc'),t0=Date.now();
+(()=>{const v=document.querySelector('.bg-media video');if(!v)return;if(RM){v.removeAttribute('autoplay');v.pause();v.remove();}else{v.play().catch(()=>{});}})();
 const pad=n=>String(n).padStart(2,'0');
 setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);tc.textContent='SP '+pad(s/3600|0)+':'+pad((s/60|0)%60)+':'+pad(s%60)},1000);
 const cv=document.getElementById('static'),cx=cv.getContext('2d'),im=cx.createImageData(160,90);
