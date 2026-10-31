@@ -108,6 +108,12 @@ footer a:hover{color:var(--accent)}
 .panel.apps .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#050506 0%,#050506 42%,rgba(5,5,6,.85) 55%,rgba(5,5,6,.25) 70%,transparent 100%);pointer-events:none}
 .panel.apps .inner{position:relative;z-index:1;padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:28rem}
 .panel.apps .num{position:static;top:auto;left:auto;margin-bottom:.55rem}
+.panel.books{padding:0;min-height:28rem;justify-content:flex-end}
+.panel.books .media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#000}
+.panel.books .media img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.panel.books .media::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#050506 0%,#050506 40%,rgba(5,5,6,.9) 52%,rgba(5,5,6,.35) 68%,rgba(5,5,6,.1) 80%,transparent 100%);pointer-events:none}
+.panel.books .inner{position:relative;z-index:1;padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:28rem}
+.panel.books .num{position:static;top:auto;left:auto;margin-bottom:.55rem}
 
 .about{display:grid;grid-template-columns:160px 1fr;gap:2.5rem;align-items:center;max-width:980px}
 .about .mascot{width:140px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.6))}
@@ -133,6 +139,7 @@ footer a:hover{color:var(--accent)}
   .panel:nth-child(3){border-left:0}
   .panel.music .inner{min-height:22rem}
   .panel.apps .inner{min-height:22rem}
+  .panel.books .inner{min-height:22rem}
   .panel.film .inner{min-height:22rem}
 }
 @media(max-width:560px){
@@ -263,11 +270,16 @@ body{padding-bottom:8.5rem}
       <a class="cta" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr">Listen on Spotify →</a>
     </div>
   </article>
-  <article class="panel">
-    <span class="num">02 / BOOKS</span>
-    <h2>Marvin Stench</h2>
-    <p>Anti-bullying children’s book. Resilience, kindness, self-love. By Zepp.</p>
-    <a class="cta" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094">On Amazon →</a>
+  <article class="panel books">
+    <div class="media">
+      <img src="/studio/assets/books.webp" alt="Marvin Stench by Zepp" width="796" height="1348" loading="lazy">
+    </div>
+    <div class="inner">
+      <span class="num">02 / BOOKS</span>
+      <h2>Marvin Stench</h2>
+      <p>Anti-bullying children’s book. Resilience, kindness, self-love. By Zepp.</p>
+      <a class="cta" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094">On Amazon →</a>
+    </div>
   </article>
   <article class="panel apps">
     <div class="media">
