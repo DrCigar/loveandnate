@@ -297,7 +297,7 @@ body{padding-bottom:7.5rem}
 
 
 <div class="lan-player" id="lan-player" role="region" aria-label="Now playing">
-  <div class="lan-player-yt" title="YouTube player (must stay visible)">
+  <div class="lan-player-yt" title="Now playing">
     <div id="lan-yt"></div>
   </div>
   <div class="lan-player-controls">
@@ -456,7 +456,8 @@ body{padding-bottom:7.5rem}
       width:'200', height:'112', videoId:VIDEO_ID,
       playerVars:{
         autoplay:0, controls:0, disablekb:1, fs:0, modestbranding:1,
-        rel:0, playsinline:1, origin:location.origin
+        rel:0, playsinline:1, iv_load_policy:3, cc_load_policy:0,
+        origin:location.origin
       },
       events:{
         onReady:(e)=>{
@@ -471,7 +472,7 @@ body{padding-bottom:7.5rem}
           else if(e.data===2||e.data===0||e.data===5) setPlaying(false);
         },
         onError:(e)=>{
-          console.warn('YouTube player error', e.data);
+          console.warn('Player error', e.data);
           titleEl.textContent='Playback unavailable';
         }
       }
