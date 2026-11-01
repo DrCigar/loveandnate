@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Music. Books. Apps. Movies. One practice.">
 <meta name="twitter:image" content="https://loveandnate.io/og-record.jpg?v=2">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#050506;--ink:#eceae4;--mute:#8a8780;
@@ -27,21 +27,16 @@
   --panel:#0d0d10;--line:#1a1a1e;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:'Exo 2',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
-nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:1.15rem 1.75rem;min-height:4.75rem;background:#000;pointer-events:none}
+nav{position:fixed;inset:0 0 auto;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:0.85rem 1.75rem;min-height:5.25rem;background:#000;pointer-events:none}
 .nav-left{position:relative;z-index:2}
-.nav-lockup{display:flex;align-items:center;gap:.7rem;max-width:min(72vw,520px)}
-.nav-emblem{position:static;transform:none;height:68px;width:auto;display:block;flex:0 0 auto;opacity:1}
-.nav-lockup-text{display:flex;flex-direction:column;justify-content:center;align-items:stretch;min-width:0;width:max-content;max-width:100%;gap:.08rem}
+.nav-lockup{display:flex;align-items:center;max-width:min(78vw,560px)}
+.nav-logo{height:72px;width:auto;max-width:min(72vw,520px);display:block;object-fit:contain;object-position:left center;flex:0 0 auto}
 .mono-mark{display:none!important}
 nav *{pointer-events:auto}
-.wordmark{height:46px;width:auto;max-width:min(48vw,340px);display:block;object-fit:contain;object-position:left center}
-.cred{display:flex;justify-content:space-between;align-items:baseline;width:100%;box-sizing:border-box;font-size:1.05rem;letter-spacing:0;text-transform:uppercase;color:var(--accent);margin-top:.2rem;opacity:.85;line-height:1;font-weight:500}
-.cred > span{flex:0 0 auto}
-.cred > .cred-gap{flex:0 0 .55em;width:.55em}
 nav .links{position:relative;z-index:2;display:flex;gap:1.5rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:7.5rem 2rem 3.5rem;overflow:hidden}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:8rem 2rem 3.5rem;overflow:hidden}
 .stars{position:absolute;inset:0;z-index:0;pointer-events:none}
 .stars canvas{width:100%;height:100%;display:block;opacity:.7}
 .nebula{position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -50,9 +45,9 @@ nav .links{position:relative;z-index:2;display:flex;gap:1.5rem;font-size:.7rem;l
     radial-gradient(ellipse 40% 50% at 20% 70%,rgba(60,80,110,.1),transparent 55%),
     linear-gradient(to top,var(--bg) 8%,transparent 45%)}
 .hero-copy{position:relative;z-index:2;padding-bottom:2rem;max-width:34rem}
-.eyebrow{color:var(--copper);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.3rem}
-h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(2.8rem,7vw,5.6rem);line-height:.95;letter-spacing:-.02em}
-h1 em{font-style:italic;color:var(--accent)}
+.eyebrow{color:var(--copper);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;margin-bottom:1.3rem;font-weight:500}
+h1{font-family:'Orbitron',sans-serif;font-weight:500;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.05;letter-spacing:.04em;text-transform:uppercase}
+h1 em{font-style:normal;font-weight:600;color:var(--accent)}
 .hero-copy p{margin-top:1.4rem;color:var(--mute);font-size:1.05rem;max-width:28rem}
 .hero-figure{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:center;min-height:70vh}
 .hero-figure .drift{width:min(100%,520px);animation:drift 14s ease-in-out infinite;filter:drop-shadow(0 30px 60px rgba(0,0,0,.65))}
@@ -65,7 +60,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .pillar{display:flex;flex-direction:column;min-width:0;min-height:0}
 .pillar-label{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;margin:0 0 1rem;padding:0 .4rem}
 .pillar-label .num{position:static;display:block;font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:var(--copper);margin:0;opacity:.9}
-.pillar-label .discipline{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(1.15rem,1.7vw,1.45rem);letter-spacing:.38em;text-transform:uppercase;line-height:1;margin:0;color:var(--accent);font-style:normal}
+.pillar-label .discipline{font-family:'Orbitron',sans-serif;font-weight:600;font-size:clamp(1.05rem,1.55vw,1.3rem);letter-spacing:.42em;text-transform:uppercase;line-height:1;margin:0;color:var(--accent);font-style:normal}
 .pillar-label .deco-rule{display:flex;align-items:center;justify-content:center;gap:.55rem;width:min(70%,9.5rem);margin-top:.15rem}
 .pillar-label .deco-rule::before,.pillar-label .deco-rule::after{content:"";flex:1 1 auto;height:1px;background:linear-gradient(90deg,transparent,rgba(181,106,58,.55),rgba(201,206,214,.35),transparent)}
 .pillar-label .deco-rule i{flex:0 0 auto;width:5px;height:5px;border:1px solid rgba(181,106,58,.75);transform:rotate(45deg);box-shadow:0 0 0 1px rgba(201,206,214,.12)}
@@ -91,8 +86,8 @@ h1 em{font-style:italic;color:var(--accent)}
 .panel:hover{background:#121216}
 .panel .num-legacy-unused{display:none}
 .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.panel-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.15;margin:0 0 .45rem;color:rgba(255,255,255,.88)}
-.panel h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,2.8vw,2.5rem);line-height:1;margin-bottom:.9rem}
+.panel-title{font-family:'Orbitron',sans-serif;font-weight:500;font-size:clamp(.95rem,1.35vw,1.1rem);line-height:1.2;letter-spacing:.08em;text-transform:uppercase;margin:0 0 .45rem;color:rgba(255,255,255,.88)}
+.panel h2{font-family:'Orbitron',sans-serif;font-weight:500;font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.1;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.9rem}
 .panel p{font-size:.78rem;color:var(--mute);margin-bottom:.85rem;max-width:24ch;opacity:.9}
 .panel .cta{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 .panel .cta:hover{color:#fff}
@@ -113,7 +108,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .water{position:absolute;inset:auto -20% -30% -20%;height:55%;background:radial-gradient(ellipse at 50% 0%,rgba(70,110,140,.16),transparent 70%);pointer-events:none}
 .ph{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);border:1px solid #5a3a22;padding:.12rem .4rem;margin-left:.35rem}
 .about{padding:5rem 2rem;max-width:900px}
-.about h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:1rem}
+.about h3{font-family:'Orbitron',sans-serif;font-size:1.65rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem}
 .about p{color:var(--mute);font-size:1.1rem;max-width:40rem;line-height:1.7}
 footer{border-top:1px solid var(--line);padding:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
 footer a:hover{color:var(--accent)}
@@ -176,12 +171,9 @@ footer a:hover{color:var(--accent)}
   .panel{min-height:20rem}
   .pillar-label .discipline{letter-spacing:.32em;font-size:1.2rem}
   nav .links{display:none}
-  .nav-lockup{gap:.5rem;max-width:calc(100vw - 2.5rem);align-items:center}
-  .wordmark{height:30px;max-width:min(52vw,200px)}
-  .nav-emblem{height:48px}
-  nav{min-height:3.75rem;padding:0.85rem 1.25rem;background:#000}
-  .cred{font-size:.72rem;margin-top:.1rem}
-  .cred > .cred-gap{flex:0 0 .4em;width:.4em}
+  .nav-lockup{max-width:calc(100vw - 5.5rem);align-items:center}
+  .nav-logo{height:48px;max-width:min(68vw,320px)}
+  nav{min-height:3.9rem;padding:0.85rem 1.1rem;background:#000}
   nav,footer,.about{padding-left:1.25rem;padding-right:1.25rem}
   .hero-figure{min-height:42vh}
 }
@@ -205,7 +197,7 @@ body{padding-bottom:8.5rem}
 .lan-player.is-playing .lan-player-btn .icon-pause{display:block}
 .lan-player-now{min-width:0;display:flex;flex-direction:column;gap:.4rem}
 .lan-player-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
-.lan-player-title{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lan-player-title{font-family:'Orbitron',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lan-player-row{display:flex;align-items:center;gap:.55rem}
 .lan-player-time{font-size:.6rem;letter-spacing:.06em;color:var(--mute);font-variant-numeric:tabular-nums;min-width:2.3rem}
 .lan-player-scrub{appearance:none;-webkit-appearance:none;flex:1;height:3px;border-radius:2px;background:#1a1a1e;outline:none;cursor:pointer}
@@ -245,12 +237,8 @@ body{padding-bottom:8.5rem}
 <body>
 <nav>
   <div class="nav-left">
-    <a class="nav-lockup" href="/studio">
-      <img class="nav-emblem" src="/studio/assets/lan-monogram.webp" alt="" width="128" height="122">
-      <span class="nav-lockup-text">
-        <img class="wordmark" src="/studio/assets/lan-wordmark.webp" alt="LOVEANDNATE" width="320" height="58">
-        <span class="cred" aria-label="Art is life"><span>A</span><span>R</span><span>T</span><span class="cred-gap" aria-hidden="true"></span><span>I</span><span>S</span><span class="cred-gap" aria-hidden="true"></span><span>L</span><span>I</span><span>F</span><span>E</span></span>
-      </span>
+    <a class="nav-lockup" href="/studio" aria-label="LOVEANDNATE — Art is life">
+      <img class="nav-logo" src="/studio/assets/lan-logo.webp" alt="LOVEANDNATE — Art is life" width="1348" height="280">
     </a>
   </div>
   <div class="nav-right">
