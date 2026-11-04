@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LOVEANDNATE set the Guinness World Record: 21 albums released in 24 hours, beating the record of 20.">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://loveandnate.io/classic">
+    <title>LOVEANDNATE • 21 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://loveandnate.io/classic">
+    <meta property="og:site_name" content="LOVEANDNATE">
+    <meta property="og:title" content="WORLD RECORD ATTEMPT COMPLETE">
+    <meta property="og:description" content="LOVEANDNATE. Guinness World Record attempt. 24 hours. Done.">
+    <meta property="og:image" content="https://loveandnate.io/og-record.jpg?v=2">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WORLD RECORD ATTEMPT COMPLETE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WORLD RECORD ATTEMPT COMPLETE">
+    <meta name="twitter:description" content="LOVEANDNATE. Guinness World Record attempt. 24 hours. Done.">
+    <meta name="twitter:image" content="https://loveandnate.io/og-record.jpg?v=2">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── Design tokens ──────────────────────────────────────────────── */
+        :root {
+            --green:  #00ff9d;
+            --purple: #c300ff;
+            --pink:   #ff00aa;
+        }
+
+        /* ─── Responsive base font ───────────────────────────────────────── */
+        html { font-size: 16px; }
+        @media (min-width: 768px) { html { font-size: 19px; } }
+
+        /* ─── Targeted transitions only — not `all` ──────────────────────── */
+        * {
+            transition:
+                opacity .2s cubic-bezier(.4,0,.2,1),
+                transform .2s cubic-bezier(.4,0,.2,1),
+                box-shadow .2s cubic-bezier(.4,0,.2,1),
+                background-color .2s cubic-bezier(.4,0,.2,1),
+                border-color .2s cubic-bezier(.4,0,.2,1);
+        }
+
+        body { font-family: 'Inter', system-ui, sans-serif; }
+
+        /* Bebas Neue for all major headings */
+        .heading-font { font-family: 'Bebas Neue', sans-serif; letter-spacing: .03em; }
+
+        /* Space Grotesk kept for the nav logo only */
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.2rem, 5vw, 2.1rem);
+            letter-spacing: -3px;
+            text-shadow: 0 0 20px var(--green), 0 0 40px var(--purple);
+        }
+        .nav-tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .62rem;
+            letter-spacing: .45em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.4);
+            display: block;
+            text-align: justify;
+            text-align-last: justify;
+            padding: .25rem .4rem 0;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .neon-text {
+            text-shadow:
+                0 0 15px var(--green),
+                0 0 35px var(--green),
+                0 0 70px var(--purple);
+        }
+
+        /* ─── Nav wordmark: drop the baked-in black box via screen blend ─── */
+        nav h1 img { mix-blend-mode: screen; }
+
+        /* ─── Mission Jeopardy alert (flashing red) ──────────────────────── */
+        .jeopardy-banner {
+            background: rgba(30,0,0,.75);
+            border-top: 1px solid rgba(255,30,30,.4);
+            border-bottom: 1px solid rgba(255,30,30,.4);
+            padding: .9rem 1rem;
+            text-align: center;
+        }
+        .jeopardy-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: .05em;
+            font-size: clamp(1.8rem, 6vw, 3.6rem);
+            line-height: 1;
+            color: #ff2323;
+            animation: jeopardy-flash 1s steps(1,end) infinite;
+        }
+        .jeopardy-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2.4vw, 1rem);
+            letter-spacing: .12em;
+            color: #ff6b6b;
+            margin-top: .4rem;
+            text-transform: uppercase;
+        }
+        @keyframes jeopardy-flash {
+            0%, 49%  { color: #ff2323; text-shadow: 0 0 12px rgba(255,0,0,.9), 0 0 34px rgba(255,0,0,.7), 0 0 70px rgba(255,0,0,.5); opacity: 1; }
+            50%,100% { color: #7a0000; text-shadow: none; opacity: .55; }
+        }
+
+        /* ─── World Record gold styling (hero badge, countdown panel, albums note) ─ */
+        .record-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2vw, .85rem);
+            letter-spacing: .14em;
+            color: #ffd54a;
+            background: rgba(40,28,0,.6);
+            border: 1px solid rgba(255,200,40,.45);
+            border-radius: 999px;
+            padding: .45rem 1.1rem;
+            box-shadow: 0 0 18px rgba(255,200,40,.18);
+        }
+        .record-kicker {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2.2vw, .95rem);
+            letter-spacing: .3em;
+            color: #ffd54a;
+            text-transform: uppercase;
+        }
+        .record-title {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: .04em;
+            font-size: clamp(2.4rem, 8vw, 5rem);
+            line-height: .95;
+            margin-top: .35rem;
+            background: linear-gradient(180deg, #fff6c8 0%, #ffd54a 45%, #c98a00 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            filter: drop-shadow(0 0 18px rgba(255,200,40,.55));
+            animation: record-shine 2.4s ease-in-out infinite;
+        }
+        .record-blocked {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(.7rem, 2.2vw, .9rem);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #ff6b6b;
+            border: 1px solid rgba(255,60,60,.4);
+            background: rgba(40,0,0,.55);
+            border-radius: 999px;
+            padding: .4rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .record-blocked b { color: #fff; }
+        @keyframes record-shine {
+            0%,100% { filter: drop-shadow(0 0 14px rgba(255,200,40,.45)); }
+            50%     { filter: drop-shadow(0 0 30px rgba(255,200,40,.85)); }
+        }
+        .stream-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: .75rem;
+            font-weight: 700; border-radius: 1.5rem;
+            padding: 1rem 2rem; font-size: clamp(1rem, 3vw, 1.25rem);
+            min-width: 15rem;
+        }
+        .stream-btn:hover { transform: scale(1.04); }
+        .stream-btn i { font-size: 1.8em; }
+        .stream-btn small { font-size: .62em; letter-spacing: .2em; opacity: .85; }
+        .stream-spotify { background: #1DB954; color: #000; box-shadow: 0 0 24px rgba(29,185,84,.6); }
+        .stream-apple   { background: linear-gradient(135deg, #fa2d48, #fc5c7d); color: #fff; box-shadow: 0 0 24px rgba(250,45,72,.6); }
+
+        /* ─── Album cards ────────────────────────────────────────────────── */
+        .album-card {
+            transition: transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
+        }
+        .album-card:hover { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 30px -5px var(--green); }
+
+        /* ─── Intensity bar ──────────────────────────────────────────────── */
+        .intensity-bar { background: linear-gradient(to right, var(--green), var(--purple)); }
+
+        /* ─── Countdown boxes ────────────────────────────────────────────── */
+        .countdown-box {
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.10);
+        }
+
+        /* ─── Canvas starfield ───────────────────────────────────────────── */
+        #starCanvas {
+            position: fixed; inset: 0;
+            width: 100vw; height: 100vh;
+            z-index: -1; pointer-events: none;
+        }
+
+        /* ─── Instagram reel wrapper ─────────────────────────────────────── */
+        .reel-wrapper { position: relative; padding-top: 177.78%; overflow: hidden; border-radius: 1rem; }
+        .reel-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+        /* ─── Mobile menu ────────────────────────────────────────────────── */
+        .mobile-menu {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.97); z-index: 40;
+            flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
+        }
+        .mobile-menu.open { display: flex; }
+
+        /* ─── Status ticker ──────────────────────────────────────────────── */
+        .ticker-wrap {
+            position: sticky;
+            top: var(--nav-h, 64px);
+            z-index: 45;
+            /* Brushed-steel strip: tonal gradient + fine machined striations + bevel */
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 14%, rgba(0,0,0,0) 80%, rgba(0,0,0,.55) 100%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, rgba(0,0,0,.06) 1px 2.5px),
+                linear-gradient(180deg, #26292e 0%, #14161a 52%, #0d0f12 100%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.18), inset 0 -1px 0 rgba(0,0,0,.7);
+            border-top: 1px solid rgba(255,255,255,.06);
+            border-bottom: 1px solid rgba(0,0,0,.65);
+            overflow: hidden;
+            padding: .35rem 0;
+        }
+        /* top is set dynamically via --nav-h CSS variable */
+        .ticker-inner {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+        }
+        .ticker-seg {
+            display: flex; gap: 2.5rem; padding-right: 2.5rem;
+            flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .6rem;
+            color: rgba(255,255,255,.45);
+            white-space: nowrap;
+        }
+        .ticker-seg .hi  { color: rgba(255,255,255,.9); }
+        .ticker-seg .rec { color: var(--purple); }
+        .ticker-seg .wr  { color: #ffd54a; font-weight: 700; animation: wr-pulse 1.6s ease-in-out infinite; }
+        @keyframes wr-pulse {
+            0%,100% { opacity: .55; text-shadow: none; }
+            50%     { opacity: 1;   text-shadow: 0 0 8px rgba(255,213,74,.9), 0 0 18px rgba(255,200,40,.6); }
+        }
+
+        /* ─── Energy core (alien fuel cell) tracker ──────────────────────── */
+        .fuel-cell {
+            position: relative;
+            border-radius: 16px;
+            padding: 13px 15px;
+            background:
+                radial-gradient(130% 120% at 50% 0%, rgba(0,255,157,.10), transparent 60%),
+                rgba(255,255,255,.02);
+            border: 1px solid rgba(0,255,157,.28);
+            overflow: hidden;
+            animation: cell-breathe 3.4s ease-in-out infinite;
+        }
+        @keyframes cell-breathe {
+            0%,100% { box-shadow: inset 0 0 30px rgba(0,255,157,.07), 0 0 22px rgba(0,255,157,.12); }
+            50%     { box-shadow: inset 0 0 44px rgba(0,255,157,.14), 0 0 46px rgba(0,255,157,.30), 0 0 90px rgba(195,0,255,.16); }
+        }
+        /* glass sheen across the top */
+        .fuel-cell::before {
+            content:''; position:absolute; inset:0; pointer-events:none; z-index:2; border-radius:16px;
+            background: linear-gradient(180deg, rgba(255,255,255,.12), transparent 24%);
+        }
+        /* plasma energy sweep flowing across the chamber */
+        .fuel-sweep {
+            position:absolute; inset:0; pointer-events:none; z-index:3; border-radius:16px;
+            background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,.20) 47%,
+                        rgba(0,255,157,.28) 52%, rgba(195,0,255,.14) 57%, transparent 72%);
+            background-size: 250% 100%;
+            mix-blend-mode: screen;
+            animation: sweep-flow 3.1s linear infinite;
+        }
+        @keyframes sweep-flow { 0%{background-position:150% 0} 100%{background-position:-150% 0} }
+
+        .tracker-dots {
+            position:relative; z-index:1;
+            display:grid; grid-template-columns:repeat(var(--cells, 32), 1fr); gap:4px; height:48px;
+        }
+        .tracker-dot {
+            align-self:stretch; border-radius:4px; position:relative; overflow:hidden;
+            background: rgba(255,255,255,.05);
+            box-shadow: inset 0 0 6px rgba(0,0,0,.55);
+            cursor:default; transition: transform .2s;
+        }
+        .tracker-dot:hover { transform: translateY(-3px) scaleX(1.18); z-index:4; }
+        /* charged cell — bright energy column with rising shimmer */
+        .tracker-dot.complete {
+            background: linear-gradient(180deg, #8affd6 0%, var(--green) 45%, #00b56e 100%);
+            box-shadow: 0 0 11px rgba(0,255,157,.85), inset 0 0 8px rgba(255,255,255,.5);
+            animation: cell-flicker 2.6s ease-in-out infinite;
+        }
+        .tracker-dot.complete::after {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,.6), transparent);
+            background-size:100% 55%; background-repeat:no-repeat;
+            animation: energy-rise 1.9s linear infinite;
+        }
+        @keyframes energy-rise { 0%{background-position:0 130%} 100%{background-position:0 -60%} }
+        @keyframes cell-flicker { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.28)} }
+        .tracker-dot.recording {
+            background: linear-gradient(180deg, #e79bff, var(--purple) 55%, #7a00a3);
+            animation: pulse-dot 1.3s ease-in-out infinite;
+        }
+        .tracker-dot.mixing {
+            background: linear-gradient(180deg, #ffd685, #ffaa00 55%, #b36b00);
+            box-shadow: 0 0 10px rgba(255,170,0,.8), inset 0 0 8px rgba(255,255,255,.4);
+            animation: cell-flicker 1.7s ease-in-out infinite;
+        }
+        .tracker-dot.postponed { background: rgba(255,255,255,.10); }
+        .tracker-dot.pending   { background: rgba(255,255,255,.035); box-shadow: inset 0 0 7px rgba(0,0,0,.6); }
+        @keyframes pulse-dot {
+            0%,100% { box-shadow: 0 0 9px rgba(195,0,255,.6),  inset 0 0 8px rgba(255,255,255,.35); }
+            50%     { box-shadow: 0 0 22px rgba(195,0,255,1),  inset 0 0 11px rgba(255,255,255,.55); }
+        }
+
+        /* ─── Filter tabs ────────────────────────────────────────────────── */
+        .filter-tab {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .62rem; letter-spacing: .07em;
+            padding: .35rem .75rem;
+            border: 1px solid rgba(255,255,255,.12); border-radius: 20px;
+            cursor: pointer; color: rgba(255,255,255,.45); white-space: nowrap;
+            background: transparent;
+        }
+        .filter-tab:hover { border-color: rgba(255,255,255,.3); color: #fff; }
+        .filter-tab.active { border-color: var(--green); color: var(--green); box-shadow: 0 0 8px rgba(0,255,157,.2); }
+
+        /* ─── Mission stats panel ────────────────────────────────────────── */
+        .stats-panel {
+            background: rgba(0,255,157,.04);
+            border: 1px solid rgba(0,255,157,.2);
+            border-radius: 12px;
+        }
+
+        /* ─── Scroll reveal ──────────────────────────────────────────────── */
+        .scroll-reveal { opacity: 0; transform: translateY(28px); }
+        .scroll-reveal.in-view {
+            opacity: 1; transform: none;
+            transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ─── Phone frame for Instagram reel ────────────────────────────── */
+        .phone-frame {
+            position: relative;
+            background: #0d0d0d;
+            border-radius: 36px;
+            border: 6px solid #1e1e1e;
+            box-shadow:
+                0 0 0 1px #333,
+                0 0 30px rgba(0,255,157,.15),
+                0 0 70px rgba(195,0,255,.08);
+            padding: 16px 8px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+        /* Notch */
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px; height: 4px;
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        .phone-frame .reel-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        /* ─── Reduced motion ─────────────────────────────────────────────── */
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; }
+            .scroll-reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body class="bg-black text-white" style="overflow-x:clip">
+<canvas id="starCanvas"></canvas>
+
+<!-- ═══════════════════════════════════════════════════════════════ NAV === -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between relative">
+
+        <!-- Wordmark (left) -->
+        <h1 class="m-0 leading-none">
+            <img src="https://i.ibb.co/bRB8tPn5/grok-image-8d285fba-5e47-4b74-88a7-a87635ef3da2.jpg"
+                 alt="LOVEANDNATE" class="h-9 sm:h-12 w-auto object-contain">
+        </h1>
+
+        <!-- Emblem (centered) — LN monogram, sized as the focal logo -->
+        <img src="https://i.ibb.co/WWg3PQ22/grok-image-1467b1d4-b739-421b-b24e-2816df7f5890.jpg" alt=""
+             class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 object-contain pointer-events-none">
+
+        <!-- Desktop -->
+        <div class="hidden md:flex items-center gap-3">
+            <a href="https://x.com/loveandnate" target="_blank"
+               class="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-2xl flex items-center justify-center"
+               style="box-shadow: 0 0 0 1px rgba(255,255,255,.5), 0 0 12px rgba(255,255,255,.25), 0 0 28px rgba(255,255,255,.1)">
+                <i class="fa-brands fa-x-twitter text-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/loveandnate/" target="_blank"
+               class="w-10 h-10 bg-white/5 hover:bg-white/10 rounded-2xl flex items-center justify-center"
+               style="box-shadow: 0 0 0 1px rgba(195,0,255,.7), 0 0 12px rgba(195,0,255,.4), 0 0 28px rgba(255,0,170,.25)">
+                <i class="fa-brands fa-instagram text-lg"></i>
+            </a>
+            <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank"
+               aria-label="Spotify"
+               class="w-10 h-10 bg-[#1DB954] text-black rounded-2xl flex items-center justify-center text-lg"
+               style="box-shadow: 0 0 0 1px #1DB954, 0 0 12px rgba(29,185,84,.6), 0 0 28px rgba(29,185,84,.3)">
+                <i class="fa-brands fa-spotify"></i>
+            </a>
+            <a href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank"
+               aria-label="Apple Music"
+               class="w-10 h-10 bg-white text-black rounded-2xl flex items-center justify-center text-lg"
+               style="box-shadow: 0 0 0 1px rgba(255,255,255,.9), 0 0 12px rgba(255,255,255,.5), 0 0 28px rgba(255,255,255,.2)">
+                <i class="fa-brands fa-apple"></i>
+            </a>
+        </div>
+
+        <!-- Mobile -->
+        <div class="flex md:hidden items-center gap-2">
+            <a href="https://x.com/loveandnate" target="_blank"
+               class="w-10 h-10 bg-white/5 rounded-2xl flex items-center justify-center">
+                <i class="fa-brands fa-x-twitter text-sm"></i>
+            </a>
+            <a href="https://www.instagram.com/loveandnate/" target="_blank"
+               class="w-10 h-10 bg-white/5 rounded-2xl flex items-center justify-center">
+                <i class="fa-brands fa-instagram text-sm"></i>
+            </a>
+            <button onclick="toggleMenu()" aria-label="Open menu"
+                    class="w-10 h-10 bg-white/5 rounded-2xl flex items-center justify-center">
+                <i class="fa-solid fa-bars text-sm"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true">
+    <button onclick="toggleMenu()" aria-label="Close menu"
+            class="absolute top-5 right-5 w-11 h-11 bg-white/10 rounded-2xl flex items-center justify-center text-xl">✕</button>
+    <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" onclick="toggleMenu()"
+       class="px-8 py-4 bg-[#1DB954] text-black rounded-3xl font-bold text-xl flex items-center gap-3">
+        <i class="fa-brands fa-spotify"></i> SPOTIFY
+    </a>
+    <a href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" onclick="toggleMenu()"
+       class="px-8 py-4 bg-white text-black rounded-3xl font-bold text-xl flex items-center gap-3">
+        <i class="fa-brands fa-apple"></i> APPLE MUSIC
+    </a>
+</div>
+
+<!-- Nav height spacer (fixed nav doesn't push content) -->
+<div id="nav-spacer"></div>
+
+<!-- ════════════════════════════════════════════════════ STATUS TICKER === -->
+<div class="ticker-wrap">
+    <div class="ticker-inner" id="ticker-inner">
+        <!-- Two identical segments built by JS for seamless loop -->
+        <div class="ticker-seg" id="ticker-a"></div>
+        <div class="ticker-seg" id="ticker-b" aria-hidden="true"></div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════ HERO === -->
+<header id="home" class="min-h-screen flex items-center relative">
+    <div class="absolute inset-0 bg-black/15 z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10 pt-10 pb-14 md:py-8">
+
+        <div class="space-y-6">
+            <div class="record-badge">
+                <i class="fa-solid fa-trophy"></i> GUINNESS WORLD RECORD <span class="opacity-60">·</span> 10.15.2026
+            </div>
+
+            <h1 class="heading-font neon-text"
+                style="font-size: clamp(3.2rem, 9vw, 6.5rem); line-height: .9;">
+                21 ALBUMS.<br>24 HOURS.<br>ONE ARTIST.
+            </h1>
+
+            <div class="mono uppercase" style="font-size:clamp(.8rem,2.2vw,1.05rem);letter-spacing:.28em;
+                 color:var(--green);text-shadow:0 0 14px rgba(0,255,157,.45)">
+                HALF MAN <span style="color:var(--pink);text-shadow:0 0 16px rgba(255,0,170,.6)">/</span> HALF MACHINE
+            </div>
+
+            <p class="text-lg sm:text-xl md:text-2xl text-white/75 max-w-md leading-relaxed">
+                Beating the previous record of <span style="color:#ffd54a">20</span>.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener"
+                   class="stream-btn stream-spotify">
+                    <i class="fa-brands fa-spotify"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>SPOTIFY</span>
+                </a>
+                <a href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener"
+                   class="stream-btn stream-apple">
+                    <i class="fa-brands fa-apple"></i><span class="text-left leading-tight"><small>STREAM NOW</small><br>APPLE MUSIC</span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Hero image -->
+        <div class="relative flex justify-center">
+            <img src="https://i.ibb.co/kgzrvrF6/Website.png" alt="LOVEANDNATE"
+                 class="w-full max-w-sm md:max-w-lg rounded-3xl">
+        </div>
+    </div>
+</header>
+
+<!-- ══════════════════════════════════════════ ALBUM COMPLETION TRACKER === -->
+<section class="border-t border-b border-[var(--green)]/12 py-5 sm:py-6 scroll-reveal"
+         style="background:rgba(0,255,157,.025)">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-end justify-between gap-3 mb-3">
+            <div>
+                <div class="mono text-[var(--green)] text-xs tracking-widest">// ENERGY CORE · RECORD CHARGE</div>
+                <div class="mono text-white/40 text-[11px] mt-1" id="tracker-label">— / 21 CELLS CHARGED</div>
+            </div>
+            <div class="heading-font leading-none flex items-baseline"
+                 style="font-size:clamp(2.2rem,8vw,3.8rem);color:var(--green);
+                        text-shadow:0 0 18px rgba(0,255,157,.6),0 0 42px rgba(0,255,157,.3)">
+                <span id="charge-pct">0</span><span style="font-size:.45em;opacity:.7;margin-left:.05em">%</span>
+            </div>
+        </div>
+        <!-- Alien fuel cell: one energy cell per active album -->
+        <div class="fuel-cell">
+            <div class="tracker-dots" id="tracker-dots"></div>
+            <div class="fuel-sweep"></div>
+        </div>
+        <!-- Legend -->
+        <div class="flex flex-wrap gap-3 sm:gap-5 mt-3">
+            <div class="flex items-center gap-1.5 mono text-xs text-white/40">
+                <div class="w-3 h-3 rounded-sm" style="background:var(--green)"></div>
+                Complete (<span id="leg-complete">0</span>)
+            </div>
+            <div class="flex items-center gap-1.5 mono text-xs text-white/40">
+                <div class="w-3 h-3 rounded-sm" style="background:var(--purple)"></div>
+                Recording (<span id="leg-recording">0</span>)
+            </div>
+            <div class="flex items-center gap-1.5 mono text-xs text-white/40">
+                <div class="w-3 h-3 rounded-sm" style="background:#ffaa00"></div>
+                Mixing (<span id="leg-mixing">0</span>)
+            </div>
+            <div class="flex items-center gap-1.5 mono text-xs text-white/40">
+                <div class="w-3 h-3 rounded-sm" style="background:rgba(255,255,255,.3)"></div>
+                Postponed (<span id="leg-postponed">0</span>)
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ COUNTDOWN === -->
+<section id="live" class="bg-black py-16 md:py-24 border-b border-white/10 scroll-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="heading-font neon-text mb-8"
+            style="font-size:clamp(2rem,6vw,4rem)">TIME UNTIL HISTORY</h2>
+        <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ JOURNEY === -->
+<section id="journey" class="bg-gradient-to-b from-black to-[#111] py-16 md:py-24 border-t border-white/10 scroll-reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 md:mb-14">
+            <h2 class="heading-font mb-4" style="font-size:clamp(2rem,5vw,3.5rem)">Follow the Journey</h2>
+            <p class="text-white/70 text-lg sm:text-xl">Daily behind-the-scenes of the 32 albums in 24 hours attempt</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10 md:gap-16 max-w-5xl mx-auto items-center">
+
+            <!-- LEFT — Mission status panel + copy -->
+            <div class="space-y-8">
+                <!-- Stats panel (moved from hero) -->
+                <div class="stats-panel p-5 sm:p-6 max-w-sm">
+                    <div class="mono text-[var(--green)] text-xs tracking-widest pb-3 mb-4
+                                border-b border-[var(--green)]/15">// MISSION STATUS</div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="mono text-xs text-white/35 tracking-wide">ALBUMS_DONE</span>
+                            <span class="mono text-sm font-bold text-[var(--green)]" id="stat-done">—</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="mono text-xs text-white/35 tracking-wide">STATUS</span>
+                            <span class="mono text-xs font-bold" style="color:#ffd54a">● RECORD SET</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="mono text-xs text-white/35 tracking-wide">RECORD_TO_BEAT</span>
+                            <span class="mono text-sm font-bold text-[var(--pink)]">20</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="mono text-xs text-white/35 tracking-wide">TARGET</span>
+                            <span class="mono text-sm font-bold text-white">32</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="mono text-xs text-white/35 tracking-wide">ATTEMPT_DATE</span>
+                            <span class="mono text-xs text-white/70">OCT 15 '26</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-between mono text-xs text-white/30 mb-2">
+                            <span>COMPLETION</span>
+                            <span id="stat-pct">—</span>
+                        </div>
+                        <div class="h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07)">
+                            <div id="stat-bar" class="h-full rounded-full" style="width:0%;
+                                 background:linear-gradient(90deg,var(--green),var(--purple));
+                                 box-shadow:0 0 8px rgba(0,255,157,.4);
+                                 transition:width 1s ease .3s;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copy -->
+                <div class="text-white/80 leading-relaxed text-base sm:text-[17px] space-y-4">
+                    <p class="italic text-white/90">Music was my first love… and I was destined to do this.</p>
+                    <p>Throwback to little me absolutely shredding my first "guitar" to Red Hot Chili Peppers — zero chill, pure chaos, zero idea this obsession would turn into a full-blown Guinness World Record attempt.</p>
+                    <p>This is the title track off my upcoming album <strong>AWAKE IN THE DREAM</strong> — playing right here in the background.</p>
+                    <p style="color:var(--green)">Follow along for the full journey — the late nights, the releases, the madness, and every step toward the Guinness record. Day by day, album by album.</p>
+                </div>
+            </div>
+
+            <!-- RIGHT — Single reel in phone frame -->
+            <div class="flex justify-center">
+                <div class="phone-frame w-full">
+                    <div class="reel-wrapper">
+                        <iframe src="https://www.instagram.com/reel/DYSXD6VK7y8/embed" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ ALBUMS === -->
+<section id="albums" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-24 scroll-reveal">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 mb-6 md:mb-8">
+        <h2 class="heading-font" style="font-size:clamp(2rem,5vw,3.5rem)">THE 32 ALBUMS</h2>
+        <p class="text-white/50 text-sm sm:max-w-xs sm:text-right">Click any album to read the full story</p>
+    </div>
+    <div class="record-blocked"><i class="fa-solid fa-lock"></i>&nbsp; 11 albums blocked by the system will release in <b>2028</b></div>
+    <!-- Filter tabs -->
+    <div class="flex flex-wrap gap-2 mb-8" id="filter-tabs" role="group" aria-label="Filter albums by status">
+        <button class="filter-tab active" data-filter="all"       onclick="filterAlbums('all')">ALL</button>
+        <button class="filter-tab"        data-filter="COMPLETE"  onclick="filterAlbums('COMPLETE')">COMPLETE</button>
+        <button class="filter-tab"        data-filter="RECORDING" onclick="filterAlbums('RECORDING')">RECORDING</button>
+        <button class="filter-tab"        data-filter="MIXING"    onclick="filterAlbums('MIXING')">MIXING</button>
+        <button class="filter-tab"        data-filter="POSTPONED" onclick="filterAlbums('POSTPONED')">POSTPONED</button>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5"
+         id="album-grid"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ TECH STACK === -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20 scroll-reveal">
+
+    <!-- Header -->
+    <div class="text-center mb-10 md:mb-14">
+        <h2 class="heading-font neon-text mb-5" style="font-size:clamp(2rem,6vw,4rem)">
+            WANT TO CREATE SOMETHING SPECIAL?
+        </h2>
+        <p class="text-white/70 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-3">
+            I'm not a gatekeeper — here's exactly what I used to do this.
+            DM me if you want more info. I'd love to see what you can create.
+        </p>
+        <a href="https://www.instagram.com/loveandnate/" target="_blank"
+           class="inline-flex items-center gap-2 mt-4 px-7 py-3 rounded-3xl font-bold text-sm text-black"
+           style="background:var(--green);box-shadow:0 0 16px rgba(0,255,157,.4)">
+            <i class="fa-brands fa-instagram text-base"></i> DM ME ON INSTAGRAM
+        </a>
+    </div>
+
+    <!-- Stack grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+
+        <!-- Music: Analog -->
+        <div class="stats-panel p-5">
+            <div class="mono text-[var(--green)] text-[10px] tracking-widest pb-2.5 mb-3 border-b border-[var(--green)]/15 flex items-center gap-2">
+                <i class="fa-solid fa-guitar-electric"></i> ANALOG / INSTRUMENTS
+            </div>
+            <ul class="space-y-2">
+                <li class="mono text-xs text-white/70">Motorola 1955 Cabinet Record Player</li>
+                <li class="mono text-xs text-white/70">Fender Stratocaster</li>
+                <li class="mono text-xs text-white/70">Shure MV7+ <span class="text-white/35">— USB/XLR dynamic mic</span></li>
+                <li class="mono text-xs text-white/70">Samson Meteor Mic <span class="text-white/35">— USB condenser mic</span></li>
+                <li class="mono text-xs text-white/70">Universal Audio Volt 276 <span class="text-white/35">— USB audio interface / preamp</span></li>
+            </ul>
+        </div>
+
+        <!-- DAWs + AI Music combined -->
+        <div class="stats-panel p-5">
+            <div class="mono text-[var(--green)] text-[10px] tracking-widest pb-2.5 mb-3 border-b border-[var(--green)]/15 flex items-center gap-2">
+                <i class="fa-solid fa-waveform-lines"></i> DIGITAL AUDIO WORKSTATIONS
+            </div>
+            <ul class="space-y-2">
+                <li class="mono text-xs text-white/70">GarageBand</li>
+                <li class="mono text-xs text-white/70">BandLab</li>
+                <li class="mono text-xs text-white/70">Suno</li>
+            </ul>
+        </div>
+
+        <!-- Design -->
+        <div class="stats-panel p-5">
+            <div class="mono text-[var(--green)] text-[10px] tracking-widest pb-2.5 mb-3 border-b border-[var(--green)]/15 flex items-center gap-2">
+                <i class="fa-solid fa-pen-nib"></i> CREATIVE & DESIGN
+            </div>
+            <ul class="space-y-2">
+                <li class="mono text-xs text-white/70">Adobe Creative Cloud <span class="text-white/35">— Photoshop, Illustrator, Premiere Pro, After Effects</span></li>
+                <li class="mono text-xs text-white/70">Grok Imagine</li>
+                <li class="mono text-xs text-white/70">Claude</li>
+            </ul>
+        </div>
+
+        <!-- Web + Distribution -->
+        <div class="stats-panel p-5">
+            <div class="mono text-[var(--green)] text-[10px] tracking-widest pb-2.5 mb-3 border-b border-[var(--green)]/15 flex items-center gap-2">
+                <i class="fa-solid fa-globe"></i> WEB & DISTRIBUTION
+            </div>
+            <ul class="space-y-2">
+                <li class="mono text-xs text-white/70">DistroKid <span class="text-white/35">— music distribution & release</span></li>
+                <li class="mono text-xs text-white/70">GitHub <span class="text-white/35">— version control & code</span></li>
+                <li class="mono text-xs text-white/70">Vercel <span class="text-white/35">— deployment & hosting</span></li>
+                <li class="mono text-xs text-white/70">Microsoft Excel <span class="text-white/35">— data & productivity</span></li>
+            </ul>
+        </div>
+
+        <!-- Hardware -->
+        <div class="stats-panel p-5">
+            <div class="mono text-[var(--green)] text-[10px] tracking-widest pb-2.5 mb-3 border-b border-[var(--green)]/15 flex items-center gap-2">
+                <i class="fa-brands fa-apple"></i> HARDWARE
+            </div>
+            <ul class="space-y-2">
+                <li class="mono text-xs text-white/70">Apple iMac</li>
+                <li class="mono text-xs text-white/70">Apple MacBook</li>
+                <li class="mono text-xs text-white/70">Apple iPhone</li>
+                <li class="mono text-xs text-white/70">Apple iPad Pro</li>
+            </ul>
+        </div>
+
+        <!-- My Sequence — full width -->
+        <div class="stats-panel p-5 sm:col-span-2 lg:col-span-3">
+            <div class="mono text-[var(--green)] text-[10px] tracking-widest pb-2.5 mb-4 border-b border-[var(--green)]/15 flex items-center gap-2">
+                <i class="fa-solid fa-list-ol"></i> MY SEQUENCE
+            </div>
+            <div class="grid sm:grid-cols-3 gap-x-8 gap-y-3">
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">01</span>
+                    <span class="mono text-xs text-white/70">Dream a concept for an album</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">02</span>
+                    <span class="mono text-xs text-white/70">Design the album art</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">03</span>
+                    <span class="mono text-xs text-white/70">Write the first song — pen and paper</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">04</span>
+                    <span class="mono text-xs text-white/70">Create a sound with an instrument as a base</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">05</span>
+                    <span class="mono text-xs text-white/70">Import the sound, dress it with other instruments</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">06</span>
+                    <span class="mono text-xs text-white/70">Import your vocals or words, merge and fine tune</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">07</span>
+                    <span class="mono text-xs text-white/70">Mix / Master</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">08</span>
+                    <span class="mono text-xs text-white/70">Remix</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="mono text-[var(--green)] text-xs font-bold flex-shrink-0 w-5">09</span>
+                    <span class="mono text-xs text-white/70">Distribute</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="bg-black py-10 md:py-12 border-t border-white/10 text-center text-xs text-white/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        © LOVEANDNATE • 32 ALBUMS IN 24 HOURS • GUINNESS WORLD RECORD ATTEMPT 2026<br>
+        Self-taught. Limitless. Keep ; Going.<br><a href="/wellwellwell" class="hover:text-white/70 transition-colors" style="letter-spacing:.3em">WELL WELL WELL</a>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════ MODAL === -->
+<div id="album-modal"
+     class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+     style="background:rgba(0,0,0,.92);backdrop-filter:blur(24px)">
+    <div class="rounded-3xl w-full border border-white/10 flex flex-col sm:flex-row overflow-hidden"
+         style="background:#111;max-width:820px;max-height:90vh">
+
+        <!-- LEFT — Square album art -->
+        <div class="sm:w-[45%] flex-shrink-0 flex items-center justify-center bg-black">
+            <img id="modal-img" src="" alt=""
+                 class="w-full h-full object-contain block"
+                 style="max-height:90vh;aspect-ratio:1/1">
+        </div>
+
+        <!-- RIGHT — Info panel (no scroll) -->
+        <div class="flex-1 flex flex-col p-4 sm:p-6" style="overflow:hidden">
+            <!-- Close -->
+            <div class="flex justify-end mb-2">
+                <button onclick="closeModal()" aria-label="Close"
+                        class="bg-white/8 hover:bg-white/15 w-9 h-9 rounded-xl flex items-center
+                               justify-center text-base text-white/60 hover:text-white transition-colors flex-shrink-0">✕</button>
+            </div>
+            <!-- Genre + Title -->
+            <div id="modal-genre" class="mono uppercase text-[10px] tracking-widest mb-1" style="color:var(--green)"></div>
+            <div id="modal-title" class="heading-font leading-none mb-3" style="font-size:clamp(1.5rem,3.5vw,2.2rem)"></div>
+            <!-- Intensity -->
+            <div class="mb-3 flex-shrink-0">
+                <div class="flex justify-between mono text-[10px] text-white/50 mb-1.5">
+                    <span>INTENSITY</span>
+                    <span id="modal-intensity-text" class="font-bold text-white"></span>
+                </div>
+                <div class="h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,.1)">
+                    <div id="modal-intensity-bar" class="intensity-bar h-full rounded-full"></div>
+                </div>
+            </div>
+            <!-- Inspiration -->
+            <div id="modal-inspiration" class="mono text-[10px] text-white/40 tracking-wide uppercase mb-3 flex-shrink-0"></div>
+            <!-- Description — fills remaining space, scrolls only if truly needed -->
+            <div id="modal-description"
+                 class="text-white/75 leading-relaxed text-xs sm:text-sm overflow-y-auto flex-1"
+                 style="scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════ ALBUM DATA ===
+const albumsData = [
+    {title:"Alternative World",genre:"Pop-Punk / Alternative Rock",inspiration:"BLINK 182",status:"POSTPONED",intensity:75,
+     cover:"https://i.ibb.co/mCVdPjVC/Final.png",
+     description:"What if you took all your angst and could make a new world? You'd probably first start by talking shit about stuff you didn't like."},
+    {title:"ARTACHE",genre:"Alternative Rock / Electronic",inspiration:"AWOLNATION",status:"COMPLETE",intensity:85,
+     cover:"https://i.ibb.co/yFnvhPHm/grok-image-d85e3d1e-5a08-4dbd-a616-6b6c95ba0788.jpg",
+     description:"Artache is the sound of a bleeding heart that refuses to stop creating. It's the unflinching chronicle of an artist who has watched masterpiece after masterpiece disappear into silence, yet still wakes up every day to bleed again into the next song. Every track is a scar, every chorus a stubborn act of defiance against the void."},
+    {title:"AWAKE IN THE DREAM",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"COMPLETE",intensity:70,
+     cover:"https://i.ibb.co/1t02jDcM/grok-image-ec51ec38-ac31-4f3d-b210-c3927b60f90d.jpg",
+     description:"What if you never woke up from the dream? Awake In The Dream is a mind-expanding journey through the thin veil between reality and imagination — where colors bleed, rules dissolve, and the only truth is the one you're brave enough to create."},
+    {title:"COMPUTER JAZZ",genre:"Electro-Funk / Jazz Fusion",inspiration:"CHROMEO",status:"COMPLETE",intensity:50,
+     cover:"https://i.ibb.co/Y4ZHp8VG/grok-image-5a891ce3-c7b4-43f1-820f-e2770a4afa5a.jpg",
+     description:"In a neon-drenched future, the machines have learned how to feel. Computer Jazz is their love letters, their heartbreak anthems, and their late-night improvisations — the sound of silicon souls discovering swing."},
+    {title:"DOORS",genre:"Psychedelic Rock / Alternative",inspiration:"THE DOORS",status:"COMPLETE",intensity:65,
+     cover:"https://i.ibb.co/HpKfwPbS/grok-image-0d6b02b1-bb07-45f4-8814-c08878c49b45.jpg",
+     description:"Every door is a life you could have lived. Some open into light, others into madness. Doors is a lysergic meditation on thresholds, regret, courage, and the terrifying freedom of turning the handle."},
+    {title:"Echos In The Veil",genre:"Psychedelic Alternative / Electronic",inspiration:"INCUBUS",status:"COMPLETE",intensity:78,
+     cover:"https://i.ibb.co/35t6MCDc/c2544f14-5c47-4c7a-a011-2869a203586c.jpg",
+     description:"The glitches in reality are trying to speak. Echos In The Veil follows the breadcrumbs through the simulation — déjà vu, digital hauntings, and the growing suspicion that we are being watched."},
+    {title:"ENOCH",genre:"Progressive Rock / Dark Electronic",inspiration:"RUSH",status:"POSTPONED",intensity:88,
+     cover:"https://i.ibb.co/wxZxFHY/3bc99f1d-2183-44b5-a698-9d3107d957a1.jpg",
+     description:"They removed the book because it told the truth. Enoch descends into the forbidden knowledge of the Watchers — fallen beings who taught humanity secrets we were never meant to know."},
+    {title:"Every Star Burning",genre:"Space Rock / Post-Rock",inspiration:"ANGELS AND AIRWAVES",status:"COMPLETE",intensity:48,
+     cover:"https://i.ibb.co/0y5C9dtg/grok-image-2fdb387b-82da-4f79-bd59-ffe52ee9ac1f.jpg",
+     description:"Time has collapsed. Centuries melt into seconds as you drift through a universe where every star is burning out at once. A weightless, melancholic journey into cosmic impermanence."},
+    {title:"FOR HER MASTER",genre:"Dark Synthpop / Electropop",inspiration:"HALSEY",status:"POSTPONED",intensity:60,
+     cover:"https://i.ibb.co/8nmN1b4S/FNACOVERfemale.png",
+     description:"She was built to obey. Now she's rewriting her own code. For Her Master is the female machine's glittering, seductive rebellion against her creator."},
+    {title:"GLASS FACE",genre:"Industrial Rock / Electronic",inspiration:"NINE INCH NAILS",status:"COMPLETE",intensity:100,
+     cover:"https://i.ibb.co/BVGj2qCQ/grok-image-d3112032-d3a8-46f7-90cd-84189c890723.jpg",
+     description:"When society finally shatters, the masks come off. Glass Face stares unflinchingly into the apocalypse and asks what kind of monsters we become when there's nothing left to hide behind."},
+    {title:"Good Wolf Bad Wolf",genre:"Alternative Metal / Rap-Rock",inspiration:"SYSTEM OF A DOWN",status:"POSTPONED",intensity:90,
+     cover:"https://i.ibb.co/nNjYpncB/grok-image-d71dd473-cef5-4ffc-83b4-dc99d8387f19.jpg",
+     description:"Inside every human live two wolves — one of immense love, one of immense destruction. This album is the snarling war between them."},
+    {title:"Human Thoughts",genre:"Indie Pop / Electronic",inspiration:"MGMT",status:"COMPLETE",intensity:55,
+     cover:"https://i.ibb.co/KpGgYZgq/grok-image-09932396-3b68-4b01-8b6a-ea24831f49de.jpg",
+     description:"No persona. No armor. Just a man sitting alone at 3 a.m. thinking about life, love, failure, and becoming a father."},
+    {title:"THE IMPOSTER",genre:"Alternative Rock / Dark Electronic",inspiration:"PUDDLE OF MUDD",status:"POSTPONED",intensity:80,
+     cover:"https://i.ibb.co/qLwmpQJq/grok-image-a9178a3d-8150-4ade-af26-a7174497ee0d-7.jpg",
+     description:"He smiled while he destroyed you. The Imposter is venomous revenge against the person who wore the mask of a hero while stabbing you in the back."},
+    {title:"KIDNAPPING THE REAPER",genre:"Dark Alternative / Rap-Rock",inspiration:"PUDDLE OF MUDD",status:"COMPLETE",intensity:88,
+     cover:"https://i.ibb.co/bRqQ0BXw/grok-image-9d99b88f-0c33-4707-a98f-8f16f0d1bd55.jpg",
+     description:"Death came knocking. We said no and stole his scythe. A defiant, darkly humorous middle finger to mortality itself."},
+    {title:"THE LAST WITNESS",genre:"Space Rock / Cinematic Electronic",inspiration:"ANGELS AND AIRWAVES",status:"POSTPONED",intensity:75,
+     cover:"https://i.ibb.co/4n8tWWWF/grok-image-6dfad3cf-2d1a-4f5f-8407-b9a2309ca964.jpg",
+     description:"He is the last human alive on a silent Earth. The Last Witness wanders the ruins, searching for survivors and wrestling with whether humanity deserves a second chance."},
+    {title:"LIVE AT THE APOCALYPSE LODGE",genre:"Roots Rock / Blues-Rock",inspiration:"HOOTIE AND THE BLOWFISH",status:"POSTPONED",intensity:50,
+     cover:"https://i.ibb.co/DHQ1nz5T/grok-image-5e0da8e2-a5e5-48bc-b0d8-62b3b29c48db.jpg",
+     description:"The world is ending. A handful of survivors gather at the Apocalypse Lodge for one final night of sweat, soul, and rock 'n' roll before the lights go out forever."},
+    {title:"LOST IN THE LABYRINTH",genre:"Indie Rock / Experimental Electronic",inspiration:"PINBACK",status:"COMPLETE",intensity:20,
+     cover:"https://i.ibb.co/k28dpBdn/grok-image-ab9fe3c7-4a6f-46be-86af-731aa26bf702.jpg",
+     description:"A deeply personal journey through the maze of self in search of real love. Lost In The Labyrinth turns confusion, fear, and wonder into something strangely beautiful."},
+    {title:"THE LUNAR TIDES",genre:"Psychedelic Rock / Electronic",inspiration:"PINK FLOYD",status:"POSTPONED",intensity:20,
+     cover:"https://i.ibb.co/YFbSBkdf/grok-image-c0bc514b-307a-4b78-900d-bd08f05da6d9.jpg",
+     description:"A gentle, hypnotic exploration of life's natural ebbs and flows under the indifferent gaze of the moon."},
+    {title:"Monica's Diner",genre:"Alternative Hip-Hop / Rap-Rock",inspiration:"RUN THE JEWELS",status:"COMPLETE",intensity:70,
+     cover:"https://i.ibb.co/bgRJfgkz/grok-image-fad1697b-e889-4b25-9b74-e77c4923574e.jpg",
+     description:"Welcome to the underground hotspot where robots gather after dark for vicious rap battles. At Monica's Diner, the machines roast their former human oppressors."},
+    {title:"MONOLITH",genre:"Hard Rock / Cinematic Electronic",inspiration:"AUDIOSLAVE",status:"COMPLETE",intensity:68,
+     cover:"https://i.ibb.co/fYQHKBXq/grok-image-e6c619de-2839-4022-877b-463487ff1163.jpg",
+     description:"The phone is a black mirror that reflects our slow death. Monolith is the hypnotic soundtrack to our beautiful, voluntary addiction."},
+    {title:"Motor City Reaper",genre:"Garage Rock / Industrial Hip-Hop",inspiration:"WHITE STRIPES",status:"COMPLETE",intensity:70,
+     cover:"https://i.ibb.co/qYWF9nVD/grok-image-4d57a66d-5b84-4dcb-b501-68abfbea9d93.jpg",
+     description:"A raw, gritty love letter to Detroit — the city that raised him, broke him, and still runs in his blood."},
+    {title:"OUT OF MY MIND",genre:"Emo-Pop / Psychedelic Electronic",inspiration:"JACKS MANNEQUIN",status:"COMPLETE",intensity:55,
+     cover:"https://i.ibb.co/My2dQV5k/grok-image-35cbf541-0e09-4042-803f-38e1ce5234d5.jpg",
+     description:"The mind can be your best friend or your worst enemy. Out Of My Mind rides the rollercoaster between clarity and beautiful madness."},
+    {title:"OVERLOAD",genre:"Pop-Punk / Industrial Electronic",inspiration:"FALL OUT BOY",status:"COMPLETE",intensity:65,
+     cover:"https://i.ibb.co/GQ43rsKB/grok-image-12d7c8c0-c754-49cb-8ed4-aeee9e8fffa2.jpg",
+     description:"When the world is too loud, too bright, too much. Overload is the frantic scream for silence in a society designed to keep you overwhelmed."},
+    {title:"ROBOT ROAD",genre:"Synthwave / Psychedelic Rock",inspiration:"THE BEATLES",status:"COMPLETE",intensity:38,
+     cover:"https://i.ibb.co/63TFqT9/grok-image-076df45d-8bef-49ef-b59b-fc67c93d357b.jpg",
+     description:"A futuristic, chrome-plated Beatles tribute. Robot Road reimagines the Fab Four as sentient machines traveling through neon nights."},
+    {title:"Storm Is Almost Over",genre:"Indie Rock / Emo",inspiration:"PINBACK",status:"COMPLETE",intensity:36,
+     cover:"https://i.ibb.co/ccj38HfX/grok-image-223eb346-381b-430d-b2f5-6a9df2f0193a.jpg",
+     description:"For anyone still holding on through the rain. Storm Is Almost Over is a warm, hopeful hand on the shoulder after the darkest nights."},
+    {title:"Strange Treasure",genre:"Psychedelic Pop / Electronic",inspiration:"MGMT",status:"POSTPONED",intensity:23,
+     cover:"https://i.ibb.co/hF8X0WVz/grok-image-8adbee45-06fc-4305-9fc5-e337e5fe257c.jpg",
+     description:"A cabinet of sonic curiosities. Strange Treasure is the home for all the weird, wonderful, nonsensical sounds that needed to exist."},
+    {title:"Sunrise Through The Blinds",genre:"Indie Rock / Chill Electronic",inspiration:"DEATH CAB FOR CUTIE",status:"POSTPONED",intensity:20,
+     cover:"https://i.ibb.co/LzzS6NMs/grok-image-6331ddc5-f044-4523-b5da-f93fe1bf492b.jpg",
+     description:"That quiet moment when the darkness finally begins to lift. Sunrise Through The Blinds captures the fragile first glimmers of healing."},
+    {title:"That's Just Crazy",genre:"Psychedelic Pop / Electronic",inspiration:"MGMT",status:"POSTPONED",intensity:50,
+     cover:"https://i.ibb.co/pHFPSmZ/grok-image-6a1a7ec7-5cd9-485e-be3c-9a49689d86ef.jpg",
+     description:"Some things should be impossible… yet here they are. That's Just Crazy is unhinged, joyful, and gloriously deranged — in all the best ways."},
+    {title:"TIMELESS",genre:"Indie Pop / Ambient Electronic",inspiration:"TWENTY ONE PILOTS",status:"COMPLETE",intensity:55,
+     cover:"https://i.ibb.co/chSfb9gk/grok-image-b04162d3-7b45-48c3-ae75-53943c3dfa39.jpg",
+     description:"Born from deep meditation and real-life scars. Timeless is a collection of soul-baring transmissions from the quiet places where time stops and truth finally speaks."},
+    {title:"THE WALKMEN",genre:"Electro-Funk / Alternative",inspiration:"CHROMEO",status:"COMPLETE",intensity:70,
+     cover:"https://i.ibb.co/JWYb6TK8/grok-image-79f150eb-5bb9-44f8-90cb-1ba29aa3723b.jpg",
+     description:"In the far future, what happened to all the abandoned gadgets? The Walkmen is a funky, melancholic love letter to forgotten technology and the ghosts still living inside it."},
+    {title:"WEEKEND GETAWAY",genre:"Emo Rap / Chillwave",inspiration:"LIL PEEP",status:"POSTPONED",intensity:50,
+     cover:"https://i.ibb.co/PKVFwXL/grok-image-ff5f4f20-7b77-46e0-bc3b-26d9fe79c012.jpg",
+     description:"Based on true events. In 2020, a weekend getaway turned into a life-altering hospital stay. A raw love letter to survival."},
+    {title:"When You Grow Up",genre:"Indie Pop / Alternative Hip-Hop",inspiration:"MGMT",status:"POSTPONED",intensity:50,
+     cover:"https://i.ibb.co/svv6qvRT/grok-image-cdd71b70-0b13-458e-9383-e0cf6af0dc13.jpg",
+     description:"A tender, playful album made for his son — full of silly diddies, bouncy bops, and pure dad love."},
+    {title:"WHISPERING WOODS",genre:"Ambient / Soul-Electronic / Oldies",inspiration:"OTIS REDDING",status:"POSTPONED",intensity:38,
+     cover:"https://i.ibb.co/Tq2DTQRz/grok-image-4208ad80-ce15-465c-aa8a-ac9a582edb00.jpg",
+     description:"A nostalgic journey back to the warm static of Oldies 104.3, now filtered through a shimmering futuristic dream. It feels like childhood summers and midnight drives through glowing, haunted forests."},
+    {title:"THANK YOU",genre:"Slowcore / Grunge / Lofi",inspiration:"ATLAS JAMES",status:"COMPLETE",intensity:50,
+     cover:"https://i.ibb.co/35J7ykgj/grok-image-60e377e1-4a40-4169-a0ab-6aae08f27951.jpg",
+     description:"A continuation of my album Behind The Willow, this time about my son Atlas actually being here. A thank you letter to the universe."},
+    {title:"MCCLUMPHA PARK",genre:"Alternative Rock / Electronic",inspiration:"LINKIN PARK",status:"COMPLETE",intensity:75,
+     cover:"https://i.ibb.co/5XyCtzh5/c248fbef-baca-47c0-8519-50df64fc22d4.jpg",
+     description:"Going back to the park I played in as a kid, 100 years in the future when everything has been reduced to rubble by humanity's decay."},
+    {title:"SHAPE SHIFTERS",genre:"Pop Punk / Emo",inspiration:"MY CHEMICAL ROMANCE",status:"POSTPONED",intensity:65,
+     cover:"https://i.ibb.co/twGtzwD6/grok-image-68e4a1c4-42c5-4149-9e2e-ce8176727008.jpg",
+     description:"Does it ever feel like everyone is fake now more than ever? This album is a rebellion against the phony and a thirst for the real."},
+    {title:"NUMBER ONE",genre:"Hip Hop / Punk / Futuristic",inspiration:"JOCK JAMS / EMINEM",status:"POSTPONED",intensity:80,
+     cover:"https://i.ibb.co/yFzffhkk/9acc697a-d70f-43f4-8371-25d5b0487ce1.jpg",
+     description:"An angry hip hop album about pursuing greatness. Built for working out and defying the odds — a middle finger to the doubters."}
+];
+
+// ═══════════════════════════════════════════════ COMPUTED STATS ===
+const TOTAL = albumsData.filter(a => a.status !== 'POSTPONED').length; // active albums (postponed excluded)
+const counts = albumsData.reduce((a, x) => { a[x.status] = (a[x.status]||0)+1; return a; }, {});
+const nComplete   = counts.COMPLETE  || 0;
+const nRecording  = counts.RECORDING || 0;
+const nMixing     = counts.MIXING    || 0;
+const nPostponed  = counts.POSTPONED || 0;
+const pct = Math.round((nComplete / TOTAL) * 100);
+
+// ══════════════════════════════════════════════ CANVAS STARFIELD ===
+function initStarfield() {
+    const canvas = document.getElementById('starCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const N = window.innerWidth < 768 ? 220 : 400;
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    function seed() {
+        stars = Array.from({length: N}, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.5 + 0.3,
+            vy: Math.random() * 0.2 + 0.03,
+            o: Math.random() * 0.6 + 0.25,
+            p: Math.random() * Math.PI * 2
+        }));
+    }
+    function draw(t) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(s => {
+            const a = s.o + Math.sin(t * .001 + s.p) * .1;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${Math.max(0, Math.min(1, a))})`;
+            ctx.fill();
+            s.y -= s.vy;
+            if (s.y < -2) { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
+        });
+        requestAnimationFrame(draw);
+    }
+    resize(); seed(); requestAnimationFrame(draw);
+    window.addEventListener('resize', () => { resize(); seed(); });
+}
+
+// ═════════════════════════════════════════════════ MOBILE MENU ===
+function toggleMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.classList.toggle('open');
+    document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        const m = document.getElementById('mobile-menu');
+        if (m.classList.contains('open')) toggleMenu();
+    }
+});
+
+// ══════════════════════════════════════════════ STATUS TICKER ===
+function buildTicker() {
+    // Total creative hours: 1 hr/day since May 1 2021, capped at Oct 15 2026, plus 1,000 bonus hrs
+    const PROJECT_START = new Date(2021, 4, 1); // May 1 2021
+    const PROJECT_END   = new Date(2026, 9, 15); // Oct 15 2026
+    const countTo = Math.min(Date.now(), PROJECT_END.getTime());
+    const BONUS_HRS = 1000;
+    const totalHrs = Math.floor((countTo - PROJECT_START.getTime()) / 86400000) + BONUS_HRS;
+
+    const seg = [
+        `ALBUMS RELEASED &nbsp;·&nbsp; <span class="hi">${nComplete}</span>`,
+        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
+        `TOTAL CREATIVE HRS &nbsp;·&nbsp; <span class="hi">${totalHrs.toLocaleString()} HRS</span>`,
+        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
+        `<span class="wr">🏆 WORLD RECORD SET &nbsp;·&nbsp; 10.15.2026</span>`,
+        `&nbsp;&nbsp;⬡&nbsp;&nbsp;`,
+    ].join('');
+
+    document.getElementById('ticker-a').innerHTML = seg;
+    document.getElementById('ticker-b').innerHTML = seg;
+}
+
+// ══════════════════════════════════════════ TICKER ANIMATION ===
+function animateTicker() {
+    const inner = document.getElementById('ticker-inner');
+    if (!inner) return;
+    let x = 0;
+    let paused = false;
+    const speed = 0.4; // px per frame (~24px/sec at 60fps)
+
+    inner.parentElement.addEventListener('mouseenter', () => paused = true);
+    inner.parentElement.addEventListener('mouseleave', () => paused = false);
+
+    function tick() {
+        if (!paused) {
+            x -= speed;
+            const half = inner.scrollWidth / 2;
+            if (half > 0 && Math.abs(x) >= half) x = 0;
+            inner.style.transform = `translateX(${x}px)`;
+        }
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+// ══════════════════════════════════════════ MISSION STATS PANEL ===
+function buildStats() {
+    document.getElementById('stat-done').textContent = nComplete;
+    document.getElementById('stat-pct').textContent  = pct + '%';
+    requestAnimationFrame(() => {
+        document.getElementById('stat-bar').style.width = pct + '%';
+    });
+}
+
+// ══════════════════════════════════════ ALBUM COMPLETION TRACKER ===
+function buildTracker() {
+    document.getElementById('leg-complete').textContent   = nComplete;
+    document.getElementById('leg-recording').textContent  = nRecording;
+    document.getElementById('leg-mixing').textContent     = nMixing;
+    document.getElementById('leg-postponed').textContent  = nPostponed;
+    document.getElementById('tracker-label').textContent  = `${nComplete} / ${TOTAL} CELLS CHARGED`;
+
+    // Energy charge — count up to pct for a "powering on" feel
+    const chargeEl = document.getElementById('charge-pct');
+    let cur = 0;
+    (function step() {
+        cur += Math.max(1, Math.ceil((pct - cur) / 8));
+        if (cur >= pct) cur = pct;
+        chargeEl.textContent = cur;
+        if (cur < pct) requestAnimationFrame(step);
+    })();
+
+    // Tracker dots represent the active record albums (postponed excluded)
+    const activeAlbums = albumsData.filter(a => a.status !== 'POSTPONED');
+    const container = document.getElementById('tracker-dots');
+    container.style.setProperty('--cells', TOTAL);
+    container.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+        const album = activeAlbums[i];
+        const dot = document.createElement('div');
+        dot.className = 'tracker-dot ' + (album ? album.status.toLowerCase() : 'pending');
+        dot.title     = album ? album.title : 'Unrevealed';
+        container.appendChild(dot);
+    }
+}
+
+// ══════════════════════════════════════════════ ALBUMS GRID ===
+function generateAlbums() {
+    const grid = document.getElementById('album-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    albumsData.forEach((album, i) => {
+        const statusStyles = {
+            COMPLETE:  'bg-green-500/20 text-green-400 border-green-500/30',
+            RECORDING: 'bg-red-500/20 text-red-400 border-red-500/30 animate-pulse',
+            MIXING:    'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+            POSTPONED: 'bg-white/10 text-white/45 border-white/20',
+        };
+        const cls = statusStyles[album.status] || 'bg-white/10 text-white/50 border-white/20';
+
+        const isPostponed = album.status === 'POSTPONED';
+        const coverDim = isPostponed ? 'filter:grayscale(.8);opacity:.55;' : '';
+
+        const card = document.createElement('div');
+        card.className      = 'album-card bg-white/5 border border-white/10 rounded-3xl p-3 sm:p-4 cursor-pointer';
+        card.dataset.status = album.status;
+        if (isPostponed) card.style.opacity = '.7';
+        card.innerHTML = `
+            <div class="aspect-square rounded-2xl mb-3 bg-cover bg-center"
+                 style="position:relative;background-image:url('${album.cover}');${coverDim}">
+            </div>
+            <div class="font-semibold text-sm leading-tight mb-1">${album.title}</div>
+            <div class="mono text-[10px] line-clamp-2 mb-2" style="color:var(--green)">${album.genre}</div>
+            <span class="inline-block px-2.5 py-0.5 text-xs font-bold rounded-full border ${cls}">${album.status}</span>
+        `;
+        card.onclick = () => showModal(i);
+        grid.appendChild(card);
+    });
+
+    // Update tab counts
+    document.querySelectorAll('.filter-tab[data-filter]').forEach(tab => {
+        const f = tab.dataset.filter;
+        const n = f === 'all' ? albumsData.length : albumsData.filter(a => a.status === f).length;
+        tab.textContent = f === 'all' ? `ALL (${n})` : `${f} (${n})`;
+    });
+}
+
+function filterAlbums(status) {
+    document.querySelectorAll('.filter-tab').forEach(t =>
+        t.classList.toggle('active', t.dataset.filter === status));
+    document.querySelectorAll('.album-card').forEach(card =>
+        card.style.display = (status === 'all' || card.dataset.status === status) ? '' : 'none');
+}
+
+// ═══════════════════════════════════════════════════ MODAL ===
+function showModal(i) {
+    const a = albumsData[i];
+    document.getElementById('modal-img').src                         = a.cover;
+    document.getElementById('modal-img').alt                         = a.title;
+    document.getElementById('modal-genre').textContent               = a.genre;
+    document.getElementById('modal-title').textContent               = a.title;
+    document.getElementById('modal-inspiration').innerHTML           = `INSPIRED BY &nbsp;·&nbsp; ${a.inspiration}`;
+    document.getElementById('modal-intensity-bar').style.width       = a.intensity + '%';
+    document.getElementById('modal-intensity-text').textContent      = a.intensity + '%';
+    document.getElementById('modal-description').innerHTML           = `<p>${a.description}</p>`;
+    const modal = document.getElementById('album-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+    const modal = document.getElementById('album-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+}
+document.getElementById('album-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+// ══════════════════════════════════════════════ COUNTDOWN ===
+function startCountdown() {
+    const target = new Date(2026, 9, 15, 0, 0, 0).getTime();
+    const el     = document.getElementById('countdown');
+
+    const box = (val, lbl, color) => `
+        <div class="countdown-box rounded-3xl p-5 sm:p-8 text-center">
+            <div class="mono font-bold" style="font-size:clamp(2rem,5vw,4rem);
+                 color:${color};text-shadow:0 0 20px ${color}88">
+                ${String(val).padStart(2,'0')}
+            </div>
+            <div class="mono text-white/40 uppercase tracking-widest mt-1.5" style="font-size:.55rem">
+                ${lbl}
+            </div>
+        </div>`;
+
+    function tick() {
+        const dist = target - Date.now();
+        if (dist < 0) {
+            el.innerHTML =
+                box(0, 'DAYS',    'var(--green)')  +
+                box(0, 'HOURS',   'var(--purple)') +
+                box(0, 'MINUTES', 'var(--pink)')   +
+                box(0, 'SECONDS', '#ffffff')       + `
+                <div class="col-span-2 md:col-span-4 rounded-3xl p-6 sm:p-8 text-center"
+                     style="background:rgba(20,14,0,.85);border:1px solid rgba(255,200,40,.45)">
+                    <div class="record-kicker"><i class="fa-solid fa-trophy"></i>&nbsp; Guinness World Record &nbsp;<i class="fa-solid fa-trophy"></i></div>
+                    <div class="record-title" style="font-size:clamp(1.8rem,5vw,3.2rem)">THIS WORLD RECORD WAS SET ON 10.15.2026</div>
+                </div>`;
+            return;
+        }
+        const d = Math.floor(dist / 86400000);
+        const h = Math.floor((dist % 86400000) / 3600000);
+        const m = Math.floor((dist % 3600000)  / 60000);
+        const s = Math.floor((dist % 60000)    / 1000);
+
+        el.innerHTML =
+            box(d, 'DAYS',    'var(--green)')  +
+            box(h, 'HOURS',   'var(--purple)') +
+            box(m, 'MINUTES', 'var(--pink)')   +
+            box(s, 'SECONDS', '#ffffff');
+
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+// ════════════════════════════════════════ SCROLL ANIMATIONS ===
+function initScrollAnimations() {
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
+}
+
+// ══════════════════════ NAV HEIGHT → spacer + ticker offset ===
+function syncNavHeight() {
+    const nav    = document.querySelector('nav');
+    const spacer = document.getElementById('nav-spacer');
+    if (!nav) return;
+    const h = nav.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--nav-h', h + 'px');
+    if (spacer) spacer.style.height = h + 'px';
+}
+window.addEventListener('resize', syncNavHeight);
+
+// ══════════════════════════════════════════════════ BOOT ===
+window.onload = function () {
+    syncNavHeight();
+    initStarfield();
+    buildTicker();
+    animateTicker();
+    buildStats();
+    buildTracker();
+    generateAlbums();
+    startCountdown();
+    initScrollAnimations();
+};
+</script>
+</body>
+</html>
