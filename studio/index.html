@@ -682,24 +682,44 @@ body{padding-bottom:8.5rem}
     if(e.key==='Escape') setOpen(false);
   });
 
-  // Active section while scrolling
-  if('IntersectionObserver' in window && sections.length){
-    const ratios=new Map();
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(en=>ratios.set(en.target.id, en.isIntersecting ? en.intersectionRatio : 0));
-      let best=null, bestR=-1;
-      for(const [id,r] of ratios){
-        if(r>bestR){ bestR=r; best=id; }
-      }
-      if(best && bestR>0) setActive(best);
-    },{
-      // account for fixed nav: observe mid band of viewport
-      root:null,
-      rootMargin:'-25% 0px -45% 0px',
-      threshold:[0,0.1,0.25,0.5,0.75,1]
-    });
-    sections.forEach(s=>io.observe(s));
+  // Active highlight.
+  // Stacked layout (mobile/tablet): accurate scroll spy — the section whose
+  // top has most recently passed just under the fixed nav.
+  // Single-row layout (desktop): click-only; cleared on any manual scroll or
+  // when the tile row leaves the viewport.
+  const stacked=()=>sections.length>1 &&
+    Math.abs(sections[0].getBoundingClientRect().top-sections[1].getBoundingClientRect().top)>4;
+  const panels=document.querySelector('.panels');
+  function navH(){ return document.querySelector('nav').getBoundingClientRect().height; }
+  function spy(){
+    if(!stacked()) return;
+    const line=navH()+window.innerHeight*0.25;
+    const pr=panels.getBoundingClientRect();
+    if(pr.top>line || pr.bottom<navH()){ setActive(null); return; }
+    let cur=null;
+    for(const s of sections){ if(s.getBoundingClientRect().top<=line) cur=s.id; }
+    setActive(cur);
   }
+  function manual(){ if(!stacked()) setActive(null); }
+  addEventListener('wheel',manual,{passive:true});
+  addEventListener('touchmove',manual,{passive:true});
+  addEventListener('keydown',e=>{
+    if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(e.key)) manual();
+  });
+  let ticking=false;
+  addEventListener('scroll',()=>{
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(()=>{
+      ticking=false;
+      if(stacked()) spy();
+      else{
+        const pr=panels.getBoundingClientRect();
+        if(pr.bottom<navH() || pr.top>window.innerHeight) setActive(null);
+      }
+    });
+  },{passive:true});
+  addEventListener('resize',()=>{ if(stacked()) spy(); else setActive(null); });
+  spy();
 
   // Deep link on load
   if(location.hash){
