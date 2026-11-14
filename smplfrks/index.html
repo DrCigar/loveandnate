@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -22,6 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/smplfrks/media/wordmark.webp" type="image/webp">
+<script>document.documentElement.className="js"</script>
 <style>
 :root{
   --bg:#050506;--ink:#eceae4;--mute:#8a8780;
@@ -83,10 +84,30 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400}
     linear-gradient(rgba(181,106,58,.55),rgba(181,106,58,.55)) bottom right/1px 14px no-repeat}
 
 /* hero */
-.hero{position:relative;min-height:min(78vh,760px);display:flex;align-items:center;justify-content:center;text-align:center;padding:8.5rem 1.5rem 4.5rem;overflow:hidden;background:#000}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.22;filter:saturate(.9) blur(1.5px);transform:scale(1.04)}
-.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(5,5,6,.35),rgba(5,5,6,.92) 75%),linear-gradient(to top,var(--bg) 2%,transparent 40%)}
+.hero{position:relative;min-height:min(88vh,820px);display:flex;align-items:center;justify-content:center;text-align:center;padding:8.5rem 1.5rem 5rem;overflow:hidden;background:#000}
+.mosaic{position:absolute;inset:-4% -2%;z-index:0;display:flex;flex-direction:column;gap:10px;transform:rotate(-4deg) scale(1.08);opacity:.42;filter:saturate(1.05)}
+.mrow{flex:1 1 0;min-height:0;overflow:hidden}
+.mtrack{display:flex;gap:10px;height:100%;width:max-content;animation:drift-l 140s linear infinite}
+.mrow.r1 .mtrack{animation-name:drift-r;animation-duration:170s}
+.mrow.r2 .mtrack{animation-duration:200s}
+.mtrack img{height:100%;width:auto;aspect-ratio:1;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(201,206,214,.08)}
+@keyframes drift-l{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@keyframes drift-r{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse 62% 55% at 50% 48%,rgba(5,5,6,.78),rgba(5,5,6,.45) 55%,rgba(5,5,6,.2) 80%),linear-gradient(to top,var(--bg) 1%,transparent 30%),linear-gradient(to bottom,#000 0,transparent 22%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 4px)}
+.scroll-cue{position:absolute;left:50%;bottom:1.4rem;z-index:3;width:26px;height:42px;margin-left:-13px;border:1px solid rgba(201,206,214,.35);border-radius:14px}
+.scroll-cue span{position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:var(--copper);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:1}70%{transform:translateY(14px);opacity:0}100%{opacity:0}}
+.pill.pill-hot{color:#fff;border-color:rgba(181,106,58,.7);background:linear-gradient(135deg,rgba(181,106,58,.28),rgba(13,13,16,.6))}
+button.pill{appearance:none;cursor:pointer}
+.supply{width:min(420px,100%);margin-top:.4rem}
+.supply-top{display:flex;justify-content:space-between;gap:1rem;font-family:'Syncopate',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.55rem}
+.supply-top b{font-weight:400;color:#fff}
+.hero-supply .supply-top{justify-content:center}
+.bar{position:relative;height:6px;background:rgba(201,206,214,.1);box-shadow:inset 0 0 0 1px rgba(201,206,214,.14);overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--copper),#e0a477 60%,#fff);box-shadow:0 0 14px rgba(181,106,58,.6);transition:width 1.6s cubic-bezier(.2,.7,.2,1)}
+.bar i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-100%);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
 .hero-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1.4rem;max-width:960px}
 .hero-copy h1{width:min(860px,88vw)}
 .hero-copy h1 img{width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
@@ -112,8 +133,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400}
 .mint-copy{position:relative;z-index:4;padding:.5rem 0}
 .mint-copy h2{font-family:'Syncopate',sans-serif;font-size:clamp(1.05rem,2.1vw,1.45rem);letter-spacing:.1em;text-transform:uppercase;line-height:1.3;color:#fff;margin:.8rem 0 1rem}
 .mint-copy .pitch{color:rgba(236,234,228,.82);font-size:1.02rem;line-height:1.7;max-width:34rem}
-.mint-supply{margin-top:1.3rem;font-family:'Syncopate',sans-serif;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.mint-supply b{font-weight:400;color:#fff}
+.mint .supply{margin:1.4rem 0 0}
 .mint-widget{margin-top:1.4rem;min-height:110px}
 smpl-mint-button{display:block}
 .mint-widget.is-ready .mint-state{display:none}
@@ -163,6 +183,60 @@ smpl-mint-button{display:block}
 .project-social svg{width:18px;height:18px;fill:currentColor}
 .passion{color:var(--mute);font-family:'Syncopate',sans-serif;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase}
 
+/* minted gallery */
+.gal-intro{text-align:center;max-width:40rem;margin:-.6rem auto 1.6rem;color:var(--mute);font-size:1.02rem;line-height:1.7}
+.gal-actions{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:1.4rem}
+.gal-filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) auto;gap:.6rem;align-items:end;margin-bottom:1rem}
+.gal-filters label{display:flex;flex-direction:column;gap:.35rem;font-family:'Syncopate',sans-serif;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);min-width:0}
+.gal-filters select{appearance:none;width:100%;min-height:42px;padding:.55rem 2rem .55rem .8rem;background:#0b0b0e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9ced6' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right .6rem center/14px;border:1px solid #2a2a30;color:var(--ink);font:500 .85rem 'DM Sans',sans-serif;border-radius:0;text-overflow:ellipsis}
+.gal-filters select:focus-visible{border-color:rgba(181,106,58,.75)}
+.gal-filters .clear{appearance:none;min-height:42px;padding:0 1rem;background:transparent;border:1px solid #2a2a30;color:var(--mute);font-family:'Syncopate',sans-serif;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.gal-filters .clear:hover{color:#fff;border-color:rgba(181,106,58,.75)}
+.gal-count{text-align:center;margin:0 0 1.2rem;font-family:'Syncopate',sans-serif;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.gal-count b{font-weight:400;color:#fff}
+.gal-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.card{position:relative;background:#000;box-shadow:var(--glass);overflow:hidden;transform:perspective(700px) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .35s ease,box-shadow .35s ease;animation:card-in .6s cubic-bezier(.2,.7,.2,1) both}
+.card::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.14),transparent 40%)}
+.card:hover{box-shadow:0 0 0 1px rgba(181,106,58,.55),0 22px 44px rgba(0,0,0,.55),0 0 26px rgba(181,106,58,.18)}
+.card a{display:block}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;background:#0d0d10;transition:transform .5s ease}
+.card:hover img{transform:scale(1.05)}
+.card .tok{position:absolute;left:.55rem;bottom:.5rem;z-index:3;font-family:'Syncopate',sans-serif;font-size:.56rem;letter-spacing:.12em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.9);padding:.25rem .45rem;background:rgba(5,5,6,.55);backdrop-filter:blur(4px)}
+.card .traits{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;justify-content:flex-end;gap:.15rem;padding:.75rem .7rem 2.2rem;background:linear-gradient(to top,rgba(5,5,6,.94) 0%,rgba(5,5,6,.82) 55%,rgba(5,5,6,.2));opacity:0;transition:opacity .25s ease;pointer-events:none}
+.card .traits div{display:flex;justify-content:space-between;gap:.5rem;font-size:.68rem;line-height:1.3}
+.card .traits dt{font-family:'Syncopate',sans-serif;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);padding-top:.15rem;flex:0 0 auto}
+.card .traits dd{color:var(--ink);text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card:hover .traits,.card:focus-within .traits,.card.open .traits{opacity:1}
+.card .tbtn{position:absolute;right:.45rem;bottom:.45rem;z-index:5;width:30px;height:30px;border-radius:50%;border:1px solid rgba(201,206,214,.4);background:rgba(5,5,6,.6);color:#fff;font:italic 500 .95rem 'Cormorant Garamond',serif;cursor:pointer;display:none;align-items:center;justify-content:center}
+@media(hover:none){.card .tbtn{display:inline-flex}.card:hover .traits,.card:focus-within .traits{opacity:0}.card.open .traits{opacity:1}}
+@keyframes card-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.gal-foot{display:flex;justify-content:center;margin-top:1.6rem}
+/* reveal dialog */
+.reveal{margin:auto;padding:0;border:0;background:transparent;color:var(--ink);max-width:min(860px,calc(100% - 2rem));width:100%}
+.reveal::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(6px)}
+.reveal-in{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:1.6rem;align-items:center;padding:1.4rem;background:#08080a;box-shadow:var(--glass)}
+.reveal[open] .reveal-art img{animation:pop .8s cubic-bezier(.2,.9,.2,1.1) both}
+@keyframes pop{0%{opacity:0;transform:scale(.7) rotate(-4deg);filter:blur(10px) saturate(2)}60%{opacity:1;filter:blur(0) saturate(1.4)}100%{transform:none;filter:none}}
+.reveal-art{background:#000;overflow:hidden;box-shadow:0 0 0 1px rgba(201,206,214,.14),0 0 40px rgba(181,106,58,.25)}
+.reveal-art img{width:100%;aspect-ratio:1;object-fit:cover}
+.reveal-body h2{font-size:clamp(2rem,4vw,2.8rem);line-height:1;margin:.6rem 0 1rem}
+.rv-traits{display:grid;gap:.5rem;margin-bottom:1.4rem}
+.rv-traits div{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.45rem}
+.rv-traits dt{font-family:'Syncopate',sans-serif;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--copper);padding-top:.2rem}
+.rv-traits dd{text-align:right;font-size:.95rem}
+.reveal-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.reveal-x{position:absolute;top:.4rem;right:.5rem;z-index:2;width:40px;height:40px;border:0;background:transparent;color:var(--mute);font-size:1.8rem;line-height:1;cursor:pointer}
+.reveal-x:hover{color:#fff}
+/* tilt + reveal-on-scroll */
+.tilt{transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .4s ease}
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .tilt.rv.in{transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0))}
+@media(max-width:960px){.gal-filters{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.reveal-in{grid-template-columns:1fr;gap:1rem;padding:1rem}.reveal-body h2{font-size:1.9rem}}
+@media(max-width:560px){.gal-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.gal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.mosaic{gap:6px}.mtrack{gap:6px}.hero{min-height:84vh;min-height:84svh;padding:7rem 1.1rem 4rem}.hero-copy{gap:1.15rem}.scroll-cue{display:none}}
+@media(prefers-reduced-motion:reduce){.mtrack,.bar i::after,.scroll-cue span,.card,.reveal[open] .reveal-art img{animation:none!important}.js .rv{opacity:1;transform:none;transition:none}.tilt,.card{transform:none!important}.bar i{transition:none}}
+
 footer{border-top:1px solid var(--line);padding:2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-family:'Syncopate',sans-serif;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
 footer a:hover{color:var(--accent)}
 footer a.with-icon{display:inline-flex;align-items:center;gap:.4rem}
@@ -196,7 +270,7 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
   .nav-streams a{width:26px;height:26px}
   .nav-streams svg{width:16px;height:16px}
   .wrap{width:calc(100% - 2.2rem)}
-  .hero{min-height:auto;padding:6.5rem 1.1rem 3.5rem}
+  .hero{min-height:84vh;min-height:84svh;padding:7rem 1.1rem 4rem}
   .strip-btn{display:none}
   .strip-wrap{grid-template-columns:minmax(0,1fr)}
   .char-strip li{width:62vw}
@@ -259,23 +333,32 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
 </div>
 
 <header class="hero">
-  <div class="hero-bg" aria-hidden="true"><img src="/smplfrks/media/still-wall.webp" alt="" width="1600" height="900" fetchpriority="low"></div>
+  <div class="mosaic" aria-hidden="true">
+    <div class="mrow r0"><div class="mtrack"><img src="/smplfrks/freaks/t/139.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/165.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/610.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/80.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/107.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/26.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/239.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/398.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/671.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/139.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/165.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/610.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/80.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/107.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/26.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/239.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/398.webp" alt="" width="320" height="320" decoding="async"><img src="/smplfrks/freaks/t/671.webp" alt="" width="320" height="320" decoding="async"></div></div>
+    <div class="mrow r1"><div class="mtrack"><img src="/smplfrks/freaks/t/468.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/195.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/538.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/529.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/602.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/205.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/38.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/249.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/361.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/468.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/195.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/538.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/529.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/602.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/205.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/38.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/249.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/361.webp" alt="" width="320" height="320" decoding="async" loading="lazy"></div></div>
+    <div class="mrow r2"><div class="mtrack"><img src="/smplfrks/freaks/t/155.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/624.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/72.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/551.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/386.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/640.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/741.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/701.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/301.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/155.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/624.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/72.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/551.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/386.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/640.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/741.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/701.webp" alt="" width="320" height="320" decoding="async" loading="lazy"><img src="/smplfrks/freaks/t/301.webp" alt="" width="320" height="320" decoding="async" loading="lazy"></div></div>
+  </div>
   <div class="hero-copy">
     <p class="eyebrow">05 — NFTs</p>
     <h1><img src="/smplfrks/media/wordmark.webp" alt="SMPL FRKS" width="1600" height="329" fetchpriority="high"></h1>
-    <p class="tag">Welcome to the SMPL FRKS Universe.</p>
+    <p class="tag">Bad times don't last, but SMPL FRKS do.</p>
     <div class="pills">
-      <a class="pill" href="https://www.youtube.com/watch?v=3FHWpiRZ1xo" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>SMPL FRKS LoFi</a>
+      <a class="pill pill-hot" href="#mint">Mint</a>
+      <a class="pill" href="#minted">The minted</a>
+      <a class="pill" href="https://opensea.io/collection/smpl-frks" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14.5l4-6.5c.9 1.6 1.2 3.3.6 4.7L10 14.5H6zm5.5-8v8h3.2c1-.9 1.8-2 2.3-3.2-.8-2.3-2.8-4.2-5.5-4.8zM4.5 16h15c-.5 1.7-1.9 3-3.7 3H8.2c-1.8 0-3.2-1.3-3.7-3z"/></svg>OpenSea</a>
+      <a class="pill" href="https://www.youtube.com/watch?v=3FHWpiRZ1xo" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>LoFi</a>
       <a class="pill" href="https://distrokid.com/hyperfollow/loveandnate/smpl-frks" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 13.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7zm0-5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>Album</a>
     </div>
+    <div class="supply hero-supply" data-supply hidden><div class="supply-top"><span><b data-minted>745</b> / <span data-max>8,433</span> minted</span></div><div class="bar"><i data-bar></i></div></div>
   </div>
+  <a class="scroll-cue" href="#main" aria-label="Scroll to content"><span></span></a>
 </header>
 
 <main id="main">
   <section class="section" aria-labelledby="marvin-h">
     <div class="wrap">
-      <div class="story">
-        <div class="tile glass corners"><img src="/smplfrks/media/still-marvin.webp" alt="Marvin Stench, startled, in front of the SMPL FRKS graffiti logo" width="900" height="900" loading="lazy"></div>
+      <div class="story rv">
+        <div class="tile glass corners tilt"><img src="/smplfrks/media/still-marvin.webp" alt="Marvin Stench, startled, in front of the SMPL FRKS graffiti logo" width="900" height="900" loading="lazy"></div>
         <div>
           <p class="eyebrow" id="marvin-h">Marvin Stench</p>
           <div class="lead" style="margin-top:1rem">
@@ -285,13 +368,13 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
           </div>
         </div>
       </div>
-      <figure class="wall glass corners"><img src="/smplfrks/media/still-wall.webp" alt="A wall of SMPL FRKS character cards" width="1600" height="900" loading="lazy"></figure>
+      <figure class="wall glass corners rv tilt"><img src="/smplfrks/media/still-wall.webp" alt="A wall of SMPL FRKS character cards" width="1600" height="900" loading="lazy"></figure>
     </div>
   </section>
 
   <section class="section" id="mint" aria-labelledby="mint-h">
     <div class="wrap">
-      <div class="mint glass corners">
+      <div class="mint glass corners rv">
         <div class="mint-visual">
           <img src="/smplfrks/media/mint-poster.webp" alt="" width="800" height="800">
           <video data-mint-loop muted loop playsinline preload="none" poster="/smplfrks/media/mint-poster.webp" aria-hidden="true" tabindex="-1">
@@ -302,7 +385,7 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
           <p class="eyebrow">The collection</p>
           <h2 id="mint-h">Mint your SMPL FRKS</h2>
           <p class="pitch">Join the Freak Fam today! Real freaking utility: repeatable IRL discounts we call Simple Perk$, community of good people + good energy, elaborate storytelling &amp; A.I. Character chats. Save big &amp; vibe high with us way beyond the stars!</p>
-          <p class="mint-supply" id="mint-supply" hidden></p>
+          <div class="supply" data-supply hidden><div class="supply-top"><span><b data-minted>745</b> / <span data-max>8,433</span> minted</span><span><b data-price>0.00294</b> ETH each</span></div><div class="bar"><i data-bar></i></div></div>
           <div class="mint-widget" id="mint-widget" aria-live="polite">
             <smpl-mint-button contract-address="0x409acDc2f42E12AB3AaC70D2a156aB55D31Df6Fe" chain-id="1"></smpl-mint-button>
             <p class="mint-state" id="mint-state">Loading mint…</p>
@@ -313,14 +396,35 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
     </div>
   </section>
 
+  <section class="section gallery-sec" id="minted" aria-labelledby="minted-h">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">On-chain · Ethereum</p>
+        <h2 id="minted-h">The Minted</h2>
+        <span class="deco-rule" aria-hidden="true"><i></i></span>
+      </div>
+      <p class="gal-intro rv">Join the selfcare odyssey of a boy named Marvin Stench going way beyond the stars to find his missing cat and manage life's many obstacles.</p>
+      <div class="gal-actions rv">
+        <button type="button" class="pill pill-hot" id="rand-btn">Random freak</button>
+        <button type="button" class="pill" id="shuffle-btn">Shuffle</button>
+        <a class="pill" href="https://opensea.io/collection/smpl-frks" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14.5l4-6.5c.9 1.6 1.2 3.3.6 4.7L10 14.5H6zm5.5-8v8h3.2c1-.9 1.8-2 2.3-3.2-.8-2.3-2.8-4.2-5.5-4.8zM4.5 16h15c-.5 1.7-1.9 3-3.7 3H8.2c-1.8 0-3.2-1.3-3.7-3z"/></svg>View collection on OpenSea</a>
+      </div>
+      <div class="gal-filters rv" id="gal-filters" role="group" aria-label="Filter by trait" hidden></div>
+      <p class="gal-count" id="gal-count" aria-live="polite"></p>
+      <ul class="gal-grid" id="gal-grid"></ul>
+      <div class="gal-foot"><button type="button" class="pill" id="more-btn" hidden>Load more</button></div>
+      <noscript><p class="gal-count"><a class="cta" href="https://opensea.io/collection/smpl-frks">See every SMPL FRKS on OpenSea →</a></p></noscript>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="perks-h">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head rv">
         <p class="eyebrow">Utility</p>
         <h2 id="perks-h">Simple Perk$</h2>
         <span class="deco-rule" aria-hidden="true"><i></i></span>
       </div>
-      <div class="perks">
+      <div class="perks rv">
         <figure class="frame glass"><img src="/smplfrks/media/say-hello.webp" alt="Say hello to Simple Perks. 1,000+ repeatable discounts in your wallet." width="1600" height="848" loading="lazy"></figure>
         <figure class="frame glass"><img src="/smplfrks/media/perk-logos.webp" alt="Simple Perks brand board" width="1472" height="668" loading="lazy"></figure>
       </div>
@@ -329,12 +433,12 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
 
   <section class="section" aria-labelledby="fam-h">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head rv">
         <p class="eyebrow">Characters</p>
         <h2 id="fam-h">The Freak Fam</h2>
         <span class="deco-rule" aria-hidden="true"><i></i></span>
       </div>
-      <div class="strip-wrap">
+      <div class="strip-wrap rv">
         <button type="button" class="strip-btn" data-dir="-1" aria-label="Previous characters" aria-controls="char-strip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6"/></svg></button>
         <ul class="char-strip" id="char-strip" tabindex="0" aria-label="SMPL FRKS characters, scroll sideways">
           <li><img src="/smplfrks/media/characters/gm-12.webp" alt="GM SMPL FRK 12, a SMPL FRKS character" width="500" height="500" loading="lazy"><span class="cap">GM SMPL FRK 12</span></li>
@@ -360,8 +464,8 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
 
   <section class="section" aria-labelledby="creator-h">
     <div class="wrap">
-      <div class="creator">
-        <div class="tile glass corners"><img src="/smplfrks/media/creator.webp" alt="Nate Zepp holding a Marvin Stench book in front of a painted wall" width="1400" height="934" loading="lazy"></div>
+      <div class="creator rv">
+        <div class="tile glass corners tilt"><img src="/smplfrks/media/creator.webp" alt="Nate Zepp holding a Marvin Stench book in front of a painted wall" width="1400" height="934" loading="lazy"></div>
         <div>
           <p class="eyebrow" id="creator-h">From the creator</p>
           <div class="lead" style="margin-top:1rem">
@@ -373,13 +477,13 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
           <p class="sign">—Nate (LOVEANDNATE)</p>
         </div>
       </div>
-      <figure class="poster glass"><img src="/smplfrks/media/poster.webp" alt="SMPL FRKS poster: Marvin Stench and the Simple Freaks in space. From the creator of Marvin Stench." width="1200" height="1714" loading="lazy"></figure>
+      <figure class="poster glass rv tilt"><img src="/smplfrks/media/poster.webp" alt="SMPL FRKS poster: Marvin Stench and the Simple Freaks in space. From the creator of Marvin Stench." width="1200" height="1714" loading="lazy"></figure>
     </div>
   </section>
 
   <section class="section" aria-labelledby="book-h">
     <div class="wrap">
-      <article class="book glass corners">
+      <article class="book glass corners rv">
         <div class="cover"><img src="/smplfrks/media/book.webp" alt="The Marvin Stench picture book by Zepp on a wooden table" width="800" height="1066" loading="lazy"></div>
         <div class="body">
           <p class="eyebrow">Books By Zepp</p>
@@ -396,7 +500,7 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
 
   <section class="section doxxed" aria-labelledby="dox-h">
     <div class="wrap">
-      <h2 id="dox-h">hickory dickory doXXED</h2>
+      <h2 id="dox-h" class="rv">hickory dickory doXXED</h2>
       <div class="project-social">
         <a href="https://x.com/smplfrks" target="_blank" rel="noopener noreferrer" aria-label="SMPL FRKS on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.1L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2zm-1.2 18h1.7L7.4 3.9H5.6L17.7 20z"/></svg></a>
         <a href="https://www.instagram.com/smplfrks/" target="_blank" rel="noopener noreferrer" aria-label="SMPL FRKS on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1 .1-1.6.2-2 .3-.4.2-.7.4-1 .7s-.5.6-.7 1c-.1.4-.3 1-.3 2-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1 .2 1.6.3 2 .2.4.4.7.7 1s.6.5 1 .7c.4.1 1 .3 2 .3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1-.1 1.6-.2 2-.3.4-.2.7-.4 1-.7s.5-.6.7-1c.1-.4.3-1 .3-2 .1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1-.2-1.6-.3-2-.2-.4-.4-.7-.7-1s-.6-.5-1-.7c-.4-.1-1-.3-2-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm6.3-2.3a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>
@@ -407,6 +511,22 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
     </div>
   </section>
 </main>
+
+<dialog class="reveal" id="reveal" aria-labelledby="rv-name">
+  <div class="reveal-in">
+    <button type="button" class="reveal-x" id="rv-close" aria-label="Close">×</button>
+    <div class="reveal-art"><img id="rv-img" alt="" width="560" height="560"></div>
+    <div class="reveal-body">
+      <p class="eyebrow">Random freak</p>
+      <h2 id="rv-name"></h2>
+      <dl class="rv-traits" id="rv-traits"></dl>
+      <div class="reveal-actions">
+        <a class="pill pill-hot" id="rv-os" target="_blank" rel="noopener noreferrer">View on OpenSea</a>
+        <button type="button" class="pill" id="rv-again">Another one</button>
+      </div>
+    </div>
+  </div>
+</dialog>
 
 <footer>
   <div>© LOVEANDNATE</div>
@@ -480,14 +600,18 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
   }
   if(mintSec){
     if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting;})){ io.disconnect(); loadMint(); } },{rootMargin:'800px 0px'});
+      var io=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting;})){ io.disconnect(); loadMint(); } },{rootMargin:'300px 0px'});
       io.observe(mintSec);
     } else loadMint();
   }
 
+  var REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FINE=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var OS_ITEM='https://opensea.io/item/ethereum/'+CONTRACT+'/';
+
   // Live supply and price: read-only eth_call, no wallet.
   (function(){
-    var el=document.getElementById('mint-supply'); if(!el || !window.fetch || typeof BigInt==='undefined') return;
+    var boxes=document.querySelectorAll('[data-supply]'); if(!boxes.length || !window.fetch || typeof BigInt==='undefined') return;
     function call(id,data){ return {jsonrpc:'2.0',id:id,method:'eth_call',params:[{to:CONTRACT,data:data},'latest']}; }
     fetch('https://ethereum-rpc.publicnode.com',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify([call(1,'0x18160ddd'),call(2,'0xd5abeb01'),call(3,'0xc7876ea4')])})
       .then(function(r){return r.json();}).then(function(rs){
@@ -495,9 +619,104 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
         if(!v[1]||!v[2]||!v[3]) return;
         var minted=parseInt(v[1],16), max=parseInt(v[2],16);
         var eth=(Number(BigInt(v[3])/BigInt(1000000000000))/1e6).toString();
-        el.innerHTML='<b>'+minted.toLocaleString('en-US')+'</b> / '+max.toLocaleString('en-US')+' minted &nbsp;·&nbsp; <b>'+eth+' ETH</b> each';
-        el.hidden=false;
+        boxes.forEach(function(box){
+          box.querySelectorAll('[data-minted]').forEach(function(e){e.textContent=minted.toLocaleString('en-US');});
+          box.querySelectorAll('[data-max]').forEach(function(e){e.textContent=max.toLocaleString('en-US');});
+          box.querySelectorAll('[data-price]').forEach(function(e){e.textContent=eth;});
+          box.hidden=false;
+          var bar=box.querySelector('[data-bar]');
+          var pct=Math.max(1.5,Math.min(100,minted/max*100));
+          box.setAttribute('role','img'); box.setAttribute('aria-label',minted+' of '+max+' minted');
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ bar.style.width=pct.toFixed(2)+'%'; }); });
+        });
       }).catch(function(){});
+  })();
+
+  // Reveal on scroll.
+  (function(){
+    var els=document.querySelectorAll('.rv');
+    if(REDUCE || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  // Subtle glass tilt (fine pointers only).
+  function tilt(el,max){
+    if(REDUCE || !FINE) return;
+    el.addEventListener('pointermove',function(e){ var r=el.getBoundingClientRect(); var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; el.style.setProperty('--ry',(x*max).toFixed(2)+'deg'); el.style.setProperty('--rx',(-y*max).toFixed(2)+'deg'); });
+    el.addEventListener('pointerleave',function(){ el.style.setProperty('--ry','0deg'); el.style.setProperty('--rx','0deg'); });
+  }
+  document.querySelectorAll('.tilt').forEach(function(el){ tilt(el,3); });
+
+  // Minted gallery: prebuilt from the contract's IPFS metadata (tokens 1-745).
+  (function(){
+    var grid=document.getElementById('gal-grid'); if(!grid) return;
+    var countEl=document.getElementById('gal-count'), moreBtn=document.getElementById('more-btn'), filtersEl=document.getElementById('gal-filters');
+    var dlg=document.getElementById('reveal');
+    var DATA=null, TRAITS=[], order=[], view=[], shown=0, PAGE=(window.innerWidth<560?16:24), filters={};
+    function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+    function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function traitsHtml(tok){ return TRAITS.map(function(t,k){ return '<div><dt>'+esc(t)+'</dt><dd>'+esc(tok[k+1])+'</dd></div>'; }).join(''); }
+    function card(tok){
+      var id=tok[0], li=document.createElement('li'); li.className='card';
+      li.innerHTML='<a href="'+OS_ITEM+id+'" target="_blank" rel="noopener noreferrer" aria-label="SMPL FRKS #'+id+' on OpenSea">'+
+        '<img src="/smplfrks/freaks/t/'+id+'.webp" alt="SMPL FRKS #'+id+'" width="320" height="320" loading="lazy" decoding="async"><span class="tok">#'+id+'</span></a>'+
+        '<dl class="traits">'+traitsHtml(tok)+'</dl>'+
+        '<button type="button" class="tbtn" aria-expanded="false" aria-label="Show traits for #'+id+'">i</button>';
+      var b=li.querySelector('.tbtn'); b.addEventListener('click',function(){ var o=li.classList.toggle('open'); b.setAttribute('aria-expanded',o?'true':'false'); });
+      tilt(li,6);
+      return li;
+    }
+    function render(reset){
+      if(reset){ grid.innerHTML=''; shown=0; }
+      var frag=document.createDocumentFragment(), end=Math.min(view.length,shown+PAGE);
+      for(var i=shown;i<end;i++){ var c=card(view[i]); c.style.animationDelay=((i-shown)*25)+'ms'; frag.appendChild(c); }
+      grid.appendChild(frag); shown=end;
+      moreBtn.hidden=shown>=view.length;
+      countEl.innerHTML=view.length? 'Showing <b>'+shown+'</b> of <b>'+view.length+'</b>'+(view.length<DATA.tokens.length?' matching':' minted') : 'No freaks match those traits.';
+    }
+    function apply(){
+      view=order.filter(function(tok){ for(var k in filters){ if(filters[k] && tok[+k+1]!==filters[k]) return false; } return true; });
+      render(true);
+    }
+    function buildFilters(){
+      var html='';
+      TRAITS.forEach(function(t,k){
+        var counts={}; DATA.tokens.forEach(function(tok){ counts[tok[k+1]]=(counts[tok[k+1]]||0)+1; });
+        var vals=Object.keys(counts).sort();
+        html+='<label>'+esc(t)+'<select data-k="'+k+'"><option value="">All ('+vals.length+')</option>'+vals.map(function(v){ return '<option value="'+esc(v)+'">'+esc(v)+' ('+counts[v]+')</option>'; }).join('')+'</select></label>';
+      });
+      html+='<button type="button" class="clear">Clear</button>';
+      filtersEl.innerHTML=html; filtersEl.hidden=false;
+      filtersEl.addEventListener('change',function(e){ var k=e.target.getAttribute('data-k'); if(k!==null){ filters[k]=e.target.value; apply(); } });
+      filtersEl.querySelector('.clear').addEventListener('click',function(){ filters={}; filtersEl.querySelectorAll('select').forEach(function(s){s.value='';}); apply(); });
+    }
+    function reveal(){
+      if(!DATA) return;
+      var pool=view.length?view:DATA.tokens, tok=pool[Math.floor(Math.random()*pool.length)], id=tok[0];
+      var img=document.getElementById('rv-img');
+      img.removeAttribute('src'); img.alt='SMPL FRKS #'+id; img.src='/smplfrks/freaks/s/'+id+'.webp';
+      img.style.animation='none'; void img.offsetWidth; img.style.animation='';
+      document.getElementById('rv-name').textContent='SMPL FRKS #'+id;
+      document.getElementById('rv-traits').innerHTML=traitsHtml(tok);
+      document.getElementById('rv-os').href=OS_ITEM+id;
+      if(dlg && !dlg.open){ if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); }
+    }
+    function load(){
+      fetch('/smplfrks/freaks/freaks.json').then(function(r){return r.json();}).then(function(d){
+        DATA=d; TRAITS=d.traits; order=shuffle(d.tokens.slice()); buildFilters(); apply();
+      }).catch(function(){ countEl.innerHTML='<a class="cta" href="https://opensea.io/collection/smpl-frks" target="_blank" rel="noopener noreferrer">See every SMPL FRKS on OpenSea →</a>'; });
+    }
+    moreBtn.addEventListener('click',function(){ render(false); });
+    document.getElementById('shuffle-btn').addEventListener('click',function(){ if(!DATA) return; shuffle(order); apply(); });
+    document.getElementById('rand-btn').addEventListener('click',reveal);
+    document.getElementById('rv-again').addEventListener('click',reveal);
+    document.getElementById('rv-close').addEventListener('click',function(){ dlg.close ? dlg.close() : dlg.removeAttribute('open'); });
+    if(dlg) dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting;})){ io.disconnect(); load(); } },{rootMargin:'900px 0px'});
+      io.observe(document.getElementById('minted'));
+    } else load();
   })();
 
   // Decorative mint animation: load and play only when on screen.
