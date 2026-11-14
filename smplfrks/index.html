@@ -118,7 +118,10 @@ button.pill{appearance:none;cursor:pointer}
 .intro-q{font-family:'Unbounded',sans-serif;font-weight:500;font-size:clamp(1.45rem,3.3vw,2.35rem);line-height:1.12;letter-spacing:-.02em;color:#fff;max-width:20ch}
 .intro-q::after{content:"";display:block;width:3.2rem;height:2px;margin:.9rem auto 0;background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 12px rgba(var(--acc-rgb),.6)}
 .intro-a{font-size:clamp(1rem,1.5vw,1.12rem);line-height:1.7;color:rgba(236,234,228,.88);max-width:36rem}
-.intro-a b{font-weight:500;color:var(--acc)}
+.intro-a b,.intro-a a{font-weight:500;color:var(--acc)}
+.intro-a a{text-decoration:underline;text-decoration-color:rgba(var(--acc-rgb),.45);text-underline-offset:3px;transition:text-decoration-color .2s}
+.intro-a a:hover,.intro-a a:focus-visible{text-decoration-color:var(--acc)}
+.intro-tag{font-family:'Unbounded',sans-serif;font-weight:500;font-size:clamp(.92rem,1.6vw,1.08rem);letter-spacing:.01em;line-height:1.35;color:var(--acc);text-shadow:0 0 18px rgba(var(--acc-rgb),.35);margin:-.2rem 0 .1rem;max-width:100%;text-wrap:balance}
 .hero-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem .7rem;font-family:'Syncopate',sans-serif;font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
 .hero-links a{color:var(--accent);padding:.35rem 0;border-bottom:1px solid rgba(var(--acc-rgb),.35)}
 .hero-links a:hover,.hero-links a:focus-visible{color:#fff;border-color:var(--acc)}
@@ -358,7 +361,8 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
     <h1><picture><source srcset="/smplfrks/media/smpl-frks-logo.webp" type="image/webp"><img src="/smplfrks/media/smpl-frks-logo.png" alt="SMPL FRKS" width="1600" height="331" fetchpriority="high"></picture></h1>
     <div class="intro glass corners">
       <h2 class="intro-q">What is the SMPL FRKS Universe?</h2>
-      <p class="intro-a">It's the NFT collection that expands on the Marvin Stench Kids Book Series. Each NFT is your official access token to <b>Simple Perks</b>: exclusive discounts on all your favorite things IRL — movie tickets, travel, apparel, etc.</p>
+      <p class="intro-a">SMPL FRKS is the NFT collection that expands the world of Marvin Stench, the anti-bullying kids book series. Every freak is your official key to <a href="https://loveandnate.savings.workingadvantage.com/home" target="_blank" rel="noopener noreferrer">Simple Perks</a>: real-world discounts on movie tickets, travel, apparel and more of your favorite things.</p>
+      <p class="intro-tag">Collect a freak. Unlock real-life perks.</p>
       <div class="pills">
         <a class="pill pill-hot pill-perks" href="https://loveandnate.savings.workingadvantage.com/home" target="_blank" rel="noopener noreferrer">Simple Perks<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6h-2V7.4l-7.3 7.3-1.4-1.4L16.6 6H14V4zM5 6h6v2H6v10h10v-5h2v7H4V6h1z"/></svg></a>
         <a class="pill pill-hot" href="#mint">Mint</a>
