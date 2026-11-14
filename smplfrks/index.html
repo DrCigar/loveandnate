@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SMPL FRKS — NFTs — LOVEANDNATE</title>
-<meta name="description" content="SMPL FRKS, the Simple Freaks NFT collection from LOVEANDNATE. Marvin Stench, Simple Perk$, and the Freak Fam.">
+<meta name="description" content="SMPL FRKS, the Simple Freaks NFT collection from LOVEANDNATE. Marvin Stench, Simple Perk$, and the Freak Fam. Mint on Ethereum.">
 <link rel="canonical" href="https://loveandnate.io/smplfrks">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://loveandnate.io/smplfrks">
@@ -112,8 +112,11 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400}
 .mint-copy{position:relative;z-index:4;padding:.5rem 0}
 .mint-copy h2{font-family:'Syncopate',sans-serif;font-size:clamp(1.05rem,2.1vw,1.45rem);letter-spacing:.1em;text-transform:uppercase;line-height:1.3;color:#fff;margin:.8rem 0 1rem}
 .mint-copy .pitch{color:rgba(236,234,228,.82);font-size:1.02rem;line-height:1.7;max-width:34rem}
-.mint-action{margin-top:1.8rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.2rem}
-.mint-btn{appearance:none;font-family:'Syncopate',sans-serif;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;min-height:52px;padding:0 1.8rem;background:transparent;color:rgba(236,234,228,.45);border:1px solid rgba(201,206,214,.28);border-radius:999px;cursor:not-allowed}
+.mint-supply{margin-top:1.3rem;font-family:'Syncopate',sans-serif;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.mint-supply b{font-weight:400;color:#fff}
+.mint-widget{margin-top:1.4rem;min-height:110px}
+smpl-mint-button{display:block}
+.mint-widget.is-ready .mint-state{display:none}
 .mint-state{display:inline-flex;align-items:center;gap:.55rem;font-size:.92rem;color:var(--mute)}
 .mint-state::before{content:"";width:7px;height:7px;border-radius:50%;background:#5a3a22;box-shadow:0 0 0 3px rgba(181,106,58,.15)}
 
@@ -181,8 +184,7 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
   .mint-visual{width:min(420px,100%);margin:0 auto}
   .mint-copy{text-align:center}
   .mint-copy .pitch{margin:0 auto}
-  .mint-action{justify-content:center}
-  .book .cover{width:min(260px,70%);margin:0 auto}
+    .book .cover{width:min(260px,70%);margin:0 auto}
   .wall img{aspect-ratio:16/9}
 }
 @media(max-width:560px){
@@ -300,9 +302,11 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
           <p class="eyebrow">The collection</p>
           <h2 id="mint-h">Mint your SMPL FRKS</h2>
           <p class="pitch">Join the Freak Fam today! Real freaking utility: repeatable IRL discounts we call Simple Perk$, community of good people + good energy, elaborate storytelling &amp; A.I. Character chats. Save big &amp; vibe high with us way beyond the stars!</p>
-          <div class="mint-action">
-            <button type="button" class="mint-btn" disabled aria-describedby="mint-state">Mint unavailable</button>
-            <span class="mint-state" id="mint-state">Minting is closed on this site for now.</span>
+          <p class="mint-supply" id="mint-supply" hidden></p>
+          <div class="mint-widget" id="mint-widget" aria-live="polite">
+            <smpl-mint-button contract-address="0x409acDc2f42E12AB3AaC70D2a156aB55D31Df6Fe" chain-id="1"></smpl-mint-button>
+            <p class="mint-state" id="mint-state">Loading mint…</p>
+            <noscript><p class="mint-state">Minting needs JavaScript and a crypto wallet.</p></noscript>
           </div>
         </div>
       </div>
@@ -436,6 +440,65 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
       strip.scrollBy({left:Number(btn.getAttribute('data-dir'))*w*2, behavior: reduce?'auto':'smooth'});
     });
   });
+
+  // Mint widget: self-hosted SMPL FRKS bundle (unchanged), loaded only when the mint section is near.
+  var CONTRACT='0x409acDc2f42E12AB3AaC70D2a156aB55D31Df6Fe';
+  var mintSec=document.getElementById('mint'), stateEl=document.getElementById('mint-state'), wrap=document.getElementById('mint-widget');
+  var SHADOW_CSS=":host>div{padding:0!important;max-width:none!important;font-family:'DM Sans',system-ui,sans-serif!important;color:#eceae4}"+
+    "div[style*='border-radius: 24px']{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;text-align:inherit!important;overflow:visible!important;position:static!important}"+
+    "div[style*='width: 80px']{display:none!important}"+
+    "div[style*='aspect-ratio: 1 / 1']{display:none!important}"+
+    "h3{display:none!important}"+
+    "div[style*='z-index: 1']>p{display:none!important}"+
+    "button{font-family:'Syncopate',sans-serif!important;font-size:.66rem!important;font-weight:400!important;letter-spacing:.16em!important;text-transform:uppercase!important;border-radius:999px!important;border:1px solid rgba(201,206,214,.45)!important;background:rgba(13,13,16,.55)!important;color:#fff!important;min-height:52px!important;height:auto!important;padding:0 1.8rem!important;max-width:100%!important;width:auto!important;transition:border-color .2s,box-shadow .2s!important}"+
+    "button:hover{border-color:rgba(181,106,58,.85)!important;box-shadow:0 0 18px rgba(181,106,58,.25)!important}"+
+    "button[title='Click to disconnect wallet']{position:static!important;min-height:36px!important;font-size:.55rem!important;margin-bottom:1rem!important}"+
+    "div[style*='grid-template-columns']{margin:16px 0 0!important;max-width:none!important}"+
+    "div[style*='grid-template-columns'] button{width:100%!important}"+
+    "div[style*='font-size: 14px']{color:#8a8780!important;font-size:.9rem!important;padding:0!important;margin-top:.9rem!important}";
+  function styleWidget(el){
+    var tries=0;
+    (function wait(){
+      var root=el.shadowRoot;
+      if(!root){ if(tries++<100) setTimeout(wait,100); return; }
+      if(!root.querySelector('style[data-lan]')){ var st=document.createElement('style'); st.setAttribute('data-lan',''); st.textContent=SHADOW_CSS; root.appendChild(st); }
+      // The bundle's own card video duplicates the page's animation; keep its 10.5 MB file from downloading.
+      function stripVideo(){ root.querySelectorAll('video').forEach(function(v){ if(v.getAttribute('src')){ v.pause(); v.removeAttribute('src'); v.load(); } }); }
+      stripVideo();
+      new MutationObserver(stripVideo).observe(root,{childList:true,subtree:true});
+      function ready(){ if(root.querySelector('button')){ wrap.classList.add('is-ready'); return true; } return false; }
+      if(!ready()){ var mo=new MutationObserver(function(){ if(ready()) mo.disconnect(); }); mo.observe(root,{childList:true,subtree:true}); }
+    })();
+  }
+  var loaded=false;
+  function loadMint(){
+    if(loaded) return; loaded=true;
+    var s=document.createElement('script'); s.src='/smplfrks/mint/smpl-mint-widgets.js'; s.async=true;
+    s.onload=function(){ var el=document.querySelector('smpl-mint-button'); if(el) styleWidget(el); };
+    s.onerror=function(){ if(stateEl) stateEl.textContent='The mint could not load. Please refresh and try again.'; };
+    document.body.appendChild(s);
+  }
+  if(mintSec){
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){ if(es.some(function(e){return e.isIntersecting;})){ io.disconnect(); loadMint(); } },{rootMargin:'800px 0px'});
+      io.observe(mintSec);
+    } else loadMint();
+  }
+
+  // Live supply and price: read-only eth_call, no wallet.
+  (function(){
+    var el=document.getElementById('mint-supply'); if(!el || !window.fetch || typeof BigInt==='undefined') return;
+    function call(id,data){ return {jsonrpc:'2.0',id:id,method:'eth_call',params:[{to:CONTRACT,data:data},'latest']}; }
+    fetch('https://ethereum-rpc.publicnode.com',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify([call(1,'0x18160ddd'),call(2,'0xd5abeb01'),call(3,'0xc7876ea4')])})
+      .then(function(r){return r.json();}).then(function(rs){
+        var v={}; rs.forEach(function(x){ v[x.id]=x.result; });
+        if(!v[1]||!v[2]||!v[3]) return;
+        var minted=parseInt(v[1],16), max=parseInt(v[2],16);
+        var eth=(Number(BigInt(v[3])/BigInt(1000000000000))/1e6).toString();
+        el.innerHTML='<b>'+minted.toLocaleString('en-US')+'</b> / '+max.toLocaleString('en-US')+' minted &nbsp;·&nbsp; <b>'+eth+' ETH</b> each';
+        el.hidden=false;
+      }).catch(function(){});
+  })();
 
   // Decorative mint animation: load and play only when on screen.
   var loop=document.querySelector('[data-mint-loop]');
