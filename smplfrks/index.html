@@ -242,6 +242,23 @@ smpl-mint-button{display:block}
 .reveal-x:hover{color:#fff}
 /* tilt + reveal-on-scroll */
 .tilt{transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .4s ease}
+.trailer-sec{padding-top:clamp(2.5rem,6vw,4.5rem)}
+.trailer{width:min(960px,100%);margin:0 auto;padding:clamp(.6rem,1.4vw,1rem)}
+.trailer-frame{position:relative;aspect-ratio:16/9;background:#d9d9d9;overflow:hidden;border-radius:2px}
+.trailer-frame video,.trailer-frame .t-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.trailer-frame .t-poster{z-index:1;transition:opacity .5s ease}
+.trailer.is-started .t-poster{opacity:0;pointer-events:none}
+.t-play{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:.7rem;padding:1rem 1.5rem 1rem 1.2rem;border-radius:999px;border:1px solid rgba(var(--acc-rgb),.7);background:rgba(5,5,6,.78);color:#fff;font-family:'Syncopate',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 0 30px rgba(var(--acc-rgb),.25);transition:box-shadow .2s,background .2s}
+.t-play:hover,.t-play:focus-visible{background:rgba(5,5,6,.9);box-shadow:0 0 40px rgba(var(--acc-rgb),.45)}
+.t-play svg{width:22px;height:22px;fill:var(--acc)}
+.trailer.is-started .t-play{display:none}
+.t-ctl{position:absolute;z-index:3;right:clamp(.6rem,1.6vw,1rem);bottom:clamp(.6rem,1.6vw,1rem);display:none;align-items:center;gap:.5rem;min-height:40px;padding:.55rem .95rem .55rem .75rem;border-radius:999px;border:1px solid rgba(var(--acc-rgb),.6);background:rgba(5,5,6,.78);color:#fff;font-family:'Syncopate',sans-serif;font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s,box-shadow .2s}
+.t-ctl:hover,.t-ctl:focus-visible{background:rgba(5,5,6,.92);box-shadow:0 0 22px rgba(var(--acc-rgb),.35)}
+.t-ctl svg{width:16px;height:16px;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.trailer.is-started .t-ctl{display:inline-flex}
+.trailer.is-playing.is-unmuted .t-ctl{opacity:.0;pointer-events:none}
+.trailer.is-playing.is-unmuted:hover .t-ctl,.trailer.is-playing.is-unmuted .t-ctl:focus-visible{opacity:1;pointer-events:auto}
+@media(max-width:560px){.t-play{padding:.8rem 1.1rem .8rem .95rem;font-size:.54rem}.t-ctl{font-size:.42rem;min-height:30px;gap:.35rem;padding:.35rem .65rem .35rem .5rem}.t-ctl svg{width:13px;height:13px}}
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
 .js .rv.in{opacity:1;transform:none}
 .js .tilt.rv.in{transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0))}
@@ -377,6 +394,27 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
 </header>
 
 <main id="main">
+  <section class="section trailer-sec" aria-labelledby="trailer-h">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow">Trailer</p>
+        <h2 id="trailer-h">Watch the trailer</h2>
+        <span class="deco-rule" aria-hidden="true"><i></i></span>
+      </div>
+      <div class="trailer glass corners rv" id="trailer">
+        <div class="trailer-frame">
+          <video id="trailer-video" muted playsinline preload="none" poster="/smplfrks/media/trailer/poster-1280.webp" width="1920" height="1080" aria-label="SMPL FRKS trailer">
+            <source src="/smplfrks/media/trailer/trailer-720.mp4" type="video/mp4" media="(max-width: 700px)">
+            <source src="/smplfrks/media/trailer/trailer-1080.webm" type="video/webm">
+            <source src="/smplfrks/media/trailer/trailer-1080.mp4" type="video/mp4">
+          </video>
+          <picture><source srcset="/smplfrks/media/trailer/poster-1280.webp 1280w, /smplfrks/media/trailer/poster.webp 1920w" sizes="(max-width: 1120px) 100vw, 1120px" type="image/webp"><img class="t-poster" src="/smplfrks/media/trailer/poster-1280.webp" alt="SMPL FRKS trailer: Neesh, Larry Stench and Marvin Stench cards" width="1280" height="720" loading="lazy"></picture>
+          <button type="button" class="t-play" id="t-play" aria-label="Play the SMPL FRKS trailer with sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play trailer</button>
+          <button type="button" class="t-ctl" id="t-ctl" aria-label="Turn sound on and replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span>Tap for sound</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="section" aria-labelledby="marvin-h">
     <div class="wrap">
       <div class="story rv">
@@ -748,6 +786,43 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
       });
     },{rootMargin:'200px'}).observe(loop);
   }
+})();
+</script>
+<script>
+(function(){
+  var box=document.getElementById('trailer'),v=document.getElementById('trailer-video'),play=document.getElementById('t-play'),ctl=document.getElementById('t-ctl');
+  if(!box||!v) return;
+  var label=ctl.querySelector('span');
+  var conn=navigator.connection||{};
+  var quiet=matchMedia('(prefers-reduced-motion: reduce)').matches||conn.saveData===true;
+  var autoplayed=false,userStarted=false;
+  function state(){
+    box.classList.toggle('is-playing',!v.paused&&!v.ended);
+    box.classList.toggle('is-unmuted',!v.muted);
+    if(v.ended){label.textContent='Replay';ctl.setAttribute('aria-label','Replay the trailer'+(v.muted?' with sound':''));}
+    else if(v.muted){label.textContent='Tap for sound';ctl.setAttribute('aria-label','Turn sound on and replay from the start');}
+    else {label.textContent='Replay';ctl.setAttribute('aria-label','Replay the trailer');}
+  }
+  function start(withSound,fromStart){
+    box.classList.add('is-started');
+    if(withSound){v.muted=false;userStarted=true;}
+    if(fromStart||v.ended){try{v.currentTime=0;}catch(e){}}
+    var p=v.play(); if(p&&p.catch) p.catch(function(){ if(!v.muted){v.muted=true;v.play().catch(function(){});} });
+    state();
+  }
+  ['play','pause','ended','volumechange'].forEach(function(e){v.addEventListener(e,state);});
+  play.addEventListener('click',function(){start(true,true);});
+  ctl.addEventListener('click',function(){ if(v.muted){start(true,true);} else {start(false,true);} });
+  if(quiet||!('IntersectionObserver' in window)){ v.setAttribute('preload','none'); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting&&e.intersectionRatio>=.5){
+        if(!autoplayed){autoplayed=true;v.muted=true;start(false,true);}
+        else if(v.paused&&!v.ended&&box.dataset.autopaused){delete box.dataset.autopaused;v.play().catch(function(){});}
+      } else if(!e.isIntersecting&&!v.paused&&!v.ended){ box.dataset.autopaused='1'; v.pause(); }
+    });
+  },{threshold:[0,.5]});
+  io.observe(box);
 })();
 </script>
 </body>
