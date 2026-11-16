@@ -407,7 +407,6 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
         <div class="trailer-frame">
           <video id="trailer-video" muted playsinline preload="none" poster="/smplfrks/media/trailer/poster-1280.webp" width="1920" height="1080" aria-label="SMPL FRKS trailer">
             <source src="/smplfrks/media/trailer/trailer-720.mp4" type="video/mp4" media="(max-width: 700px)">
-            <source src="/smplfrks/media/trailer/trailer-1080.webm" type="video/webm">
             <source src="/smplfrks/media/trailer/trailer-1080.mp4" type="video/mp4">
           </video>
           <picture><source srcset="/smplfrks/media/trailer/poster-1280.webp 1280w, /smplfrks/media/trailer/poster.webp 1920w" sizes="(max-width: 1120px) 100vw, 1120px" type="image/webp"><img class="t-poster" src="/smplfrks/media/trailer/poster-1280.webp" alt="SMPL FRKS trailer: Neesh, Larry Stench and Marvin Stench cards" width="1280" height="720" loading="lazy"></picture>
@@ -417,22 +416,6 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
       </div>
     </div>
   </section>
-  <section class="section" aria-labelledby="marvin-h">
-    <div class="wrap">
-      <div class="story rv">
-        <div class="tile glass corners tilt"><img src="/smplfrks/media/still-marvin.webp" alt="Marvin Stench, startled, in front of the SMPL FRKS graffiti logo" width="900" height="900" loading="lazy"></div>
-        <div>
-          <p class="eyebrow" id="marvin-h">Marvin Stench</p>
-          <div class="lead" style="margin-top:1rem">
-            <p class="first">Yo, space explorers &amp; Freak Fam!</p>
-            <p>I'm Marvin Stench, your favorite quirky hero from that epic children's book where I saved Earth from alien invaders!</p>
-            <p>My saga rockets on in the Simple Freaks NFT collection, as I chase my cat Larry across the cosmos to confront the Simple Freaks!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section" id="mint" aria-labelledby="mint-h">
     <div class="wrap">
       <div class="mint glass corners rv">
@@ -805,13 +788,23 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
     else if(v.muted){label.textContent='Tap for sound';ctl.setAttribute('aria-label','Turn sound on and replay from the start');}
     else {label.textContent='Replay';ctl.setAttribute('aria-label','Replay the trailer');}
   }
+  function showPlay(){ box.classList.remove('is-started'); }
   function start(withSound,fromStart){
-    box.classList.add('is-started');
     if(withSound){v.muted=false;userStarted=true;}
+    if(v.readyState===0){ try{v.load();}catch(e){} }
     if(fromStart||v.ended){try{v.currentTime=0;}catch(e){}}
-    var p=v.play(); if(p&&p.catch) p.catch(function(){ if(!v.muted){v.muted=true;v.play().catch(function(){});} });
+    var p;
+    try{ p=v.play(); }catch(e){ showPlay(); return; }
+    if(p&&p.then){
+      p.then(function(){box.classList.add('is-started');state();}).catch(function(){
+        if(!v.muted){ v.muted=true; v.play().then(function(){box.classList.add('is-started');state();}).catch(showPlay); }
+        else showPlay();
+      });
+    }
     state();
   }
+  v.addEventListener('playing',function(){box.classList.add('is-started');state();});
+  v.addEventListener('error',showPlay,true);
   ['play','pause','ended','volumechange'].forEach(function(e){v.addEventListener(e,state);});
   play.addEventListener('click',function(){start(true,true);});
   ctl.addEventListener('click',function(){ if(v.muted){start(true,true);} else {start(false,true);} });
@@ -819,7 +812,7 @@ footer .links{display:flex;gap:1.5rem;flex-wrap:wrap}
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(e.isIntersecting&&e.intersectionRatio>=.5){
-        if(!autoplayed){autoplayed=true;v.muted=true;start(false,true);}
+        if(!autoplayed){autoplayed=true;v.muted=true;v.defaultMuted=true;start(false,true);}
         else if(v.paused&&!v.ended&&box.dataset.autopaused){delete box.dataset.autopaused;v.play().catch(function(){});}
       } else if(!e.isIntersecting&&!v.paused&&!v.ended){ box.dataset.autopaused='1'; v.pause(); }
     });
