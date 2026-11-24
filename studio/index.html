@@ -382,6 +382,32 @@ body{padding-bottom:8.5rem}
 @media (min-width:761px) and (max-height:760px){.room-copy .lede{display:none}}
 .hot:hover,.hot:focus-visible,.hot-music:hover,.hot-music:focus-within{z-index:7}
 
+/* music objects + decor (lava lamp, guitar) */
+.hot-album{border-radius:3px}
+.hot-album::after,.hot-guitar::after{display:none}
+.hot-album:hover,.hot-album:focus-visible{box-shadow:0 0 0 1px rgba(var(--glow),.8),0 0 22px 4px rgba(var(--glow),.35)}
+.shelf-tag{position:absolute;z-index:4;pointer-events:none}
+.shelf-tag .tag{opacity:0}
+.shelf-tag::after{content:"";position:absolute;right:-2px;top:-2px;width:7px;height:7px;border-radius:50%;background:rgba(var(--glow),.9);animation:ping 2.8s ease-out infinite}
+.room-scene:has(.hot-album:hover,.hot-album:focus-visible) .shelf-tag::after{opacity:0}
+.screen.ipod-scr{width:120px;height:90px;background:linear-gradient(#cfe0ee,#9fb6c9);color:#0b1620;font:600 11px/1.15 'DM Sans',sans-serif;padding:8px 9px;box-sizing:border-box;opacity:.88;filter:brightness(.8)}
+.screen.ipod-scr b{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid rgba(11,22,32,.35);padding-bottom:3px;margin-bottom:5px}
+.screen.ipod-scr .np{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.screen.ipod-scr i{position:absolute;left:9px;right:9px;bottom:10px;height:5px;border-radius:3px;background:rgba(11,22,32,.25);overflow:hidden}
+.screen.ipod-scr i::after{content:"";position:absolute;inset:0;width:38%;background:#0b1620}
+.room-scene:has(.hot-ipod:hover,.hot-ipod:focus-visible) .ipod-scr{filter:brightness(1.05)}
+.lava-glow,.lava-halo{position:absolute;z-index:2;pointer-events:none;border-radius:50%;mix-blend-mode:screen}
+.lava-glow{background:radial-gradient(ellipse at 50% 55%,rgba(255,120,40,.55),rgba(255,70,20,.18) 55%,transparent 75%);animation:lava 5.5s ease-in-out infinite}
+.lava-halo{background:radial-gradient(ellipse at 50% 45%,rgba(255,110,40,.22),transparent 68%);animation:lava 7s ease-in-out infinite reverse}
+@keyframes lava{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.lava-glow,.lava-halo{animation:none}}
+.room-scene.hl-music .is-music>.hot,.room-scene.hl-music .hot.is-music{box-shadow:0 0 0 1px rgba(var(--glow),.75),0 0 30px 6px rgba(var(--glow),.35);animation:hlm 1.3s ease-in-out 2}
+@keyframes hlm{50%{box-shadow:0 0 0 1px rgba(var(--glow),.3),0 0 10px 2px rgba(var(--glow),.12)}}
+@media (max-width:760px){
+  .hot-album .tag,.hot-guitar .tag{display:none}
+  .shelf-tag .tag{opacity:1}
+}
+
 </style>
 </head>
 <body>
@@ -429,7 +455,7 @@ body{padding-bottom:8.5rem}
 <section class="room room--a" aria-label="The LOVEANDNATE studio">
   <div class="room-pan" tabindex="0" aria-label="The studio room. Swipe sideways to look around.">
   <div class="room-scene">
-    <img class="room-bg" src="/studio/assets/room/loft-owl.webp" alt="" width="2560" height="1440" fetchpriority="high" decoding="async">
+    <img class="room-bg" src="/studio/assets/room/loft-owl-albums.webp" alt="" width="2560" height="1440" fetchpriority="high" decoding="async">
     <div class="screen tv" data-quad="533,335 688,335 688,447 533,447" data-lazy-video data-skip-slow aria-hidden="true">
       <img class="poster" src="/wellwellwell/bg-poster.webp" alt="">
       <video muted loop playsinline preload="none" poster="/wellwellwell/bg-poster.webp"><source data-src="/wellwellwell/bg.mp4" type="video/mp4"></video><i class="crt"></i>
@@ -439,12 +465,36 @@ body{padding-bottom:8.5rem}
       <video muted loop playsinline preload="none" poster="/studio/assets/room/laptop-poster.webp"><source data-src="/studio/assets/room/laptop-loop.mp4" type="video/mp4"></video><i class="glare"></i>
     </div>
     <div class="screen phone" data-quad="1152,590 1198,599 1150,622 1099,611" aria-hidden="true"><img src="/studio/assets/room/innerpool-screen.webp" alt=""></div>
+    <div class="shelf-tag" style="left:0.938%;top:10.278%;width:22.188%;height:21.944%" aria-hidden="true"><span class="tag"><b>Music</b><i>21 albums · tap a cover</i></span></div>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/6P7XSGb2csLxuqE1OQwTi3" target="_blank" rel="noopener noreferrer" style="left:1.172%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: ARTACHE, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>ARTACHE</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/0sgIXTm3MdWFRKTnh5KQWC" target="_blank" rel="noopener noreferrer" style="left:4.297%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: AWAKE IN THE DREAM, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>AWAKE IN THE DREAM</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/18pmkrSvYYpSkzPsMpZZoU" target="_blank" rel="noopener noreferrer" style="left:7.422%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: COMPUTER JAZZ, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>COMPUTER JAZZ</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/3evzNRWBMlKgxlAxL4K9Hr" target="_blank" rel="noopener noreferrer" style="left:10.547%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: DOORS, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>DOORS</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/079MYECZNpcwkR0xR3Geqb" target="_blank" rel="noopener noreferrer" style="left:13.672%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: ECHOS IN THE VEIL, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>ECHOS IN THE VEIL</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1ftVmPtlEDGg7uHdp3EnwA" target="_blank" rel="noopener noreferrer" style="left:16.797%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: EVERY STAR BURNING, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>EVERY STAR BURNING</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/7DRKx17yDXTL2Wohp3fcUM" target="_blank" rel="noopener noreferrer" style="left:19.922%;top:10.694%;width:2.969%;height:5.556%" aria-label="Music: GLASS FACE, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>GLASS FACE</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1Xk0lbQtPn28UodkeUQqZn" target="_blank" rel="noopener noreferrer" style="left:1.172%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: HUMAN THOUGHTS, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>HUMAN THOUGHTS</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:4.297%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: KIDNAPPING THE REAPER, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>KIDNAPPING THE REAPER</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1AVdlexeqEPjqseBBa7QRc" target="_blank" rel="noopener noreferrer" style="left:7.422%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: LOST IN THE LABYRINTH, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>LOST IN THE LABYRINTH</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1zquRmWVOy12xBSkQUCmL7" target="_blank" rel="noopener noreferrer" style="left:10.547%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: MCCLUMPHA PARK, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>MCCLUMPHA PARK</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:13.672%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: MONICA&#x27;S DINER, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>MONICA&#x27;S DINER</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:16.797%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: MONOLITH, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>MONOLITH</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1fc97y48I5FVSTeUeaHu9W" target="_blank" rel="noopener noreferrer" style="left:19.922%;top:18.472%;width:2.969%;height:5.556%" aria-label="Music: MOTOR CITY REAPER, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>MOTOR CITY REAPER</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:1.172%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: OUT OF MY MIND, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>OUT OF MY MIND</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:4.297%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: OVERLOAD, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>OVERLOAD</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1nfJG8Im4fKQMwJSH6fJrd" target="_blank" rel="noopener noreferrer" style="left:7.422%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: ROBOT ROAD, listen on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>ROBOT ROAD</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:10.547%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: STORM IS ALMOST OVER, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>STORM IS ALMOST OVER</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:13.672%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: THANK YOU, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>THANK YOU</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:16.797%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: THE WALKMEN, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>THE WALKMEN</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:19.922%;top:26.250%;width:2.969%;height:5.556%" aria-label="Music: TIMELESS, listen on Spotify (artist page)"><span class="tag" aria-hidden="true"><b>Music</b><i>TIMELESS</i></span></a>
+    <div class="lava-glow" style="left:60.056%;top:50.401%;width:2.297%;height:9.344%" aria-hidden="true"></div><div class="lava-halo" style="left:54.259%;top:38.810%;width:13.825%;height:34.602%" aria-hidden="true"></div>
+    <a class="hot hot-guitar is-music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" style="left:50.625%;top:62.152%;width:8.125%;height:35.164%" aria-label="Music: silver Stratocaster, listen now on Spotify"><span class="tag" aria-hidden="true"><b>Music</b><i>Silver Strat · listen on Spotify</i></span></a>
     <a class="hot tag-below" id="windows" href="/windows" style="left:35.547%;top:6.554%;width:23.438%;height:34.669%" aria-label="Windows: Owl Window, hand-painted. Open the sold-out gallery"><span class="tag" aria-hidden="true"><b>Windows</b><i>Owl Window · sold-out gallery</i></span></a>
     <a class="hot " id="books" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094" style="left:81.016%;top:40.182%;width:7.031%;height:12.457%" aria-label="Books: Marvin Stench by Zepp, on Amazon"><span class="tag" aria-hidden="true"><b>Books</b><i>Marvin Stench on Amazon</i></span></a>
     <a class="hot " id="movies" href="/wellwellwell" style="left:39.453%;top:43.194%;width:19.453%;height:22.500%" aria-label="Movies: WELL WELL WELL"><span class="tag" aria-hidden="true"><b>Movies</b><i>WELL WELL WELL</i></span></a>
     <a class="hot " id="nfts" href="/smplfrks" style="left:73.516%;top:57.778%;width:15.859%;height:20.833%" aria-label="NFTs: SMPL FRKS"><span class="tag" aria-hidden="true"><b>NFTs</b><i>SMPL FRKS</i></span></a>
     <a class="hot " id="apps" href="#innerpool" style="left:84.922%;top:80.278%;width:9.609%;height:7.778%" aria-label="Apps: Innerpool, coming soon"><span class="tag" aria-hidden="true"><b>Apps</b><i>Innerpool, coming soon</i></span></a>
-    <div class="hot-music" style="left:16.641%;top:43.889%;width:16.250%;height:23.750%">
+    <div class="hot-music is-music" style="left:16.641%;top:43.889%;width:16.250%;height:23.750%">
       <a class="hot" id="music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="Music: listen now on Spotify"></a>
       <span class="tag tag-music"><b>Music</b><i>21 albums released in 24 hours</i>
         <span class="streams"><span class="listen">Listen now</span>
@@ -695,8 +745,14 @@ body{padding-bottom:8.5rem}
   new ResizeObserver(layout).observe(scene); layout();
   const mobile=matchMedia('(max-width:760px)').matches;
   const pan=document.querySelector('.room-pan'); if(mobile&&pan){pan.scrollLeft=(pan.scrollWidth-pan.clientWidth)*.5;}
+  // iPod screen: show what the site player is playing
+  const np=scene.querySelector('.ipod-scr .np'), tt=document.getElementById('lan-title');
+  if(np&&tt){const sync=()=>{const t=tt.textContent.trim();np.textContent=t;const ip=scene.querySelector('.hot-ipod .tag i');if(ip&&t)ip.textContent='Now playing: '+t;};sync();new MutationObserver(sync).observe(tt,{childList:true,characterData:true,subtree:true});}
+  // nav "Music": light up every music object in the room
+  const hl=()=>{scene.classList.remove('hl-music');void scene.offsetWidth;scene.classList.add('hl-music');clearTimeout(hl.t);hl.t=setTimeout(()=>scene.classList.remove('hl-music'),2800);};
+  document.querySelectorAll('a[href="#music"]').forEach(a=>a.addEventListener('click',hl));
+  if(location.hash==='#music') hl();
 })();
-
 </script>
 </body>
 </html>
