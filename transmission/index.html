@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LOVEANDNATE — Transmission</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="A recovered transmission. Origin log for LOVEANDNATE.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://loveandnate.io/transmission">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://loveandnate.io/transmission">
+<meta property="og:site_name" content="LOVEANDNATE">
+<meta property="og:title" content="LOVEANDNATE — Transmission">
+<meta property="og:description" content="A recovered transmission. Origin log for LOVEANDNATE.">
+<meta property="og:image" content="https://loveandnate.io/og-record.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LOVEANDNATE — Transmission">
+<meta name="twitter:description" content="A recovered transmission. Origin log for LOVEANDNATE.">
+<meta name="twitter:image" content="https://loveandnate.io/og-record.jpg?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;
+  --ink:#00ff41;
+  --ink-soft:#7cff9a;
+  --dim:#3dcc5a;
+  --mute:#0b3d16;
+  --warn:#ffb000;
+  --glitch-r:#ff003c;
+  --glitch-c:#00e5ff;
+  --panel:rgba(0,12,4,.72);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#000;color:var(--ink);width:100%;max-width:100%;overflow-x:hidden}
+html{color-scheme:dark;-webkit-text-size-adjust:100%}
+body{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-weight:400;line-height:1.55;
+  min-height:100vh;min-height:100svh;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+a{color:var(--ink);text-decoration:none}
+a:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+#rain{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none;opacity:.4}
+.scan,.vignette,.tear,.aberration{position:fixed;inset:0;pointer-events:none}
+.scan{
+  z-index:20;
+  background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.22) 2px 3px);
+  opacity:.7;
+}
+.vignette{
+  z-index:21;
+  background:
+    radial-gradient(ellipse at 50% 45%,transparent 42%,rgba(0,0,0,.72) 100%),
+    linear-gradient(to right,rgba(0,0,0,.35),transparent 12%,transparent 88%,rgba(0,0,0,.35));
+}
+.tear{
+  z-index:22;opacity:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,255,65,.08) 46%,rgba(0,0,0,.65) 50%,rgba(0,229,255,.08) 54%,transparent 62%);
+  mix-blend-mode:screen;
+  transform:translateY(-20%);
+}
+body.is-dropout .tear{opacity:1;animation:tear .34s steps(3) both}
+@keyframes tear{
+  0%{transform:translateY(-30%) skewX(0)}
+  40%{transform:translateY(12%) skewX(-8deg)}
+  70%{transform:translateY(40%) skewX(6deg)}
+  100%{transform:translateY(110%) skewX(0);opacity:0}
+}
+.aberration{z-index:19;mix-blend-mode:screen;opacity:0;background:
+  linear-gradient(90deg,rgba(255,0,60,.08),transparent 30%,transparent 70%,rgba(0,229,255,.08))}
+body.is-glitch .aberration{opacity:1}
+body.is-glitch main{animation:shake .18s steps(2)}
+@keyframes shake{
+  0%{transform:translate(-2px,1px)}
+  50%{transform:translate(3px,-1px)}
+  100%{transform:translate(0,0)}
+}
+.phosphor{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,255,65,.06),transparent 55%);
+}
+/* faint rolling beam */
+.beam{position:fixed;left:0;right:0;height:18vh;z-index:18;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(0,255,65,.045) 50%,transparent);
+  animation:beam 7.5s linear infinite;opacity:.8}
+@keyframes beam{0%{top:-20vh}100%{top:110vh}}
+
+.wrap{position:relative;z-index:5;width:100%;max-width:72rem;margin:0 auto;
+  padding:max(.7rem,env(safe-area-inset-top)) 1.15rem 2.25rem;
+  padding-bottom:max(2.25rem,env(safe-area-inset-bottom));
+}
+.hud{
+  display:grid;grid-template-columns:1fr auto;gap:.15rem 1rem;
+  font-size:clamp(.68rem,.95vw,.78rem);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);margin:0 0 .7rem;padding:.65rem .85rem .55rem;
+  border:1px solid var(--mute);background:rgba(0,8,2,.96);
+  text-shadow:0 0 8px rgba(0,255,65,.35);
+  position:relative;
+}
+.hud::before,.hud::after{content:"";position:absolute;width:10px;height:10px;border-color:var(--ink);border-style:solid;opacity:.7}
+.hud::before{top:-1px;left:-1px;border-width:1px 0 0 1px}
+.hud::after{top:-1px;right:-1px;border-width:1px 1px 0 0}
+.hud-id{font-weight:600;color:var(--ink);letter-spacing:.16em}
+.hud-stat{text-align:right}
+.hud-stat b{color:var(--warn);font-weight:500}
+.hud-meta{grid-column:1/-1;color:var(--dim);letter-spacing:.06em;margin-top:.15rem;text-transform:none}
+.hud .blink{animation:blink 1.2s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.skip{
+  display:none;position:relative;z-index:6;
+  font-size:clamp(.72rem,2.4vw,.85rem);letter-spacing:.14em;
+  color:var(--dim);border:1px solid var(--mute);padding:.45rem .7rem;
+  margin:0 0 1rem;width:fit-max;width:fit-content;background:rgba(0,0,0,.45);
+}
+html.is-live .skip{display:inline-block}
+.skip:hover,.skip:focus-visible{color:var(--ink);border-color:var(--ink)}
+
+.boot{display:none;margin:0 0 1.25rem;font-size:clamp(.82rem,2.6vw,.95rem);color:var(--dim)}
+html.is-live .boot{display:block}
+html.is-decoded .boot,html.is-static .boot,html.is-mid .boot{display:none}
+.boot .line{white-space:pre-wrap;overflow-wrap:anywhere}
+.boot .ok{color:var(--ink)}
+.boot .warn{color:var(--warn)}
+.boot .bad{color:var(--glitch-r)}
+
+main{position:relative;padding:.75rem .95rem .85rem;border:1px solid var(--mute);background:rgba(0,6,1,.96);
+  box-shadow:inset 0 0 60px rgba(0,255,65,.04),0 0 0 1px rgba(0,255,65,.05);
+}
+main::before,main::after{content:"";position:absolute;width:10px;height:10px;border-color:var(--ink);border-style:solid;opacity:.7}
+main::before{bottom:-1px;left:-1px;border-width:0 0 1px 1px}
+main::after{bottom:-1px;right:-1px;border-width:0 1px 1px 0}
+
+h1{font-size:clamp(.72rem,2.2vw,.86rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);margin:0 0 .65rem;
+  text-shadow:2px 0 var(--glitch-r),-2px 0 var(--glitch-c),0 0 12px rgba(0,255,65,.45);
+}
+.pkt{margin:0 0 .7rem}
+.pkt:last-of-type{margin-bottom:.35rem}
+.hex,.hud .hex{text-transform:none!important}
+.pkt h2{font-size:clamp(.7rem,2vw,.8rem);font-weight:600;letter-spacing:.14em;color:var(--ink-soft);
+  margin:0 0 .32rem;text-shadow:0 0 8px rgba(0,255,65,.3)}
+.pkt .meta{display:grid;grid-template-columns:minmax(0,max-content) minmax(0,1fr);gap:.02rem 1.15rem;color:var(--dim);font-size:clamp(.68rem,2vw,.76rem);margin:0 0 .4rem}
+.pkt .meta div{display:contents}
+.pkt .meta dt{font-weight:400;letter-spacing:.04em}
+.pkt .meta dd{margin:0;overflow-wrap:anywhere}
+.pkt p{font-size:clamp(.86rem,3vw,.95rem);color:var(--ink);margin:0 0 .28rem;overflow-wrap:anywhere;max-width:50rem}
+.pkt p:last-child{margin-bottom:0}
+.redact{display:inline-block;min-width:11ch;height:.95em;vertical-align:-.1em;padding:0;user-select:none;
+  background:repeating-linear-gradient(-45deg,#000 0 5px,#0a2a12 5px 7px);
+  box-shadow:inset 0 0 0 1px #0a4a1a;color:transparent;text-shadow:none;overflow:hidden}
+html.is-static .redact,html.is-decoded .redact{color:transparent}
+.cursor{display:inline-block;width:.65ch;height:1.05em;background:var(--ink);vertical-align:text-bottom;
+  margin-left:1px;box-shadow:0 0 8px var(--ink);animation:blink .9s steps(1) infinite}
+html.is-static .cursor,html.is-decoded .cursor{display:none}
+html.is-mid .cursor{display:inline-block;animation:none;opacity:1}
+
+/* hide packets until decoded / revealed */
+html.is-live:not(.is-decoded):not(.is-mid):not(.is-static):not(.is-typing) .pkt{display:none}
+html.is-typing .pkt{display:none}
+html.is-typing .pkt.is-open{display:block}
+html.is-mid .pkt[data-pkt="04"],
+html.is-mid .pkt[data-pkt="05"]{display:none}
+html.is-mid .term,
+html.is-typing .term,
+html.is-live:not(.is-decoded):not(.is-static):not(.is-typing) .term{opacity:0;pointer-events:none;height:0;overflow:hidden;margin:0;padding:0;border:0}
+html.is-typing .cursor{display:inline-block}
+
+.term{
+  display:inline-block;margin-top:.65rem;padding:.55rem .8rem;
+  border:1px solid var(--ink);letter-spacing:.18em;font-size:clamp(.78rem,2.4vw,.88rem);
+  font-weight:500;text-transform:uppercase;color:var(--ink);
+  text-shadow:0 0 10px rgba(0,255,65,.5);
+  background:rgba(0,20,6,.5);
+}
+.term:hover,.term:focus-visible{background:var(--ink);color:#001806;text-shadow:none}
+
+.sig{margin-top:.55rem;color:var(--dim);font-size:clamp(.66rem,2vw,.76rem);letter-spacing:.08em}
+html.is-mid .sig,html.is-typing .sig,html.is-live:not(.is-decoded):not(.is-static) .sig{display:none}
+
+
+.cols{display:block}
+.await{display:none;color:var(--dim);font-size:clamp(.72rem,2vw,.82rem);letter-spacing:.12em;margin:0 0 .8rem}
+html.is-mid .await{display:block}
+@media (min-width:820px){
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 0;align-items:start}
+  .col[data-col="a"]{padding-right:1.5rem}
+  .col[data-col="b"]{padding-left:1.5rem;border-left:1px solid var(--mute)}
+  .pkt .meta{display:flex;flex-wrap:wrap;gap:.1rem 1.15rem}
+  .pkt .meta div{display:flex;gap:.55rem;min-width:0}
+}
+/* reduced motion / static fallback */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .beam,.tear,.aberration{display:none!important}
+  #rain{opacity:.22}
+  .scan{opacity:.45}
+  .cursor{display:none!important}
+}
+html.is-static .beam,html.is-static .tear,html.is-static .aberration{display:none!important}
+html.is-static #rain{opacity:.22}
+html.is-static .hud .blink{animation:none;opacity:1}
+
+@media (max-width:420px){
+  .hud{grid-template-columns:1fr;gap:.2rem}
+  .hud-stat{text-align:left}
+  .wrap{padding-left:.9rem;padding-right:.9rem}
+  h1{letter-spacing:.1em;text-shadow:1px 0 var(--glitch-r),-1px 0 var(--glitch-c),0 0 10px rgba(0,255,65,.4)}
+  .term{letter-spacing:.12em}
+  .pkt .meta{grid-template-columns:1fr;gap:0}
+  .pkt .meta dt{margin-top:.12rem}
+  .pkt .meta div:first-child dt{margin-top:0}
+}
+</style>
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+<div class="phosphor" aria-hidden="true"></div>
+<div class="beam" aria-hidden="true"></div>
+<div class="scan" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="tear" aria-hidden="true"></div>
+<div class="aberration" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="hud" aria-label="Signal status">
+    <div class="hud-id">LAN-NET // NODE <span class="hex">0x0N</span></div>
+    <div class="hud-stat"><span class="blink">●</span> CARRIER: <b>WEAK</b></div>
+    <div class="hud-meta" id="hud-meta">UPLINK 42.3314N 83.0458W &nbsp;·&nbsp; RECOVERED 10.15.26 &nbsp;·&nbsp; <span id="clock">T+00:00:00</span></div>
+  </header>
+
+  <a class="skip" href="#log" id="skip">[ SKIP DECODE ]</a>
+
+  <section class="boot" id="boot" aria-hidden="true"></section>
+
+  <main id="log" tabindex="-1">
+    <h1>Recovered origin log // LOVEANDNATE</h1>
+
+    <div class="cols">
+    <div class="col" data-col="a">
+    <article class="pkt" data-pkt="01">
+      <h2>// PKT 0x01 &nbsp; ORIGIN</h2>
+      <dl class="meta">
+        <div><dt>TIMESTAMP LOCKED</dt><dd>10.15.86</dd></div>
+        <div><dt>GEOFIX</dt><dd>DETROIT, MICHIGAN</dd></div>
+        <div><dt>DESIGNATION</dt><dd>LOVEANDNATE</dd></div>
+        <div><dt>NODE STATUS</dt><dd>INDEPENDENT</dd></div>
+      </dl>
+      <p>A signal starts here. Not a brand. A birth.</p>
+      <p>Subject entered the world on 10.15.86, in Detroit, Michigan. Later the node would call itself LOVEANDNATE.</p>
+      <p>An independent frequency. No management. No label. No rules.</p>
+    </article>
+
+    <article class="pkt" data-pkt="02">
+      <h2>// PKT 0x02 &nbsp; PRACTICE</h2>
+      <dl class="meta">
+        <div><dt>CHECKSUM</dt><dd>OK</dd></div>
+        <div><dt>DEVOTION</dt><dd>EQUAL VOLTAGE</dd></div>
+      </dl>
+      <p>Two loves, held at equal voltage: hand-drawn tactile art, and computer code.</p>
+      <p>He does not choose. He marries them. The union is the work.</p>
+    </article>
+
+    <article class="pkt" data-pkt="03">
+      <h2>// PKT 0x03 &nbsp; BECOMING</h2>
+      <dl class="meta">
+        <div><dt>DATESTAMP</dt><dd>10.15.26</dd></div>
+        <div><dt>MACHINE : HUMAN</dt><dd>1 : 1</dd></div>
+      </dl>
+      <p>Years of trial and error. Every art form. No exemption.</p>
+      <p>By 10.15.26 the subject is half machine — machine power blended with human creativity, at last.</p>
+      <p>Payload that day: twenty-one full-length albums, released in twenty-four hours.</p>
+      <p>Marker: WORLD RECORD HOLDER.</p>
+      <p>[ <span class="redact" title="payload damaged">REDACTED</span> ] further payload damaged.</p>
+    </article>
+    </div>
+    <div class="col" data-col="b">
+    <p class="await">DECRYPTING PACKETS <span class="hex">0x04–0x05</span></p>
+    <article class="pkt" data-pkt="04">
+      <h2>// PKT 0x04 &nbsp; CHARACTER</h2>
+      <dl class="meta">
+        <div><dt>HELMET MARK</dt><dd>N</dd></div>
+        <div><dt>HOPE INDEX</dt><dd>ACTIVE</dd></div>
+      </dl>
+      <p>The portrayal is a robot in a suit. A black helmet. The letter N.</p>
+      <p>The last hopeful human on earth — after everyone else went full cyborg, or became the worst parts of humanity.</p>
+      <p>He is still here. He is still making.</p>
+    </article>
+
+    <article class="pkt" data-pkt="05">
+      <h2>// PKT 0x05 &nbsp; PURPOSE</h2>
+      <dl class="meta">
+        <div><dt>PRIORITY</dt><dd>MAXIMUM</dd></div>
+        <div><dt>BELIEF</dt><dd>INTACT</dd></div>
+      </dl>
+      <p>Belief, recovered intact:</p>
+      <p>Creation is the purpose of life. In the physical sense, and in the creative sense. Both.</p>
+    </article>
+
+    <p class="sig">END OF RECOVERED LOG &nbsp;//&nbsp; CARRIER UNSTABLE &nbsp;//&nbsp; FRAGMENT 5/5</p>
+    <a class="term" href="/">[ TERMINATE LINK ]</a>
+    </div>
+    </div>
+  </main>
+</div>
+
+<noscript>
+  <style>
+    .skip,.boot,.beam,.cursor{display:none!important}
+    .pkt,.term{display:block!important;opacity:1!important;height:auto!important;pointer-events:auto!important}
+    #rain{opacity:.22}
+  </style>
+</noscript>
+
+<script>
+(function(){
+  var html=document.documentElement, body=document.body;
+  var params=new URLSearchParams(location.search);
+  var shot=params.get('t');
+  var RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var skip=document.getElementById('skip');
+  var boot=document.getElementById('boot');
+  var clock=document.getElementById('clock');
+  var cancelled=false, timers=[], rainRaf=0, t0=Date.now();
+
+  function later(fn,ms){var id=setTimeout(fn,ms);timers.push(id);return id}
+  function clearAll(){cancelled=true;timers.forEach(clearTimeout);timers=[]}
+
+  function pad(n){return String(n).padStart(2,'0')}
+  function tick(){
+    if(RM){clock.textContent='T+00:00:00';return}
+    var s=Math.floor((Date.now()-t0)/1000);
+    clock.textContent='T+'+pad(s/3600|0)+':'+pad((s/60|0)%60)+':'+pad(s%60);
+  }
+  tick();
+  if(!RM) setInterval(tick,1000);
+
+  /* ---- matrix rain ---- */
+  var cv=document.getElementById('rain'), cx=cv.getContext('2d');
+  var glyphs='アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴ0123456789ABCDEFNLANCREATEα$#*+10.15';
+  var cols=[], font=16, dpr=Math.min(window.devicePixelRatio||1,2);
+  function resize(){
+    var w=window.innerWidth, h=window.innerHeight;
+    cv.width=Math.floor(w*dpr); cv.height=Math.floor(h*dpr);
+    cv.style.width=w+'px'; cv.style.height=h+'px';
+    cx.setTransform(dpr,0,0,dpr,0,0);
+    font=w<420?13:16;
+    var n=Math.max(18,Math.floor(w/font));
+    if(cols.length!==n){
+      cols=new Array(n);
+      for(var i=0;i<n;i++) cols[i]=Math.random()*-40;
+    }
+  }
+  function drawRain(animate){
+    var w=window.innerWidth, h=window.innerHeight;
+    cx.fillStyle=animate?'rgba(0,0,0,0.08)':'rgba(0,0,0,1)';
+    cx.fillRect(0,0,w,h);
+    cx.font=font+"px 'IBM Plex Mono', monospace";
+    for(var i=0;i<cols.length;i++){
+      var ch=glyphs.charAt(Math.random()*glyphs.length|0);
+      var x=i*font, y=cols[i]*font;
+      cx.fillStyle='#c8ffd4';
+      cx.fillText(ch,x,y);
+      cx.fillStyle='#00ff41';
+      if(y>font) cx.fillText(glyphs.charAt((ch.charCodeAt(0)+i)%glyphs.length),x,y-font);
+      if(animate){
+        if(y>h && Math.random()>0.975) cols[i]=0;
+        else cols[i]++;
+      }else{
+        cols[i]=(h/font)*Math.random();
+      }
+    }
+    if(!animate){
+      // paint a denser static field
+      for(var k=0;k<cols.length*12;k++){
+        var i=k%cols.length;
+        cx.fillStyle=Math.random()>0.85?'#7cff9a':'#147a2a';
+        cx.fillText(glyphs.charAt(Math.random()*glyphs.length|0), i*font, Math.random()*h);
+      }
+    }
+  }
+  function loop(){
+    drawRain(true);
+    rainRaf=requestAnimationFrame(loop);
+  }
+  resize();
+  window.addEventListener('resize',function(){resize(); if(RM) drawRain(false)});
+  if(RM){drawRain(false)}
+  else{
+    loop();
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){cancelAnimationFrame(rainRaf)}
+      else if(!RM){loop()}
+    });
+  }
+
+  /* ---- occasional dropout ---- */
+  function glitchBurst(){
+    if(RM||cancelled||html.classList.contains('is-static')) return;
+    body.classList.add('is-dropout','is-glitch');
+    later(function(){body.classList.remove('is-dropout','is-glitch')},340);
+  }
+
+  /* ---- typewriter ---- */
+  function typeText(el,text,speed){
+    return new Promise(function(resolve){
+      if(cancelled){el.textContent=text;resolve();return}
+      el.textContent='';
+      var i=0, cur=document.createElement('span');
+      cur.className='cursor'; el.appendChild(cur);
+      function step(){
+        if(cancelled){el.textContent=text;resolve();return}
+        if(i>=text.length){if(cur.parentNode)cur.remove();resolve();return}
+        var n=1;
+        if(text[i]===' ' && Math.random()>0.4) n=Math.min(3,text.length-i);
+        el.insertBefore(document.createTextNode(text.slice(i,i+n)),cur);
+        i+=n;
+        var wait=speed;
+        if('.,—;:'.indexOf(text[i-1])>=0) wait+=40;
+        later(step,wait);
+      }
+      step();
+    });
+  }
+
+  var bootLines=[
+    {t:'LAN-NET  v0.15.86', c:''},
+    {t:'initializing uplink................', c:''},
+    {t:'handshake timeout', c:'bad'},
+    {t:'retry 2/3', c:'warn'},
+    {t:'carrier detected  @  42.3314N 83.0458W', c:'ok'},
+    {t:'decrypting fragment  0x4C414E', c:''},
+    {t:'WARNING: packet incomplete', c:'warn'},
+    {t:'identity matrix  ........  PARTIAL', c:'ok'},
+    {t:'human remainder  ........  DETECTED', c:'ok'},
+    {t:'machine overlay  ........  0.50', c:'ok'},
+    {t:'hope index       ........  ACTIVE', c:'ok'},
+    {t:'rendering recovered log...', c:''}
+  ];
+
+  function showBootLine(item){
+    var d=document.createElement('div');
+    d.className='line'+(item.c?' '+item.c:'');
+    boot.appendChild(d);
+    return typeText(d, item.t, 10);
+  }
+
+  async function runBoot(){
+    boot.innerHTML='';
+    for(var i=0;i<bootLines.length;i++){
+      if(cancelled) return;
+      await showBootLine(bootLines[i]);
+      if(i===2 || i===6) glitchBurst();
+      await new Promise(function(r){later(r, i===2||i===6?220:70)});
+    }
+  }
+
+  function setMid(){
+    clearAll();
+    html.classList.remove('is-live');
+    html.classList.add('is-mid');
+    html.classList.remove('is-decoded','is-static');
+    var p3=document.querySelector('.pkt[data-pkt="03"]');
+    if(!p3||p3.dataset.clipped==='1') return;
+    p3.dataset.clipped='1';
+    var ps=p3.querySelectorAll('p:not(.meta)');
+    // Keep first paragraph, clip the becoming line mid-sentence, hide the rest.
+    if(ps[1]){
+      ps[1].textContent='By 10.15.26 the subject is half machine — machine power blended with human creativ';
+      var cur=document.createElement('span'); cur.className='cursor'; ps[1].appendChild(cur);
+    }
+    for(var i=2;i<ps.length;i++) ps[i].style.display='none';
+  }
+
+  function restoreMid(){
+    var p3=document.querySelector('.pkt[data-pkt="03"]');
+    if(!p3||p3.dataset.clipped!=='1') return;
+    p3.dataset.clipped='0';
+    var ps=p3.querySelectorAll('p:not(.meta)');
+    if(ps[1]) ps[1].textContent='By 10.15.26 the subject is half machine — machine power blended with human creativity, at last.';
+    for(var i=2;i<ps.length;i++) ps[i].style.display='';
+  }
+
+  function finish(){
+    clearAll();
+    restoreMid();
+    html.classList.remove('is-live','is-mid','is-typing');
+    html.classList.add('is-decoded');
+    skip.style.display='none';
+    boot.setAttribute('aria-hidden','true');
+  }
+
+  function goStatic(){
+    clearAll();
+    restoreMid();
+    html.classList.remove('is-live','is-mid','is-decoded','is-typing');
+    html.classList.add('is-static');
+    skip.style.display='none';
+    cancelAnimationFrame(rainRaf);
+    drawRain(false);
+  }
+
+  async function runLogs(){
+    if(cancelled){finish();return}
+    html.classList.add('is-typing');
+    html.classList.remove('is-live');
+    var pkts=document.querySelectorAll('.pkt');
+    for(var p=0;p<pkts.length;p++){
+      if(cancelled){finish();return}
+      var paras=[].slice.call(pkts[p].querySelectorAll('p:not(.meta)'));
+      var stored=paras.map(function(el){return {el:el, html:el.innerHTML, text:el.textContent}});
+      paras.forEach(function(el){el.textContent=''});
+      pkts[p].classList.add('is-open');
+      for(var i=0;i<stored.length;i++){
+        if(cancelled){stored.forEach(function(s){s.el.innerHTML=s.html});finish();return}
+        if(stored[i].html.indexOf('redact')>=0){
+          stored[i].el.innerHTML=stored[i].html;
+        }else{
+          await typeText(stored[i].el, stored[i].text, 12);
+        }
+        if(p===2 && i===1) glitchBurst();
+        await new Promise(function(r){later(r,80)});
+      }
+    }
+    finish();
+  }
+
+  async function play(){
+    html.classList.add('is-live');
+    boot.removeAttribute('aria-hidden');
+    await runBoot();
+    if(cancelled){finish();return}
+    await new Promise(function(r){later(r,200)});
+    await runLogs();
+  }
+
+  function onSkip(e){
+    if(e) e.preventDefault();
+    finish();
+    document.getElementById('log').focus && document.getElementById('log').scrollIntoView({block:'start'});
+  }
+  skip.addEventListener('click',onSkip);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'||e.key==='Enter'||e.key===' '){
+      if(html.classList.contains('is-live')||html.classList.contains('is-mid')){
+        if(e.key===' ') e.preventDefault();
+        onSkip();
+      }
+    }
+  });
+
+  // Public hook for screenshots / other pages
+  window.__transmission={
+    finish:finish, mid:setMid, static:goStatic, play:play
+  };
+
+  if(RM || shot==='static'){goStatic()}
+  else if(shot==='full' || shot==='done'){finish()}
+  else if(shot==='mid'){setMid()}
+  else{play()}
+})();
+</script>
+</body>
+</html>
