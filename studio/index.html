@@ -391,9 +391,9 @@ body{padding-bottom:8.5rem}
 .shelf-tag::after{content:"";position:absolute;right:-2px;top:-2px;width:7px;height:7px;border-radius:50%;background:rgba(var(--glow),.9);animation:ping 2.8s ease-out infinite}
 .room-scene:has(.hot-album:hover,.hot-album:focus-visible) .shelf-tag::after{opacity:0}
 .lava-glow,.lava-halo{position:absolute;z-index:2;pointer-events:none;border-radius:50%;mix-blend-mode:screen}
-.lava-glow{background:radial-gradient(ellipse at 50% 35%,rgba(150,70,255,.42),transparent 60%),radial-gradient(ellipse at 50% 75%,rgba(40,110,255,.40),transparent 62%),radial-gradient(ellipse at 50% 55%,rgba(110,255,120,.22),transparent 70%);animation:lava 5.5s ease-in-out infinite}
-.lava-halo{background:radial-gradient(ellipse at 50% 45%,rgba(110,80,255,.20),rgba(40,140,255,.08) 45%,transparent 68%);animation:lava 7s ease-in-out infinite reverse}
-@keyframes lava{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.lava-glow{background:radial-gradient(ellipse at 50% 35%,rgba(150,70,255,.42),transparent 60%),radial-gradient(ellipse at 50% 75%,rgba(40,110,255,.40),transparent 62%),radial-gradient(ellipse at 50% 55%,rgba(110,255,120,.22),transparent 70%);animation:lava 6s ease-in-out infinite}
+.lava-halo{background:radial-gradient(ellipse at 50% 45%,rgba(110,80,255,.20),rgba(40,140,255,.08) 45%,transparent 68%);animation:lava 6s ease-in-out infinite;animation-delay:-1.2s}
+@keyframes lava{0%,100%{opacity:.82}50%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.lava-glow,.lava-halo{animation:none}}
 .room-scene.hl-music .is-music>.hot,.room-scene.hl-music .hot.is-music{box-shadow:0 0 0 1px rgba(var(--glow),.75),0 0 30px 6px rgba(var(--glow),.35);animation:hlm 1.3s ease-in-out 2}
 @keyframes hlm{50%{box-shadow:0 0 0 1px rgba(var(--glow),.3),0 0 10px 2px rgba(var(--glow),.12)}}
@@ -453,6 +453,32 @@ html.crate-open{overflow:hidden}
 .hot-cans::after{display:none}
 .hot-cans:hover::after{display:none}
 
+/* v7: helmet -> /transmission */
+.hot-helmet{--glow:107,233,175;--tagbg:rgba(2,10,6,.86);--tagline:rgba(107,233,175,.45)}
+.hot-helmet .tag b{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;letter-spacing:.18em;color:#6BE9AF;text-shadow:0 0 8px rgba(107,233,175,.55)}
+.hot-helmet .tag i{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:.66rem;color:rgba(107,233,175,.7)}
+.hot-helmet .tag i::after{content:"_";animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.hot-helmet .tag i::after{animation:none}}
+.hot-nfts{--glow:107,233,175}
+/* v7 intro (index only) */
+.intro{display:none}
+html.intro-on .intro{display:block;position:fixed;inset:0;z-index:2147483000;background:#000;overflow:hidden;opacity:1;transition:opacity .9s ease;contain:strict}
+html.intro-on .intro.is-out{opacity:0;pointer-events:none}
+.intro video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(.85)}
+.intro::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 60% 50%,rgba(0,0,0,.15),rgba(0,0,0,.65)),linear-gradient(to bottom,rgba(0,0,0,.35),transparent 25%,transparent 75%,rgba(0,0,0,.5));pointer-events:none}
+.intro-title{position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%);margin:0;text-align:center;color:#f4efe6;white-space:nowrap;font-weight:400;opacity:0;animation:introT 4.1s ease both;animation-delay:.6s;text-shadow:0 0 30px rgba(0,0,0,.8)}
+.intro-title span{display:block;font-family:'DM Sans',sans-serif;font-size:clamp(.6rem,1.1vw,.85rem);letter-spacing:.6em;text-transform:uppercase;color:rgba(244,239,230,.78);padding-left:.6em}
+.intro-title strong{display:block;font-family:'Syncopate',sans-serif;font-weight:700;font-size:clamp(1.5rem,5.2vw,4.6rem);letter-spacing:.32em;padding-left:.32em;margin:.55em 0;line-height:1;background:linear-gradient(180deg,#fff 0%,#f1e3c8 55%,#b9925a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:introTrack 4.1s cubic-bezier(.2,.7,.2,1) both;animation-delay:.6s}
+@keyframes introT{0%{opacity:0;filter:blur(6px)}20%{opacity:1;filter:blur(0)}66%{opacity:1;filter:blur(0)}86%,100%{opacity:0;filter:blur(3px)}}
+@keyframes introTrack{0%{letter-spacing:.2em}100%{letter-spacing:.38em}}
+.intro-skip{position:absolute;right:max(1.25rem,env(safe-area-inset-right));bottom:max(1.25rem,env(safe-area-inset-bottom));z-index:3;font:400 .62rem/1 'Syncopate',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:.85rem 1.2rem .85rem 1.45rem;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.intro-skip:hover,.intro-skip:focus-visible{background:rgba(255,255,255,.14);border-color:#fff;outline:none}
+.intro-skip:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+@media (max-width:760px){.intro-title strong{font-size:clamp(1.15rem,7vw,2rem);letter-spacing:.18em;padding-left:.18em}@keyframes introTrack{0%{letter-spacing:.12em}100%{letter-spacing:.2em}}}
+@media (prefers-reduced-motion:reduce){html.intro-on .intro{display:none}}
+@media (max-width:760px){.hot-helmet .tag{bottom:auto;top:calc(100% + 30px);left:-24px;right:auto;padding:.35rem .5rem;transform:none}.hot-helmet .tag::before{inset:0}.hot-helmet:hover .tag,.hot-helmet:focus-visible .tag{transform:none}}
+
 </style>
 </head>
 <body>
@@ -500,13 +526,10 @@ html.crate-open{overflow:hidden}
 <section class="room room--a" aria-label="The LOVEANDNATE studio">
   <div class="room-pan" tabindex="0" aria-label="The studio room. Swipe sideways to look around.">
   <div class="room-scene">
-    <img class="room-bg" src="/studio/assets/room/loft-owl-laptop.webp" alt="" width="2560" height="1440" fetchpriority="high" decoding="async">
+    <img class="room-bg" src="/studio/assets/room/loft-owl-v7.webp" alt="" width="2560" height="1440" fetchpriority="high" decoding="async">
     <div class="screen tv" data-quad="533,335 688,335 688,447 533,447" data-lazy-video data-skip-slow aria-hidden="true">
       <img class="poster" src="/wellwellwell/bg-poster.webp" alt="">
       <video muted loop playsinline preload="none" poster="/wellwellwell/bg-poster.webp"><source data-src="/wellwellwell/bg.mp4" type="video/mp4"></video><i class="crt"></i>
-    </div>
-    <div class="screen laptop frk comp-laptop" data-quad="914.9183959960938,434.2935485839844 1083.8624267578125,440.7291259765625 1084.9522705078125,539.6928100585938 913.8228149414062,532.7128295898438" aria-hidden="true">
-      <img class="f f1" src="/studio/assets/room/frk-larry.webp" alt="" decoding="async"><img class="f f2" src="/studio/assets/room/frk-neesh.webp" alt="" loading="lazy" decoding="async"><img class="f f3" src="/studio/assets/room/frk-marvin.webp" alt="" loading="lazy" decoding="async"><i class="glare"></i>
     </div>
     <div class="screen phone" data-quad="1152,590 1198,599 1150,622 1099,611" aria-hidden="true"><img src="/studio/assets/room/innerpool-screen.webp" alt=""></div>
     <div class="shelf-tag" style="left:75.000%;top:2.639%;width:20.391%;height:6.111%" aria-hidden="true"><span class="tag"><b>Music</b><i>21 albums</i></span></div>
@@ -531,14 +554,14 @@ html.crate-open{overflow:hidden}
     <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="18" style="left:83.333%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: THANK YOU. Open the record crate"><span class="tag" aria-hidden="true"><b>THANK YOU</b><i>Open the record crate</i></span></a>
     <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="19" style="left:85.378%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: THE WALKMEN. Open the record crate"><span class="tag" aria-hidden="true"><b>THE WALKMEN</b><i>Open the record crate</i></span></a>
     <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="20" style="left:87.422%;top:37.500%;width:7.812%;height:13.889%" aria-label="Music: TIMELESS. Open the record crate"><span class="tag" aria-hidden="true"><b>TIMELESS</b><i>Open the record crate</i></span></a>
-    <div class="lava-glow" style="left:34.978%;top:50.401%;width:2.297%;height:9.344%" aria-hidden="true"></div><div class="lava-halo" style="left:29.181%;top:38.810%;width:13.825%;height:34.602%" aria-hidden="true"></div>
+    <div class="lava-glow" style="left:34.969%;top:51.856%;width:2.250%;height:10.844%" aria-hidden="true"></div><div class="lava-halo" style="left:29.331%;top:41.244%;width:13.525%;height:34.911%" aria-hidden="true"></div>
     <a class="hot hot-guitar is-music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="0" style="left:6.256%;top:15.600%;width:11.247%;height:49.403%" aria-label="Music: silver Stratocaster. Open the record crate"><span class="tag" aria-hidden="true"><b>Music</b><i>Silver Strat · open the record crate</i></span></a>
-    <a class="hot hot-helmet is-music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="0" style="left:87.131%;top:56.000%;width:12.300%;height:23.722%" aria-label="Music: the LOVEANDNATE helmet. Open the record crate"><span class="tag" aria-hidden="true"><b>Music</b><i>The helmet · open the record crate</i></span></a>
+    <a class="hot hot-helmet" href="/transmission" style="left:69.219%;top:58.178%;width:11.250%;height:21.544%" aria-label="The LOVEANDNATE helmet. Incoming transmission: open the origin story"><span class="tag" aria-hidden="true"><b>▚ INCOMING TRANSMISSION</b><i>signal source: unknown</i></span></a>
     <a class="hot hot-cans" href="/windows" style="left:59.119%;top:57.397%;width:5.512%;height:9.640%" aria-label="Windows: spray paint cans. Open the hand-painted windows gallery"><span class="tag" aria-hidden="true"><b>Windows</b><i>Spray cans · hand-painted windows</i></span></a>
     <a class="hot tag-below" id="windows" href="/windows" style="left:35.547%;top:6.554%;width:23.438%;height:34.669%" aria-label="Windows: Owl Window, hand-painted. Open the sold-out gallery"><span class="tag" aria-hidden="true"><b>Windows</b><i>Owl Window · sold-out gallery</i></span></a>
     <a class="hot " id="books" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094" style="left:80.988%;top:52.222%;width:6.461%;height:16.389%" aria-label="Books: Marvin Stench by Zepp, on Amazon"><span class="tag" aria-hidden="true"><b>Books</b><i>Marvin Stench by Zepp · Amazon</i></span></a>
     <a class="hot " id="movies" href="/wellwellwell" style="left:39.453%;top:43.194%;width:19.453%;height:22.500%" aria-label="Movies: WELL WELL WELL"><span class="tag" aria-hidden="true"><b>Movies</b><i>WELL WELL WELL</i></span></a>
-    <a class="hot " id="nfts" href="/smplfrks" style="left:69.375%;top:58.889%;width:17.383%;height:22.153%" aria-label="NFTs: SMPL FRKS, open the collection"><span class="tag" aria-hidden="true"><b>NFTs</b><i>SMPL FRKS · Neesh, Larry &amp; Marvin</i></span></a>
+    <a class="hot hot-nfts" id="nfts" href="/smplfrks" style="left:80.625%;top:75.208%;width:4.141%;height:10.347%" aria-label="NFTs: SMPL FRKS trading cards of Neesh, Larry Stench and Marvin Stench. Open the collection"><span class="tag" aria-hidden="true"><b>NFTs</b><i>SMPL FRKS cards · Neesh, Larry &amp; Marvin</i></span></a>
     <a class="hot " id="apps" href="#innerpool" style="left:84.922%;top:80.278%;width:9.609%;height:7.778%" aria-label="Apps: Innerpool, coming soon"><span class="tag" aria-hidden="true"><b>Apps</b><i>Innerpool, coming soon</i></span></a>
     <div class="hot-music is-music" style="left:16.641%;top:43.889%;width:16.250%;height:23.750%">
       <a class="hot" id="music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="Music: listen now on Spotify"></a>
