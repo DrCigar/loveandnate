@@ -289,9 +289,205 @@ body{padding-bottom:8.5rem}
   .lan-player.is-playing .lan-player-viz{opacity:.5}
 }
 
+/* ===== HOME ROOM (Detroit loft) ===== */
+.room{position:relative;padding-top:5.25rem;background:#000;--glow:255,184,107;--tagbg:rgba(14,10,7,.78);--tagline:rgba(255,190,120,.35)}
+.room-pan{position:relative;overflow:hidden;outline:none}
+.room-scene{position:relative;width:100%;aspect-ratio:16/9;max-height:calc(100vh - 5.25rem - 100px);margin:0 auto;overflow:hidden;isolation:isolate}
+@supports (aspect-ratio:1){.room-scene{max-width:calc((100vh - 5.25rem - 100px)*16/9)}}
+.room-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0;user-select:none;-webkit-user-drag:none}
+.room-scene::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%),linear-gradient(to bottom,transparent 78%,rgba(0,0,0,.85) 100%)}
+.screen{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;background:#050505;z-index:1;pointer-events:none;transition:filter .5s}
+.screen video,.screen img{width:100%;height:100%;object-fit:cover;display:block}
+.screen .poster{position:absolute;inset:0}
+.screen video{position:relative;opacity:0;transition:opacity .6s}
+.screen.is-playing video{opacity:1}
+.screen.tv{width:320px;height:236px;border-radius:26px/30px}
+.screen.tv video,.screen.tv .poster{filter:sepia(.25) contrast(1.08) saturate(.9) brightness(.92)}
+.screen.tv .crt{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.28) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,rgba(255,255,255,.08) 0,transparent 55%,rgba(0,0,0,.75) 100%);mix-blend-mode:multiply;animation:crt 4s steps(40) infinite}
+@keyframes crt{50%{opacity:.85}}
+.screen.laptop{width:480px;height:300px}
+.screen.laptop video,.screen.laptop .poster{filter:brightness(.68) contrast(1.05)}
+.screen.laptop .glare,.screen.phone::after{position:absolute;inset:0;content:"";background:linear-gradient(115deg,rgba(255,255,255,.10),transparent 40%)}
+.screen.phone{width:180px;height:380px;border-radius:22px}
+.screen.phone img{object-position:50% 0;filter:brightness(.95)}
+/* light spill from screens */
+.room-scene .tv{box-shadow:0 0 60px 18px rgba(170,190,255,.10)}
+/* hotspots */
+.hot,.hot-music{position:absolute;z-index:4;border-radius:12px}
+.hot{display:block;outline:none;transition:box-shadow .35s,background .35s}
+.hot-music>.hot{position:absolute;inset:0}
+.hot:hover,.hot:focus-visible,.hot-music:hover>.hot,.hot-music:focus-within>.hot{box-shadow:0 0 0 1px rgba(var(--glow),.55),0 0 38px 6px rgba(var(--glow),.28),inset 0 0 40px rgba(var(--glow),.16);background:radial-gradient(ellipse at center,rgba(var(--glow),.10),transparent 70%)}
+.hot::after{content:"";position:absolute;right:6px;top:6px;width:7px;height:7px;border-radius:50%;background:rgba(var(--glow),.9);box-shadow:0 0 0 0 rgba(var(--glow),.6);animation:ping 2.8s ease-out infinite;transition:opacity .3s}
+.hot:hover::after,.hot:focus-visible::after,.hot-music:hover>.hot::after{opacity:0}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(var(--glow),.55)}70%,100%{box-shadow:0 0 0 14px rgba(var(--glow),0)}}
+.tag{position:absolute;left:50%;bottom:100%;transform:translate(-50%,6px);padding:0 0 10px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;z-index:5}
+.tag b,.tag i{display:block}
+.tag b{font-family:'Syncopate',sans-serif;font-weight:400;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:#fff}
+.tag i{font-style:normal;font-family:'DM Sans',sans-serif;font-size:.72rem;color:rgba(255,255,255,.72);margin-top:.2rem}
+.tag::before{content:"";position:absolute;inset:0 0 10px;z-index:-1;border-radius:10px;background:var(--tagbg);border:1px solid var(--tagline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tag{padding:.55rem .8rem calc(.55rem + 10px)}
+.hot:hover .tag,.hot:focus-visible .tag,.hot-music:hover .tag,.hot-music:focus-within .tag{opacity:1;transform:translate(-50%,0)}
+.hot-music .tag{pointer-events:none}
+.hot-music:hover .tag,.hot-music:focus-within .tag{pointer-events:auto}
+.tag .streams{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.tag .listen{font-family:'Syncopate',sans-serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.tag .streams a{display:inline-flex;width:22px;height:22px}
+.tag .streams svg{width:22px;height:22px}
+.tag .sp svg{fill:#1DB954}
+/* screen glow when its object is hovered */
+.room-scene:has(#movies:hover,#movies:focus-visible) .tv,.room-scene:has(#nfts:hover,#nfts:focus-visible) .laptop,.room-scene:has(#apps:hover,#apps:focus-visible) .phone{filter:brightness(1.3) saturate(1.1)}
+/* deco study: glass + serif labels */
+/* copy */
+.room-copy{position:absolute;left:clamp(1rem,3vw,3rem);bottom:clamp(1rem,2.4vw,2.4rem);z-index:6;pointer-events:none;max-width:34rem}
+.room-copy .eyebrow{margin-bottom:.6rem}
+.room-copy h1{font-size:clamp(2rem,3.6vw,3.4rem);text-shadow:0 2px 24px rgba(0,0,0,.8)}
+.room-copy .hint{margin-top:.7rem;font-size:.78rem;color:rgba(255,255,255,.6)}
+.room-list{display:none}
+.room-pan::-webkit-scrollbar{display:none}
+@media (max-width:760px){
+  .room-pan{overflow-x:auto;overflow-y:hidden;scroll-snap-type:none;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .room-scene{width:205vw;max-width:none;max-height:none}
+  .tag{opacity:1;transform:translate(-50%,0);padding:.35rem .5rem calc(.35rem + 6px)}
+  .tag::before{inset:0 0 6px}
+  .tag i,.tag .streams{display:none}
+  .tag b{font-size:.5rem}
+  .room--b .tag b{font-size:.85rem}
+  .hot-music .tag{pointer-events:none}
+  .room-copy{position:static;padding:1.4rem 1.25rem .4rem;max-width:none}
+  .room-copy h1{font-size:2.1rem}
+  .room-list{display:grid;gap:.5rem;padding:.8rem 1.25rem 2rem}
+  .room-list a{display:grid;grid-template-columns:2.2rem 1fr auto;align-items:center;gap:.2rem .6rem;padding:.85rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.03)}
+  .room-list a::after{content:"→";grid-row:1/3;grid-column:3;color:rgba(var(--glow),.9)}
+  .room-list .n{grid-row:1/3;font-family:'Syncopate',sans-serif;font-size:.55rem;color:var(--copper);letter-spacing:.2em}
+  .room-list b{font-family:'Syncopate',sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+  .room-list i{font-style:normal;font-size:.78rem;color:rgba(255,255,255,.6);grid-column:2}
+}
+
+.hot.tag-below .tag{bottom:auto;top:100%;padding:calc(.55rem + 10px) .8rem .55rem;transform:translate(-50%,-6px)}
+.hot.tag-below .tag::before{inset:10px 0 0}
+.hot.tag-below:hover .tag,.hot.tag-below:focus-visible .tag{transform:translate(-50%,0)}
+@media (max-width:760px){.hot.tag-below .tag{top:auto;bottom:100%;padding:.35rem .5rem calc(.35rem + 6px)}.hot.tag-below .tag::before{inset:0 0 6px}}
+
+.room-copy .lede{margin-top:.6rem;font-size:.86rem;line-height:1.5;color:rgba(255,255,255,.72);max-width:24rem;text-shadow:0 1px 12px rgba(0,0,0,.9)}
+.room-list .streams{display:flex;align-items:center;gap:.7rem;grid-column:2/4;margin-top:.45rem}
+.room-list .streams .listen{font-family:'Syncopate',sans-serif;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.room-list .streams a{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border:0;padding:0;background:none}
+.room-list .streams a::after{content:none}
+.room-list .streams svg{width:22px;height:22px}
+.room-list .sp svg{fill:#1DB954}
+@media (max-width:760px){
+  .room-list .rl-music{display:grid;grid-template-columns:2.2rem 1fr auto;align-items:center;gap:.2rem .6rem;padding:.85rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.03)}
+  .room-copy .lede{font-size:.9rem}
+}
+@media (min-width:761px) and (max-height:760px){.room-copy .lede{display:none}}
+.hot:hover,.hot:focus-visible,.hot-music:hover,.hot-music:focus-within{z-index:7}
+
+/* music objects + decor (lava lamp, guitar) */
+.hot-album{border-radius:3px}
+.hot-album::after,.hot-guitar::after{display:none}
+.hot-album:hover,.hot-album:focus-visible{box-shadow:0 0 0 1px rgba(var(--glow),.8),0 0 22px 4px rgba(var(--glow),.35)}
+.shelf-tag{position:absolute;z-index:4;pointer-events:none}
+.shelf-tag .tag{opacity:0}
+.shelf-tag::after{content:"";position:absolute;right:-2px;top:-2px;width:7px;height:7px;border-radius:50%;background:rgba(var(--glow),.9);animation:ping 2.8s ease-out infinite}
+.room-scene:has(.hot-album:hover,.hot-album:focus-visible) .shelf-tag::after{opacity:0}
+.lava-glow,.lava-halo{position:absolute;z-index:2;pointer-events:none;border-radius:50%;mix-blend-mode:screen}
+.lava-glow{background:radial-gradient(ellipse at 50% 35%,rgba(150,70,255,.42),transparent 60%),radial-gradient(ellipse at 50% 75%,rgba(40,110,255,.40),transparent 62%),radial-gradient(ellipse at 50% 55%,rgba(110,255,120,.22),transparent 70%);animation:lava 6s ease-in-out infinite}
+.lava-halo{background:radial-gradient(ellipse at 50% 45%,rgba(110,80,255,.20),rgba(40,140,255,.08) 45%,transparent 68%);animation:lava 6s ease-in-out infinite;animation-delay:-1.2s}
+@keyframes lava{0%,100%{opacity:.82}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.lava-glow,.lava-halo{animation:none}}
+.room-scene.hl-music .is-music>.hot,.room-scene.hl-music .hot.is-music{box-shadow:0 0 0 1px rgba(var(--glow),.75),0 0 30px 6px rgba(var(--glow),.35);animation:hlm 1.3s ease-in-out 2}
+@keyframes hlm{50%{box-shadow:0 0 0 1px rgba(var(--glow),.3),0 0 10px 2px rgba(var(--glow),.12)}}
+@media (max-width:760px){
+  .hot-album .tag,.hot-guitar .tag{display:none}
+  .shelf-tag .tag{opacity:1}
+}
+
+/* album sleeves: tags anchor right so they stay inside the scene */
+.hot.hot-album .tag,.hot.hot-album.tag-below .tag{left:auto;right:-2px;transform:translate(0,-6px)}
+.hot.hot-album:hover .tag,.hot.hot-album:focus-visible .tag{transform:translate(0,0)}
+.hot-album:hover,.hot-album:focus-visible{background:rgba(var(--glow),.06)}
+.hot-guitar .tag{left:0;transform:translate(0,6px)}
+.hot-guitar:hover .tag,.hot-guitar:focus-visible .tag{transform:translate(0,0)}
+.shelf-tag .tag{left:auto;right:0;bottom:auto;top:2px;transform:none}
+/* record crate overlay */
+.crate{position:fixed;inset:0;z-index:2000;display:flex;flex-direction:column;background:rgba(9,7,5,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;overflow:auto;overscroll-behavior:contain;padding:clamp(1rem,3vw,2.6rem) clamp(1rem,4vw,4rem) 2rem}
+.crate[hidden]{display:none}
+.crate-head{display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.6rem;padding-right:3.5rem}
+.crate-head h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,3vw,2.8rem);line-height:1}
+.crate-sub{margin-top:.4rem;color:rgba(255,255,255,.65);font-size:.9rem}
+.crate-head .streams{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+.crate-head .listen{font-family:'Syncopate',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase}
+.crate-head .streams a{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:50%}
+.crate-head .streams svg{width:26px;height:26px}
+.crate-head .sp svg{fill:#1DB954}
+.crate-x{position:absolute;top:clamp(.8rem,2.4vw,2rem);right:clamp(.8rem,2.4vw,2rem);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.04);color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
+.crate-x:hover,.crate-x:focus-visible{border-color:rgba(var(--glow),.8);outline:none;box-shadow:0 0 0 3px rgba(var(--glow),.25)}
+.crate-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,40vw),1fr));gap:1.6rem 1.3rem}
+.crate-grid a{display:block;color:inherit;text-decoration:none;border-radius:6px;outline:none}
+.crate-grid img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;background:#17120d;border-radius:3px;box-shadow:0 14px 30px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06);transition:transform .3s,box-shadow .3s}
+.crate-grid a:hover img,.crate-grid a:focus-visible img{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 22px 40px rgba(0,0,0,.7),0 0 0 2px rgba(var(--glow),.8)}
+.crate-grid b{display:block;margin-top:.7rem;font-family:'Syncopate',sans-serif;font-weight:400;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase}
+.crate-grid i{display:block;margin-top:.25rem;font-style:normal;font-size:.78rem;color:rgba(255,255,255,.6)}
+.crate-hint{display:none}
+html.crate-open{overflow:hidden}
+.room-list .rl-crate{grid-column:2/4;justify-self:start;margin-top:.6rem;padding:.55rem .9rem;border-radius:999px;border:1px solid rgba(var(--glow),.5);background:rgba(var(--glow),.08);color:#fff;font:inherit;font-size:.8rem;cursor:pointer}
+@media (max-width:760px){
+  .crate{padding:1rem 0 1.2rem}
+  .crate-head{padding:0 4rem 0 1.25rem;margin-bottom:1rem;gap:.8rem}
+  .crate-head .streams{margin-left:0}
+  .crate-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78vw;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 11vw 1rem;gap:1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .crate-grid::-webkit-scrollbar{display:none}
+  .crate-grid li{scroll-snap-align:center}
+  .crate-hint{display:block;text-align:center;font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.4rem}
+}
+
+/* v5: computer screen = dark SMPL FRKS loop (real Neesh / Larry / Marvin art), CSS crossfade + slow pan */
+.screen.laptop{width:480px;height:270px;background:#0b0b0e}
+.screen.frk .f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:brightness(.86) contrast(1.05) saturate(.92) sepia(.08);animation:frk 18s linear infinite;will-change:opacity,transform}
+.screen.frk .f1{animation-delay:-2s}.screen.frk .f2{animation-delay:4s}.screen.frk .f3{animation-delay:10s}
+@keyframes frk{0%{opacity:0;transform:scale(1.02) translateX(1.5%)}6%{opacity:1}33%{opacity:1}39%{opacity:0;transform:scale(1.08) translateX(-1.5%)}100%{opacity:0;transform:scale(1.08) translateX(-1.5%)}}
+@media (prefers-reduced-motion:reduce){.screen.frk .f{animation:none}.screen.frk .f1{opacity:1}}
+.room-scene .screen.laptop{box-shadow:0 0 60px 18px rgba(107,233,175,.07)}
+.hot-helmet .tag{left:auto;right:0;transform:translate(0,6px)}
+.hot-helmet:hover .tag,.hot-helmet:focus-visible .tag{transform:translate(0,0)}
+.hot-cans::after{display:none}
+.hot-cans:hover::after{display:none}
+
+/* v7: helmet -> /transmission */
+.hot-helmet{--glow:107,233,175;--tagbg:rgba(2,10,6,.86);--tagline:rgba(107,233,175,.45)}
+.hot-helmet .tag b{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;letter-spacing:.18em;color:#6BE9AF;text-shadow:0 0 8px rgba(107,233,175,.55)}
+.hot-helmet .tag i{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:.66rem;color:rgba(107,233,175,.7)}
+.hot-helmet .tag i::after{content:"_";animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.hot-helmet .tag i::after{animation:none}}
+.hot-nfts{--glow:107,233,175}
+/* v7 intro (index only) */
+.intro{display:none}
+html.intro-on .intro{display:block;position:fixed;inset:0;z-index:2147483000;background:#000;overflow:hidden;opacity:1;transition:opacity .9s ease;contain:strict}
+html.intro-on .intro.is-out{opacity:0;pointer-events:none}
+.intro video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(.85)}
+.intro::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 70% at 60% 50%,rgba(0,0,0,.15),rgba(0,0,0,.65)),linear-gradient(to bottom,rgba(0,0,0,.35),transparent 25%,transparent 75%,rgba(0,0,0,.5));pointer-events:none}
+.intro-title{position:absolute;left:50%;top:50%;z-index:2;transform:translate(-50%,-50%);margin:0;text-align:center;color:#f4efe6;white-space:nowrap;font-weight:400;opacity:0;animation:introT 4.1s ease both;animation-delay:.6s;text-shadow:0 0 30px rgba(0,0,0,.8)}
+.intro-title span{display:block;font-family:'DM Sans',sans-serif;font-size:clamp(.6rem,1.1vw,.85rem);letter-spacing:.6em;text-transform:uppercase;color:rgba(244,239,230,.78);padding-left:.6em}
+.intro-title strong{display:block;font-family:'Syncopate',sans-serif;font-weight:700;font-size:clamp(1.5rem,5.2vw,4.6rem);letter-spacing:.32em;padding-left:.32em;margin:.55em 0;line-height:1;background:linear-gradient(180deg,#fff 0%,#f1e3c8 55%,#b9925a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:introTrack 4.1s cubic-bezier(.2,.7,.2,1) both;animation-delay:.6s}
+@keyframes introT{0%{opacity:0;filter:blur(6px)}20%{opacity:1;filter:blur(0)}66%{opacity:1;filter:blur(0)}86%,100%{opacity:0;filter:blur(3px)}}
+@keyframes introTrack{0%{letter-spacing:.2em}100%{letter-spacing:.38em}}
+.intro-skip{position:absolute;right:max(1.25rem,env(safe-area-inset-right));bottom:max(1.25rem,env(safe-area-inset-bottom));z-index:3;font:400 .62rem/1 'Syncopate',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:.85rem 1.2rem .85rem 1.45rem;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.intro-skip:hover,.intro-skip:focus-visible{background:rgba(255,255,255,.14);border-color:#fff;outline:none}
+.intro-skip:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+@media (max-width:760px){.intro-title strong{font-size:clamp(1.15rem,7vw,2rem);letter-spacing:.18em;padding-left:.18em}@keyframes introTrack{0%{letter-spacing:.12em}100%{letter-spacing:.2em}}}
+@media (prefers-reduced-motion:reduce){html.intro-on .intro{display:none}}
+@media (max-width:760px){.hot-helmet .tag{bottom:auto;top:calc(100% + 30px);left:-24px;right:auto;padding:.35rem .5rem;transform:none}.hot-helmet .tag::before{inset:0}.hot-helmet:hover .tag,.hot-helmet:focus-visible .tag{transform:none}}
+
 </style>
+<script>(function(){try{if(sessionStorage.getItem('lan-intro'))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('intro-on')}catch(e){}})();</script>
 </head>
 <body>
+<div class="intro" id="intro" role="region" aria-label="Intro">
+  <video muted autoplay playsinline preload="auto" aria-hidden="true" disablepictureinpicture></video>
+  <p class="intro-title" aria-label="A LOVEANDNATE production"><span>A</span><strong>LOVEANDNATE</strong><span>Production</span></p>
+  <button type="button" class="intro-skip">Skip</button>
+</div>
 <nav>
   <div class="nav-left">
     <a class="nav-lockup" href="/" aria-label="LOVEANDNATE — Art is life">
@@ -332,133 +528,106 @@ body{padding-bottom:8.5rem}
   <a href="/windows">Windows</a>
 </div>
 
-<header class="hero">
-  <div class="hero-media" data-lazy-video>
-    <img class="poster" src="/studio/assets/hero-loop-poster.webp" alt="" width="1280" height="720">
-    <video muted loop playsinline preload="metadata" poster="/studio/assets/hero-loop-poster.webp" aria-hidden="true">
-      <source data-src="/studio/assets/hero-loop.webm" type="video/webm">
-      <source data-src="/studio/assets/hero-loop.mp4" type="video/mp4">
-    </video>
-    <div class="scrim"></div>
+<!-- Home hero: the studio room (Room A, Detroit loft). The previous hero + six tiles markup is in git at 059a352 (index.html, <header class="hero"> and <section class="panels">); its CSS is still below, unused. -->
+<section class="room room--a" aria-label="The LOVEANDNATE studio">
+  <div class="room-pan" tabindex="0" aria-label="The studio room. Swipe sideways to look around.">
+  <div class="room-scene">
+    <img class="room-bg" src="/studio/assets/room/loft-owl-v7.webp" alt="" width="2560" height="1440" fetchpriority="high" decoding="async">
+    <div class="screen tv" data-quad="533,335 688,335 688,447 533,447" data-lazy-video data-skip-slow aria-hidden="true">
+      <img class="poster" src="/wellwellwell/bg-poster.webp" alt="">
+      <video muted loop playsinline preload="none" poster="/wellwellwell/bg-poster.webp"><source data-src="/wellwellwell/bg.mp4" type="video/mp4"></video><i class="crt"></i>
+    </div>
+    <div class="screen phone" data-quad="1152,590 1198,599 1150,622 1099,611" aria-hidden="true"><img src="/studio/assets/room/innerpool-screen.webp" alt=""></div>
+    <div class="shelf-tag" style="left:75.000%;top:2.639%;width:20.391%;height:6.111%" aria-hidden="true"><span class="tag"><b>Music</b><i>21 albums</i></span></div>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/6P7XSGb2csLxuqE1OQwTi3" target="_blank" rel="noopener noreferrer" data-crate="0" style="left:75.156%;top:2.917%;width:2.044%;height:13.889%" aria-label="Music: ARTACHE. Open the record crate"><span class="tag" aria-hidden="true"><b>ARTACHE</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/0sgIXTm3MdWFRKTnh5KQWC" target="_blank" rel="noopener noreferrer" data-crate="1" style="left:77.201%;top:2.917%;width:2.044%;height:13.889%" aria-label="Music: AWAKE IN THE DREAM. Open the record crate"><span class="tag" aria-hidden="true"><b>AWAKE IN THE DREAM</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/18pmkrSvYYpSkzPsMpZZoU" target="_blank" rel="noopener noreferrer" data-crate="2" style="left:79.245%;top:2.917%;width:2.044%;height:13.889%" aria-label="Music: COMPUTER JAZZ. Open the record crate"><span class="tag" aria-hidden="true"><b>COMPUTER JAZZ</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/3evzNRWBMlKgxlAxL4K9Hr" target="_blank" rel="noopener noreferrer" data-crate="3" style="left:81.289%;top:2.917%;width:2.044%;height:13.889%" aria-label="Music: DOORS. Open the record crate"><span class="tag" aria-hidden="true"><b>DOORS</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/079MYECZNpcwkR0xR3Geqb" target="_blank" rel="noopener noreferrer" data-crate="4" style="left:83.333%;top:2.917%;width:2.044%;height:13.889%" aria-label="Music: ECHOS IN THE VEIL. Open the record crate"><span class="tag" aria-hidden="true"><b>ECHOS IN THE VEIL</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1ftVmPtlEDGg7uHdp3EnwA" target="_blank" rel="noopener noreferrer" data-crate="5" style="left:85.378%;top:2.917%;width:2.044%;height:13.889%" aria-label="Music: EVERY STAR BURNING. Open the record crate"><span class="tag" aria-hidden="true"><b>EVERY STAR BURNING</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/7DRKx17yDXTL2Wohp3fcUM" target="_blank" rel="noopener noreferrer" data-crate="6" style="left:87.422%;top:2.917%;width:7.812%;height:13.889%" aria-label="Music: GLASS FACE. Open the record crate"><span class="tag" aria-hidden="true"><b>GLASS FACE</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1Xk0lbQtPn28UodkeUQqZn" target="_blank" rel="noopener noreferrer" data-crate="7" style="left:75.156%;top:20.556%;width:2.044%;height:13.889%" aria-label="Music: HUMAN THOUGHTS. Open the record crate"><span class="tag" aria-hidden="true"><b>HUMAN THOUGHTS</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="8" style="left:77.201%;top:20.556%;width:2.044%;height:13.889%" aria-label="Music: KIDNAPPING THE REAPER. Open the record crate"><span class="tag" aria-hidden="true"><b>KIDNAPPING THE REAPER</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1AVdlexeqEPjqseBBa7QRc" target="_blank" rel="noopener noreferrer" data-crate="9" style="left:79.245%;top:20.556%;width:2.044%;height:13.889%" aria-label="Music: LOST IN THE LABYRINTH. Open the record crate"><span class="tag" aria-hidden="true"><b>LOST IN THE LABYRINTH</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1zquRmWVOy12xBSkQUCmL7" target="_blank" rel="noopener noreferrer" data-crate="10" style="left:81.289%;top:20.556%;width:2.044%;height:13.889%" aria-label="Music: MCCLUMPHA PARK. Open the record crate"><span class="tag" aria-hidden="true"><b>MCCLUMPHA PARK</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="11" style="left:83.333%;top:20.556%;width:2.044%;height:13.889%" aria-label="Music: MONICA&#x27;S DINER. Open the record crate"><span class="tag" aria-hidden="true"><b>MONICA&#x27;S DINER</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="12" style="left:85.378%;top:20.556%;width:2.044%;height:13.889%" aria-label="Music: MONOLITH. Open the record crate"><span class="tag" aria-hidden="true"><b>MONOLITH</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1fc97y48I5FVSTeUeaHu9W" target="_blank" rel="noopener noreferrer" data-crate="13" style="left:87.422%;top:20.556%;width:7.812%;height:13.889%" aria-label="Music: MOTOR CITY REAPER. Open the record crate"><span class="tag" aria-hidden="true"><b>MOTOR CITY REAPER</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="14" style="left:75.156%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: OUT OF MY MIND. Open the record crate"><span class="tag" aria-hidden="true"><b>OUT OF MY MIND</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="15" style="left:77.201%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: OVERLOAD. Open the record crate"><span class="tag" aria-hidden="true"><b>OVERLOAD</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/album/1nfJG8Im4fKQMwJSH6fJrd" target="_blank" rel="noopener noreferrer" data-crate="16" style="left:79.245%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: ROBOT ROAD. Open the record crate"><span class="tag" aria-hidden="true"><b>ROBOT ROAD</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="17" style="left:81.289%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: STORM IS ALMOST OVER. Open the record crate"><span class="tag" aria-hidden="true"><b>STORM IS ALMOST OVER</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="18" style="left:83.333%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: THANK YOU. Open the record crate"><span class="tag" aria-hidden="true"><b>THANK YOU</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="19" style="left:85.378%;top:37.500%;width:2.044%;height:13.889%" aria-label="Music: THE WALKMEN. Open the record crate"><span class="tag" aria-hidden="true"><b>THE WALKMEN</b><i>Open the record crate</i></span></a>
+    <a class="hot hot-album is-music tag-below" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="20" style="left:87.422%;top:37.500%;width:7.812%;height:13.889%" aria-label="Music: TIMELESS. Open the record crate"><span class="tag" aria-hidden="true"><b>TIMELESS</b><i>Open the record crate</i></span></a>
+    <div class="lava-glow" style="left:34.969%;top:51.856%;width:2.250%;height:10.844%" aria-hidden="true"></div><div class="lava-halo" style="left:29.331%;top:41.244%;width:13.525%;height:34.911%" aria-hidden="true"></div>
+    <a class="hot hot-guitar is-music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" data-crate="0" style="left:6.256%;top:15.600%;width:11.247%;height:49.403%" aria-label="Music: silver Stratocaster. Open the record crate"><span class="tag" aria-hidden="true"><b>Music</b><i>Silver Strat · open the record crate</i></span></a>
+    <a class="hot hot-helmet" href="/transmission" style="left:69.219%;top:58.178%;width:11.250%;height:21.544%" aria-label="The LOVEANDNATE helmet. Incoming transmission: open the origin story"><span class="tag" aria-hidden="true"><b>▚ INCOMING TRANSMISSION</b><i>signal source: unknown</i></span></a>
+    <a class="hot hot-cans" href="/windows" style="left:59.119%;top:57.397%;width:5.512%;height:9.640%" aria-label="Windows: spray paint cans. Open the hand-painted windows gallery"><span class="tag" aria-hidden="true"><b>Windows</b><i>Spray cans · hand-painted windows</i></span></a>
+    <a class="hot tag-below" id="windows" href="/windows" style="left:35.547%;top:6.554%;width:23.438%;height:34.669%" aria-label="Windows: Owl Window, hand-painted. Open the sold-out gallery"><span class="tag" aria-hidden="true"><b>Windows</b><i>Owl Window · sold-out gallery</i></span></a>
+    <a class="hot " id="books" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094" style="left:80.988%;top:52.222%;width:6.461%;height:16.389%" aria-label="Books: Marvin Stench by Zepp, on Amazon"><span class="tag" aria-hidden="true"><b>Books</b><i>Marvin Stench by Zepp · Amazon</i></span></a>
+    <a class="hot " id="movies" href="/wellwellwell" style="left:39.453%;top:43.194%;width:19.453%;height:22.500%" aria-label="Movies: WELL WELL WELL"><span class="tag" aria-hidden="true"><b>Movies</b><i>WELL WELL WELL</i></span></a>
+    <a class="hot hot-nfts" id="nfts" href="/smplfrks" style="left:80.625%;top:75.208%;width:4.141%;height:10.347%" aria-label="NFTs: SMPL FRKS trading cards of Neesh, Larry Stench and Marvin Stench. Open the collection"><span class="tag" aria-hidden="true"><b>NFTs</b><i>SMPL FRKS cards · Neesh, Larry &amp; Marvin</i></span></a>
+    <a class="hot " id="apps" href="#innerpool" style="left:84.922%;top:80.278%;width:9.609%;height:7.778%" aria-label="Apps: Innerpool, coming soon"><span class="tag" aria-hidden="true"><b>Apps</b><i>Innerpool, coming soon</i></span></a>
+    <div class="hot-music is-music" style="left:16.641%;top:43.889%;width:16.250%;height:23.750%">
+      <a class="hot" id="music" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="Music: listen now on Spotify"></a>
+      <span class="tag tag-music"><b>Music</b><i>21 albums released in 24 hours</i>
+        <span class="streams"><span class="listen">Listen now</span>
+        <a class="sp" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.3.18.42.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-.96-.18-1.08-.66-.12-.48.18-.96.66-1.08 4.38-1.32 9.78-.66 13.5 1.62.36.18.6.78.12 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z"/></svg></a>
+        <a class="am" href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Apple Music"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="am-grad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FB5C74"/><stop offset="1" stop-color="#FA233B"/></linearGradient></defs><path fill="url(#am-grad2)" d="M19.1 3.2c-.2-.1-.5 0-.6.1l-7.4 2.5c-.3.1-.5.4-.5.7v9.6c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9S6.7 21 8.7 21s3.6-1.3 3.6-2.9V9.3l6.2-2.1v6.4c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9s1.6 2.9 3.6 2.9 3.6-1.3 3.6-2.9V3.8c0-.3-.2-.5-.5-.6z"/></svg></a></span></span>
+    </div>
   </div>
-  <div class="stars" aria-hidden="true"><canvas id="stars"></canvas></div>
-  <div class="nebula" aria-hidden="true"></div>
-  <div class="hero-copy">
+  </div>
+  <div class="room-copy">
     <p class="eyebrow">Creative studio</p>
     <h1>Six disciplines.<br><em>One practice.</em></h1>
-    <p>Sound, story, software, film, NFTs, and painted windows — built by a self-taught artist working under LOVEANDNATE.</p>
+    <p class="lede">Sound, story, software, film, NFTs, and painted windows — built by a self-taught artist working under LOVEANDNATE.</p>
+    <p class="hint">Hover or tap anything in the room.</p>
   </div>
-</header>
-
-<section class="panels" aria-label="Pillars">
-  <div class="pillar" id="music">
-    <header class="pillar-label">
-      <span class="num">01</span>
-      <h2 class="discipline">Music</h2>
-      <span class="deco-rule" aria-hidden="true"><i></i></span>
-    </header>
-    <article class="panel music">
-      <div class="media">
-        <img src="/studio/assets/music.webp" alt="LOVEANDNATE music" width="988" height="1285" loading="lazy">
-      </div>
-      <div class="inner">
-        <p class="cred-line">21 albums released in 24 hours</p>
-        <div class="tile-streams">
-          <span class="listen">Listen now</span>
-          <a class="sp" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Spotify">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.3.18.42.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-.96-.18-1.08-.66-.12-.48.18-.96.66-1.08 4.38-1.32 9.78-.66 13.5 1.62.36.18.6.78.12 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z"/></svg>
-          </a>
-          <a class="am" href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Apple Music">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="am-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FB5C74"/><stop offset="1" stop-color="#FA233B"/></linearGradient></defs><path fill="url(#am-grad)" d="M19.1 3.2c-.2-.1-.5 0-.6.1l-7.4 2.5c-.3.1-.5.4-.5.7v9.6c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9S6.7 21 8.7 21s3.6-1.3 3.6-2.9V9.3l6.2-2.1v6.4c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9s1.6 2.9 3.6 2.9 3.6-1.3 3.6-2.9V3.8c0-.3-.2-.5-.5-.6z"/></svg>
-          </a>
-        </div>
-      </div>
-    </article>
+  <div class="room-list" role="navigation" aria-label="Everything in the room">
+    <div class="rl-music"><span class="n">01</span><b>Music</b><i>21 albums released in 24 hours</i>
+      <span class="streams"><span class="listen">Listen now</span>
+      <a class="sp" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.3.18.42.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-.96-.18-1.08-.66-.12-.48.18-.96.66-1.08 4.38-1.32 9.78-.66 13.5 1.62.36.18.6.78.12 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z"/></svg></a>
+      <a class="am" href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Apple Music"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="am-grad3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FB5C74"/><stop offset="1" stop-color="#FA233B"/></linearGradient></defs><path fill="url(#am-grad3)" d="M19.1 3.2c-.2-.1-.5 0-.6.1l-7.4 2.5c-.3.1-.5.4-.5.7v9.6c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9S6.7 21 8.7 21s3.6-1.3 3.6-2.9V9.3l6.2-2.1v6.4c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9s1.6 2.9 3.6 2.9 3.6-1.3 3.6-2.9V3.8c0-.3-.2-.5-.5-.6z"/></svg></a></span>
+      <button type="button" class="rl-crate" data-crate="0">Browse all 21 albums</button></div>
+    <a href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094"><span class="n">02</span><b>Books</b><i>Marvin Stench</i></a>
+    <a href="#innerpool"><span class="n">03</span><b>Apps</b><i>Innerpool, coming soon</i></a>
+    <a href="/wellwellwell"><span class="n">04</span><b>Movies</b><i>WELL WELL WELL</i></a>
+    <a href="/smplfrks"><span class="n">05</span><b>NFTs</b><i>SMPL FRKS</i></a>
+    <a href="/windows"><span class="n">06</span><b>Windows</b><i>Sold-out gallery</i></a>
   </div>
-  <div class="pillar" id="books">
-    <header class="pillar-label">
-      <span class="num">02</span>
-      <h2 class="discipline">Books</h2>
-      <span class="deco-rule" aria-hidden="true"><i></i></span>
-    </header>
-    <article class="panel books">
-      <div class="media">
-        <picture><source media="(min-width: 1281px)" srcset="/studio/assets/tiles/books-tall.webp" type="image/webp" width="880" height="2120"><img src="/studio/assets/tiles/books-std.webp" alt="Marvin Stench by Zepp, the hardcover" width="1500" height="1910" loading="lazy" decoding="async"></picture>
-      </div>
-      <div class="inner">
-        <p class="panel-title">Marvin Stench</p>
-        <a class="cta" href="https://www.amazon.com/Marvin-Stench-Zepp/dp/1540831094">On Amazon →</a>
-      </div>
-    </article>
-  </div>
-  <div class="pillar" id="apps">
-    <header class="pillar-label">
-      <span class="num">03</span>
-      <h2 class="discipline">Apps</h2>
-      <span class="deco-rule" aria-hidden="true"><i></i></span>
-    </header>
-    <article class="panel apps">
-      <div class="media">
-        <img src="/studio/assets/innerpool.webp" alt="Innerpool app" width="1080" height="1725" loading="lazy">
-      </div>
-      <div class="inner">
-        <p class="panel-title">Innerpool</p>
-        <a class="cta" href="#innerpool">Coming soon →</a>
-      </div>
-    </article>
-  </div>
-  <div class="pillar" id="movies">
-    <header class="pillar-label">
-      <span class="num">04</span>
-      <h2 class="discipline">Movies</h2>
-      <span class="deco-rule" aria-hidden="true"><i></i></span>
-    </header>
-    <article class="panel film">
-      <div class="media" data-lazy-video data-skip-slow>
-        <img src="/studio/assets/movies.webp" alt="Movies" width="1080" height="1956" loading="lazy">
-        <video muted loop playsinline autoplay preload="none" poster="/studio/assets/movies.webp" aria-hidden="true">
-          <source data-src="/wellwellwell/bg.mp4" type="video/mp4">
-        </video>
-        <div class="vhs-track" aria-hidden="true"></div>
-      </div>
-      <div class="inner">
-        <a class="cta" href="/wellwellwell">Enter →</a>
-      </div>
-    </article>
-  </div>
-  <div class="pillar" id="nfts">
-    <header class="pillar-label">
-      <span class="num">05</span>
-      <h2 class="discipline">NFTs</h2>
-      <span class="deco-rule" aria-hidden="true"><i></i></span>
-    </header>
-    <article class="panel nfts">
-      <div class="media">
-        <picture><source media="(min-width: 1281px)" srcset="/studio/assets/tiles/nfts-tall.webp" type="image/webp" width="880" height="2120"><img src="/studio/assets/tiles/nfts-std.webp" alt="SMPL FRKS cards from the trailer on a walnut table: Neesh, Larry Stench and Marvin Stench" width="1500" height="1910" loading="lazy" decoding="async"></picture>
-      </div>
-      <div class="inner">
-        <p class="panel-title">SMPL FRKS</p>
-        <span class="cta">Enter →</span>
-      </div>
-      <a class="panel-hit" href="/smplfrks" aria-label="SMPL FRKS"></a>
-    </article>
-  </div>
-  <div class="pillar" id="windows">
-    <header class="pillar-label">
-      <span class="num">06</span>
-      <h2 class="discipline">Windows</h2>
-      <span class="deco-rule" aria-hidden="true"><i></i></span>
-    </header>
-    <article class="panel windows">
-      <div class="media">
-        <picture><source media="(min-width: 1281px)" srcset="/studio/assets/tiles/windows-tall.webp" type="image/webp" width="880" height="2120"><img src="/studio/assets/tiles/windows-std.webp" alt="Close-up of the sold-out hand-painted Owl window" width="1500" height="1910" loading="lazy" decoding="async"></picture>
-      </div>
-      <div class="inner">
-        <p class="panel-title">Sold out</p>
-        <span class="cta">Enter →</span>
-      </div>
-      <a class="panel-hit" href="/windows" aria-label="Windows — sold-out gallery"></a>
-    </article>
+  <div class="crate" id="crate" role="dialog" aria-modal="true" aria-labelledby="crate-h" hidden>
+    <div class="crate-head">
+      <div><p class="eyebrow">Music</p><h2 id="crate-h">The record crate</h2><p class="crate-sub">21 albums released in 24 hours</p></div>
+      <span class="streams"><span class="listen">Listen now</span>
+        <a class="sp" href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Spotify"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.52 17.34c-.24.36-.66.48-1.02.24-2.82-1.74-6.36-2.1-10.56-1.14-.42.12-.78-.18-.9-.54-.12-.42.18-.78.54-.9 4.56-1.02 8.52-.6 11.64 1.32.3.18.42.66.3 1.02zm1.44-3.3c-.3.42-.84.6-1.26.3-3.24-1.98-8.16-2.58-11.94-1.38-.48.12-.96-.18-1.08-.66-.12-.48.18-.96.66-1.08 4.38-1.32 9.78-.66 13.5 1.62.36.18.6.78.12 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.3c-.6.18-1.2-.18-1.38-.72-.18-.6.18-1.2.72-1.38 4.26-1.26 11.28-1.02 15.72 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z"/></svg></a>
+        <a class="am" href="https://music.apple.com/us/artist/loveandnate/1625477213" target="_blank" rel="noopener noreferrer" aria-label="LOVEANDNATE on Apple Music"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="am-grad4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FB5C74"/><stop offset="1" stop-color="#FA233B"/></linearGradient></defs><path fill="url(#am-grad4)" d="M19.1 3.2c-.2-.1-.5 0-.6.1l-7.4 2.5c-.3.1-.5.4-.5.7v9.6c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9S6.7 21 8.7 21s3.6-1.3 3.6-2.9V9.3l6.2-2.1v6.4c-.5-.3-1.2-.5-1.9-.5-2 0-3.6 1.3-3.6 2.9s1.6 2.9 3.6 2.9 3.6-1.3 3.6-2.9V3.8c0-.3-.2-.5-.5-.6z"/></svg></a></span>
+      <button type="button" class="crate-x" aria-label="Close the record crate">&times;</button>
+    </div>
+    <ul class="crate-grid" aria-label="21 albums">
+      <li><a href="https://open.spotify.com/album/6P7XSGb2csLxuqE1OQwTi3" target="_blank" rel="noopener noreferrer" aria-label="ARTACHE, listen on Spotify"><img data-src="/studio/assets/music/covers/artache.webp" alt="" width="480" height="480" decoding="async"><b>ARTACHE</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/0sgIXTm3MdWFRKTnh5KQWC" target="_blank" rel="noopener noreferrer" aria-label="AWAKE IN THE DREAM, listen on Spotify"><img data-src="/studio/assets/music/covers/awake-in-the-dream.webp" alt="" width="480" height="480" decoding="async"><b>AWAKE IN THE DREAM</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/18pmkrSvYYpSkzPsMpZZoU" target="_blank" rel="noopener noreferrer" aria-label="COMPUTER JAZZ, listen on Spotify"><img data-src="/studio/assets/music/covers/computer-jazz.webp" alt="" width="480" height="480" decoding="async"><b>COMPUTER JAZZ</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/3evzNRWBMlKgxlAxL4K9Hr" target="_blank" rel="noopener noreferrer" aria-label="DOORS, listen on Spotify"><img data-src="/studio/assets/music/covers/doors.webp" alt="" width="480" height="480" decoding="async"><b>DOORS</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/079MYECZNpcwkR0xR3Geqb" target="_blank" rel="noopener noreferrer" aria-label="ECHOS IN THE VEIL, listen on Spotify"><img data-src="/studio/assets/music/covers/echos-in-the-veil.webp" alt="" width="480" height="480" decoding="async"><b>ECHOS IN THE VEIL</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/1ftVmPtlEDGg7uHdp3EnwA" target="_blank" rel="noopener noreferrer" aria-label="EVERY STAR BURNING, listen on Spotify"><img data-src="/studio/assets/music/covers/every-star-burning.webp" alt="" width="480" height="480" decoding="async"><b>EVERY STAR BURNING</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/7DRKx17yDXTL2Wohp3fcUM" target="_blank" rel="noopener noreferrer" aria-label="GLASS FACE, listen on Spotify"><img data-src="/studio/assets/music/covers/glass-face.webp" alt="" width="480" height="480" decoding="async"><b>GLASS FACE</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/1Xk0lbQtPn28UodkeUQqZn" target="_blank" rel="noopener noreferrer" aria-label="HUMAN THOUGHTS, listen on Spotify"><img data-src="/studio/assets/music/covers/human-thoughts.webp" alt="" width="480" height="480" decoding="async"><b>HUMAN THOUGHTS</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="KIDNAPPING THE REAPER, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/kidnapping-the-reaper.webp" alt="" width="480" height="480" decoding="async"><b>KIDNAPPING THE REAPER</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/1AVdlexeqEPjqseBBa7QRc" target="_blank" rel="noopener noreferrer" aria-label="LOST IN THE LABYRINTH, listen on Spotify"><img data-src="/studio/assets/music/covers/lost-in-the-labyrinth.webp" alt="" width="480" height="480" decoding="async"><b>LOST IN THE LABYRINTH</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/1zquRmWVOy12xBSkQUCmL7" target="_blank" rel="noopener noreferrer" aria-label="MCCLUMPHA PARK, listen on Spotify"><img data-src="/studio/assets/music/covers/mcclumpha-park.webp" alt="" width="480" height="480" decoding="async"><b>MCCLUMPHA PARK</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="MONICA&#x27;S DINER, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/monica-s-diner.webp" alt="" width="480" height="480" decoding="async"><b>MONICA&#x27;S DINER</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="MONOLITH, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/monolith.webp" alt="" width="480" height="480" decoding="async"><b>MONOLITH</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/1fc97y48I5FVSTeUeaHu9W" target="_blank" rel="noopener noreferrer" aria-label="MOTOR CITY REAPER, listen on Spotify"><img data-src="/studio/assets/music/covers/motor-city-reaper.webp" alt="" width="480" height="480" decoding="async"><b>MOTOR CITY REAPER</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="OUT OF MY MIND, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/out-of-my-mind.webp" alt="" width="480" height="480" decoding="async"><b>OUT OF MY MIND</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="OVERLOAD, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/overload.webp" alt="" width="480" height="480" decoding="async"><b>OVERLOAD</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/album/1nfJG8Im4fKQMwJSH6fJrd" target="_blank" rel="noopener noreferrer" aria-label="ROBOT ROAD, listen on Spotify"><img data-src="/studio/assets/music/covers/robot-road.webp" alt="" width="480" height="480" decoding="async"><b>ROBOT ROAD</b><i>Listen on Spotify ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="STORM IS ALMOST OVER, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/storm-is-almost-over.webp" alt="" width="480" height="480" decoding="async"><b>STORM IS ALMOST OVER</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="THANK YOU, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/thank-you.webp" alt="" width="480" height="480" decoding="async"><b>THANK YOU</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="THE WALKMEN, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/the-walkmen.webp" alt="" width="480" height="480" decoding="async"><b>THE WALKMEN</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      <li><a href="https://open.spotify.com/artist/48cIusfYn89O9pA7eVWTlr" target="_blank" rel="noopener noreferrer" aria-label="TIMELESS, listen on Spotify (artist page)"><img data-src="/studio/assets/music/covers/timeless.webp" alt="" width="480" height="480" decoding="async"><b>TIMELESS</b><i>Listen on Spotify (artist page) ↗</i></a></li>
+      </ul>
+    <p class="crate-hint" aria-hidden="true">Swipe to flip through · Esc to close</p>
   </div>
 </section>
 
@@ -519,7 +688,7 @@ body{padding-bottom:8.5rem}
 </footer>
 <script>
 (function(){
-  const c=document.getElementById('stars'),x=c.getContext('2d');
+  const c=document.getElementById('stars'); if(!c) return; const x=c.getContext('2d');
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let w,h,stars,t=0;
   function resize(){
@@ -669,6 +838,84 @@ body{padding-bottom:8.5rem}
 })();
 </script>
 
+<script>
+(()=>{ // Home room: map real content onto the screens in the backdrop, mobile pan
+  const scene=document.querySelector('.room-scene'); if(!scene) return;
+  const BW=1280;
+  function H(src,dst){const A=[],b=[];for(let i=0;i<4;i++){const[x,y]=src[i],[u,v]=dst[i];A.push([x,y,1,0,0,0,-u*x,-u*y]);b.push(u);A.push([0,0,0,x,y,1,-v*x,-v*y]);b.push(v);}
+    for(let c=0;c<8;c++){let p=c;for(let r=c+1;r<8;r++)if(Math.abs(A[r][c])>Math.abs(A[p][c]))p=r;[A[c],A[p]]=[A[p],A[c]];[b[c],b[p]]=[b[p],b[c]];
+      for(let r=0;r<8;r++){if(r===c)continue;const f=A[r][c]/A[c][c];for(let k=c;k<8;k++)A[r][k]-=f*A[c][k];b[r]-=f*b[c];}}
+    return b.map((v,i)=>v/A[i][i]);}
+  const screens=[...scene.querySelectorAll('.screen[data-quad]')].map(el=>({el,q:el.dataset.quad.split(' ').map(p=>p.split(',').map(Number))}));
+  function layout(){const k=scene.clientWidth/BW;
+    for(const{el,q}of screens){const w=el.offsetWidth,h=el.offsetHeight;
+      const m=H([[0,0],[w,0],[w,h],[0,h]],q.map(([x,y])=>[x*k,y*k]));
+      el.style.transform=`matrix3d(${m[0]},${m[3]},0,${m[6]},${m[1]},${m[4]},0,${m[7]},0,0,1,0,${m[2]},${m[5]},0,1)`;}}
+  new ResizeObserver(layout).observe(scene); layout();
+  const mobile=matchMedia('(max-width:760px)').matches;
+  const pan=document.querySelector('.room-pan'); if(mobile&&pan){pan.scrollLeft=(pan.scrollWidth-pan.clientWidth)*.5;}
+  // Record crate: opened by the shelf sleeves, the Strat, nav "Music" and the list button
+  const crate=document.getElementById('crate');
+  if(crate){
+    const grid=crate.querySelector('.crate-grid'), items=[...grid.querySelectorAll('a')]; let opener=null;
+    const focusables=()=>[...crate.querySelectorAll('a[href],button')].filter(e=>e.offsetParent!==null);
+    function open(i,from){
+      opener=from||document.activeElement;
+      crate.querySelectorAll('img[data-src]').forEach(im=>{im.loading='lazy';im.src=im.dataset.src;im.removeAttribute('data-src');});
+      crate.hidden=false; document.documentElement.classList.add('crate-open'); crate.scrollTop=0;
+      const t=items[i]||items[0];
+      if(matchMedia('(max-width:760px)').matches){grid.scrollLeft=t.parentElement.offsetLeft-(grid.clientWidth-t.parentElement.offsetWidth)/2;}
+      else if(i>0) t.scrollIntoView({block:'center'});
+      (i>0?t:crate.querySelector('.crate-x')).focus({preventScroll:true});
+    }
+    function close(){crate.hidden=true;document.documentElement.classList.remove('crate-open');if(opener&&opener.focus)opener.focus({preventScroll:true});}
+    window.lanCrate={open,close};
+    document.addEventListener('click',e=>{
+      const a=e.target.closest('[data-crate],a[href="#music"]'); if(!a||crate.contains(a)) return;
+      if(e.metaKey||e.ctrlKey||e.shiftKey) return;
+      e.preventDefault(); e.stopImmediatePropagation(); open(+(a.dataset.crate||0),a);
+    },true);
+    crate.querySelector('.crate-x').addEventListener('click',close);
+    crate.addEventListener('click',e=>{if(e.target===crate)close();});
+    crate.addEventListener('keydown',e=>{
+      if(e.key==='Escape'){e.preventDefault();close();return;}
+      if(e.key==='Tab'){const f=focusables(),fi=f[0],la=f[f.length-1];
+        if(e.shiftKey&&document.activeElement===fi){e.preventDefault();la.focus();}
+        else if(!e.shiftKey&&document.activeElement===la){e.preventDefault();fi.focus();}}
+      const k=items.indexOf(document.activeElement);
+      if(k>-1&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){e.preventDefault();const n=items[Math.max(0,Math.min(items.length-1,k+(e.key==='ArrowRight'?1:-1)))];n.focus();n.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});}
+    });
+    if(location.hash==='#music') open(0);
+  }
+})();
+</script>
+<script>
+(function(){
+  var d=document.documentElement, el=document.getElementById('intro');
+  if(!el) return;
+  if(!d.classList.contains('intro-on')){ el.remove(); return; }
+  try{ sessionStorage.setItem('lan-intro','1'); }catch(e){}
+  var v=el.querySelector('video'), small=matchMedia('(max-width: 760px)').matches, done=false, timers=[];
+  v.muted=true; v.setAttribute('muted',''); v.poster='/studio/assets/room/intro-poster.webp';
+  v.src='/studio/assets/room/'+(small?'intro-960.mp4':'intro-1280.mp4');
+  var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  var skipBtn=el.querySelector('.intro-skip'); try{ skipBtn.focus({preventScroll:true}); }catch(e){}
+  function end(fast){
+    if(done) return; done=true; timers.forEach(clearTimeout);
+    el.style.transitionDuration=fast?'.45s':'.9s'; el.classList.add('is-out');
+    document.removeEventListener('keydown',onKey,true); window.removeEventListener('wheel',onWheel);
+    setTimeout(function(){ d.classList.remove('intro-on'); try{v.pause(); v.removeAttribute('src'); v.load();}catch(e){} el.remove();
+      if(document.activeElement===skipBtn||document.activeElement===document.body){ var r=document.querySelector('.room-pan'); if(r) try{r.focus({preventScroll:true});}catch(e){} } }, fast?470:920);
+  }
+  function onKey(e){ e.preventDefault(); e.stopPropagation(); end(true); }
+  function onWheel(){ end(true); }
+  el.addEventListener('click',function(){ end(true); });
+  document.addEventListener('keydown',onKey,true);
+  window.addEventListener('wheel',onWheel,{passive:true});
+  timers.push(setTimeout(function(){ end(false); },4200));
+  window.__lanIntroEnd=end;
+})();
+</script>
 </body>
 </html>
 <script>
@@ -688,6 +935,8 @@ body{padding-bottom:8.5rem}
     const conn=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
     const slow=conn && (conn.saveData || conn.effectiveType==='slow-2g' || conn.effectiveType==='2g');
     if(RM || (slow && root.hasAttribute('data-skip-slow'))){ v.remove(); return; }
+    if(root.hasAttribute('data-desktop-only') && matchMedia('(max-width: 760px)').matches){ v.remove(); return; }
+    v.addEventListener('playing',()=>root.classList.add('is-playing'),{once:true});
     if('IntersectionObserver' in window){
       const io=new IntersectionObserver(ents=>{
         ents.forEach(e=>{ if(e.isIntersecting){ load(); io.disconnect(); }});
@@ -735,7 +984,9 @@ body{padding-bottom:8.5rem}
     if(!el) return;
     setActive(id);
     setOpen(false);
-    el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+    const room=el.closest('.room');
+    (room||el).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+    if(room){ el.focus({preventScroll:true}); }
     history.replaceState(null, '', '#'+id);
   }
 
@@ -763,9 +1014,9 @@ body{padding-bottom:8.5rem}
   // top has most recently passed just under the fixed nav.
   // Single-row layout (desktop): click-only; cleared on any manual scroll or
   // when the tile row leaves the viewport.
-  const stacked=()=>sections.length>1 &&
+  const stacked=()=>!document.querySelector('.room') && sections.length>1 &&
     Math.abs(sections[0].getBoundingClientRect().top-sections[1].getBoundingClientRect().top)>4;
-  const panels=document.querySelector('.panels');
+  const panels=document.querySelector('.panels')||document.querySelector('.room');
   function navH(){ return document.querySelector('nav').getBoundingClientRect().height; }
   function spy(){
     if(!stacked()) return;
